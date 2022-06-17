@@ -297,7 +297,7 @@ switch ($error = 'SinError') {
                     </div>
                     <div class="container-fluid">
                         <div class="row">
-                            <p class="text-center mt-3">© <span id="anio"></span> PlanetDog.com by FJF WEB SAC</p>
+                            <p class="text-center mt-3">© <span class="anio"></span> PlanetDog.com by FJF WEB SAC</p>
                         </div>
                     </div>
                 </div>
