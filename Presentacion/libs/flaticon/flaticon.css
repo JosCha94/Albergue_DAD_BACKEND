@@ -1,0 +1,133 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+font-style: normal;
+}
+
+.flaticon-puppy:before { content: "\f100"; }
+.flaticon-dog-food:before { content: "\f101"; }
+.flaticon-collar:before { content: "\f102"; }
+.flaticon-license:before { content: "\f103"; }
+.flaticon-bathing:before { content: "\f104"; }
+.flaticon-canned-food:before { content: "\f105"; }
+.flaticon-canned-food-1:before { content: "\f106"; }
+.flaticon-leash:before { content: "\f107"; }
+.flaticon-dog-food-bowl:before { content: "\f108"; }
+.flaticon-face-of-staring-dog:before { content: "\f109"; }
+.flaticon-dog-face:before { content: "\f10a"; }
+.flaticon-chewing-bone-for-dog:before { content: "\f10b"; }
+.flaticon-border-collie-dog-head:before { content: "\f10c"; }
+.flaticon-angry-dog:before { content: "\f10d"; }
+.flaticon-dog-face-1:before { content: "\f10e"; }
+.flaticon-border-collie-head:before { content: "\f10f"; }
+.flaticon-animal-paw-print:before { content: "\f110"; }
+.flaticon-dog-bone:before { content: "\f111"; }
+.flaticon-long-haired-dog-head:before { content: "\f112"; }
+.flaticon-dog-face-2:before { content: "\f113"; }
+.flaticon-basset-hound-dog-head:before { content: "\f114"; }
+.flaticon-plain-dog:before { content: "\f115"; }
+.flaticon-dog-in-front-of-a-man:before { content: "\f116"; }
+.flaticon-dog-with-belt-walking-with-a-man:before { content: "\f117"; }
+.flaticon-man-on-his-knees-to-cuddle-his-dog:before { content: "\f118"; }
+.flaticon-man-carrying-a-dog-with-a-belt-to-walk:before { content: "\f119"; }
+.flaticon-man-throwing-a-disc-and-dog-jumping-to-catch-it:before { content: "\f11a"; }
+.flaticon-dog-having-a-bubbles-bath:before { content: "\f11b"; }
+.flaticon-dog-puppy-sitting-in-front-of-his-man:before { content: "\f11c"; }
+.flaticon-dog-checked-by-a-veterinary:before { content: "\f11d"; }
+.flaticon-man-combing-a-dog:before { content: "\f11e"; }
+.flaticon-dog-puppy-and-his-owner-looking-to-opposite-directions:before { content: "\f11f"; }
+.flaticon-dog-playing-with-a-man:before { content: "\f120"; }
+.flaticon-dog-and-a-man:before { content: "\f121"; }
+.flaticon-dog-and-pets-house:before { content: "\f122"; }
+.flaticon-dog-smelling-a-bone:before { content: "\f123"; }
+.flaticon-dog-with-owner:before { content: "\f124"; }
+.flaticon-dog-bitting-a-stick-playing-with-a-man:before { content: "\f125"; }
+.flaticon-paws-up-dog-playing-with-a-man:before { content: "\f126"; }
+.flaticon-dog-learning-man-instructions:before { content: "\f127"; }
+.flaticon-dog-shitting:before { content: "\f128"; }
+.flaticon-dog-with-first-aid-kit-bag:before { content: "\f129"; }
+.flaticon-bone:before { content: "\f12a"; }
+.flaticon-dog:before { content: "\f12b"; }
+.flaticon-stethoscope:before { content: "\f12c"; }
+.flaticon-veterinary:before { content: "\f12d"; }
+.flaticon-dog-1:before { content: "\f12e"; }
+.flaticon-dog-seating:before { content: "\f12f"; }
+.flaticon-dog-running:before { content: "\f130"; }
+.flaticon-dog-dish:before { content: "\f131"; }
+.flaticon-dog-face-3:before { content: "\f132"; }
+.flaticon-guide-dog:before { content: "\f133"; }
+.flaticon-dog-collar:before { content: "\f134"; }
+.flaticon-dog-playing:before { content: "\f135"; }
+.flaticon-bone-1:before { content: "\f136"; }
+.flaticon-feeding-the-dog:before { content: "\f137"; }
+.flaticon-dog-seating-1:before { content: "\f138"; }
+.flaticon-walking-the-dog:before { content: "\f139"; }
+.flaticon-dog-seatting:before { content: "\f13a"; }
+.flaticon-dog-running-1:before { content: "\f13b"; }
+.flaticon-german-shepherd:before { content: "\f13c"; }
+.flaticon-washing-the-dog:before { content: "\f13d"; }
+.flaticon-dog-eating:before { content: "\f13e"; }
+.flaticon-dog-playing-1:before { content: "\f13f"; }
+.flaticon-man-dog-and-stick:before { content: "\f140"; }
+.flaticon-couple-of-dogs:before { content: "\f141"; }
+.flaticon-dog-urinating:before { content: "\f142"; }
+.flaticon-man-and-dog:before { content: "\f143"; }
+.flaticon-treat:before { content: "\f144"; }
+.flaticon-dog-sleeping:before { content: "\f145"; }
+.flaticon-dog-and-man-seating:before { content: "\f146"; }
+.flaticon-dog-walker:before { content: "\f147"; }
+.flaticon-dog-licking:before { content: "\f148"; }
+.flaticon-dog-scaping:before { content: "\f149"; }
+.flaticon-hughing-dog:before { content: "\f14a"; }
+.flaticon-dog-training:before { content: "\f14b"; }
+.flaticon-dog-2:before { content: "\f14c"; }
+.flaticon-dog-training-1:before { content: "\f14d"; }
+.flaticon-walking-the-dog-1:before { content: "\f14e"; }
+.flaticon-dog-training-2:before { content: "\f14f"; }
+.flaticon-running:before { content: "\f150"; }
+.flaticon-exposition:before { content: "\f151"; }
+.flaticon-dog-training-3:before { content: "\f152"; }
+.flaticon-dog-training-4:before { content: "\f153"; }
+.flaticon-dog-3:before { content: "\f154"; }
+.flaticon-pets-hotel-symbol-with-a-dog-and-a-cat-in-a-circle-with-one-star:before { content: "\f155"; }
+.flaticon-pet-hotel-sign-with-a-dog-and-a-cat-under-a-roof-line:before { content: "\f156"; }
+.flaticon-dog-pet-allowed-hotel-signal:before { content: "\f157"; }
+.flaticon-dog-pawprint-in-a-house:before { content: "\f158"; }
+.flaticon-pets-hotel-circular-symbol-with-a-dog-and-a-verification-sign-inside-a-heart:before { content: "\f159"; }
+.flaticon-thumb-up-on-dog-symbol:before { content: "\f15a"; }
+.flaticon-pets-hotel-house-sign-with-a-paw:before { content: "\f15b"; }
+.flaticon-pet-hotel-symbol-with-three-stars:before { content: "\f15c"; }
+.flaticon-pet-hotel-symbols-of-three-stars-a-semicircle-and-a-bone-black-shape:before { content: "\f15d"; }
+.flaticon-big-dog-black-silhouette-with-verification-sign:before { content: "\f15e"; }
+.flaticon-pets-hotel:before { content: "\f15f"; }
+.flaticon-pet-hotel-sign:before { content: "\f160"; }
+.flaticon-dog-4:before { content: "\f161"; }
+.flaticon-pawprints:before { content: "\f162"; }
+.flaticon-pawprints-1:before { content: "\f163"; }
+.flaticon-dog-pawprints:before { content: "\f164"; }
+.flaticon-pet:before { content: "\f165"; }
+.flaticon-dog-training-5:before { content: "\f166"; }
+.flaticon-dog-puppy:before { content: "\f167"; }
+.flaticon-dog-5:before { content: "\f168"; }
+.flaticon-dog-6:before { content: "\f169"; }
+.flaticon-animal:before { content: "\f16a"; }
+.flaticon-running-dog-silhouette:before { content: "\f16b"; }
+.flaticon-sitting-dog:before { content: "\f16c"; }
+.flaticon-dog-silhouette-in-a-sitting-position:before { content: "\f16d"; }
+.flaticon-sitting-dog-1:before { content: "\f16e"; }

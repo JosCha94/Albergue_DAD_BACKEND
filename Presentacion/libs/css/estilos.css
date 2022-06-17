@@ -1,0 +1,672 @@
+*{
+  font-family: 'Baloo Thambi 2', cursive;  
+}
+body{
+  background-image: url(../images/huesoPatron.png);
+  background-color: #fafbfd;
+  min-height: 100vh; 
+  margin: 0; 
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* MENU */
+.nav-link:hover {
+  transition: 0.5s;
+  font-weight: bold;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+.active{
+  font-weight: bold;
+}
+/*NAVBAR*/
+
+/* .navbar .container{
+  background-color: #001E6C;  
+}
+.navbar .container .collapse .nav-link{
+  color:#FCD900
+} */
+
+#nav_principal{
+  background-color: #001E6C;
+  
+}
+
+#nav_principal .navbar .collapse .nav-link{
+  color:white
+}
+#nav_principal .navbar .collapse .nav-link:hover{
+  color:#E8630a
+}
+
+.btn-login{
+  color: #fff;
+  background-color: #E8630A;
+
+}
+.btn-login:hover{
+ background-color: #ca0f48;
+ color: #fff;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+/*NAVBAR END*/
+/* MENU */
+/*inicio  */
+.bg-icon{
+  background-color: #E8630A;
+}
+.icon-wrapper{
+  display: inline-block;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  margin-bottom:20px;
+  transition: all 0.2s ease-in-out;
+}
+.icon-box{
+ padding:30px 20px 0px 20px;
+ z-index:99;
+}
+
+.icon-box:hover .icon-wrapper{
+  transform:scale(1.2);
+}
+.icon-wrapper i {
+  color:#fff;
+  font-size: 80px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+/* custom ul */
+ul.custom {
+  list-style: none;
+  margin-bottom:0;
+}
+ul.custom li {
+  padding: 5px 0px;
+  font-size: 16px;
+  line-height: 24px;
+}
+ul.custom li:before {
+  font-family: "Flaticon";
+  content: "\f111";
+  padding-right: 7px;
+  font-weight: normal;
+  font-size: 15px;
+}
+.text-light ul.custom li:before {
+  color:#fff!important;
+}
+/*inicio  */
+
+/* VAINA DE LOADING */
+.lds-facebook {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-facebook div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: #FFC300;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .lds-facebook div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+  }
+  .lds-facebook div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+  }
+  .lds-facebook div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+  }
+  @keyframes lds-facebook {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+  }
+/* VAINA DE LOADING END*/
+
+/* FOOTER   */
+footer{
+  background-color:#dfdbdb;
+  min-height:50px; 
+  color:#001E6C;
+}
+footer a{
+  text-decoration: none;
+  color: #E8630a;
+}
+footer a:hover{
+  color: #001E6C; 
+}
+
+
+/* REGISTRO USER */
+.size-btn{
+  padding: 0px 40px;
+  line-height: 2.7em;
+  letter-spacing:1px;
+  font-weight: 700;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+}
+
+/* PAGINA DE ADOPCION */
+
+.container.adop-text{
+  background-image: url(../images/huesoPatron.png);
+  color: #E8630A;
+  margin: 10px;
+  border: 2px solid;
+  border-radius: 20px;
+  border-color: #E8630A;
+  padding: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+/**************filtros***********/
+
+.sidebar-filter{
+  font-size: 14px;
+}
+
+/*============FOTOS PERRITOS=============*/
+.wrapper-gallery {
+  text-align: center;
+}
+.wrapper-gallery a {
+  color: #E8630A;
+  text-decoration: none;
+}
+
+.polaroid-gallery {
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.2);
+}
+.caption-gallery {
+ font-size: 20px;
+ text-align: center;
+ margin-top: 20px;
+ font-weight:700;
+}
+
+.item-gallery:nth-of-type(4n+1) {
+  transform: scale(0.9, 0.9) rotate(5deg);
+  transition: all 0.35s;
+}
+.item-gallery:nth-of-type(4n+1) .polaroid-gallery:before {
+  transform: rotate(6deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  right: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
+}
+.item-gallery:nth-of-type(4n+2) {
+  transform: scale(0.9, 0.9) rotate(-5deg);
+  transition: all 0.35s;
+}
+.item-gallery:nth-of-type(4n+2) .polaroid-gallery:before {
+  transform: rotate(-6deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  left: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
+}
+.item-gallery:nth-of-type(4n+4) {
+  transform: scale(0.9, 0.9) rotate(3deg);
+  transition: all 0.35s;
+}
+.item-gallery:nth-of-type(4n+4) .polaroid-gallery:before {
+  transform: rotate(4deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  right: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
+}
+.item-gallery:nth-of-type(4n+3) {
+  transform: scale(0.9, 0.9) rotate(-3deg);
+  transition: all 0.35s;
+}
+.item-gallery:nth-of-type(4n+3) .polaroid:before {
+  transform: rotate(-4deg);
+  height: 20%;
+  width: 47%;
+  bottom: 30px;
+  left: 12px;
+  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
+}
+.item-gallery:hover {
+  filter: none;
+  transform: scale(1, 1) rotate(0deg) !important;
+  transition: all 0.35s;
+
+}
+/*===============FIN FOTOS PERRITOS=============*/
+
+/*===============ADOPTAR-SINGLE================*/
+
+.pet-adopt-info {
+  margin-bottom:20px;
+}
+.pet-adopt-info h6{
+display:inline;
+}
+
+
+/* Jumbotron */
+
+.jumbotron {
+  background: url(../images/jumbotron.png);
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  width: 100%;
+  height: 380px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 7em;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+}
+.jumbotron .jumbo-heading {
+  size: content;
+  color: #fff;
+  padding: 40px 70px;
+  background-color: #E8630A ;
+  margin-top: 330px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 10px solid;
+}
+
+.jumbo-heading h1 {
+  margin: 0px;
+}
+/*FIN JUMBOTRON*/
+.pet-adopt-info {
+  margin-bottom:20px;
+}
+.pet-adopt-info h6{
+display:inline;
+color: #E8630A ;
+
+}
+.btn-adopt{
+  color: #fff;
+  background-color: #E8630A;
+
+}
+.btn-adopt:hover{
+ background-color:#001E6C;
+ color: #fff;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.breadcrumb-link{
+  color:#E8630A;
+  /* text-decoration: none; */
+  font-size: 20px;
+}
+
+.breadcrumb-item.active{
+  font-size: 20px;
+}
+/*********** TABS*****************/
+#dog-info-tab .nav-link{
+  text-decoration: none;
+  color: #E8630A;
+}
+#dog-info-tab .nav-link.active{
+  color: black;  
+}
+.container-tab{
+  width: 400px;
+  /* height: 350px; */
+  text-align: justify;  
+}
+.container-tab li,p{
+  font-weight: normal;
+  font-size: small;
+}
+.tab-content{
+  height: 300px;
+}
+.btns a span{
+  font-size: small;
+  padding: 0;
+}
+
+/********formulario adopcion**************/
+
+.body{
+  text-align: center;
+  background: url(../images/huesoPatron.png);
+  background-repeat: repeat;
+  background-size:contain;
+  background-position:center;
+}
+
+/* .form-adopt{
+ margin-top: 80px ;
+ box-shadow: -3px -3px 9px #aaa9a9a2,
+              3px 3px 7px rgba(147, 149, 151, 0.671);
+  
+} */
+.card.text-black{
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  background-color: transparent;
+}
+h1.text-center{
+  color: #E8630A;
+}
+
+
+
+
+
+
+/********formulario adopcion**************/
+
+
+
+/*===============ADOPTAR-SINGLE-END================*/
+
+/*===============DONAR================*/
+
+/* section-heading */
+ .section-heading {
+     margin-bottom: 90px;
+     text-align: center;
+     position: relative;
+     z-index: 99;
+}
+ .section-heading h2{
+     font-size: 62px;
+     font-weight: 800;
+}
+ .section-heading.light-icon h2:before{
+     color: #fff!important;
+}
+ .section-heading h2:before{
+     content: "\f110";
+     z-index: 0;
+     font-family: "flaticon";
+     font-size: 120px;
+     z-index: 0;
+     opacity: 0.3;
+     display: block;
+     font-weight: normal;
+     left: 35%;
+     z-index: -1;
+     margin-top: -40px;
+     position: absolute;
+}
+/* forms */
+ .form-control {
+     transition:all 0.3s ease-in-out;
+     border:0;
+     border: 2px solid;
+     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+     border-radius: 0px;
+     line-height: 2;
+}
+ .form-control input{
+     height:50px;
+}
+ .form-control:focus{
+     outline:none;
+     box-shadow:none;
+}
+ .input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+     border-top-right-radius: 0;
+     border-bottom-right-radius: 0;
+}
+ .form-control.border2{
+     border-color:#fff;
+}
+ .input-group-btn .btn{
+     margin-top:0px;
+     height: 48px;
+     margin-left: 0px;
+     border-radius: 0;
+}
+/* button */
+.btn-donation{
+  color: #fff;
+  background-color: #e8630a;
+  padding: 0px 40px;
+  line-height: 2.7em;
+  letter-spacing:1px;
+  font-weight: 700;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+}
+.btn-donation:hover{
+ background-color:#001E6C;
+ color: #fff;
+ box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*===============DONAR================*/
+
+/*=========================== Blog Pages ============================ */
+#blog-home .card.blog-card{
+  border: 0px;
+  border-radius: 0px;
+  margin-top: 40px;
+  border-bottom: 1px solid;
+}
+*blog  prev style1 */
+/* Page margin*/
+.page{
+  background-color: #fff;
+  padding-top:50px;
+  padding-bottom:90px;
+position:relative;
+z-index:100;
+}
+/* page with sidebar */
+  .page-with-sidebar{
+      padding-right:30px;
+ }
+/* cards */
+.card {
+  display:block;
+  border:0px;
+  border-radius:15px;
+  padding:20px;
+}
+.card-header{
+  background:none;
+}
+.card-title{
+  transition: all 0.2s ease-in-out;
+}
+a .card-title:hover {
+  color: inherit;
+}
+
+
+/* widgets */
+.widget-area{
+  margin:40px 0px;
+  padding: 20px;
+}
+.widget-area:first-child{
+  margin-top: 0px;
+}
+.widget-area:before{
+  font-family: 'Flaticon';
+  content: "\f110";
+  font-weight:normal;
+  font-size: 30px;
+  margin: 0 auto;
+  position: absolute;
+  margin-top: -30px;
+  float: right;
+  right: 20px;
+  transform: rotate(12deg);
+  opacity: 0.5;
+}
+.widget-area .form-control{
+ border:2px solid transparent;
+}
+
+/* blog style1 */
+.blog-card .post-info{
+  font-family:'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px 5px 0px 0px;
+}
+.blog-card .card-body{
+ padding:20px 0 0 0px;
+}
+.blog-card .post-info a{
+  margin:0px 5px;
+}
+.card.blog-card:first-child{
+  margin-top:0px!important;
+}
+.blog-card .card-img-top{
+  transition: all .3s ease-out;
+}
+.blog-card .blog-img{
+  overflow:hidden;
+  border: 10px solid;
+}
+.blog-card .card-img-top:hover{
+  transform: scale(1.2) rotate(5deg);
+}
+/* blog sidebar and comments */
+.blog-sidebar .card{
+  background:none;
+  padding: 20px;
+}
+.comment{
+  padding:30px 0px;
+  border-bottom:1px dotted;
+}
+.comment-img{
+  max-width:150px;
+  max-height:150px;
+}
+.comment:last-child{
+  border-bottom:0px;
+}
+
+
+/*=========================== Blog Pages ============================ */
+
+strong{
+  font-size: 1.05em;
+}
+
+/**********************APADRINAR *********************************/
+
+.sus-title{
+border-left: 5px solid #001E6C;
+color: #E8630a;
+}
+.sus-lado .text-center.pt-5{
+  background-color: #dfdbdb;
+  box-shadow: -3px -3px 9px #aaa9a9a2,
+              3px 3px 7px rgba(147, 149, 151, 0.671);
+  height: 650px;
+}
+.sus-lado .text-center.precio{
+  background-color: #001E6C;
+}
+
+.sus-centro .text-center.pt-5{
+  background-color: #dfdbdb;
+  box-shadow: -3px -3px 9px #aaa9a9a2,
+              3px 3px 7px rgba(147, 149, 151, 0.671);
+  height: 650px;
+  
+}
+.sus-centro .text-center.precio{
+  background-color: #E8630a ;
+}
+h2.text-uppercase{
+  color:#001E6C
+}
+.sus-p p{
+  color: #001E6C;
+}
+.sus-centro .text-center.pt-5:hover{
+  transition: transform 0.4s;
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  -webkit-transition: transform 0.4s;
+  -moz-transition: transform 0.4s;
+  -ms-transition: transform 0.4s;
+  -o-transition: transform 0.4s;
+}
+.sus-lado .text-center.pt-5:hover{
+  transition: transform 0.4s;
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+.p-4 h4,li{
+  color: #001E6C;
+}
+
+/*********APADRINAR DETALLES *************/
+.card-sus{
+  margin-top: 15px;
+  box-shadow: -3px -3px 9px #aaa9a9a2,
+              3px 3px 7px rgba(147, 149, 151, 0.671);
+ 
+
+}
+#sus-title{
+  color: #001E6C;
+  font-size: 20px;
+  padding: 20px;
+}
+.c-card{
+  color: #001E6C;
+}
+/*********PERFIL DE USUARIO *************/
+.img-circle{
+  border-radius: 50%;
+}
+
