@@ -40,9 +40,13 @@ switch ($error = 'SinError') {
     <meta name="keywords" content="adopcion, perritos, donaciones, albergues, suscripción">
     <meta name="description" content="Adopta un perrito en el albergue, dona para apoyar al albergue, suscribete a un plan para apadrinar, coprar productos para el perrito">
     <!-- LINKS HOJAS DE ESTILOS -->
+    <link rel="stylesheet" href="Presentacion\libs\datatable\dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="Presentacion/libs/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="Presentacion\libs\datatable\bootstrap.min.css"> -->
     <link rel="stylesheet" href="Presentacion/libs/css/estilos.css">
     <link rel="stylesheet" href="Presentacion/libs/flaticon/flaticon.css">
+
+
 
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -311,14 +315,17 @@ switch ($error = 'SinError') {
     </body>
 <?php endif; ?>
 <!-- LINKS SCRIPT -->
+
 <script src="Presentacion/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" crossorigin="anonymous"></script>
+<script src="Presentacion\libs\fontawesome\js\all.min.js"></script>
 <script src="Presentacion/libs/javascript/jquery-3.6.0.min.js"></script>
 <script src="Presentacion/libs/javascript/script.js"></script>
-
+<script src="Presentacion\libs\datatable\jquery.dataTables.min.js"></script>
+<script src="Presentacion\libs\datatable\dataTables.bootstrap5.min.js"></script>
 
 
 
 
 
 </html>
+
