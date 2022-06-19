@@ -22,14 +22,7 @@ body{
 .active{
   font-weight: bold;
 }
-/*NAVBAR*/
 
-/* .navbar .container{
-  background-color: #001E6C;  
-}
-.navbar .container .collapse .nav-link{
-  color:#FCD900
-} */
 
 #nav_principal{
   background-color: #001E6C;
@@ -169,153 +162,8 @@ footer a:hover{
   position: relative;
 }
 
-/* PAGINA DE ADOPCION */
+/* PAGINA DE ADOPCION ADMIN */
 
-.container.adop-text{
-  background-image: url(../images/huesoPatron.png);
-  color: #E8630A;
-  margin: 10px;
-  border: 2px solid;
-  border-radius: 20px;
-  border-color: #E8630A;
-  padding: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-}
-
-/**************filtros***********/
-
-.sidebar-filter{
-  font-size: 14px;
-}
-
-/*============FOTOS PERRITOS=============*/
-.wrapper-gallery {
-  text-align: center;
-}
-.wrapper-gallery a {
-  color: #E8630A;
-  text-decoration: none;
-}
-
-.polaroid-gallery {
-  background: #fff;
-  padding: 1rem;
-  box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.2);
-}
-.caption-gallery {
- font-size: 20px;
- text-align: center;
- margin-top: 20px;
- font-weight:700;
-}
-
-.item-gallery:nth-of-type(4n+1) {
-  transform: scale(0.9, 0.9) rotate(5deg);
-  transition: all 0.35s;
-}
-.item-gallery:nth-of-type(4n+1) .polaroid-gallery:before {
-  transform: rotate(6deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  right: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
-}
-.item-gallery:nth-of-type(4n+2) {
-  transform: scale(0.9, 0.9) rotate(-5deg);
-  transition: all 0.35s;
-}
-.item-gallery:nth-of-type(4n+2) .polaroid-gallery:before {
-  transform: rotate(-6deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  left: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
-}
-.item-gallery:nth-of-type(4n+4) {
-  transform: scale(0.9, 0.9) rotate(3deg);
-  transition: all 0.35s;
-}
-.item-gallery:nth-of-type(4n+4) .polaroid-gallery:before {
-  transform: rotate(4deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  right: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
-}
-.item-gallery:nth-of-type(4n+3) {
-  transform: scale(0.9, 0.9) rotate(-3deg);
-  transition: all 0.35s;
-}
-.item-gallery:nth-of-type(4n+3) .polaroid:before {
-  transform: rotate(-4deg);
-  height: 20%;
-  width: 47%;
-  bottom: 30px;
-  left: 12px;
-  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
-}
-.item-gallery:hover {
-  filter: none;
-  transform: scale(1, 1) rotate(0deg) !important;
-  transition: all 0.35s;
-
-}
-/*===============FIN FOTOS PERRITOS=============*/
-
-/*===============ADOPTAR-SINGLE================*/
-
-.pet-adopt-info {
-  margin-bottom:20px;
-}
-.pet-adopt-info h6{
-display:inline;
-}
-
-
-/* Jumbotron */
-
-.jumbotron {
-  background: url(../images/jumbotron.png);
-  background-repeat:no-repeat;
-  background-size:contain;
-  background-position:center;
-  width: 100%;
-  height: 380px;
-  color: #fff;
-  text-align: center;
-  margin-bottom: 7em;
-  border-bottom-left-radius: 25%;
-  border-bottom-right-radius: 25%;
-}
-.jumbotron .jumbo-heading {
-  size: content;
-  color: #fff;
-  padding: 40px 70px;
-  background-color: #E8630A ;
-  margin-top: 330px;
-  display: inline-block;
-  border-radius: 50%;
-  border: 10px solid;
-}
-
-.jumbo-heading h1 {
-  margin: 0px;
-}
-/*FIN JUMBOTRON*/
-.pet-adopt-info {
-  margin-bottom:20px;
-}
-.pet-adopt-info h6{
-display:inline;
-color: #E8630A ;
-
-}
 .btn-adopt{
   color: #fff;
   background-color: #E8630A;
@@ -326,80 +174,26 @@ color: #E8630A ;
  color: #fff;
  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-.breadcrumb-link{
-  color:#E8630A;
-  /* text-decoration: none; */
+
+.table-heading{
+  background-color: #E8630a;
+  color: #001E6C;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav-tabs .nav-link{
+  color: #001E6C;
+  font-weight: bold;
   font-size: 20px;
 }
-
-.breadcrumb-item.active{
-  font-size: 20px;
-}
-/*********** TABS*****************/
-#dog-info-tab .nav-link{
-  text-decoration: none;
-  color: #E8630A;
-}
-#dog-info-tab .nav-link.active{
-  color: black;  
-}
-.container-tab{
-  width: 400px;
-  /* height: 350px; */
-  text-align: justify;  
-}
-.container-tab li,p{
-  font-weight: normal;
-  font-size: small;
-}
-.tab-content{
-  height: 300px;
-}
-.btns a span{
-  font-size: small;
-  padding: 0;
-}
-
-/********formulario adopcion**************/
-
-.body{
-  text-align: center;
-  background: url(../images/huesoPatron.png);
-  background-repeat: repeat;
-  background-size:contain;
-  background-position:center;
-}
-
-/* .form-adopt{
- margin-top: 80px ;
- box-shadow: -3px -3px 9px #aaa9a9a2,
-              3px 3px 7px rgba(147, 149, 151, 0.671);
-  
-} */
-.card.text-black{
-  border-radius: 25px;
-  -webkit-border-radius: 25px;
-  -moz-border-radius: 25px;
-  -ms-border-radius: 25px;
-  -o-border-radius: 25px;
-  background-color: transparent;
-}
-h1.text-center{
-  color: #E8630A;
+.nav-tabs .nav-link.active{
+  background-color: #E8630a;
+  color: #001E6C;
 }
 
 
-
-
-
-
-/********formulario adopcion**************/
-
-
-
-/*===============ADOPTAR-SINGLE-END================*/
-
-/*===============DONAR================*/
+/* FIN ADOPCION ADMIN
 
 /* section-heading */
  .section-heading {
@@ -593,78 +387,10 @@ strong{
   font-size: 1.05em;
 }
 
-/**********************APADRINAR *********************************/
-
-.sus-title{
-border-left: 5px solid #001E6C;
-color: #E8630a;
-}
-.sus-lado .text-center.pt-5{
-  background-color: #dfdbdb;
-  box-shadow: -3px -3px 9px #aaa9a9a2,
-              3px 3px 7px rgba(147, 149, 151, 0.671);
-  height: 650px;
-}
-.sus-lado .text-center.precio{
-  background-color: #001E6C;
-}
-
-.sus-centro .text-center.pt-5{
-  background-color: #dfdbdb;
-  box-shadow: -3px -3px 9px #aaa9a9a2,
-              3px 3px 7px rgba(147, 149, 151, 0.671);
-  height: 650px;
-  
-}
-.sus-centro .text-center.precio{
-  background-color: #E8630a ;
-}
-h2.text-uppercase{
-  color:#001E6C
-}
-.sus-p p{
-  color: #001E6C;
-}
-.sus-centro .text-center.pt-5:hover{
-  transition: transform 0.4s;
-  transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  -o-transform: scale(1.05);
-  -webkit-transition: transform 0.4s;
-  -moz-transition: transform 0.4s;
-  -ms-transition: transform 0.4s;
-  -o-transition: transform 0.4s;
-}
-.sus-lado .text-center.pt-5:hover{
-  transition: transform 0.4s;
-  transform: scale(1.05);
-  -webkit-transform: scale(1.05);
-  -moz-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  -o-transform: scale(1.05);
-}
-.p-4 h4,li{
-  color: #001E6C;
-}
+/**
 
 /*********APADRINAR DETALLES *************/
-.card-sus{
-  margin-top: 15px;
-  box-shadow: -3px -3px 9px #aaa9a9a2,
-              3px 3px 7px rgba(147, 149, 151, 0.671);
- 
 
-}
-#sus-title{
-  color: #001E6C;
-  font-size: 20px;
-  padding: 20px;
-}
-.c-card{
-  color: #001E6C;
-}
 /*********PERFIL DE USUARIO *************/
 .img-circle{
   border-radius: 50%;
