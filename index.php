@@ -46,8 +46,6 @@ switch ($error = 'SinError') {
     <link rel="stylesheet" href="Presentacion/libs/css/estilos.css">
     <link rel="stylesheet" href="Presentacion/libs/flaticon/flaticon.css">
 
-
-
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -322,10 +320,22 @@ switch ($error = 'SinError') {
 <script src="Presentacion/libs/javascript/script.js"></script>
 <script src="Presentacion\libs\datatable\jquery.dataTables.min.js"></script>
 <script src="Presentacion\libs\datatable\dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tablaClientes').DataTable({
+            "scrollX": true
+        });
+    });
+
+    $(document).ready(function() {
+        $('#tablaProductos').DataTable({
+            "scrollX": true
+        });
+    });
+</script>
 
 
 
 
 
 </html>
-
