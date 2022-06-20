@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+// error_reporting(0);
 session_regenerate_id(true);
 require_once 'SL/permisos.php';
 require_once('DAL/conexion.php');
@@ -208,7 +208,9 @@ switch ($error = 'SinError') {
             if ($modulo == "perfil-usuario") {
                 include_once "Presentacion/vistas/perfil-usuario.php";
             }
-
+            if ($modulo == "adoptar-update") {
+                include_once "Presentacion/vistas/adoptar-update.php";
+            }
             ?>
         </div>
 
@@ -332,6 +334,7 @@ switch ($error = 'SinError') {
             "scrollX": true
         });
     });
+ 
 </script>
 
 

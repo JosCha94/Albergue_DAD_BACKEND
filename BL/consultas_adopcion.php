@@ -26,6 +26,18 @@ class Consulta_adopcion{
         }
     }
 
+    public function mostrar_datosAdo($conexion, $id) {
+        try{
+            $sql = "CALL SP_admin_select_datos_adopcion($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $adop = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $adop;
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+        }
+    }
+
  
 }
 ?>
