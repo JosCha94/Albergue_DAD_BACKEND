@@ -4,9 +4,9 @@ $consulta = new Consulta_producto();
 $productos = $consulta->listarProductos($conexion);
 ?>
 <h2 class="text-center mt-3 h1">Productos</h2>
-<button type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
+<a href="index.php?modulo=agrega-producto" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
 <span>Agregar Producto  <i class="fa-solid fa-circle-plus"></i></apan> 
-</button>
+</a>
 <hr>
 <div class="row">
     <div class="col-sm-12">
@@ -18,7 +18,6 @@ $productos = $consulta->listarProductos($conexion);
                         <td>Estado </td>
                         <td>Categoria </td>
                         <td>Precio </td>
-                        <td>IGV </td>
                         <td>Stock</td>
                         <td WIDTH="150">Detalle </td>
                         <td>Tamaño</td>
@@ -26,7 +25,6 @@ $productos = $consulta->listarProductos($conexion);
                         <td>Fecha modificación</td>
                         <td>Editar</td>
                         <td>Habilitar/Deshabilitar</td>
-                        <!-- <td>Habilitar</td> -->
 
                     </tr>
                 </thead>
@@ -36,7 +34,6 @@ $productos = $consulta->listarProductos($conexion);
                         <td>Estado </td>
                         <td>Categoria </td>
                         <td>Precio </td>
-                        <td>IGV </td>
                         <td>Stock</td>
                         <td WIDTH="150">Detalle </td>
                         <td>Tamaño</td>
@@ -44,7 +41,6 @@ $productos = $consulta->listarProductos($conexion);
                         <td>Fecha modificación</td>
                         <td>Editar</td>
                         <td>Habilitar/Deshabilitar</td>
-                        <!-- <td>Habilitar</td> -->
 
                     </tr>
                 </tfoot>
@@ -55,7 +51,6 @@ $productos = $consulta->listarProductos($conexion);
                             <td><?php echo ($value['product_estado']); ?> </td>
                             <td><?php echo ($value['cat_nombre']); ?></td>
                             <td><?php echo ($value['product_precio']); ?> </td>
-                            <td><?php echo ($value['product_igv']); ?> </td>
                             <td><?php echo ($value['product_stock']); ?> </td>
                             <td WIDTH="150"><?php echo ($value['product_descripcion']); ?> </td>
                             <td><?php echo ($value['product_size_perro']); ?> </td>
@@ -71,9 +66,6 @@ $productos = $consulta->listarProductos($conexion);
                                 <span class="btn btn-success btn-xs mt-4" title="Habilitar Producto"><i class="fa-solid fa-power-off"></i></span>
                             <?php endif; ?>
                         </td>
-                        <!-- <td>
-                            <span class="btn btn-success btn-xs" title="Habilitar Usuario"><i class="fa-solid fa-power-off"></i></span>
-                        </td> -->
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

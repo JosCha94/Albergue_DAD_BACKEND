@@ -62,7 +62,7 @@ switch ($error = 'SinError') {
                                                         case ("apadrinar"):
                                                             echo " - Apadrinar ";
                                                             break;
-                                                        case ("productos"):
+                                                        case ("productos" || "agrega-producto"):
                                                             echo " - Productos ";
                                                             break;
                                                         case ("ventas"):
@@ -114,7 +114,7 @@ switch ($error = 'SinError') {
                                 <a class="nav-link <?php echo ($modulo == "apadrinar") ? " active " : " " ?> mx-2" href="index.php?modulo=apadrinar">Apadrinar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?php echo ($modulo == "productos") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
+                                <a class="nav-link <?php echo ($modulo == "productos" || $modulo == "agrega-producto") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link <?php echo ($modulo == "ventas") ? " active " : " " ?> mx-2" href="index.php?modulo=ventas">Ventas</a>
@@ -207,6 +207,9 @@ switch ($error = 'SinError') {
             }
             if ($modulo == "perfil-usuario") {
                 include_once "Presentacion/vistas/perfil-usuario.php";
+            }
+            if ($modulo == "agrega-producto") {
+                include_once "Presentacion/vistas/insert_producto.php";
             }
 
             ?>
