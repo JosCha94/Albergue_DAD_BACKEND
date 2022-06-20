@@ -7,6 +7,13 @@ $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
 $data = $consulta->mostrar_datosAdo($conexion, $id);
 
+if (isset($_POST['agendar'])) {
+    $idAdop = $id;
+    $fecha = $_POST[strval('fecha')];
+    $hora = $_POST[strval('hora')];
+    $fechaHora = $fecha . " " . $hora;
+    $consulta->updateEstadoAdop($conexion, $idAdop, $fechaHora);
+}
 
 ?>
 
@@ -34,14 +41,14 @@ $data = $consulta->mostrar_datosAdo($conexion, $id);
             <div class="form ">
                 <textarea class="form-control my-4" id="floatingInput" rows="4" placeholder="Envia un mensaje" style="min-heigth: 100%" required></textarea>
             </div>
-            <div class="form">
+            <div class="form text-center">
                 <label class="mx-2" for="">Agenda una fecha</label>
                 <input class="mx-2" type="date" name="fecha" required>
                 <input class="mx-2" type="time" name="hora" required>
             </div>
-            <div class="my-3">
-                <button class="btn me-5 btn-adopt my-4" type="submit">Aceptar</button>
-                <button class="btn ms-5 btn-secondary my-4" type="submit">Rechazar</button>
+            <div class="my-3 d-grid">
+                <button class="btn btn-adopt my-4" type="submit" name="agendar" >Aceptar</button>
+                <button class="btn btn-secondary my-4" type="submit">Rechazar</button>
             </div>
         </form>
     </div>
@@ -80,7 +87,7 @@ $data = $consulta->mostrar_datosAdo($conexion, $id);
             </div>
             <div class="col-md-5">
                 <div class="text-center">
-                    <img class="img-fluid" src="data:image/<?php echo ($data['img_perro_tipo']); ?>;base64,<?php echo base64_encode($data['img_perro_foto']); ?>" alt="Laski perro adopcion">
+                    <img class="img-fluid" src="data:image/<?php echo $data['img_perro_tipo']; ?>;base64,<?php echo base64_encode($data['img_perro_foto']); ?>" alt="Laski perro adopcion">
                 </div>
             </div>
         </div>

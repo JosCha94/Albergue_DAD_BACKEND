@@ -5,7 +5,7 @@ $productos = $consulta->listarProductos($conexion);
 ?>
 <h2 class="text-center mt-3 h1">Productos</h2>
 <a href="index.php?modulo=agrega-producto" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
-<span>Agregar Producto  <i class="fa-solid fa-circle-plus"></i></apan> 
+<span>Agregar Producto  <i class="fa-solid fa-circle-plus"></i></span> 
 </a>
 <hr>
 <div class="row">
