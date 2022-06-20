@@ -2,7 +2,7 @@
 class Consulta_adopcion{
 
     //MUESTRA TODOS LOS DATOS DE LA TABLA ADOPCIONES
-    public function ad_listar_adiociones($conexion) {
+    public function ad_listar_adopciones($conexion) {
         try{
             $sql = "CALL SP_admin_select_adopciones()";
             $consulta = $conexion->prepare($sql);

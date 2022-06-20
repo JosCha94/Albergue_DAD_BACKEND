@@ -108,6 +108,9 @@ switch ($error = 'SinError') {
                                 <a class="nav-link <?php echo ($modulo == "clientes") ? " active " : " " ?> mx-2" href="index.php?modulo=clientes">Clientes</a>
                             </li>
                             <li class="nav-item ">
+                                <a class="nav-link <?php echo ($modulo == "perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
+                            </li>
+                            <li class="nav-item ">
                                 <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adoptar</a>
                             </li>
                             <li class="nav-item ">
@@ -213,6 +216,9 @@ switch ($error = 'SinError') {
             }
             if ($modulo == "agrega-producto") {
                 include_once "Presentacion/vistas/insert_producto.php";
+            }
+            if ($modulo == "perritos") {
+                include_once "Presentacion/vistas/perritos.php";
             }
 
             ?>
@@ -338,6 +344,19 @@ switch ($error = 'SinError') {
             "scrollX": true
         });
     });
+   
+    $(document).ready(function() {
+        $('#tablaPerritos').DataTable({
+            "scrollX": true
+        });
+    });
+    
+
+    function showDetails(perro) {
+        var perroId = perro.getAttribute("data-id");
+        console.log(perroId);
+    }
+    
  
 </script>
 
