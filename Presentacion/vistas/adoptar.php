@@ -40,15 +40,16 @@ $adop = $consulta->ad_listar_adopciones($conexion);
                         <tbody>
                             <?php foreach ($adop as $adopcion => $value) : ?>
                             <tr class="text-center">
-                                <td><input type="hidden" name="ID" value="<?= $value['adop_id']; ?>"><?= $value['adop_id']; ?></td>
+                                <td><?= $value['adop_id']; ?></td>
                                 <td><?= $value['adop_dueño']; ?></td>
                                 <td><?= $value['adop_razon']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
-                                <td>
-                                    <div class="text-center">
-                                        <a href="index.php?modulo=adoptar-update&id=<?= $value['adop_id']; ?>" type="button" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
-                                    </div>    
-                                </td>
+                                <form action="index.php?modulo=admin_adoptar" method="POST">
+                                    <td class="text-center">
+                                        <button  class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </button>
+                                        <input type="hidden" name="id_adop" value="<?= $value['adop_id']; ?>">
+                                    </td>
+                                </form>    
                             </tr>
                             <?php endforeach; ?>
                         </tbody>

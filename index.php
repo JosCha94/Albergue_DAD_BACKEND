@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+// error_reporting(0);
 session_regenerate_id(true);
 require_once 'SL/permisos.php';
 require_once('DAL/conexion.php');
@@ -211,8 +211,8 @@ switch ($error = 'SinError') {
             if ($modulo == "perfil-usuario") {
                 include_once "Presentacion/vistas/perfil-usuario.php";
             }
-            if ($modulo == "adoptar-update") {
-                include_once "Presentacion/vistas/adoptar-update.php";
+            if ($modulo == "admin_adoptar") {
+                include_once "Presentacion/vistas/admin_adoptar.php";
             }
             if ($modulo == "agrega-producto") {
                 include_once "Presentacion/vistas/admin_producto.php";
@@ -220,8 +220,8 @@ switch ($error = 'SinError') {
             if ($modulo == "perritos") {
                 include_once "Presentacion/vistas/perritos.php";
             }
-            if ($modulo == "perritos-update") {
-                include_once "Presentacion/vistas/perritos-update.php";
+            if ($modulo == "admin_perritos") {
+                include_once "Presentacion/vistas/admin_perritos.php";
             }
 
             ?>
@@ -353,14 +353,7 @@ switch ($error = 'SinError') {
             "scrollX": true
         });
     });
-    
 
-    function showDetails(perro) {
-        var perroId = perro.getAttribute("data-id");
-        console.log(perroId);
-    }
-   
- 
 </script>
 
 

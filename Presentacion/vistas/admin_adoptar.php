@@ -2,7 +2,8 @@
 require_once('BL/consultas_adopcion.php');
 require_once('DAL/conexion.php');
 
-$id=$_GET['id'];
+$adoId=$_POST['id_adop'];
+$id = $adoId;
 $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
 $data = $consulta->mostrar_datosAdo($conexion, $id);

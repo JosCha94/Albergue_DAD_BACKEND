@@ -2,6 +2,7 @@
 require_once('BL/consultas_perritos.php');
 require_once('DAL/conexion.php');
 
+
 $conexion = conexion::conectar();
 $consulta = new Consulta_perrito();
 $perro = $consulta->listarPerritos($conexion);
@@ -9,9 +10,10 @@ $perro = $consulta->listarPerritos($conexion);
 ?>
 
 <h2 class="text-center mt-3 h1">Perritos</h2>
-<a href="index.php?modulo=agrega-producto&formTipo=insertProduct" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
-    <span>Agregar Producto <i class="fa-solid fa-circle-plus"></i></apan>
+<a href="index.php?modulo=admin_perritos&formTipo=insertPerrito" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
+    <span>Agregar Perrito <i class="fa-solid fa-circle-plus"></i></apan>
 </a>
+<hr>
 <div class="row">
     <div class="col sm-12">
         <div class="container-tab mt-5">
@@ -47,7 +49,7 @@ $perro = $consulta->listarPerritos($conexion);
                         <td><?= $value['perro_estado'] ;?></td>
                         <td><?= $value['perro_fecha_creacion'] ;?></td>
                         <td><?= $value['perro_fecha_modificacion'] ;?></td>
-                        <form action="index.php?modulo=perritos-update" method="POST">
+                        <form action="index.php?modulo=admin_perritos&formTipo=updatePerrito" method="POST">
                             <td class="d-grid">
                                 <button class="btn btn-warning btn-xs" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <input type="hidden" name="updt_perrito" value="<?= $value['perro_id'] ;?>">
