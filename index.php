@@ -1,6 +1,6 @@
 <?php
 session_start();
-// error_reporting(0);
+error_reporting(0);
 session_regenerate_id(true);
 require_once 'SL/permisos.php';
 require_once('DAL/conexion.php');
@@ -161,7 +161,7 @@ switch ($error = 'SinError') {
     ?> -->
 
 
-
+<?php echo $idEditProducto ?>
 
         <!-- BODY -->
         <div class="container mb-5">
@@ -212,7 +212,7 @@ switch ($error = 'SinError') {
                 include_once "Presentacion/vistas/adoptar-update.php";
             }
             if ($modulo == "agrega-producto") {
-                include_once "Presentacion/vistas/insert_producto.php";
+                include_once "Presentacion/vistas/admin_producto.php";
             }
 
             ?>

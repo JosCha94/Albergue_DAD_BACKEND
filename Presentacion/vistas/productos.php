@@ -2,10 +2,11 @@
 require_once('BL/consultas_productos.php');
 $consulta = new Consulta_producto();
 $productos = $consulta->listarProductos($conexion);
+
 ?>
 <h2 class="text-center mt-3 h1">Productos</h2>
-<a href="index.php?modulo=agrega-producto" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
-<span>Agregar Producto  <i class="fa-solid fa-circle-plus"></i></apan> 
+<a href="index.php?modulo=agrega-producto&formTipo=insertProduct" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
+    <span>Agregar Producto <i class="fa-solid fa-circle-plus"></i></apan>
 </a>
 <hr>
 <div class="row">
@@ -57,15 +58,20 @@ $productos = $consulta->listarProductos($conexion);
                             <td><?php echo ($value['product_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['product_fecha_modificacion']); ?> </td>
                             <td>
-                                <span class="btn btn-warning btn-xs mt-4" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></span>
+                                <form action="index.php?modulo=agrega-producto&formTipo=updateProduct" method="post">
+                                    <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
+                                    <button class="btn btn-warning btn-xs mt-4" name="cambiarDatosProducto" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></button>
+                                </form>
+                                <!-- ----------------------------
+                                <span class="btn btn-warning btn-xs mt-4" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></span> -->
                             </td>
                             <td>
-                                <?php if($value['product_estado'] == 'Habilitado'): ?>
-                            <span class="btn btn-danger btn-xs mt-4" title="Deshabilitar Producto"><i class="fa-solid fa-power-off"></i></span>
-                            <?php else: ?>
-                                <span class="btn btn-success btn-xs mt-4" title="Habilitar Producto"><i class="fa-solid fa-power-off"></i></span>
-                            <?php endif; ?>
-                        </td>
+                                <?php if ($value['product_estado'] == 'Habilitado') : ?>
+                                    <span class="btn btn-danger btn-xs mt-4" title="Deshabilitar Producto"><i class="fa-solid fa-power-off"></i></span>
+                                <?php else : ?>
+                                    <span class="btn btn-success btn-xs mt-4" title="Habilitar Producto"><i class="fa-solid fa-power-off"></i></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
