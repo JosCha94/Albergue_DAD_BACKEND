@@ -68,7 +68,7 @@ if (isset($_POST['update_pdt'])) {
             </div>
             <div class="row">
 
-                <div class="col-lg-6 p-5 res-margin bg-secondary bg-gradient h-50 mx-auto">
+                <div class="col-lg-6 p-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
 
                     <h4 class="text-light">Nuevo Producto</h4>
 
@@ -188,7 +188,7 @@ if (isset($_POST['update_pdt'])) {
             </div>
             <div class="row">
 
-                <div class="col-lg-6 p-5 res-margin bg-secondary bg-gradient h-50 mx-auto">
+                <div class="col-lg-6 p-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
 
                     <h4 class="text-light">Datos del Producto</h4>
 
