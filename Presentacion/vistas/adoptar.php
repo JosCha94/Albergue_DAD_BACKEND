@@ -5,7 +5,7 @@ require_once('DAL/conexion.php');
 
 $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
-$adop = $consulta->ad_listar_adiociones($conexion);
+$adop = $consulta->ad_listar_adopciones($conexion);
 
 
 ?>
