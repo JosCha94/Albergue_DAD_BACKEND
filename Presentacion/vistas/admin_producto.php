@@ -37,7 +37,7 @@ if (isset($_POST['registro_pdt'])) {
 }
 
 if (isset($_POST['update_pdt'])) {
-    $idEditProduct = $_POST['productID'];
+    $idProduct = $_POST['productID'];
     $category = $_POST['productCategory'];
     $product = $_POST['productName'];
     $precio = $_POST['productPrecio'];
@@ -50,11 +50,11 @@ if (isset($_POST['update_pdt'])) {
     $consulta = new Consulta_producto();
     $errores = $consulta->Validar_registroPdt($pdto);
     if (count($errores) == 0) {
-        // $estado = $consulta->insetar_producto($conexion, $pdto);
+         $estado = $consulta->update_producto($conexion, $pdto, $idProduct);
 
         if ($estado == 'fallo') {
         } else {
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&mensaje=El producto se agrego correctamente" />';
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
         }
     }
 }
@@ -297,7 +297,7 @@ if (isset($_POST['update_pdt'])) {
                                                 Deshabilitado
                                             </label>
                                         </div>
-                                        <input type="hidden" name="productID" value="<?php echo $pdtID['product_id']; ?>">
+                                        <input type="hidden" name="productID" value="<?php if (isset($idProduct)) {echo $idProduct;} else {echo $pdtID['product_id'];} ?>">
                                     </div>
                                 </div>
 
