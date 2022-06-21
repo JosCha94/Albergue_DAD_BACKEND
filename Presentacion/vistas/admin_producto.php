@@ -31,7 +31,7 @@ if (isset($_POST['registro_pdt'])) {
 
         if ($estado == 'fallo') {
         } else {
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&mensaje=El producto se agrego correctamente" />';
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se agrego correctamente" />';
         }
     }
 }
