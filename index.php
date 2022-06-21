@@ -220,6 +220,9 @@ switch ($error = 'SinError') {
             if ($modulo == "perritos") {
                 include_once "Presentacion/vistas/perritos.php";
             }
+            if ($modulo == "perritos-update") {
+                include_once "Presentacion/vistas/perritos-update.php";
+            }
 
             ?>
         </div>
@@ -356,7 +359,7 @@ switch ($error = 'SinError') {
         var perroId = perro.getAttribute("data-id");
         console.log(perroId);
     }
-    
+   
  
 </script>
 
