@@ -46,7 +46,7 @@ class Consulta_producto
     public function insetar_producto($conexion, $pdto)
     {
         try {
-            $sql = "CALL SP_insertar_producto(:categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
+            $sql = "CALL SP_insertar_producto_admin(:categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':categoria', $pdto->getProduct_categoria());
             $consulta->bindParam(':nombre', $pdto->getProduct_nombre());
@@ -130,7 +130,7 @@ class Consulta_producto
     public function detalleProducto($conexion, $id)
     {
         try {
-            $sql = "CALL SP_select_producto_id($id)";
+            $sql = "CALL SP_select_producto_id_admin($id)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $pdtid = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -143,7 +143,7 @@ class Consulta_producto
     public function update_producto($conexion, $pdto, $id)
     {
         try {
-            $sql = "CALL SP_update_producto($id, :categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
+            $sql = "CALL SP_update_producto_admin($id, :categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':categoria', $pdto->getProduct_categoria());
             $consulta->bindParam(':nombre', $pdto->getProduct_nombre());
