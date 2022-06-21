@@ -88,7 +88,7 @@ class Consulta_producto
             $errores['pdt'] = "El nombre del producto es requerido";
         } elseif (strlen($producto) < 5 || strlen($producto) > 50) {
             $errores['pdt'] = "El nombre del producto debe tener no menos de 5 caracteres";
-        } elseif (ctype_alpha($producto) == false) {
+        } elseif (!preg_match("/^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚÑ]+$/", $producto)) {
             $errores['pdt'] = "El nombre del producto solo debe de tener letras";
         }
 
@@ -138,6 +138,33 @@ class Consulta_producto
         } catch (PDOException $e) {
             echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
         }
+    }
+
+    public function update_producto($conexion, $pdto, $id)
+    {
+        try {
+            $sql = "CALL SP_update_producto($id, :categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':categoria', $pdto->getProduct_categoria());
+            $consulta->bindParam(':nombre', $pdto->getProduct_nombre());
+            $consulta->bindParam(':precio', $pdto->getProduct_precio());
+            $consulta->bindParam(':stock', $pdto->getProduct_stock());
+            $consulta->bindParam(':descrip', $pdto->getProduct_descripcion()); 
+            $consulta->bindParam(':tamano', $pdto->getProduct_size_perro());
+            $consulta->bindParam(':estado', $pdto->getProduct_estado()); 
+            $consulta->execute();
+            $estado = 'bien';
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un error no se ha podido actualizar el producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
     }
 }
 ?>
