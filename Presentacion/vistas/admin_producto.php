@@ -68,7 +68,7 @@ if (isset($_POST['update_pdt'])) {
             </div>
             <div class="row">
 
-                <div class="col-lg-6 p-5 res-margin bg-secondary h-50 mx-auto">
+                <div class="col-lg-6 p-5 res-margin bg-secondary bg-gradient h-50 mx-auto">
 
                     <h4 class="text-light">Nuevo Producto</h4>
 
@@ -183,14 +183,14 @@ if (isset($_POST['update_pdt'])) {
     <section id="dormRegistro" class="container-fluid mt-5">
         <div class="container">
             <div class="section-heading text-center">
-                <h2>Actualizacion de Producto</h2>
-                <?php echo $idEditProducto ?>
+                <h2>Actualizacion de Producto: <br>
+                <?php echo $pdtID['product_nombre'] ?> </h2>
             </div>
             <div class="row">
 
-                <div class="col-lg-6 p-5 res-margin bg-secondary h-50 mx-auto">
+                <div class="col-lg-6 p-5 res-margin bg-secondary bg-gradient h-50 mx-auto">
 
-                    <h4 class="text-light">Nuevo Producto</h4>
+                    <h4 class="text-light">Datos del Producto</h4>
 
                     <!-- Form Starts -->
                     <div id="product_form">
