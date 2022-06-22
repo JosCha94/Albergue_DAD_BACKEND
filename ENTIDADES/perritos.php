@@ -1,6 +1,5 @@
 <?php
 class perritos{
-    private $perro_id;
     private $perro_nombre;
     private $perro_peso;
     private $perro_tamano;
@@ -8,23 +7,18 @@ class perritos{
     private $perro_sexo;
     private $perro_actividad;
     private $perro_descripcion;
-    private $perro_estado;
 
-    public function __construct($perro_id, $perro_nombre, $perro_peso, $perro_tamano, $perro_nacimiento, $perro_sexo, $perro_actividad, $perro_descripcion, $perro_estado){
-        $this->perro_id = $perro_id;
+    public function __construct($perro_nombre, $perro_peso, $perro_tamano, $perro_nacimiento, $perro_sexo, $perro_actividad, $perro_descripcion){
         $this->perro_nombre = $perro_nombre;
         $this->perro_peso = $perro_peso;
-        $this->perro_tamaño = $perro_tamano;
+        $this->perro_tamano = $perro_tamano;
         $this->perro_nacimiento = $perro_nacimiento;
         $this->perro_sexo = $perro_sexo;
         $this->perro_actividad = $perro_actividad;
         $this->perro_descripcion = $perro_descripcion;
-        $this->perro_estado = $perro_estado;
     }
 
-    public function getPerro_id(){
-        return $this->perro_id;
-    }
+    
     public function getPerro_nombre(){
         return $this->perro_nombre;
     }
@@ -46,15 +40,11 @@ class perritos{
     public function getPerro_descripcion(){
         return $this->perro_descripcion;
     }
-    public function getPerro_estado(){
-        return $this->perro_estado;
-    }
 
 
 
-    public function setPerro_id($perro_id){
-        return $this->perro_id=$perro_id;
-    }
+
+
     public function setPerro_nombre($perro_nombre){
         return $this->perro_nombre=$perro_nombre;
     }
@@ -76,8 +66,6 @@ class perritos{
     public function setPerro_descripcion($perro_descripcion){
         return $this->perro_descripcion=$perro_descripcion;
     }
-    public function setPerro_estado($perro_estado){
-        return $this->perro_estado=$perro_estado;
-    }
+
 }
 ?>
