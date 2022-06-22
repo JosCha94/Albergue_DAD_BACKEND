@@ -166,5 +166,50 @@ class Consulta_producto
         }
         return $estado;
     }
+
+    public function desabilitar_producto($conexion, $Puid)
+    {
+        try {
+            $sql = "CALL SP_desabilita_producto_admin($Puid)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
+    public function habilitar_producto($conexion, $Puid)
+    {
+        try {
+            $sql = "CALL SP_habilita_producto_admin($Puid)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo habilitar el producto
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
 }
 ?>

@@ -164,7 +164,7 @@ switch ($error = 'SinError') {
     ?> -->
 
 
-<?php echo $idEditProducto ?>
+<!-- <?php echo $idEditProducto ?> -->
 
         <!-- BODY -->
         <div class="container mb-5">
