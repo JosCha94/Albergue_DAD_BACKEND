@@ -107,11 +107,11 @@ endif;
 <?php elseif ($formTipo == 'insertPerrito') : ?>
 
 <section>
-    <div class="text-center"><h2 class="text center mt-3 h1">Agregar perrito</h2></div>
-    <div class="container-fluid">
+    <div><h2 class="text-center my-3 h1">Agregar perrito</h2></div>
+    <div class="container-fluid w-50">
     <form action="" method="POST">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-12 ">
                 <div class="row mb-4">
                     <div class="col">
                         <div class="form-outline">
@@ -167,13 +167,15 @@ endif;
                             <label for="select_estado" class="form-label">Estado</label>
                         </div>
                     </div>    
-                </div>   
+                </div>
+                <input class="form-control mb-2" type="file" id="add_img" multiple />
+                <label for="formFileMultiple" class="form-label mb-3">Seleciona un maximo de 3 imagenes</label>
+                
                 <div class="form-outline mb-2">
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"> </textarea>
                     <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
                 </div> 
             </div>
-            <div class="col-md-5">   
                 
         </div>    
         <div class="text-center">
