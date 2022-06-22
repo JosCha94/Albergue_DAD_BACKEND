@@ -389,12 +389,20 @@ strong{
   font-size: 1.05em;
 }
 
-/**
 
-/*********APADRINAR DETALLES *************/
 
 /*********PERFIL DE USUARIO *************/
 .img-circle{
   border-radius: 50%;
 }
-/*********PERFIL DE USUARIO *************/
+
+.btn-orange{
+  color: #fff;
+  background-color: #E8630a;
+  border-color: #E8630a;
+}
+
+@media (max-width: 740px) { 
+  .txt_form{font-size: 1.25rem;}
+
+ }

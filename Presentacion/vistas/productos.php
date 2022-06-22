@@ -32,7 +32,7 @@ if (isset($_POST['active_pdt'])) {
 <hr>
 <div class="row">
     <div class="col-sm-12">
-        <div class="my-3">
+        <div class="my-3 ">
             <table class="table table-sm table-hover" id="tablaProductos">
                 <thead class="bg-danger text-white">
                     <tr>

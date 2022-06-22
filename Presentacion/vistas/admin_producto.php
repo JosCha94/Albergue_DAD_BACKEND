@@ -68,7 +68,7 @@ if (isset($_POST['update_pdt'])) {
             </div>
             <div class="row">
 
-                <div class="col-lg-6 p-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
+                <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
 
                     <h4 class="text-light">Nuevo Producto</h4>
 
@@ -87,19 +87,19 @@ if (isset($_POST['update_pdt'])) {
                             <?php endif; ?>
                             <div class="row">
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Nombre Producto </label>
+                                    <label class="txt_form">Nombre Producto </label>
                                     <input type="text" name="productName" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($product)) echo $product ?>" required>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Precio</label>
+                                    <label class="txt_form">Precio</label>
                                     <input type="number" name="productPrecio" class="form-control input-field" min="0" step="0.01" value="<?php if (isset($precio)) echo $precio ?>" required>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Stock </label>
+                                    <label class="txt_form">Stock </label>
                                     <input type="number" name="productStock" class="form-control input-field" min="0" value="<?php if (isset($stock)) echo $stock ?>" required>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Categoria </label>
+                                    <label class="txt_form">Categoria </label>
                                     <select class="form-select" aria-label="Default select example" name="productCategory">
                                         <option selected>
                                             <!-- <?php if ($category != '') {
@@ -113,7 +113,7 @@ if (isset($_POST['update_pdt'])) {
                                     </select>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Descripción del producto </label>
+                                    <label class="txt_form">Descripción del producto </label>
                                 </div>
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="productDescripcion" name="productDescripcion" style="height: 100px" required> <?php if (isset($descrip)) echo $descrip ?></textarea>
@@ -121,7 +121,7 @@ if (isset($_POST['update_pdt'])) {
                                 </div>
 
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Para perritos de tamaño </label>
+                                    <label class="txt_form">Para perritos de tamaño </label>
                                     <div class="d-flex justify-content-evenly">
                                         <div class="form-check">
                                             <input class="form-check-input " value="Pequeno" type="radio" name="productSizeDog" id="RadioProductPequeno" <?php if ($sizeDog == 'Pequeno') echo 'checked' ?>>
@@ -129,7 +129,7 @@ if (isset($_POST['update_pdt'])) {
                                                 Pequeño
                                             </label>
                                         </div>
-                                        <div class="form-check">
+                                        <div class="form-check mx-3">
                                             <input class="form-check-input " value="Mediano" type="radio" name="productSizeDog" id="RadioProductMediano" <?php if ($sizeDog == 'Mediano') echo 'checked' ?>>
                                             <label class="form-check-label" for="RadioProductMediano">
                                                 Mediano
@@ -144,7 +144,7 @@ if (isset($_POST['update_pdt'])) {
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Estado </label>
+                                    <label class="txt_form">Estado </label>
                                     <div class="d-flex justify-content-evenly">
                                         <div class="form-check">
                                             <input class="form-check-input estado" type="radio" name="productEstado" id="RadioProductEstadoHab" value="Habilitado" checked>
@@ -163,8 +163,8 @@ if (isset($_POST['update_pdt'])) {
 
                                 <!-- button -->
                                 <div class="mt-3 d-flex justify-content-around">
-                                    <button type="submit" name="registro_pdt" value="Submit" class="btn btn-donation mt-3">Agregar</button>
-                                    <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger size-btn mt-3">Limpiar</button>
+                                    <button type="submit" name="registro_pdt" value="Submit" class="btn btn-orange my-3">Agregar</button>
+                                    <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                                 </div>
 
                         </form>
@@ -180,15 +180,15 @@ if (isset($_POST['update_pdt'])) {
     <!-- /section-->
 <?php elseif ($formTipo == 'updateProduct') : ?>
 
-    <section id="dormRegistro" class="container-fluid mt-5">
-        <div class="container">
-            <div class="section-heading text-center">
-                <h2>Actualizacion de Producto: <br>
-                <?php echo $pdtID['product_nombre'] ?> </h2>
+    <section id="dormRegistro" class="container-fluid mt-5" >
+        <div class="container ">
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">Actualizacion de Producto: <br>
+                <?php echo $pdtID['product_nombre'] ?> </h1>
             </div>
             <div class="row">
 
-                <div class="col-lg-6 p-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
+                <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
 
                     <h4 class="text-light">Datos del Producto</h4>
 
@@ -207,24 +207,24 @@ if (isset($_POST['update_pdt'])) {
                             <?php endif; ?>
                             <div class="row">
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Nombre Producto </label>
+                                    <label class="txt_form">Nombre Producto </label>
                                     <input type="text" name="productName" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($product)) {echo $product;} else { echo $pdtID['product_nombre'];} ?>" required>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Precio</label>
+                                    <label class="txt_form">Precio</label>
                                     <input type="number" name="productPrecio" class="form-control input-field" min="0" step="0.01" value="<?php if (isset($precio)) {echo $precio;} else { echo $pdtID['product_precio'];} ?>" required>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Stock </label>
+                                    <label class="txt_form">Stock </label>
                                     <input type="number" name="productStock" class="form-control input-field" min="0" value="<?php if (isset($stock)) {echo $stock;} else { echo $pdtID['product_stock'];} ?>" required>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Categoria </label>
+                                    <label class="txt_form">Categoria </label>
                                     <select class="form-select" aria-label="Default select example" name="productCategory">
                                         <option selected>
                                         </option>
                                         <?php foreach ($categories as $key => $value) : ?>
-                                            <option value="<?= $value['cat_id']; ?>" <?php 
+                                            <option value="<?= $value['cat_id']; ?>" <?php
                                             if (isset($category)){
                                                 if ($category != '' and $category == $value['cat_id']) echo 'selected';
                                             }else{
@@ -235,7 +235,7 @@ if (isset($_POST['update_pdt'])) {
                                     </select>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Descripción del producto </label>
+                                    <label class="txt_form">Descripción del producto </label>
                                 </div>
                                 <div class="form-floating">
                                     <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="productDescripcion" name="productDescripcion" style="height: 100px" required>
@@ -244,9 +244,9 @@ if (isset($_POST['update_pdt'])) {
                                     <label for="productDescripcion">Escribe una descripcion del producto aqui</label>
                                 </div>
 
-                                <div class="col-md-12 text-light mt-2">
-                                    <label>Para perritos de tamaño </label>
-                                    <div class="d-flex justify-content-evenly">
+                                <div class="col-md-12 text-light mt-2 ">
+                                    <label class="txt_form">Para perritos de tamaño </label>
+                                    <div class="d-flex flex-nowrap justify-content-evenly">
                                         <div class="form-check">
                                             <input class="form-check-input " value="Pequeno" type="radio" name="productSizeDog" id="RadioProductPequeno" <?php
                                             if (isset($sizeDog)){
@@ -256,8 +256,8 @@ if (isset($_POST['update_pdt'])) {
                                                 Pequeño
                                             </label>
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input " value="Mediano" type="radio" name="productSizeDog" id="RadioProductMediano" <?php 
+                                        <div class="form-check mx-3">
+                                            <input class="form-check-input " value="Mediano" type="radio" name="productSizeDog" id="RadioProductMediano" <?php
                                             if (isset($sizeDog)){
                                                 if ($sizeDog == 'Mediano') echo 'checked';
                                             }else if ($pdtID['product_size_perro'] == 'Mediano') echo 'checked' ?>>
@@ -266,7 +266,7 @@ if (isset($_POST['update_pdt'])) {
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input " value="Grande" type="radio" name="productSizeDog" id="RadioProductGrande" <?php 
+                                            <input class="form-check-input " value="Grande" type="radio" name="productSizeDog" id="RadioProductGrande" <?php
                                             if (isset($sizeDog)){
                                                 if ($sizeDog == 'Grande') echo 'checked';
                                             }else if ($pdtID['product_size_perro'] == 'Grande') echo 'checked' ?>>
@@ -277,10 +277,10 @@ if (isset($_POST['update_pdt'])) {
                                     </div>
                                 </div>
                                 <div class="col-md-12 text-light mt-2">
-                                    <label>Estado </label>
+                                    <label class="txt_form">Estado </label>
                                     <div class="d-flex justify-content-evenly">
                                         <div class="form-check">
-                                            <input class="form-check-input estado" type="radio" name="productEstado" id="RadioProductEstadoHab" value="Habilitado" <?php 
+                                            <input class="form-check-input estado" type="radio" name="productEstado" id="RadioProductEstadoHab" value="Habilitado" <?php
                                             if (isset($estado)){
                                                 if ($estado == 'Habilitado') echo 'checked';
                                             }elseif ($pdtID['product_estado'] == 'Habilitado') echo 'checked' ?>>
@@ -289,7 +289,7 @@ if (isset($_POST['update_pdt'])) {
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input estado" type="radio" name="productEstado" id="RadioProductEstadoDes" value="Deshabilitado" <?php 
+                                            <input class="form-check-input estado" type="radio" name="productEstado" id="RadioProductEstadoDes" value="Deshabilitado" <?php
                                             if (isset($estado)){
                                                 if ($estado == 'Deshabilitado') echo 'checked';
                                             }elseif ($pdtID['product_estado'] == 'Deshabilitado') echo 'checked' ?>>
@@ -303,8 +303,8 @@ if (isset($_POST['update_pdt'])) {
 
                                 <!-- button -->
                                 <div class="mt-3 d-flex justify-content-around">
-                                    <button type="submit" name="update_pdt" value="Submit" class="btn btn-donation mt-3">Actualizar</button>
-                                    <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger size-btn mt-3">Limpiar</button>
+                                    <button type="submit" name="update_pdt" value="Submit" class="btn btn-orange my-3">Actualizar</button>
+                                    <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                                 </div>
 
                         </form>

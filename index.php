@@ -226,7 +226,7 @@ switch ($error = 'SinError') {
 
             ?>
         </div>
-
+        
         <!-- FOOTER -->
         <footer class="footer-area">
             <!--== Start Footer Main ==-->
