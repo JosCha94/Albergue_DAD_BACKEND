@@ -133,13 +133,12 @@ Class Consulta_perrito
     public function insertar_fotoPerrito($conexion, $img)
     {
         try {
-            $sql = "CALL SP_admin_insertar_fotoPerrito(:p_id, :foto, :fNombre, :fTipo, :fEstado)";
+            $sql = "CALL SP_admin_insertar_fotoPerrito(:p_id, :foto, :fNombre, :fTipo)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':p_id', $img->getPerro_id());
             $consulta->bindValue(':foto', $img->getImg_perro_foto());
             $consulta->bindValue(':fNombre', $img->getImg_perro_nombre());
             $consulta->bindValue(':fTipo', $img->getImg_perro_tipo());
-            $consulta->bindValue(':fEstado', $img->getImg_perro_estado()); 
             $consulta->execute();
             $estado = 'bien';
         } catch (PDOException $e) {

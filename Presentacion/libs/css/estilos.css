@@ -194,7 +194,13 @@ h2.text-center{
 
 /* FIN ADOPCION ADMIN*/
 /**************PERRITOS ADMIN ***************/
+/* .hide {
+  display: none;
+}
 
+.show {
+  display: block;
+} */
 
 /*******************************/
 /* section-heading */
@@ -406,3 +412,11 @@ strong{
   .txt_form{font-size: 1.25rem;}
 
  }
+
+
+
+
+
+
+
+

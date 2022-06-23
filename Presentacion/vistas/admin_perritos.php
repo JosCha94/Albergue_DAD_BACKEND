@@ -1,19 +1,18 @@
 <?php
 require_once('BL/consultas_perritos.php');
-require_once('ENTIDADES/perritos.php');
+require_once('ENTIDADES/img_perritos.php');
 
 $formTipo = $_GET['formTipo'] ?? '';
 
 $conexion = conexion::conectar();
 $consulta = new Consulta_perrito();
-if ($formTipo == 'updatePerrito') :
-    if ($_POST['updt_perrito'] != '') {
-        $id = $_POST['updt_perrito'];
-        $perro = $consulta->listarPerritosPorId($conexion, $id);
-        $imgs = $consulta -> listarImgs_perritos($conexion, $id);
-    }
-endif;
 
+if(isset($_GET['id'])){
+$id = $_GET['id'];
+
+$perro = $consulta->listarPerritosPorId($conexion, $id);
+$imgs = $consulta -> listarImgs_perritos($conexion, $id);
+}
 
 if (isset($_POST['btnInsert'])) {
     $p_nom = $_POST['nom_perro'];
@@ -23,22 +22,58 @@ if (isset($_POST['btnInsert'])) {
     $p_sexo = $_POST['select_sexo'];
     $p_actividad = $_POST['select_actividad'];
     $p_descrip = $_POST['name_descrip'];
-    $perro = new perritos($p_nom, $p_peso, $p_tamano, $p_nacimiento, $p_sexo, $p_actividad, $p_descrip);
 
-
+    $add_perro = new perritos($p_nom, $p_peso, $p_tamano, $p_nacimiento, $p_sexo, $p_actividad, $p_descrip);
     $consulta = new Consulta_perrito();
-    $errores = $consulta->Validar_registroPerrito($perro);
+    $errores = $consulta->Validar_registroPerrito($add_perro);
     if (count($errores) == 0) {
-        $estado = $consulta->insertar_perrito($conexion, $perro);
+        $estado = $consulta->insertar_perrito($conexion, $add_perro);
 
         if ($estado == 'fallo') {
         } else {
             echo '<div class="alert alert-success">¡El nuevo perrito ha sido agregado con exito!.</div>';
         }
-    
     }
-    
-} 
+}
+
+if (isset($_POST['save_foto'])) {
+
+    $foto = $_FILES['new_foto'];
+    $fotoName = $_FILES['new_foto']['name'];
+    $fotoType = $_FILES['new_foto']['type'];
+    $fotoError = $_FILES['new_foto']['error'];
+    $fotoPeso = $_FILES['new_foto']['size'];
+    $ext = explode('.', $fotoName);
+    $extR = strtolower(end($ext));
+    var_dump($foto);
+    $permitir = array('jpg', 'jpeg', 'png');
+    if(in_array($extR, $permitir)){
+        if ($fotoError === 0){
+            if($fotoPeso < 5000000){
+                $fotoNombreNew = uniqid('', true).".".$extR;
+            }else{
+            echo '<div class="alert alert-danger">¡El archivo es muy grande!.</div>';
+                
+            }
+        }else{
+        echo '<div class="alert alert-danger">¡Hubo un error al cargar la foto!</div>';
+        }
+    }else{
+        echo '<div class="alert alert-danger">¡No tienes permitido añadir archivos de ese tipo!.</div>';
+    }
+
+    $img = new img_perritos($id, $foto, $fotoNombreNew, $extR);
+    $consulta = new Consulta_perrito();
+    $estado = $consulta->insertar_fotoPerrito($conexion, $img);
+    if ($estado == 'fallo') {
+        echo '<div class="alert alert-danger">¡Hubo un error al momento de guardar la foto!.</div>';
+    } else {
+        echo '<div class="alert alert-success">¡El nuevo perrito ha sido agregado con exito!.</div>';
+    }
+}
+
+
+ 
 
 ?>
 
@@ -115,38 +150,35 @@ if (isset($_POST['btnInsert'])) {
                       <?php $array = json_encode($imgs);
                       if ($array != '[]' ){
                       ?>
-                    <?php foreach ($imgs as $key => $value) : ?>
-                    <div class="row">
-                        <div>
-                            <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="data:image/<?php echo $value['img_perro_tipo']; ?>;base64,<?php echo base64_encode($value['img_perro_foto']); ?>" alt="">
-                            <button class="btn btn-success my-3 mx-2" title="CAMBIAR FOTO"><i class="fa-solid fa-plus"></i></button>
-                            <button class="btn btn-danger my-3 mx-2" title="BORRAR FOTO"><i class="fa-solid fa-circle-minus"></i></button>
+                        <?php foreach ($imgs as $key => $value) : ?>
+                        <div class="row">
+                            <div>
+                                <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="data:image/<?php echo $value['img_perro_tipo']; ?>;base64,<?php echo base64_encode($value['img_perro_foto']); ?>" alt="">
+                                <a  href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $value['perro_id'] ;?>" class="btn btn-warning">Modificar</a>
+                            </div>
+                        </div> 
+                        <?php endforeach; ?>
+                        <?php } else{ ?>
+                        <div class="row">
+                            <div>
+                                <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="Presentacion\libs\images\default-image.png" alt="">
+                                <a  href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $perro['perro_id'] ;?>" class="btn btn-warning">Modificar</a>
+                            </div>
                         </div>
-                    </div> 
-                <?php endforeach; ?>
-                <?php } else{ ?>
-                    <div class="row">
-                        <div>
-                            <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="Presentacion\libs\images\default-image.png" alt="">
-                            <button class="btn btn-success my-3 mx-2" title="CAMBIAR FOTO"><i class="fa-solid fa-plus"></i></button>
-                            <button class="btn btn-danger my-3 mx-2" title="BORRAR FOTO"><i class="fa-solid fa-circle-minus"></i></button>
+                        <div class="row">
+                            <div>
+                                <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="Presentacion\libs\images\default-image.png" alt="">
+                                <a  href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $perro['perro_id'] ;?>" class="btn btn-warning">Modificar</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="Presentacion\libs\images\default-image.png" alt="">
-                            <button class="btn btn-success my-3 mx-2" title="CAMBIAR FOTO"><i class="fa-solid fa-plus"></i></button>
-                            <button class="btn btn-danger my-3 mx-2" title="BORRAR FOTO"><i class="fa-solid fa-circle-minus"></i></button>
+                        <div class="row">
+                            <div>
+                                <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="Presentacion\libs\images\default-image.png" alt="">
+                                <a  href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $perro['perro_id'] ;?>" class="btn btn-warning">Modificar</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div>
-                            <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="Presentacion\libs\images\default-image.png" alt="">
-                            <button class="btn btn-success my-3 mx-2" title="CAMBIAR FOTO"><i class="fa-solid fa-plus"></i></button>
-                            <button class="btn btn-danger my-3 mx-2" title="BORRAR FOTO"><i class="fa-solid fa-circle-minus"></i></button>
-                        </div>
-                    </div>
-                    <?php } ?>
+                        <?php } ?>
+                </div>
             </div>    
             <div class="text-center">
                 <button type="submit" name="btnUpdate" class="btn btn-primary btn-block mb-4">Actualizar datos</button>
@@ -155,6 +187,7 @@ if (isset($_POST['btnInsert'])) {
         </form>
     </div>
 </section>
+
 
 <?php elseif ($formTipo == 'insertPerrito') : ?>
 
@@ -248,65 +281,79 @@ if (isset($_POST['btnInsert'])) {
 
 <?php elseif ($formTipo == 'insertFoto') : ?>
 
-<section id="insert_foto">
-    <div><h2 class="text-center my-3 h1">Agregar fotos</h2></div>
+<section id="insert_foto" class=" my-5 container w-75">
+    <div><h2 class="text-center my-5 h1">Agregar fotos</h2></div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <form action="" method="post">
+            <div class="row">
+                    <div class="col col-md-4">
+                        <div class="card shadow-lg mb-4" >
+                        <?php $array = json_encode($imgs);
+                        if ($array != '[]' ){
+                        ?>
+                            <img class="card-img-top img-fluid " src="data:image/<?php echo $imgs[0]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[0]['img_perro_foto']); ?>" alt="Card image cap">
+                            <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
+
+                        <?php }else{  ?>  
+                            <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap">
+                            <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
+                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                    
+                </div>
+                <div class="col col-md-4">
+                    <div class="card shadow-lg mb-4" >
+                        <?php $array = json_encode($imgs);
+                        if ($array != '[]' ){
+                        ?>
+                            <img class="card-img-top img-fluid" src="data:image/<?php echo $imgs[1]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[1]['img_perro_foto']); ?>" alt="Card image cap">
+                            <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
+
+                        <?php }else{  ?>  
+                            <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap">
+                            <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
+                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
+                    </div>
+                </div>
+                <div class="col col-md-4">
+                    <div class="card shadow-lg mb-4" >
+                        <?php $array = json_encode($imgs);
+                        if ($array != '[]' ){
+                        ?>
+                            <img class="card-img-top img-fluid" src="data:image/<?php echo $imgs[2]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[2]['img_perro_foto']); ?>" alt="Card image cap">
+                            <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
+
+                        <?php }else{  ?>  
+                            <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap"> 
+                            <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
+                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="col col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </form>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="modal fade" id="foto_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Subir Foto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                    <div class="modal-body">
+                        <input type="file" name="new_foto">
                     </div>
-                </div>
-            </div>
-            <div class="col col-md-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-success" name="save_foto">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </section>
+
+
+
+
 <?php endif; ?>

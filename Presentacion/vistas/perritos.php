@@ -31,12 +31,12 @@ $perro = $consulta->listarPerritos($conexion);
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha de ingreso</th>
                         <th scope="col">Fecha de modificación</th>
+                        <th scope="col">editar fotos</th>
                         <th scope="col">Editar</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($perro as $key => $value) : ?>
-
+                    <?php foreach ($perro as $key => $value) : ?>
                     <tr>
                         <td><?= $value['perro_id'] ;?></td>
                         <td><?= $value['perro_nombre'] ;?></td>
@@ -49,20 +49,17 @@ $perro = $consulta->listarPerritos($conexion);
                         <td><?= $value['perro_estado'] ;?></td>
                         <td><?= $value['perro_fecha_creacion'] ;?></td>
                         <td><?= $value['perro_fecha_modificacion'] ;?></td>
-                        <form action="index.php?modulo=admin_perritos&formTipo=updatePerrito" method="POST">
-                            <td class="d-grid">
-                                <button class="btn btn-warning btn-xs" title="Editar"><i class="fa-solid fa-pen-to-square"></i></button>
-                                <input type="hidden" name="updt_perrito" value="<?= $value['perro_id'] ;?>">
-                            </td>
-                        </form>
-                        
-                <?php endforeach; ?>
-                            
+                        <td class="text-center">
+                            <a href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $value['perro_id'] ;?>" class="btn btn-warning" title="EDITAR FOTOS"><i class="fa-solid fa-file-image"></i></a>
+                        </td>
+                        <td>
+                            <a href="index.php?modulo=admin_perritos&formTipo=updatePerrito&id=<?= $value['perro_id'] ;?>" class="btn btn-warning" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-
 

@@ -6,12 +6,11 @@ class img_perritos{
     private $img_perro_tipo;
     private $img_perro_estado;
 
-    public function __construct($perro_id, $img_perro_foto, $img_perro_nombre,$img_perro_tipo, $img_perro_estado){
+    public function __construct($perro_id, $img_perro_foto, $img_perro_nombre,$img_perro_tipo){
         $this->perro_id = $perro_id;
         $this->img_perro_foto = $img_perro_foto;
         $this->img_perro_nombre = $img_perro_nombre;
         $this->img_perro_tipo = $img_perro_tipo;
-        $this->img_perro_estado = $img_perro_estado;
     }
 
    
@@ -27,9 +26,7 @@ class img_perritos{
     public function getImg_perro_tipo(){
         return $this->img_perro_tipo;
     }
-    public function getImg_perro_estado(){
-        return $this->img_perro_estado;
-    }
+    
 
  
     public function setPerro_id($perro_id){
@@ -44,8 +41,6 @@ class img_perritos{
     public function setImg_perro_tipo($img_perro_tipo){
         $this->img_perro_tipo = $img_perro_tipo;
     }
-    public function setImg_perro_estado($img_perro_estado){
-        $this->img_perro_estado = $img_perro_estado;
-    }
+ 
 }
 ?>
