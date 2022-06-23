@@ -38,14 +38,15 @@ if (isset($_POST['btnInsert'])) {
 
 if (isset($_POST['save_foto'])) {
 
-    $foto = $_FILES['new_foto'];
+    $data = $_FILES['new_foto'];
+    $foto = file_get_contents($_FILES['new_foto']['tmp_name']);
     $fotoName = $_FILES['new_foto']['name'];
     $fotoType = $_FILES['new_foto']['type'];
     $fotoError = $_FILES['new_foto']['error'];
     $fotoPeso = $_FILES['new_foto']['size'];
     $ext = explode('.', $fotoName);
     $extR = strtolower(end($ext));
-    var_dump($foto);
+    // var_dump($foto);
     $permitir = array('jpg', 'jpeg', 'png');
     if(in_array($extR, $permitir)){
         if ($fotoError === 0){
@@ -68,8 +69,10 @@ if (isset($_POST['save_foto'])) {
     if ($estado == 'fallo') {
         echo '<div class="alert alert-danger">¡Hubo un error al momento de guardar la foto!.</div>';
     } else {
-        echo '<div class="alert alert-success">¡El nuevo perrito ha sido agregado con exito!.</div>';
+            echo "<meta http-equiv='refresh' content='3'>";
+            echo '<div class="alert alert-success">¡La nueva foto a sido añadida con exito con exito!.</div>';
     }
+
 }
 
 
@@ -288,8 +291,9 @@ if (isset($_POST['save_foto'])) {
             <div class="row">
                     <div class="col col-md-4">
                         <div class="card shadow-lg mb-4" >
-                        <?php $array = json_encode($imgs);
-                        if ($array != '[]' ){
+                        <?php 
+                        
+                        if (count($imgs) > 0 ){
                         ?>
                             <img class="card-img-top img-fluid " src="data:image/<?php echo $imgs[0]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[0]['img_perro_foto']); ?>" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
@@ -303,8 +307,8 @@ if (isset($_POST['save_foto'])) {
                 </div>
                 <div class="col col-md-4">
                     <div class="card shadow-lg mb-4" >
-                        <?php $array = json_encode($imgs);
-                        if ($array != '[]' ){
+                        <?php 
+                        if (count($imgs) > 1 ){
                         ?>
                             <img class="card-img-top img-fluid" src="data:image/<?php echo $imgs[1]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[1]['img_perro_foto']); ?>" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
@@ -317,8 +321,8 @@ if (isset($_POST['save_foto'])) {
                 </div>
                 <div class="col col-md-4">
                     <div class="card shadow-lg mb-4" >
-                        <?php $array = json_encode($imgs);
-                        if ($array != '[]' ){
+                        <?php 
+                        if (count($imgs) > 2 ){
                         ?>
                             <img class="card-img-top img-fluid" src="data:image/<?php echo $imgs[2]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[2]['img_perro_foto']); ?>" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
