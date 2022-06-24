@@ -27,3 +27,4 @@ $(document).ready(function () {
 //     text.classList.toggle("hide");
 //     text.classList.toggle("show");
 //   }
+

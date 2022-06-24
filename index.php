@@ -354,7 +354,15 @@ switch ($error = 'SinError') {
         });
     });
     
-    
+
+  function checkDelete() {
+    let status  = confirm( "¿Estás seguro que deseas eliminar esta foto?" );
+    return status;
+   
+  }
+
+
+
 
 </script>
 

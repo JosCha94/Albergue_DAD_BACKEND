@@ -70,7 +70,7 @@ if (isset($_POST['save_foto'])) {
     if ($estado == 'fallo') {
         echo '<div class="alert alert-danger">¡Hubo un error al momento de guardar la foto!.</div>';
     } else {
-            echo "<meta http-equiv='refresh' content='3'>";
+            echo "<meta http-equiv='refresh' content='2'>";
             echo '<div class="alert alert-success">¡La nueva foto a sido añadida con exito con exito!.</div>';
     }
 
@@ -95,11 +95,63 @@ if (isset($_POST['btnUpdate'])) {
 
         if ($estado == 'fallo') {
         } else {
-            echo "<meta http-equiv='refresh' content='3'>";
+            echo "<meta http-equiv='refresh' content='2'>";
             echo '<div class="alert alert-success">¡Los datos se actualizaron con éxito!.</div>';
         }
     }
 }
+
+if (isset($_POST['elim_foto1'])){
+    $f_id1 = $_POST['ipt_delete1'];
+
+    $consulta = new Consulta_perrito();
+    $del_img = $consulta->delete_foto($conexion, $f_id1);
+
+    if(!$del_img){
+
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La foto se elimino con éxito!.</div>';
+        
+    }else{
+        echo '<div class="alert alert-danger">¡Hubo un erro el momento de eliminar la foto!.</div>';
+        
+    }
+   
+}
+if (isset($_POST['elim_foto2'])){
+    $f_id2 = $_POST['ipt_delete2'];
+
+    $consulta = new Consulta_perrito();
+    $del_img = $consulta->delete_foto($conexion, $f_id2);
+
+    if(!$del_img){
+
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La foto se elimino con éxito!.</div>';
+        
+    }else{
+        echo '<div class="alert alert-danger">¡Hubo un erro el momento de eliminar la foto!.</div>';
+        
+    }
+    
+}
+if (isset($_POST['elim_foto3'])){
+    $f_id3 = $_POST['ipt_delete3'];
+
+    $consulta = new Consulta_perrito();
+    $del_img = $consulta->delete_foto($conexion, $f_id3);
+
+    if(!$del_img){
+
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La foto se elimino con éxito!.</div>';
+        
+    }else{
+        echo '<div class="alert alert-danger">¡Hubo un erro el momento de eliminar la foto!.</div>';
+        
+    }
+}
+
 
 ?>
 
@@ -337,8 +389,8 @@ if (isset($_POST['btnUpdate'])) {
                         <?php }else{  ?>  
                             <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
-                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
-                            <input type="hidden" name="ipt_delete" value="<?php echo $imgs[0]['img_perro_id'];?>">
+                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto1" onclick="return confirmDelete();"><i class="fa-solid fa-circle-minus"></i></button>
+                            <input type="hidden" name="ipt_delete1" value="<?php echo $imgs[0]['img_perro_id'];?>">
                     </div>
                     
                 </div>
@@ -352,8 +404,8 @@ if (isset($_POST['btnUpdate'])) {
                         <?php }else{  ?>  
                             <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
-                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
-                            <input type="hidden" name="ipt_delete" value="<?php echo $imgs[1]['img_perro_id'];?>">
+                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto2" onclick="return checkDelete()"><i class="fa-solid fa-circle-minus"></i></button>
+                            <input type="hidden" name="ipt_delete2" value="<?php echo $imgs[1]['img_perro_id'];?>">
 
                     </div>
                 </div>
@@ -367,15 +419,15 @@ if (isset($_POST['btnUpdate'])) {
                         <?php }else{  ?>  
                             <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap"> 
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
-                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
-                            <input type="hidden" name="ipt_delete" value="<?php echo $imgs[2]['img_perro_id'];?>">
+                            <button class="btn btn-danger mt-3 ms-3" name= "elim_foto3" onclick="return checkDelete()"><i class="fa-solid fa-circle-minus"></i></button>
+                            <input type="hidden" name="ipt_delete3" value="<?php echo $imgs[2]['img_perro_id'];?>">
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <form action="" method="post" enctype="multipart/form-data">
-        <div class="modal fade" id="foto_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal fade" id="foto_modal" tabindex="-1" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -383,7 +435,7 @@ if (isset($_POST['btnUpdate'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="file" name="new_foto">
+                        <input type="file" name="new_foto" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>

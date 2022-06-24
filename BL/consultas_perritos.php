@@ -186,9 +186,9 @@ Class Consulta_perrito
         return $estado;
     }
 
-    public function delete_foto($conexion, $id){
+    public function delete_foto($conexion, $f_id){
         try {
-            $sql = "CALL SP_admin_delete_foto($id)";
+            $sql = "CALL SP_admin_delete_foto($f_id)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $del_img = $consulta->fetchAll(PDO::FETCH_ASSOC);
