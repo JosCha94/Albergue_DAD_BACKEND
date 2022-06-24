@@ -43,7 +43,7 @@ Class Consulta_perrito
     public function listarImgs_perritos($conexion, $id)
     {
         try {
-            $sql = "CALL SP_listar_img_byId($id)";
+            $sql = "CALL SP_admin_listar_imgId($id)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $imgs = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -52,12 +52,14 @@ Class Consulta_perrito
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede listar los perritos
+                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede mostrar las imagenes
+            </div>
 
             <?php
         }
     }
 
+    //////////////////AGREGAR NUEVO PERRITO
     public function insertar_perrito($conexion, $perro)
     {
         try {
@@ -85,6 +87,8 @@ Class Consulta_perrito
         return $estado;
         
     }
+
+    //VALIDACION DE REGISTRO DE PERRITOS
 
     public function Validar_registroPerrito($perro)
     {
@@ -153,6 +157,55 @@ Class Consulta_perrito
         }
         return $estado;
     }
+
+    public function update_perritoAdmin($conexion, $id, $perro)
+    {
+        try {
+            $sql = "CALL SP_admin_update_perrito($id, :nombre, :peso, :tamano, :nacimiento, :sexo, :actividad, :descripcion, :estado)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindValue(':nombre', $perro->getPerro_nombre());
+            $consulta->bindValue(':peso', $perro->getPerro_peso());
+            $consulta->bindValue(':tamano', $perro->getPerro_tamano());
+            $consulta->bindValue(':nacimiento', $perro->gerPerro_nacimiento());
+            $consulta->bindValue(':sexo', $perro->getPerro_sexo()); 
+            $consulta->bindValue(':actividad', $perro->getPerro_actividad());
+            $consulta->bindValue(':descripcion', $perro->getPerro_descripcion()); 
+            $consulta->bindValue(':estado', $perro->getPerro_estado()); 
+            $consulta->execute();
+            $estado = 'bien';
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un error no se ha podido actualizar los datos del producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
+    }
+
+    public function delete_foto($conexion, $id){
+        try {
+            $sql = "CALL SP_admin_delete_foto($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $del_img = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $del_img;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede mostrar las imagenes
+            </div>
+
+            <?php
+        }
+    }
+
+
+
 
 
 

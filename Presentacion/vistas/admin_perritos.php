@@ -1,6 +1,7 @@
 <?php
 require_once('BL/consultas_perritos.php');
 require_once('ENTIDADES/img_perritos.php');
+require_once('ENTIDADES/perritos.php');
 
 $formTipo = $_GET['formTipo'] ?? '';
 
@@ -75,15 +76,37 @@ if (isset($_POST['save_foto'])) {
 
 }
 
+if (isset($_POST['btnUpdate'])) {
+    $id = $_GET['id'];
+    $p_name = $_POST['nombre'];
+    $p_peso = $_POST['peso'];
+    $p_tamano = $_POST['tamano'];
+    $p_nacimiento = $_POST['nacimiento'];
+    $p_sexo = $_POST['sexo'];
+    $p_actividad = $_POST['actividad'];
+    $p_estado = $_POST['estado'];
+    $p_descripcion = $_POST['descripcion'];
+    $perro = new updt_perrito($p_name, $p_peso, $p_tamano, $p_nacimiento, $p_sexo, $p_actividad,  $p_descripcion, $p_estado);
 
- 
+    $consulta = new Consulta_perrito();
+    $errores = $consulta->Validar_registroPerrito($perro);
+    if (count($errores) == 0) {
+         $estado = $consulta->update_perritoAdmin($conexion, $id, $perro);
+
+        if ($estado == 'fallo') {
+        } else {
+            echo "<meta http-equiv='refresh' content='3'>";
+            echo '<div class="alert alert-success">¡Los datos se actualizaron con éxito!.</div>';
+        }
+    }
+}
 
 ?>
 
 <?php if ($formTipo == 'updatePerrito') : ?>
     
 <section id="update_perrito">
-    <div class="text-center"><h2 class="text-center mt-3 h1"><?= $perro['perro_nombre']; ?></h2></div>
+    <div class="text-center"><h2 class="text-center mt-3 h1">Actualizar Perrito</h2></div>
     <div class="container my-4">
         <form action="" method="POST">
             <div class="row">
@@ -91,13 +114,13 @@ if (isset($_POST['save_foto'])) {
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" id="pnom" class="form-control" value="<?= $perro['perro_nombre']; ?>" />
+                                <input type="text" id="pnom" class="form-control" value="<?php if (isset($p_name)) {echo $p_name;} else { echo $perro['perro_nombre'];} ?>" maxlength="50" minlength="5" name="nombre" required/>
                                 <label class="form-label" for="pnom">Nombre del perrito</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" id="ppeso" class="form-control" value="<?= $perro['perro_peso']; ?>"/>
+                                <input type="number" id="ppeso" class="form-control" value="<?php if (isset($p_peso)) {echo $p_peso;} else { echo $perro['perro_peso'];} ?>" name="peso" min="0" step="0.01"  required/>
                                 <label class="form-label" for="ppeso">Peso</label>
                             </div>
                         </div>
@@ -105,13 +128,19 @@ if (isset($_POST['save_foto'])) {
                     <div class="row mb-2">
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <input type="text" id="ptamano" class="form-control" value="<?= $perro['perro_tamano']; ?>" />
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="tamano" required>
+                                    <option selected><?php if (isset($p_tamano)) {echo $p_tamano;} else { echo $perro['perro_tamano'];} ?></option>
+                                    <option value="M">Pequeño</option>
+                                    <option value="H">Grande</option>
+                                    <option value="H">Mediano</option>
+                                </select>
                                 <label class="form-label" for="ptamano">Tamaño</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <input type="text" id="pnaci" class="form-control" value="<?= $perro['perro_nacimiento']; ?>" />
+                                <input type="date" id="pnaci" class="form-control" value="<?php if (isset($p_nacimiento)) {echo $p_nacimiento;} else { echo $perro['perro_nacimiento'];} ?>" name = "nacimiento" required/>
+                                
                                 <label class="form-label" for="pnaci">Fecha de nacimiento</label>
                             </div>
                         </div>    
@@ -119,13 +148,21 @@ if (isset($_POST['save_foto'])) {
                     <div class="row mb-2">
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <input type="text" id="psexo" class="form-control" value="<?= $perro['perro_sexo']; ?>" />
-                                <label class="form-label" for="psexo">Sexo</label>
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="sexo" required>
+                                    <option selected><?php if (isset($p_sexo)) {echo $p_sexo;} else { echo $perro['perro_sexo'];} ?></option>
+                                    <option value="M">Macho</option>
+                                    <option value="H">Hembra</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <input type="text" id="pacti" class="form-control" value="<?= $perro['perro_actividad']; ?>" />
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="actividad" required>
+                                    <option selected><?php if (isset($p_actividad)) {echo $p_actividad;} else { echo $perro['perro_actividad'];} ?></option>
+                                    <option value="Ligera">Ligera</option>
+                                    <option value="Moderada">Moderada</option>
+                                    <option value="Intensa">Intensa</option>
+                                </select>
                                 <label class="form-label" for="pacti">Nivel de actividad</label>
                             </div>
                         </div>    
@@ -133,8 +170,8 @@ if (isset($_POST['save_foto'])) {
                     <div class="row mb-2">
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <select class="form-select" aria-label="Default select example" id="select_estado">
-                                    <option selected><?= $perro['perro_estado']; ?></option>
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="estado" required>
+                                    <option selected><?php if (isset($p_estado)) {echo $p_estado;} else { echo $perro['perro_estado'];} ?></option>
                                     <option value="Adoptado">Adoptado</option>
                                     <option value="Sin Adoptar">Sin Adoptar</option>
                                     <option value="Reingreso">Reingreso</option>
@@ -145,7 +182,7 @@ if (isset($_POST['save_foto'])) {
                         </div>    
                     </div>   
                     <div class="form-outline mb-2">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"> <?= $perro['perro_descripcion']; ?></textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="descripcion" rows="3" required minlength="5" maxlength="255"> <?php if (isset($p_descripcion)) {echo $p_descripcion;} else { echo $perro['perro_descripcion'];} ?></textarea>
                         <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
                     </div> 
                 </div>
@@ -297,11 +334,11 @@ if (isset($_POST['save_foto'])) {
                         ?>
                             <img class="card-img-top img-fluid " src="data:image/<?php echo $imgs[0]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[0]['img_perro_foto']); ?>" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
-
                         <?php }else{  ?>  
                             <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
                             <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
+                            <input type="hidden" name="ipt_delete" value="<?php echo $imgs[0]['img_perro_id'];?>">
                     </div>
                     
                 </div>
@@ -312,11 +349,12 @@ if (isset($_POST['save_foto'])) {
                         ?>
                             <img class="card-img-top img-fluid" src="data:image/<?php echo $imgs[1]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[1]['img_perro_foto']); ?>" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
-
                         <?php }else{  ?>  
                             <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
                             <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
+                            <input type="hidden" name="ipt_delete" value="<?php echo $imgs[1]['img_perro_id'];?>">
+
                     </div>
                 </div>
                 <div class="col col-md-4">
@@ -326,11 +364,11 @@ if (isset($_POST['save_foto'])) {
                         ?>
                             <img class="card-img-top img-fluid" src="data:image/<?php echo $imgs[2]['img_perro_tipo']; ?>;base64,<?php echo base64_encode($imgs[2]['img_perro_foto']); ?>" alt="Card image cap">
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto" disabled><i class="fa-solid fa-circle-plus"></i></button>
-
                         <?php }else{  ?>  
                             <img class="card-img-top img-fluid" src="Presentacion/libs/images/default-image.png" alt="Card image cap"> 
                             <button type="button" class="btn btn-success mt-3 mx-5" data-bs-toggle="modal" data-bs-target="#foto_modal" name ="subir_foto"><i class="fa-solid fa-circle-plus"></i></button> <?php } ?>
                             <button class="btn btn-danger mt-3 ms-3" name= "elim_foto" ><i class="fa-solid fa-circle-minus"></i></button>
+                            <input type="hidden" name="ipt_delete" value="<?php echo $imgs[2]['img_perro_id'];?>">
                     </div>
                 </div>
             </div>

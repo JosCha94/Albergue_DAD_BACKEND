@@ -10,13 +10,13 @@ $perro = $consulta->listarPerritos($conexion);
 ?>
 
 <h2 class="text-center mt-3 h1">Perritos</h2>
-<a href="index.php?modulo=admin_perritos&formTipo=insertPerrito" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
+<a href="index.php?modulo=admin_perritos&formTipo=insertPerrito" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalProducto">
     <span>Agregar Perrito <i class="fa-solid fa-circle-plus"></i></apan>
 </a>
 <hr>
 <div class="row">
     <div class="col sm-12">
-        <div class="container-tab mt-5">
+        <div class="container-tab mt-2">
             <table class="table table-sm table-hover" id="tablaPerritos">
                 <thead class="bg-danger text-white text-center table-heading">
                     <tr>
