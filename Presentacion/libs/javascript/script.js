@@ -28,3 +28,39 @@ $(document).ready(function () {
 //     text.classList.toggle("show");
 //   }
 
+$(document).ready(function() {
+    $('#tablaClientes').DataTable({
+        "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#tablaProductos').DataTable({
+        "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#tablaPerritos').DataTable({
+        "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#tablaVentas').DataTable({
+        "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#tablaDetalleVentas').DataTable({
+        // "scrollX": true
+    });
+});
+
+function checkDelete() {
+let status  = confirm( "¿Estás seguro que deseas eliminar esta foto?" );
+return status;
+
+}
+

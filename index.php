@@ -1,6 +1,6 @@
 <?php
 session_start();
-// error_reporting(0);
+error_reporting(0);
 session_regenerate_id(true);
 require_once 'SL/permisos.php';
 require_once('DAL/conexion.php');
@@ -335,39 +335,5 @@ switch ($error = 'SinError') {
 <script src="Presentacion/libs/javascript/script.js"></script>
 <script src="Presentacion\libs\datatable\jquery.dataTables.min.js"></script>
 <script src="Presentacion\libs\datatable\dataTables.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#tablaClientes').DataTable({
-            "scrollX": true
-        });
-    });
-
-    $(document).ready(function() {
-        $('#tablaProductos').DataTable({
-            "scrollX": true
-        });
-    });
-   
-    $(document).ready(function() {
-        $('#tablaPerritos').DataTable({
-            "scrollX": true
-        });
-    });
-    
-
-  function checkDelete() {
-    let status  = confirm( "¿Estás seguro que deseas eliminar esta foto?" );
-    return status;
-   
-  }
-
-
-
-
-</script>
-
-
-
-
 
 </html>
