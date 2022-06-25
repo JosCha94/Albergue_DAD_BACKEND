@@ -34,7 +34,7 @@ $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
                                 <th scope="col">Periodo de la suscripción</th>
                                 <th scope="col">Fecha de inicio</th>
                                 <th scope="col">Fecha de renovación</th>
-                                <th scope="col">Fecha de expiracioón</th>
+                                <th scope="col">Fecha de expiración</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Deshabilitar</th>
                             </tr>
@@ -51,9 +51,6 @@ $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
                                 <td><?= $value['suscrip_fecha_inicio'] ;?></td>
                                 <td><?= $value['suscrip_fecha_renov'] ;?></td>
                                 <td><?= $value['suscrip_fecha_termino'] ;?></td>
-                                <td>
-                                    <span class="btn btn-warning btn-xs" title="Editar"><i class="fa-solid fa-pen-to-square"></i></span>
-                                </td>
                                 <td>
                                     <span class="btn btn-danger btn-xs" title="Desabilitar perrito"><i class="fa-solid fa-power-off"></i></span>
                                 </td>

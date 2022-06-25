@@ -6,6 +6,21 @@ require_once('DAL/conexion.php');
 $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
 $adop = $consulta->ad_listar_adopciones($conexion);
+$entrevista = $consulta->ad_listar_entrevista($conexion);
+$final = $consulta->ad_listar_finalizadas($conexion);
+
+// if (isset($_POST['btn_rechazar'])) {
+//     $consulta = new Consulta_adopcion();
+//     $rechazar = $consulta->rechazar_adopcion($conexion, $id);
+//     if(!$rechazar)
+//     {
+//         echo '<div class="alert alert-danger">¡Ocurrio un errr, la solicitud no pudo ser rechazada!.</div>';
+//     }else{
+//         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adopciones&mensaje=La solicitud se ha rechazado" />';
+//     }
+// }
+
+
 
 
 ?>
@@ -44,12 +59,9 @@ $adop = $consulta->ad_listar_adopciones($conexion);
                                 <td><?= $value['adop_dueño']; ?></td>
                                 <td><?= $value['adop_razon']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
-                                <form action="index.php?modulo=admin_adoptar" method="POST">
-                                    <td class="text-center">
-                                        <button  class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </button>
-                                        <input type="hidden" name="id_adop" value="<?= $value['adop_id']; ?>">
-                                    </td>
-                                </form>    
+                                <td class="text-center">
+                                    <a href="index.php?modulo=admin_adoptar&id=<?= $value['adop_id']; ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
+                                </td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -64,28 +76,37 @@ $adop = $consulta->ad_listar_adopciones($conexion);
                                 <th scope="col">Razón de adopción</th>
                                 <th scope="col">Fecha de entrevista</th>
                                 <th scope="col">Fecha de solicitud</th>
-                                <th scope="col">Link de reunión</th>
+                                <th scope ="col">Aceptar</th>
+                                <th scope="col">Rechazar</th>
+                                <!-- <th scope="col">Link de reunión</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($adop as $adopcion => $value) : ?>
+                        <?php foreach ($entrevista as $adopcion => $value) : ?>
                             <tr class="text-center">
                                 <td><?= $value['adop_id']; ?></td>
                                 <td><?= $value['adop_dueño']; ?></td>
                                 <td><?= $value['adop_razon']; ?></td>
+                                <td><?= $value['adop_fecha_entrevista']; ?></td>
+                                <td><?= $value['adop_fecha_creacion']; ?></td>
+                                <td>
+                                    <button class="btn btn-success mt-3 ms-3" name= "btn_aceptar" ><i class="fa-solid fa-check"></i></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" ><i class="fa-solid fa-circle-minus"></i></button>
+                                </td>
                             </tr>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>        
                 </div>
                 <div class="tab-pane fade" id="adopciones" role="tabpanel" aria-labelledby="">
                     <table id="tablaAdop" class="table table-sm table-hover">
                         <thead class="table-heading text-white bg-danger">
-                            <tr>
+                            <tr class="text-center">
                                 <th scope="col">ID adopción</th>
                                 <th scope="col">Adoptante</th>
                                 <th scope="col">Razón de adopción</th>
-                                <th scope="col">Fecha de entrevista</th>
                                 <th scope="col">Observaciones</th>
                                 <th scope="col">Fecha de solicitud</th>
                                 <th scope="col">Fecha de última visita</th>
@@ -96,16 +117,16 @@ $adop = $consulta->ad_listar_adopciones($conexion);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($adop as $adopcion => $value) : ?>
+                            <?php foreach ($final as $adopcion => $value) : ?>
                                 <tr class="text-center">
-                                    <td><?= $value['adop_id'] ?><</td>
+                                    <td><?= $value['adop_id'] ?></td>
                                     <td><?= $value['adop_dueño'] ?></td>
                                     <td><?= $value['adop_razon'] ?></td>
-                                    <td><?= $value['adop_fecha_entrevista'] ?></td>
                                     <td><?= $value['adop_observaciones'] ?></td>
                                     <td><?= $value['adop_fecha_creacion'] ?></td>
                                     <td><?= $value['adop_ultima_visita'] ?></td>
                                     <td><?= $value['adop_resumen_visitas'] ?></td>
+                                    <!-- <td><?php if($value['adop_estado'] == 'Rechazada'{echo '<span class="bg-warning">' $value['adop_estado']'</span>'}else{'<span class="bg-success">' $value['adop_estado']'</span>'} ?></td> -->
                                     <td><?= $value['adop_estado'] ?></td>
                                     <td><?= $value['adop_fecha'] ?></td>
                                     <td><?= $value['adop_fecha_cambio'] ?></td>
