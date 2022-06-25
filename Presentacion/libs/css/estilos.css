@@ -19,9 +19,9 @@ body{
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
 }
-.active{
+/* .active{
   font-weight: bold;
-}
+} */
 
 
 #nav_principal{

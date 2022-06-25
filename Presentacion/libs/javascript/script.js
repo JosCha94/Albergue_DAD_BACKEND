@@ -46,6 +46,17 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $('#tablaVentas').DataTable({
+        "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#tablaDetalleVentas').DataTable({
+        // "scrollX": true
+    });
+});
 
 function checkDelete() {
 let status  = confirm( "¿Estás seguro que deseas eliminar esta foto?" );
