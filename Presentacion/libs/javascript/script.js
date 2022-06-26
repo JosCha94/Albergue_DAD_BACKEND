@@ -58,6 +58,38 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function() {
+    $('#solicitudesAdop').DataTable({
+        // "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#agendaAdop').DataTable({
+        // "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#adopFinal').DataTable({
+        // "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#suscip').DataTable({
+        // "scrollX": true
+    });
+});
+
+$(document).ready(function() {
+    $('#tipoSusci').DataTable({
+        // "scrollX": true
+    });
+});
+
+
+//funcion para confirmar delete
 function checkDelete() {
 let status  = confirm( "¿Estás seguro que deseas eliminar esta foto?" );
 return status;

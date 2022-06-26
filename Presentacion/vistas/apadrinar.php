@@ -16,17 +16,17 @@ $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
         <div class="container-tab mt-5">
             <ul class="nav nav-tabs" id="adop-tables-tab" role="tablist">
                 <li class="nav-item" role="solicitud">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#suscripciones" type="button" role="tab" aria-controls="solicitudes" aria-selected="true">Suscripciones</button>
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#suscripciones" type="button" role="tab" aria-controls="" aria-selected="true">Suscripciones</button>
                 </li>
                 <li class="nav-item" role="Agenda de entrevistas">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tipo_sus" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Tipo de suscripción</button>
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tipo_sus" type="button" role="tab" aria-controls="" aria-selected="false">Tipo de suscripción</button>
                 </li>
             </ul>
             <div class="tab-content " id="myTabContent">
                 <div class="tab-pane fade show active" id="suscripciones" role="tabpanel" aria-labelledby="home-tab">
-                    <table class="table table-sm table-hover" id="tablaSuscrip">
+                    <table id="suscip" class="table table-sm table-hover" >
                         <thead class="bg-danger text-center text-white table-heading">
-                            <tr class="text-center">
+                            <tr class="">
                                 <th scope="col">ID</th>
                                 <th scope="col">Nombre del cliente</th>
                                 <th scope="col">Tipo de suscripción</th>
@@ -35,7 +35,6 @@ $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
                                 <th scope="col">Fecha de inicio</th>
                                 <th scope="col">Fecha de renovación</th>
                                 <th scope="col">Fecha de expiración</th>
-                                <th scope="col">Editar</th>
                                 <th scope="col">Deshabilitar</th>
                             </tr>
                         </thead>
@@ -61,7 +60,7 @@ $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
                     </table>
                 </div>
                 <div class="tab-pane fade" id="tipo_sus" role="tabpanel" aria-labelledby="">
-                    <table id="tablaAdop" class="table table-sm table-hover">
+                    <table id="tipoSusci" class="table table-sm table-hover">
                         <thead class="table-heading text-center text-white bg-danger">
                             <tr>
                                 <th scope="col">ID</th>

@@ -9,18 +9,33 @@ $adop = $consulta->ad_listar_adopciones($conexion);
 $entrevista = $consulta->ad_listar_entrevista($conexion);
 $final = $consulta->ad_listar_finalizadas($conexion);
 
-// if (isset($_POST['btn_rechazar'])) {
-//     $consulta = new Consulta_adopcion();
-//     $rechazar = $consulta->rechazar_adopcion($conexion, $id);
-//     if(!$rechazar)
-//     {
-//         echo '<div class="alert alert-danger">¡Ocurrio un errr, la solicitud no pudo ser rechazada!.</div>';
-//     }else{
-//         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adopciones&mensaje=La solicitud se ha rechazado" />';
-//     }
-// }
+
+if (isset($_POST['btn_rechazar'])) {
+    $id = $_POST['recha_value'];
+    $consulta = new Consulta_adopcion();
+    $rechazar = $consulta->rechazar_adopcion($conexion, $id);
+    if(!$rechazar)
+    {
+        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser rechazada!.</div>';
+    }else{
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La solicitud fue rechazada exitosamente!.</div>';
+    }
+}
 
 
+if (isset($_POST['btn_aceptar'])) {
+    $id = $_POST['acep_value'];
+    $consulta = new Consulta_adopcion();
+    $aceptar = $consulta->aceptar_adopcion($conexion, $id);
+    if(!$aceptar)
+    {
+        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser aceptada!.</div>';
+    }else{
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La adopcion ha sido aceptada!.</div>';
+    }
+}
 
 
 ?>
@@ -31,18 +46,18 @@ $final = $consulta->ad_listar_finalizadas($conexion);
         <div class="container-tab mt-5">
             <ul class="nav nav-tabs" id="adop-tables-tab" role="tablist">
                 <li class="nav-item" role="solicitud">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#solicitudes" type="button" role="tab" aria-controls="solicitudes" aria-selected="true">Solicitudes de adopción</button>
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tabSolicitudesAdop" type="button" role="tab" aria-controls="solicitudes" aria-selected="true">Solicitudes de adopción</button>
                 </li>
                 <li class="nav-item" role="Agenda de entrevistas">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#agen_adopciones" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Agenda de entrevistas</button>
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tabAgendaAdop" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Agenda de entrevistas</button>
                 </li>
                 <li class="nav-item" role="Adopciones finalizadas">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#adopciones" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Adopciones finalizadas</button>
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tabAdopFinal" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Adopciones finalizadas</button>
                 </li>
             </ul>
             <div class="tab-content " id="myTabContent">
-                <div class="tab-pane fade show active" id="solicitudes" role="tabpanel" aria-labelledby="home-tab">
-                    <table id="tablaAdop" class="table table-sm table-hover">
+                <div class="tab-pane fade show active" id="tabSolicitudesAdop" role="tabpanel" aria-labelledby="home-tab">
+                    <table id="solicitudesAdop" class="table table-sm table-hover">
                         <thead class="bg-danger text-white table-heading">
                             <tr>
                                 <th scope="col">ID solicitud</th>
@@ -67,8 +82,8 @@ $final = $consulta->ad_listar_finalizadas($conexion);
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="agen_adopciones" role="tabpanel" aria-labelledby="">
-                    <table id="tablaAdop" class="table table-sm table-hover">
+                <div class="tab-pane fade" id="tabAgendaAdop" role="tabpanel" aria-labelledby="">
+                    <table id="agendaAdop" class="table table-sm table-hover">
                         <thead class="table-heading text-white bg-danger">
                             <tr>
                                 <th scope="col">ID adopción</th>
@@ -83,25 +98,29 @@ $final = $consulta->ad_listar_finalizadas($conexion);
                         </thead>
                         <tbody>
                         <?php foreach ($entrevista as $adopcion => $value) : ?>
-                            <tr class="text-center">
-                                <td><?= $value['adop_id']; ?></td>
-                                <td><?= $value['adop_dueño']; ?></td>
-                                <td><?= $value['adop_razon']; ?></td>
-                                <td><?= $value['adop_fecha_entrevista']; ?></td>
-                                <td><?= $value['adop_fecha_creacion']; ?></td>
-                                <td>
-                                    <button class="btn btn-success mt-3 ms-3" name= "btn_aceptar" ><i class="fa-solid fa-check"></i></button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" ><i class="fa-solid fa-circle-minus"></i></button>
-                                </td>
-                            </tr>
+                            <form action="" method="post">
+                                <tr class="text-center">
+                                    <td><?= $value['adop_id']; ?></td>
+                                    <td><?= $value['adop_dueño']; ?></td>
+                                    <td><?= $value['adop_razon']; ?></td>
+                                    <td><?= $value['adop_fecha_entrevista']; ?></td>
+                                    <td><?= $value['adop_fecha_creacion']; ?></td>
+                                    <td>
+                                        <button class="btn btn-success mt-3 ms-3" name= "btn_aceptar" ><i class="fa-solid fa-check"></i></button>
+                                        <input type="hidden" name="acep_value" value="<?= $value['adop_id']; ?>">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" ><i class="fa-solid fa-circle-minus"></i></button>
+                                        <input type="hidden" name="recha_value" value="<?= $value['adop_id']; ?>">
+                                    </td>
+                                </tr>
+                            </form>
                             <?php endforeach; ?>
                         </tbody>
                     </table>        
                 </div>
-                <div class="tab-pane fade" id="adopciones" role="tabpanel" aria-labelledby="">
-                    <table id="tablaAdop" class="table table-sm table-hover">
+                <div class="tab-pane fade" id="tabAdopFinal" role="tabpanel" aria-labelledby="">
+                    <table id="adopFinal" class="table table-sm table-hover">
                         <thead class="table-heading text-white bg-danger">
                             <tr class="text-center">
                                 <th scope="col">ID adopción</th>
@@ -126,8 +145,10 @@ $final = $consulta->ad_listar_finalizadas($conexion);
                                     <td><?= $value['adop_fecha_creacion'] ?></td>
                                     <td><?= $value['adop_ultima_visita'] ?></td>
                                     <td><?= $value['adop_resumen_visitas'] ?></td>
-                                    <!-- <td><?php if($value['adop_estado'] == 'Rechazada'{echo '<span class="bg-warning">' $value['adop_estado']'</span>'}else{'<span class="bg-success">' $value['adop_estado']'</span>'} ?></td> -->
-                                    <td><?= $value['adop_estado'] ?></td>
+                                    <?php if($value['adop_estado'] == 'Rechazada'){ 
+                                                echo "<td class='bg-danger text-white'>$value[adop_estado]</td>";
+                                                
+                                                }else{echo"<td class='bg-success text-white'>$value[adop_estado]</td>";}?>
                                     <td><?= $value['adop_fecha'] ?></td>
                                     <td><?= $value['adop_fecha_cambio'] ?></td>
                                 </tr>
