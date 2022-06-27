@@ -61,7 +61,7 @@ class Consulta_producto
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong>Error!</strong><br> Debido a un error no se ha podido agregar el producto, intentelo mas tarde
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido agregar el producto, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
@@ -136,7 +136,11 @@ class Consulta_producto
             $pdtid = $consulta->fetch(PDO::FETCH_ASSOC);
             return $pdtid;
         } catch (PDOException $e) {
-            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar los datos del producto
+            <?php
         }
     }
 
@@ -158,7 +162,7 @@ class Consulta_producto
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong>Error!</strong><br> Debido a un error no se ha podido actualizar el producto, intentelo mas tarde
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido actualizar el producto, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
@@ -179,7 +183,7 @@ class Consulta_producto
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
               <div class="alert alert-danger alert-dismissible fade show " role="alert">
-              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+              <strong>Error!</strong> Debido a un problema , no se pudo deshabilitar el producto
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -201,7 +205,7 @@ class Consulta_producto
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
               <div class="alert alert-danger alert-dismissible fade show " role="alert">
-              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo habilitar el producto
+              <strong>Error!</strong> Debido a un problema, no se pudo habilitar el producto, intentelo mas tarde
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -211,5 +215,65 @@ class Consulta_producto
         return $estado;
     }
 
+    public function listarImgProducto($conexion, $id)
+    {
+        try {
+            $sql = "CALL SP_select_img_producto_id_admin($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $pdtImgid = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $pdtImgid;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar imagenes del producto
+            </div>
+            <?php
+        }
+    }
+
+    public function eliminarImgProducto($conexion, $id)
+    {
+        try {
+            $sql = "CALL SP_delete_img_producto_id_admin($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo eliminar la imagen del producto
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
+    public function cambia_estado_Imgproducto($conexion, $Imgid, $estadoImg)
+    {
+        try {
+            $sql = "CALL SP_update_estado_imgpdt_admin($Imgid, $estadoImg)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema, no se pudo cambiar la visibilidad de la imagen producto, intentelo mas tarde
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
 }
 ?>

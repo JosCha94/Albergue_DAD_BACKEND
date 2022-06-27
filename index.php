@@ -164,7 +164,7 @@ switch ($error = 'SinError') {
     ?> -->
 
 
-<!-- <?php echo $idEditProducto ?> -->
+        <!-- <?php echo $idEditProducto ?> -->
 
         <!-- BODY -->
         <div class="container mb-5">
@@ -226,104 +226,109 @@ switch ($error = 'SinError') {
 
             ?>
         </div>
-        
+
         <!-- FOOTER -->
-        <footer class="footer-area">
-            <!--== Start Footer Main ==-->
-            <div class="footer-main mt-5">
-                <div class="container pt--0 pb--0">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-3">
-                            <div class="widget-item widget-about">
-                                <h4 class="widget-title">About Us</h4>
-                                <p class="desc">Lorem ipsum dolor sit amet, consectel adipisicing elit, sed do eiusmod temp incidid ut labore et dolo</p>
-                                <div class="social-icons">
-                                    <a href="" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
-                                    <a href="" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                                    <a href="" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="widget-item nav-menu-item1">
-                                <h4 class="widget-title">Information</h4>
-                                <div class="widget-menu-wrap">
-                                    <ul class="nav-menu">
-                                        <li><a href="about-us.html">Acerca de nosotros</a></li>
-                                        <li><a href="account-login.html">Politicas de privacidad</a></li>
-                                        <li><a href="account-login.html">Terminos y condiciones</a></li>
-                                        <li><a href="contact.html">Contactanos</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="widget-item nav-menu-item2">
-                                <h4 class="widget-title">Mapa del sitio</h4>
-                                <div class="widget-menu-wrap">
-                                    <ul class="nav-menu">
-                                        <li><a href="index.php?modulo=adoptar">Adoptar</a></li>
-                                        <li><a href="index.php?modulo=apadrinar">Apadrinar</a></li>
-                                        <li><a href="index.php?modulo=tienda">Tienda virtual</a></li>
-                                        <li><a href="index.php?modulo=donar">Donaciones</a></li>
-                                        <li><a href="index.php?modulo=blog">Blog</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-3">
-                            <div class="widget-item">
-                                <h4 class="widget-title">Informacion de contacto</h4>
-                                <div class="widget-contact-info">
-                                    <p class="contact-info-desc">Si tienes alguna duda o pregunta, por favor escribenos a: <a href="mailto://demo@example.com">demo@example.com</a></p>
-                                    <div class="contact-item">
-                                        <div class="icon">
-                                            <i class="pe-7s-map-marker"></i>
-                                        </div>
-                                        <div class="info">
-                                            <p>direccion calle <br>200, distrito.</p>
-                                        </div>
-                                    </div>
-                                    <div class="contact-item phone-info">
-                                        <div class="icon">
-                                            <i class="pe-7s-phone"></i>
-                                        </div>
-                                        <div class="info">
-                                            <p><i class="fa-brands fa-whatsapp"></i> <span>Escribenos al WhatsApp</span> <br><a href="">+51 999 888 333</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--== End Footer Main ==-->
+        <?php if ($logueado == null || $logueado == 'false') : ?>
 
-            <!--== Start Footer Bottom ==-->
-            <div class="footer-bottom">
-                <div class="container pt--0 pb--0">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="footer-bottom-content">
-                                <div class="payment">
-                                    <a href="account.html"><img src="Presentacion/libs/images/payment.webp" width="192" height="21" alt="Payment Logo"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
+        <?php else : ?>
+            <footer class="footer-area">
+                <!--== Start Footer Main ==-->
+                <div class="footer-main mt-5">
+                    <div class="container pt--0 pb--0">
                         <div class="row">
-                            <p class="text-center mt-3">© <span class="anio"></span> PlanetDog.com by FJF WEB SAC</p>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="widget-item widget-about">
+                                    <h4 class="widget-title">About Us</h4>
+                                    <p class="desc">Lorem ipsum dolor sit amet, consectel adipisicing elit, sed do eiusmod temp incidid ut labore et dolo</p>
+                                    <div class="social-icons">
+                                        <a href="" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+                                        <a href="" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                                        <a href="" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="widget-item nav-menu-item1">
+                                    <h4 class="widget-title">Information</h4>
+                                    <div class="widget-menu-wrap">
+                                        <ul class="nav-menu">
+                                            <li><a href="about-us.html">Acerca de nosotros</a></li>
+                                            <li><a href="account-login.html">Politicas de privacidad</a></li>
+                                            <li><a href="account-login.html">Terminos y condiciones</a></li>
+                                            <li><a href="contact.html">Contactanos</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="widget-item nav-menu-item2">
+                                    <h4 class="widget-title">Mapa del sitio</h4>
+                                    <div class="widget-menu-wrap">
+                                        <ul class="nav-menu">
+                                            <li><a href="index.php?modulo=adoptar">Adoptar</a></li>
+                                            <li><a href="index.php?modulo=apadrinar">Apadrinar</a></li>
+                                            <li><a href="index.php?modulo=tienda">Tienda virtual</a></li>
+                                            <li><a href="index.php?modulo=donar">Donaciones</a></li>
+                                            <li><a href="index.php?modulo=blog">Blog</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="widget-item">
+                                    <h4 class="widget-title">Informacion de contacto</h4>
+                                    <div class="widget-contact-info">
+                                        <p class="contact-info-desc">Si tienes alguna duda o pregunta, por favor escribenos a: <a href="mailto://demo@example.com">demo@example.com</a></p>
+                                        <div class="contact-item">
+                                            <div class="icon">
+                                                <i class="pe-7s-map-marker"></i>
+                                            </div>
+                                            <div class="info">
+                                                <p>direccion calle <br>200, distrito.</p>
+                                            </div>
+                                        </div>
+                                        <div class="contact-item phone-info">
+                                            <div class="icon">
+                                                <i class="pe-7s-phone"></i>
+                                            </div>
+                                            <div class="info">
+                                                <p><i class="fa-brands fa-whatsapp"></i> <span>Escribenos al WhatsApp</span> <br><a href="">+51 999 888 333</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!--== End Footer Main ==-->
 
-            </div>
+                <!--== Start Footer Bottom ==-->
 
-            <!--== End Footer Bottom ==-->
-        </footer>
-    
+                <div class="footer-bottom">
+                    <div class="container pt--0 pb--0">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="footer-bottom-content">
+                                    <div class="payment">
+                                        <a href="account.html"><img src="Presentacion/libs/images/payment.webp" width="192" height="21" alt="Payment Logo"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <p class="text-center mt-3">© <span class="anio"></span> PlanetDog.com by FJF WEB SAC</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--== End Footer Bottom ==-->
+            </footer>
+        <?php endif; ?>
+
 
     </body>
 <?php endif; ?>

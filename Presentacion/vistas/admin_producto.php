@@ -1,17 +1,28 @@
 <?php
 require_once('BL/consultas_productos.php');
 require_once 'ENTIDADES/producto.php';
+require_once 'ENTIDADES/img_productos.php';
 $consulta = new Consulta_producto();
 $categories = $consulta->listarCategorias($conexion);
+
 
 $formTipo = $_GET['formTipo'] ?? '';
 
 if ($formTipo == 'updateProduct') :
+    
     if ($_POST['product_id'] != '') {
         $idEditProducto = $_POST['product_id'];
+        $_SESSION['usuario'][6] = $idEditProducto;
         $pdtID = $consulta->detalleProducto($conexion, $idEditProducto);
+        $pdtImgID = $consulta->listarImgProducto($conexion, $idEditProducto);
+    }
+    else{
+        $pdtImgID = $consulta->listarImgProducto($conexion, $_SESSION['usuario'][6]);
+        $pdtID = $consulta->detalleProducto($conexion, $_SESSION['usuario'][6]);        
     }
 endif;
+
+
 
 
 if (isset($_POST['registro_pdt'])) {
@@ -24,7 +35,7 @@ if (isset($_POST['registro_pdt'])) {
     $estado = $_POST['productEstado'];
     $pdto = new Producto($category, $product, $precio, $stock, $descrip, $sizeDog, $estado);
 
-    $consulta = new Consulta_producto();
+    // $consulta = new Consulta_producto();
     $errores = $consulta->Validar_registroPdt($pdto);
     if (count($errores) == 0) {
         $estado = $consulta->insetar_producto($conexion, $pdto);
@@ -47,11 +58,11 @@ if (isset($_POST['update_pdt'])) {
     $estado = $_POST['productEstado'];
     $pdto = new Producto($category, $product, $precio, $stock, $descrip, $sizeDog, $estado);
 
-    $consulta = new Consulta_producto();
+    // $consulta = new Consulta_producto();
     $errores = $consulta->Validar_registroPdt($pdto);
     if (count($errores) == 0) {
          $estado = $consulta->update_producto($conexion, $pdto, $idProduct);
-
+        
         if ($estado == 'fallo') {
         } else {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
@@ -59,10 +70,64 @@ if (isset($_POST['update_pdt'])) {
     }
 }
 
+if (isset($_POST['update_ImgPdt'])) {
+    $idImg = $_POST['img_id'];
+    $ImgEstado = $_POST['imgProductEstado'.$idImg];
+    $consulta = $conexion->cambia_estado_Imgproducto($conexion, $idImg,  $ImgEstado);
+    
+    if($consulta == 'bien') {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=La visibilidad de la imagen se actualizo correctamente" />';
+        } else {
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=No se pudo cambiar la visibilidad de la imagen del producto" />';
+        }
+
+}
+
+if (isset($_POST['guardarImgPdt'])) {
+    if (isset($_FILES['foto']['name'])) {
+        $tipoArchivo = $_FILES['foto']['type'];
+        $idpdt =  $_SESSION['usuario'][6];
+
+        $permitido=array('image/jpg','image/jpeg','image/png');
+        if (in_array($tipoArchivo,$permitido)==false) {
+            die("Archivo no permitido");
+        }
+        $nombreArchivo = $_FILES['foto']['name'];
+        $tamanoArchivo = $_FILES['foto']['size'];
+
+        $imgSubida = fopen($_FILES['foto']['tmp_name'], 'r');
+        $binariosImg = fread($imgSubida, $tamanoArchivo);
+
+        $binariosImg = addslashes($binariosImg);       
+
+        // $Imgpdto = new img_producto($idpdt, $nombreArchivo, $binariosImg, $tipoArchivo);
+        // $AddImgRes = $consulta->agrega_ImgProducto($conexion, $Imgpdto);
+        $query = "INSERT INTO img_productos (product_id, img_product_nombre, img_product_foto, img_product_tipo) VALUES ($idpdt,'$nombreArchivo', '$binariosImg', '$tipoArchivo')";
+        $consulta = $conexion->prepare($query);
+       if($consulta->execute()){
+              echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&mensaje=La imagen del producto se agrego correctamente" />';
+       }else{
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=La imagen del producto no se agrego correctamente" />';
+        }
+    }
+}
+
+if (isset($_POST['delete_ImgPdt'])) {
+    $idImg = $_POST['img_id'];
+    $estado = $consulta->eliminarImgProducto($conexion,$idImg);
+    
+    if ($estado == 'fallo') {
+        } else {
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&mensaje=La imagen del producto se elimino correctamente" />';
+        }
+
+}
 ?>
+
+
 <?php if ($formTipo == 'insertProduct') : ?>
     <section id="dormRegistro" class="container-fluid mt-5">
-        <div class="container">
+
             <div class="section-heading text-center">
                 <h2>Nuevo Producto</h2>
             </div>
@@ -174,21 +239,18 @@ if (isset($_POST['update_pdt'])) {
                 <!-- /col-lg-->
             </div>
             <!-- /row-->
-        </div>
-        <!-- /container-->
     </section>
     <!-- /section-->
 <?php elseif ($formTipo == 'updateProduct') : ?>
+    <div class="container-fluid mt-5" >
 
-    <section id="dormRegistro" class="container-fluid mt-5" >
-        <div class="container ">
             <div class="text-center mb-4">
                 <h1 class="fw-bold">Actualizacion de Producto: <br>
                 <?php echo $pdtID['product_nombre'] ?> </h1>
             </div>
             <div class="row">
-
-                <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
+                
+                <div class="col-12 col-md-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto mt-1">
 
                     <h4 class="text-light">Datos del Producto</h4>
 
@@ -306,17 +368,76 @@ if (isset($_POST['update_pdt'])) {
                                     <button type="submit" name="update_pdt" value="Submit" class="btn btn-orange my-3">Actualizar</button>
                                     <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                                 </div>
+                            </div>
 
                         </form>
                         <!-- /form-group-->
                     </div>
                 </div>
                 <!-- /col-lg-->
+            
+                <div class="col-12 col-md-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto border-dark border-start  mt-1">
+                        <h4 class="text-light mb-3">Imagenes del producto</h4>
+
+                        <?php foreach ($pdtImgID as $key => $value) : ?>
+
+                        <div class="card mb-3 bg-secondary bg-opacity-50" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                <img src="data:image/<?php echo ($value['img_product_tipo']); ?>;base64,<?php echo base64_encode($value['img_product_foto']); ?>" alt="<?= $value['product_nombre']; ?>" class="img-fluid rounded-start">
+                                </div>
+                                <div class="col-md-8">
+                                <div class="card-body">
+
+                                        <h5 class="card-title"></h5>
+                                        <div class="col-md-12 text-light mt-1">
+                                        <form method="post" action="">
+                                            <label class="txt_form">Mostrar en la galeria </label>
+                                            <div class="d-flex justify-content-evenly mb-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input estado" type="radio" name="imgProductEstado<?php echo ($value['img_product_id']); ?>" id="RadioImgEstadoActi<?php echo ($value['img_product_id']); ?>" value="Activado" <?php if ($value['img_product_estado'] == 'Activado') echo 'checked' ?>>
+                                                    <label class="form-check-label" for="RadioImgEstadoActi<?php echo ($value['img_product_id']); ?>">
+                                                        Activado
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input estado" type="radio" name="imgProductEstado<?php echo ($value['img_product_id']); ?>" id="RadioImgEstadoDes<?php echo ($value['img_product_id']); ?>" value="Desactivado" <?php if ($value['img_product_estado'] == 'Desactivado') echo 'checked' ?>>
+                                                    <label class="form-check-label" for="RadioImgEstadoDes<?php echo ($value['img_product_id']); ?>">
+                                                        Desactivado
+                                                    </label>
+                                                </div>
+
+                                                <input type="hidden" name="img_id" value="<?php echo ($value['img_product_id']); ?>">
+
+                                            </div>
+                                            <button type="submit" name="delete_ImgPdt" class="btn btn-danger">Eliminar</button>
+                                            <button type="submit" name="update_ImgPdt" value="Submit" class="btn btn-orange ms-2">Actualizar</button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php endforeach; ?>
+                    </div>
+                <div class="col-12 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto mt-1">                    
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="col-6">
+                            <label for="foto" class="form-label text-light fs-4">Seleccione una imagen para agregar</label>
+                            <input type="file" class="form-control" id="foto" name="foto" >
+                            <input type="hidden" id="IdProduct" name="IdProduct" value="">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-orange my-3" name="guardarImgPdt">Agregar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+                    
             <!-- /row-->
-        </div>
-        <!-- /container-->
-    </section>
-    <!-- /section-->
+    
+        
+    </div>    
 
 <?php endif; ?>
