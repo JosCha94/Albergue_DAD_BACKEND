@@ -106,11 +106,11 @@ if (isset($_POST['btn_aceptar'])) {
                                     <td><?= $value['adop_fecha_entrevista']; ?></td>
                                     <td><?= $value['adop_fecha_creacion']; ?></td>
                                     <td>
-                                        <button class="btn btn-success mt-3 ms-3" name= "btn_aceptar" ><i class="fa-solid fa-check"></i></button>
+                                        <button class="btn btn-success mt-3 ms-3" name= "btn_aceptar" onclick="return checkDelete()"><i class="fa-solid fa-check"></i></button>
                                         <input type="hidden" name="acep_value" value="<?= $value['adop_id']; ?>">
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" ><i class="fa-solid fa-circle-minus"></i></button>
+                                        <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" onclick="return checkDelete()" ><i class="fa-solid fa-circle-minus"></i></button>
                                         <input type="hidden" name="recha_value" value="<?= $value['adop_id']; ?>">
                                     </td>
                                 </tr>

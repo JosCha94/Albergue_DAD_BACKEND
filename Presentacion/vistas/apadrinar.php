@@ -7,6 +7,33 @@ $conexion = conexion::conectar();
 $consulta = new Consulta_suscripcion();
 $sus = $consulta->listarSuscripAdmin($conexion);
 $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
+
+if (isset($_POST['cancel_sus'])) {
+    $id = $_POST['inpt_cancel'];
+    $consulta = new Consulta_suscripcion();
+    $cancel = $consulta->cancelar_suscipcion($conexion, $id);
+    if(!$cancel)
+    {
+        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser rechazada!.</div>';
+    }else{
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La solicitud fue rechazada exitosamente!.</div>';
+    }
+}
+
+if (isset($_POST['habi_sus'])) {
+    $id = $_POST['inpt_habil'];
+    $consulta = new Consulta_suscripcion();
+    $habilitar = $consulta->habilitar_suscripcion($conexion, $id);
+    if(!$habilitar)
+    {
+        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser rechazada!.</div>';
+    }else{
+        echo "<meta http-equiv='refresh' content='2'>";
+        echo '<div class="alert alert-success">¡La solicitud fue rechazada exitosamente!.</div>';
+    }
+}
+
 ?>
 
 
@@ -40,22 +67,31 @@ $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
                         </thead>
                         <tbody>
                         <?php foreach ($sus as $key => $value) : ?>
-
                             <tr class="text-center">
                                 <td><?= $value['suscrip_id'] ;?></td>
                                 <td><?= $value['usr_nombres'] ;?></td>
                                 <td><?= $value['tipo_id'] ;?></td>
-                                <td><?= $value['suscrip_estado'] ;?></td>
+                                <?php if($value['suscrip_estado'] == 'Cancelada'){ 
+                                                echo "<td class='bg-danger text-white'>$value[suscrip_estado]</td>";
+                                                
+                                                }else{echo"<td class='bg-success text-white'>$value[suscrip_estado]</td>";}?>
                                 <td><?= $value['suscrip_tiempo'] ;?></td>
                                 <td><?= $value['suscrip_fecha_inicio'] ;?></td>
                                 <td><?= $value['suscrip_fecha_renov'] ;?></td>
                                 <td><?= $value['suscrip_fecha_termino'] ;?></td>
                                 <td>
-                                    <span class="btn btn-danger btn-xs" title="Desabilitar perrito"><i class="fa-solid fa-power-off"></i></span>
+                                    <form action="" method="POST">
+                                    <?php if($value['suscrip_estado'] == "Vigente"){ ?>
+                                        <button class="btn btn-danger" title="Cancelar Suscripcion" name="cancel_sus" onclick="return checkDelete()"><i class="fa-solid fa-power-off"></i></button>
+                                        <?php }else{ ?>
+                                        <button class="btn btn-success" title="Habilitar Suscipción" name="habi_sus" onclick="return checkDelete()"><i class="fa-solid fa-power-off"></i></button> <?php } ?>
+                                        <input type="hidden" name="inpt_cancel" value="<?= $value['suscrip_id'] ;?>">
+                                        <input type="hidden" name="inpt_habil" value="<?= $value['suscrip_id'] ;?>">
+                                        
+                                    </form>
                                 </td>
-                        <?php endforeach; ?>
-                                    
                             </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
