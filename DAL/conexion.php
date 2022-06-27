@@ -6,7 +6,7 @@ class conexion
     {
         $contrasena = "";
         $usuario = "root";
-        $BaseDeDatos = "albergue_dogs_2";
+        $BaseDeDatos = "albergue_dogs";
         $servidor = "localhost";
         try {
             $conexion = new PDO("mysql:host=$servidor; dbname=$BaseDeDatos", $usuario, $contrasena, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
