@@ -22,7 +22,7 @@ if ($formTipo == 'updateProduct') :
     }
 endif;
 
-
+$idpdt =  $_SESSION['usuario'][6];
 
 
 if (isset($_POST['registro_pdt'])) {
@@ -71,32 +71,41 @@ if (isset($_POST['update_pdt'])) {
 }
 
 if (isset($_POST['guardarImgPdt'])) {
-    if (isset($_FILES['foto']['name'])) {
-        $tipoArchivo = $_FILES['foto']['type'];
-        $idpdt =  $_SESSION['usuario'][6];
 
-        $permitido=array('image/jpg','image/jpeg','image/png');
-        if (in_array($tipoArchivo,$permitido)==false) {
-            die("Archivo no permitido");
+    $data = $_FILES['foto'];
+    $foto = file_get_contents($_FILES['foto']['tmp_name']);
+    $fotoName = $_FILES['foto']['name'];
+    $fotoType = $_FILES['foto']['type'];
+    $fotoError = $_FILES['foto']['error'];
+    $fotoPeso = $_FILES['foto']['size'];
+    $ext = explode('.', $fotoName);
+    $extR = strtolower(end($ext));
+
+    $permitir = array('jpg', 'jpeg', 'png');
+    if(in_array($extR, $permitir)){
+        if ($fotoError === 0){
+            if($fotoPeso < 5000000){
+                $fotoNombreNew = uniqid('', true).".".$extR;
+            }else{
+            echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">¡El archivo es muy grande!. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>';
+                
+            }
+        }else{
+        echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">¡Hubo un error al cargar la foto! <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>';
         }
-        $nombreArchivo = $_FILES['foto']['name'];
-        $tamanoArchivo = $_FILES['foto']['size'];
-
-        $imgSubida = fopen($_FILES['foto']['tmp_name'], 'r');
-        $binariosImg = fread($imgSubida, $tamanoArchivo);
-
-        $binariosImg = addslashes($binariosImg);       
-
-        // $Imgpdto = new img_producto($idpdt, $nombreArchivo, $binariosImg, $tipoArchivo);
-        // $AddImgRes = $consulta->agrega_ImgProducto($conexion, $Imgpdto);
-        $query = "INSERT INTO img_productos (product_id, img_product_nombre, img_product_foto, img_product_tipo) VALUES ($idpdt,'$nombreArchivo', '$binariosImg', '$tipoArchivo')";
-        $consulta = $conexion->prepare($query);
-       if($consulta->execute()){
-              echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&mensaje=La imagen del producto se agrego correctamente" />';
-       }else{
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=La imagen del producto no se agrego correctamente" />';
-        }
+    }else{
+        echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">¡No tienes permitido añadir archivos de ese tipo!. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     }
+
+    $img = new img_producto($idpdt, $fotoNombreNew, $foto, $extR);
+    $consulta = new Consulta_producto();
+    $estado = $consulta->insertar_fotoProducto($conexion, $img);
+    if ($estado == 'fallo') {
+        // echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=La imagen del producto no se agrego correctamente" />';
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&mensaje=La imagen del producto se agrego correctamente" />';
+    }
+
 }
 
 if (isset($_POST['delete_ImgPdt'])) {

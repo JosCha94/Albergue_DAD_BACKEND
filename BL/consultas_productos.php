@@ -297,5 +297,29 @@ class Consulta_producto
         }
         return $estado;
     }
+
+    public function insertar_fotoProducto($conexion, $img)
+    {
+        try {
+            $sql = "CALL SP_agrega_img_producto_id_admin(:p_id, :fNombre, :foto, :fTipo)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindValue(':p_id', $img->getId_producto());
+            $consulta->bindValue(':fNombre', $img->getImg_producto_nombre());
+            $consulta->bindValue(':foto', $img->getImg_producto_foto());
+            $consulta->bindValue(':fTipo', $img->getImg_producto_tipo());
+            $consulta->execute();
+            $estado = 'bien';
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un error no se ha podido agregar la foto del producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
+    }
 }
 ?>
