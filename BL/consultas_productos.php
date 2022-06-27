@@ -254,10 +254,32 @@ class Consulta_producto
         return $estado;
     }
 
-    public function cambia_estado_Imgproducto($conexion, $Imgid, $estadoImg)
+    public function cambia_estado_Imgproducto_Desac($conexion, $Imgid)
     {
         try {
-            $sql = "CALL SP_update_estado_imgpdt_admin($Imgid, $estadoImg)";
+            $sql = "CALL SP_update_estado_Desac_img_producto_admin($Imgid)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema, no se pudo cambiar la visibilidad de la imagen producto, intentelo mas tarde
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
+    public function cambia_estado_Imgproducto_Acti($conexion, $Imgid)
+    {
+        try {
+            $sql = "CALL SP_update_estado_Acti_img_producto_admin($Imgid)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $estado='bien';

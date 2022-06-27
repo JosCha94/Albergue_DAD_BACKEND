@@ -8,7 +8,7 @@ switch ($error = 'SinError') {
 <?php if ($error == 'SinError') : ?>
 <?php if ($logueado == null || $logueado == 'false') {
 ?>
-    <div class="container mt-4 mb-4">
+    <div class="container w-50 mt-4 mb-4">
         <main class="form-signin">
             <form action="BL/valida_user.php" method="post">
 
