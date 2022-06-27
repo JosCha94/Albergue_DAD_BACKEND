@@ -96,22 +96,23 @@ class Consulta_adopcion{
         }
         return $estado;
     }
-    public function aceptar_adopcion($conexion, $ado_id)
+
+    public function aceptar_adopcion($conexion, $ado_id, $obs)
     {
         try {
-            $sql = "CALL SP_admin_adop_aceptar($ado_id)";
+            $sql = "CALL SP_admin_adop_aceptar($ado_id, :observaciones)";
             $consulta = $conexion->prepare($sql);
+            $consulta->bindValue(':observaciones', $obs->getObservaciones());
             $consulta->execute();
             $estado='bien';
 
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
-              <div class="alert alert-danger alert-dismissible fade show " role="alert">
-              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-
             <?php
             $estado='mal';
         }

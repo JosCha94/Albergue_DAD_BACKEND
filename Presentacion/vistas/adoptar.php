@@ -9,6 +9,13 @@ $adop = $consulta->ad_listar_adopciones($conexion);
 $entrevista = $consulta->ad_listar_entrevista($conexion);
 $final = $consulta->ad_listar_finalizadas($conexion);
 
+if(isset($_POST['acp_modal'])){
+    $id= $_POST['value_modal'];
+    $consulta = new Consulta_adopcion();
+    $data = $consulta->mostrar_datosAdo($conexion, $id);
+
+}
+
 
 if (isset($_POST['btn_rechazar'])) {
     $id = $_POST['recha_value'];
@@ -24,18 +31,6 @@ if (isset($_POST['btn_rechazar'])) {
 }
 
 
-if (isset($_POST['btn_aceptar'])) {
-    $id = $_POST['acep_value'];
-    $consulta = new Consulta_adopcion();
-    $aceptar = $consulta->aceptar_adopcion($conexion, $id);
-    if(!$aceptar)
-    {
-        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser aceptada!.</div>';
-    }else{
-        echo "<meta http-equiv='refresh' content='2'>";
-        echo '<div class="alert alert-success">¡La adopcion ha sido aceptada!.</div>';
-    }
-}
 
 
 ?>
@@ -75,7 +70,7 @@ if (isset($_POST['btn_aceptar'])) {
                                 <td><?= $value['adop_razon']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
                                 <td class="text-center">
-                                    <a href="index.php?modulo=admin_adoptar&id=<?= $value['adop_id']; ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
+                                    <a href="index.php?modulo=admin_adoptar&formTipo=gestEntrevista&id=<?= $value['adop_id']; ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -93,28 +88,26 @@ if (isset($_POST['btn_aceptar'])) {
                                 <th scope="col">Fecha de solicitud</th>
                                 <th scope ="col">Aceptar</th>
                                 <th scope="col">Rechazar</th>
-                                <!-- <th scope="col">Link de reunión</th> -->
                             </tr>
                         </thead>
                         <tbody>
                         <?php foreach ($entrevista as $adopcion => $value) : ?>
-                            <form action="" method="post">
-                                <tr class="text-center">
-                                    <td><?= $value['adop_id']; ?></td>
-                                    <td><?= $value['adop_dueño']; ?></td>
-                                    <td><?= $value['adop_razon']; ?></td>
-                                    <td><?= $value['adop_fecha_entrevista']; ?></td>
-                                    <td><?= $value['adop_fecha_creacion']; ?></td>
-                                    <td>
-                                        <button class="btn btn-success mt-3 ms-3" name= "btn_aceptar" onclick="return checkDelete()"><i class="fa-solid fa-check"></i></button>
-                                        <input type="hidden" name="acep_value" value="<?= $value['adop_id']; ?>">
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" onclick="return checkDelete()" ><i class="fa-solid fa-circle-minus"></i></button>
-                                        <input type="hidden" name="recha_value" value="<?= $value['adop_id']; ?>">
-                                    </td>
+                            <tr class="text-center">
+                                <td><?= $value['adop_id']; ?></td>
+                                <td><?= $value['adop_dueño']; ?></td>
+                                <td><?= $value['adop_razon']; ?></td>
+                                <td><?= $value['adop_fecha_entrevista']; ?></td>
+                                <td><?= $value['adop_fecha_creacion']; ?></td>
+                                <td>
+                                    <a href="index.php?modulo=admin_adoptar&formTipo=acptAdop&id=<?= $value['adop_id']; ?>" class="btn btn-success mt-3 ms-3" name= "btn_aceptar"><i class="fa-solid fa-check"></i></a>
+                                </td>
+                                <td>
+                                <form action="" method="post">
+                                    <button class="btn btn-danger mt-3 ms-3" name= "btn_rechazar" onclick="return checkDelete()" ><i class="fa-solid fa-circle-minus"></i></button>
+                                    <input type="hidden" name="recha_value" value="<?= $value['adop_id']; ?>">
+                                </form>
+                                </td>
                                 </tr>
-                            </form>
                             <?php endforeach; ?>
                         </tbody>
                     </table>        
@@ -160,4 +153,3 @@ if (isset($_POST['btn_aceptar'])) {
         </div>
     </div>
 </div>
-
