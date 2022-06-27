@@ -52,5 +52,25 @@ class adopcion{
   
 }
 
+class updt_estadoAdo{
+    private $entrevista;
+
+    public function __construct($entrevista){
+        $this->entrevista = $entrevista;
+    }
+
+    public function getEntrevista(){
+        return $this ->entrevista;
+    }
+    
+
+    public function setEntrevista($entrevista){
+        $this->entrevista = $entrevista;
+    }
+
+
+
+}
+
 
 ?>

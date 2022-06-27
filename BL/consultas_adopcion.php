@@ -26,19 +26,100 @@ class Consulta_adopcion{
         }
     }
 
-    public function updateEstadoAdop($conexion, $idAdop, $fechaHora){
+
+    public function updateEstadoAdop($conexion, $idAdop, $entrevista)
+    {
+        try {
+            $sql = "CALL SP_admin_updateEstado_adopcion($idAdop, :fechaHora)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindValue(':fechaHora', $entrevista->getEntrevista());
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
+    public function ad_listar_entrevista($conexion) {
         try{
-            $sql = "CALL SP_admin_updateEstado_adopcion($idAdop, $fechaHora)";
+            $sql = "CALL SP_admin_select_entrevistas()";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
-            $adopEstado = $consulta->fetchall(PDO::FETCH_ASSOC);
-            return $adopEstado;
-        }catch (PDOException $e) {
+            $entre = $consulta->fetchall(PDO::FETCH_ASSOC);
+            return $entre;
+        } catch (PDOException $e) {
             echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
         }
-        
     }
+
+    public function ad_listar_finalizadas($conexion) {
+        try{
+            $sql = "CALL SP_admin_select_adop_final()";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $final = $consulta->fetchall(PDO::FETCH_ASSOC);
+            return $final;
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+        }
+    }
+
+
+    public function rechazar_adopcion($conexion, $ado_id)
+    {
+        try {
+            $sql = "CALL SP_admin_adop_rechazar($ado_id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+    public function aceptar_adopcion($conexion, $ado_id)
+    {
+        try {
+            $sql = "CALL SP_admin_adop_aceptar($ado_id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
 
  
 }
-?>
+
+
