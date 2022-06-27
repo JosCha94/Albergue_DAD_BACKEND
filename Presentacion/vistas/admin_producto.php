@@ -70,19 +70,6 @@ if (isset($_POST['update_pdt'])) {
     }
 }
 
-if (isset($_POST['update_ImgPdt'])) {
-    $idImg = $_POST['img_id'];
-    $ImgEstado = $_POST['imgProductEstado'.$idImg];
-    $consulta = $conexion->cambia_estado_Imgproducto($conexion, $idImg,  $ImgEstado);
-    
-    if($consulta == 'bien') {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=La visibilidad de la imagen se actualizo correctamente" />';
-        } else {
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=No se pudo cambiar la visibilidad de la imagen del producto" />';
-        }
-
-}
-
 if (isset($_POST['guardarImgPdt'])) {
     if (isset($_FILES['foto']['name'])) {
         $tipoArchivo = $_FILES['foto']['type'];
@@ -122,6 +109,22 @@ if (isset($_POST['delete_ImgPdt'])) {
         }
 
 }
+
+if (isset($_POST['update_estado_ImgPdt'])) {
+    $idImg = $_POST['img_id'];
+    $ImgEstado =  $_POST['imgProductEstado'.$idImg];
+    if ($ImgEstado == 'Activado') {
+        $estadoImg = $consulta->cambia_estado_Imgproducto_Acti($conexion,$idImg);        
+    }else{
+        $estadoImg = $consulta->cambia_estado_Imgproducto_Desac($conexion,$idImg);        
+    }    
+    if($estadoImg == 'bien') {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&mensaje=La visibilidad de la imagen se actualizo correctamente" />';
+        } else {
+            // echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=No se pudo cambiar la visibilidad de la imagen del producto" />';
+        }
+}
+
 ?>
 
 
@@ -410,8 +413,8 @@ if (isset($_POST['delete_ImgPdt'])) {
                                                 <input type="hidden" name="img_id" value="<?php echo ($value['img_product_id']); ?>">
 
                                             </div>
-                                            <button type="submit" name="delete_ImgPdt" class="btn btn-danger">Eliminar</button>
-                                            <button type="submit" name="update_ImgPdt" value="Submit" class="btn btn-orange ms-2">Actualizar</button>
+                                            <button type="submit" name="delete_ImgPdt" class="btn btn-danger" onclick="return confirm('¿Confirma si deseas eliminar la imagen del producto?')">Eliminar</button>
+                                            <button type="submit" name="update_estado_ImgPdt" value="Submit" class="btn btn-orange ms-2">Actualizar</button>
                                         </form>
                                         </div>
                                     </div>
@@ -425,7 +428,7 @@ if (isset($_POST['delete_ImgPdt'])) {
                     <form method="post" enctype="multipart/form-data">
                         <div class="col-6">
                             <label for="foto" class="form-label text-light fs-4">Seleccione una imagen para agregar</label>
-                            <input type="file" class="form-control" id="foto" name="foto" >
+                            <input type="file" class="form-control" id="foto" name="foto" required>
                             <input type="hidden" id="IdProduct" name="IdProduct" value="">
                         </div>
                         <div class="col-12">
