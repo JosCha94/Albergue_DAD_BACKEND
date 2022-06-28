@@ -44,7 +44,7 @@ class Consulta_suscripcion
     public function cancelar_suscipcion($conexion, $id)
     {
         try {
-            $sql = "CALL SP_admin_cancelar_susci($id)";
+            $sql = "CALL SP_admin_cancelar_suscri($id)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $estado='bien';

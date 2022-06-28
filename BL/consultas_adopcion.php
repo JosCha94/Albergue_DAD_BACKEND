@@ -119,6 +119,26 @@ class Consulta_adopcion{
         return $estado;
     }
 
+    
+    public function user_mail($conexion, $adId) {
+        try{
+            $sql = "CALL SP_admin_user_mail($adId)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $mail = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $mail;
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div> -->
+            <?php
+
+        }
+    }
+
 
  
 }

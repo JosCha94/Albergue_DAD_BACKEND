@@ -10,6 +10,8 @@ $id = $_GET['id'];
 $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
 $data = $consulta->mostrar_datosAdo($conexion, $id);
+$user = $consulta->user_mail($conexion, $id);
+
 
 
 //ACEPTA LA ENTREVISTA Y PONE UNA FECHA PARA ELLA
@@ -56,6 +58,31 @@ if (isset($_POST['btn_aceptar'])) {
     }
 }
 
+//EMAIL
+// if(isset($_POST['agendar'])){
+//     $usrId = $_POST['user_id'];
+//     $name = $_POST['user_nombre'];
+//     $asunto = "Solicitud de adopción"
+//     $msg = $_POST['mensaje']
+//     $email = $_POST['user_mail'];
+//     $fecha = $_POST['fecha'];
+//     $hora = $_POST['hora'];
+//     $fechaHora = $fecha .' '. $hora;
+//     $header = "From: noreply@example.com" . "\r\n";
+//     $header.= "Reply-to: noreply@example.com" . "\r\n";
+//     $header.= "X-Mailer: PHP/". phpversion();
+//     $mail= mail($email, $asunto, $msg, $header);
+//     if ($mail){
+//         echo "¡Se ha enviado un email al adoptante!"
+//     }
+
+// }
+
+
+
+
+
+
 ?>
 <?php if ($formTipo == 'gestEntrevista') : ?>
 
@@ -82,12 +109,16 @@ if (isset($_POST['btn_aceptar'])) {
         <form action="" method="post" class="d-inline me-5">
             <h1 class="h3 my-3 fw-normal text-center">  Agendar entrevista</h1>
             <div class="form ">
-                <textarea class="form-control my-4" id="floatingInput" rows="4" placeholder="Escribe un mensaje para el solicitante" style="min-heigth: 100%" required ></textarea>
+                <textarea class="form-control my-4" id="floatingInput" rows="4" placeholder="Escribe un mensaje para el solicitante" style="min-heigth: 100%" required name="mensaje" ></textarea>
             </div>
             <div class="form text-center">
                 <label class="mx-2" for="">Agenda una fecha</label>
                 <input class="mx-2" type="date" name="fecha" required>
                 <input class="mx-2" type="time" name="hora"required>
+                <input type="hidden" name="user_nombre" value="<?php echo $user['adop_dueño']?>">
+                <input type="hidden" name="user_mail" value="<?php echo $user['usr_email']?>">
+                <input type="hidden" name="user_id" value="<?php echo $user['usr_id']?>">
+                <input type="hidden" name="" value="">
             </div>
             <button class="btn btn-adopt my-5" style="width:180px" type="submit" name="agendar" >Aceptar</button>
         </form>
