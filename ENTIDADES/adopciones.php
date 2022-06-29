@@ -72,5 +72,21 @@ class updt_estadoAdo{
 
 }
 
+class acpt_adopcion{
+    private $observaciones;
+
+    public function __construct($observaciones){
+        $this->observaciones = $observaciones;
+    }
+
+    public function getObservaciones(){
+        return $this->observaciones;
+    }
+
+    public function setObservaciones($observaciones){
+        $this->observaciones = $observaciones;
+    }
+}
+
 
 ?>
