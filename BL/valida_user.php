@@ -8,7 +8,7 @@ $pass = $_POST['pass'];
 
 try {
     // $SQLQuery = "SELECT * FROM usuarios WHERE nombre = '$user' AND contrasena = '$pass' ";
-    $SQLQuery = "CALL SP_valida_usuario('$user','$pass') ";
+    $SQLQuery = "CALL SP_valida_usuario_admin('$user','$pass') ";
     $result = $bd->query($SQLQuery);
     $usuarios = $result->fetch(PDO::FETCH_ASSOC);
     // VALIDA Q LA VARIABLE TENGA ALGO
