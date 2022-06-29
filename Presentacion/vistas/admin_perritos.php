@@ -239,8 +239,8 @@ if (isset($_POST['elim_foto3'])){
                     </div> 
                 </div>
                 <div class="col-md-5"> 
-                      <?php $array = json_encode($imgs);
-                      if ($array != '[]' ){
+                      <?php 
+                        if (count($imgs) > 0 ){
                       ?>
                         <?php foreach ($imgs as $key => $value) : ?>
                         <div class="row">
