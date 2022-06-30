@@ -340,5 +340,4 @@ switch ($error = 'SinError') {
 <script src="Presentacion/libs/javascript/script.js"></script>
 <script src="Presentacion\libs\datatable\jquery.dataTables.min.js"></script>
 <script src="Presentacion\libs\datatable\dataTables.bootstrap5.min.js"></script>
-
 </html>
