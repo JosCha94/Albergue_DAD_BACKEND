@@ -1,7 +1,16 @@
 <?php
+
+
 require_once('BL/consultas_adopcion.php');
 require_once('DAL/conexion.php');
 require_once('ENTIDADES/adopciones.php');
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once('BL/phpmailer/Exception.php');
+require_once('BL/phpmailer/PHPMailer.php');
+require_once('BL/phpmailer/SMTP.php');
+
+
 
 $formTipo = $_GET['formTipo'] ?? '';
 
@@ -59,24 +68,47 @@ if (isset($_POST['btn_aceptar'])) {
 }
 
 //EMAIL
-// if(isset($_POST['agendar'])){
-//     $usrId = $_POST['user_id'];
-//     $name = $_POST['user_nombre'];
-//     $asunto = "Solicitud de adopción"
-//     $msg = $_POST['mensaje']
-//     $email = $_POST['user_mail'];
-//     $fecha = $_POST['fecha'];
-//     $hora = $_POST['hora'];
-//     $fechaHora = $fecha .' '. $hora;
-//     $header = "From: noreply@example.com" . "\r\n";
-//     $header.= "Reply-to: noreply@example.com" . "\r\n";
-//     $header.= "X-Mailer: PHP/". phpversion();
-//     $mail= mail($email, $asunto, $msg, $header);
-//     if ($mail){
-//         echo "¡Se ha enviado un email al adoptante!"
-//     }
+if(isset($_POST['agendar'])){
+    $usrId = $_POST['user_id'];
+    $name = $_POST['user_nombre'];
+    $asunto = "Solicitud de adopción";
+    $msg = $_POST['mensaje'];
+    $correo = $_POST['user_mail'];
+    $fecha = $_POST['fecha'];
+    $hora = $_POST['hora'];
+    $fechaHora = $fecha .' '. $hora;
+    $body = "Hola <strong>".$name."</strong>, hemos revisado tu solicitud y hemos procedido a agendar una fecha para tu entrevista por videollamada <br> fecha de entrevista: <strong>" .$fechaHora. "</strong><br>
+    Con las siguientes observaciones: <br>" .$msg. "<br> Si tienes alguna duda sobre la entrevista, o deseas reagendar la entrevista, escribenos a este correo electronico con el asunto REAGENDAR ENTREVISTA. <br> Saludos Cordiales.";
 
-// }
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = "0";                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';'smtp.live.com';'smtp-mail.outlook.com';               //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'albergue.adoptar.perritos@gmail.com';                     //SMTP username
+        $mail->Password   = 'iolsqknvqrlvoijr';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('albergue.adoptar.perritos@gmail.com', "ALBERGUE DE PERRITOS");
+        $mail->addAddress($correo, $name);     //Add a recipient
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = $asunto;
+        $mail->Body    = $body;
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        echo 'El correo se mando correctamente';
+    } catch (Exception $e) {
+        echo "Hubo un error al momento de enviar el correo: {$mail->ErrorInfo}";
+    }
+}
 
 
 
