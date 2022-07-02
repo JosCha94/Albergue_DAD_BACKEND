@@ -9,9 +9,9 @@ $detalle = $consulta->detalleVenta($conexion);
 
 <hr>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 ">
         <div class="my-3 ">
-            <ul class="nav nav-tabs" id="adop-tables-tab" role="tablist">
+            <ul class="nav nav-tabs mb-2" id="adop-tables-tab" role="tablist">
                 
                 <li class="nav-item" role="solicitud">
                     <button class="nav-link active" id="ventas-tab" data-bs-toggle="tab" data-bs-target="#ventas" type="button" role="tab" aria-controls="ventas" aria-selected="true">Todas las ventas</button>
@@ -81,7 +81,7 @@ $detalle = $consulta->detalleVenta($conexion);
                     </table>
                 </div>
                 <div class="tab-pane fade" id="detalleVentas" role="tabpanel" aria-labelledby="detalleVentas-tab">
-                <table class="table table-sm table-hover mx-auto" id="tablaDetalleVentas">
+                <table class="table table-lg table-hover mx-auto" id="tablaDetalleVentas">
                         <thead class="bg-danger text-white">
                             <tr>
                                 <td>Id Detalle </td>
