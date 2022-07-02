@@ -111,10 +111,6 @@ if(isset($_POST['agendar'])){
 }
 
 
-
-
-
-
 ?>
 <?php if ($formTipo == 'gestEntrevista') : ?>
 

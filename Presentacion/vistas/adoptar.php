@@ -59,6 +59,7 @@ if (isset($_POST['btn_rechazar'])) {
                                 <th scope="col">Adoptante</th>
                                 <th scope="col">Razón de adopción</th>
                                 <th scope="col">Fecha de solicitud</th>
+                                <th scope="col">Nombre del Perro</th>
                                 <th scope="col">Acción a realizar</th>
                             </tr>
                         </thead>
@@ -69,6 +70,7 @@ if (isset($_POST['btn_rechazar'])) {
                                 <td><?= $value['adop_dueño']; ?></td>
                                 <td><?= $value['adop_razon']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
+                                <td><?= $value['perro_nombre']; ?></td>
                                 <td class="text-center">
                                     <a href="index.php?modulo=admin_adoptar&formTipo=gestEntrevista&id=<?= $value['adop_id']; ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
                                 </td>
@@ -83,6 +85,7 @@ if (isset($_POST['btn_rechazar'])) {
                             <tr>
                                 <th scope="col">ID adopción</th>
                                 <th scope="col">Adoptante</th>
+                                <th scope="col">Nombre del perro</th>
                                 <th scope="col">Razón de adopción</th>
                                 <th scope="col">Fecha de entrevista</th>
                                 <th scope="col">Fecha de solicitud</th>
@@ -95,6 +98,7 @@ if (isset($_POST['btn_rechazar'])) {
                             <tr class="text-center">
                                 <td><?= $value['adop_id']; ?></td>
                                 <td><?= $value['adop_dueño']; ?></td>
+                                <td><?= $value['perro_nombre']; ?></td>
                                 <td><?= $value['adop_razon']; ?></td>
                                 <td><?= $value['adop_fecha_entrevista']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
@@ -119,6 +123,7 @@ if (isset($_POST['btn_rechazar'])) {
                                 <th scope="col">ID adopción</th>
                                 <th scope="col">Adoptante</th>
                                 <th scope="col">Razón de adopción</th>
+                                <th scope="col">Nombre del perro</th>
                                 <th scope="col">Observaciones</th>
                                 <th scope="col">Fecha de solicitud</th>
                                 <th scope="col">Fecha de última visita</th>
@@ -134,6 +139,7 @@ if (isset($_POST['btn_rechazar'])) {
                                     <td><?= $value['adop_id'] ?></td>
                                     <td><?= $value['adop_dueño'] ?></td>
                                     <td><?= $value['adop_razon'] ?></td>
+                                    <td><?= $value['perro_nombre'] ?></td>
                                     <td><?= $value['adop_observaciones'] ?></td>
                                     <td><?= $value['adop_fecha_creacion'] ?></td>
                                     <td><?= $value['adop_ultima_visita'] ?></td>
