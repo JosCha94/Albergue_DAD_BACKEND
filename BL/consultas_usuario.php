@@ -135,5 +135,49 @@ class Consulta_usuario
         return $estado;
     }
 
+    public function deshabilitar_User($conexion, $idUser)
+    {
+        try {
+            $sql = "CALL SP_Deshabilitar_User_admin($idUser)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            //  echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema , no se pudo desactivar al usuario
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
+    public function habilitar_User($conexion, $idUser)
+    {
+        try {
+            $sql = "CALL SP_Habilitar_User_admin($idUser)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+              echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema , no se pudo activar al usuario
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
 }
 ?>

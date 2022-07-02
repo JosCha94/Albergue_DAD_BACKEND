@@ -39,6 +39,26 @@ if (isset($_POST['active_Urol'])) {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El rol se activo para el usuario" />';
     }
 }
+
+if (isset($_POST['delete_usr'])) {
+    $idUser = $_POST['usr_id'];
+    $estado = $consulta->deshabilitar_User($conexion, $idUser);
+
+    if ($estado == 'mal') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El usuario fue desactivado" />';
+    }
+}
+
+if (isset($_POST['active_usr'])) {
+    $idUser = $_POST['usr_id'];
+    $estado = $consulta->habilitar_User($conexion, $idUser);
+
+    if ($estado == 'mal') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El usuario fue activado" />';
+    }
+}
 ?>
 <h2 class="text-center mt-3 h1">Usuarios</h2>
 <div class="row">
@@ -105,8 +125,18 @@ if (isset($_POST['active_Urol'])) {
                                     <td><?php echo ($value['usr_fecha_creacion']); ?> </td>
                                     <td><?php echo ($value['usr_fecha_modificacion']); ?> </td>
                                     <td>
-                                        <span class="btn btn-warning btn-xs" title="Cambiar contraseña"><i class="fa-solid fa-pen-to-square"></i></span>
-                                    </td>
+                                <?php if ($value['usr_estado'] == 'Habilitado') : ?>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
+                                        <button class="btn btn-danger btn-xs " name="delete_usr" title="Deshabilitar Usuario" onclick="return confirm('¿Quieres Deshabilitar este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
+                                    </form>
+                                <?php else : ?>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
+                                        <button class="btn btn-success btn-xs " name="active_usr" title="Habilitar usuario" onclick="return confirm('¿Quieres Habilitar este usuario?')"><i class="fa-solid fa-toggle-on"></i></button>
+                                    </form>
+                                <?php endif; ?>
+                            </td>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>
                                     <td><?php echo ($value['usr_rol_estado']); ?> </td>                 
                                     <td>
@@ -114,13 +144,13 @@ if (isset($_POST['active_Urol'])) {
                                     <form action="" method="post">
                                         <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
                                         <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                        <button class="btn btn-danger btn-xs" name="delete_Urol" title="Desactivar Rol"><i class="fa-solid fa-power-off"></i></button>
+                                        <button class="btn btn-danger btn-xs" name="delete_Urol" title="Desactivar Rol" onclick="return confirm('¿Quieres Desactivar este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
                                     </form>
                                 <?php else : ?>
                                     <form action="" method="post">
                                         <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
                                         <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                        <button class="btn btn-success btn-xs" name="active_Urol" title="Activar Rol"><i class="fa-solid fa-power-off"></i></button>
+                                        <button class="btn btn-success btn-xs" name="active_Urol" title="Activar Rol" onclick="return confirm('¿Quieres Activar este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
                                     </form>
                                 <?php endif; ?>
                             </td>

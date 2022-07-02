@@ -81,21 +81,20 @@ if (isset($_POST['active_pdt'])) {
                             <td>
                                 <form action="index.php?modulo=agrega-producto&formTipo=updateProduct" method="post">
                                     <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
-                                    <button class="btn btn-warning btn-xs mt-4" name="cambiarDatosProducto" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-warning btn-xs" name="cambiarDatosProducto" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
-                                <!-- ----------------------------
-                                <span class="btn btn-warning btn-xs mt-4" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></span> -->
+
                             </td>
                             <td>
                                 <?php if ($value['product_estado'] == 'Habilitado') : ?>
                                     <form action="" method="post">
                                         <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
-                                        <button class="btn btn-danger btn-xs mt-4" name="delete_pdt" title="Deshabilitar Producto"><i class="fa-solid fa-power-off"></i></button>
+                                        <button class="btn btn-danger btn-xs" name="delete_pdt" title="Deshabilitar Producto" onclick="return confirm('¿Quieres Deshabilitar este producto?')"><i class="fa-solid fa-power-off"></i></button>
                                     </form>
                                 <?php else : ?>
                                     <form action="" method="post">
                                         <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
-                                        <button class="btn btn-success btn-xs mt-4" name="active_pdt" title="Habilitar Producto"><i class="fa-solid fa-power-off"></i></button>
+                                        <button class="btn btn-success btn-xs" name="active_pdt" title="Habilitar Producto" onclick="return confirm('¿Quieres Habilitar este producto?')"><i class="fa-solid fa-power-off"></i></button>
                                     </form>
                                 <?php endif; ?>
                             </td>
