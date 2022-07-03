@@ -3,23 +3,14 @@ require_once('BL/consultas_productos.php');
 $consulta = new Consulta_producto();
 $productos = $consulta->listarProductos($conexion);
 
-if (isset($_POST['delete_pdt'])) {
+if (isset($_POST['cambia_estado_pdt'])) {
     $productoId = $_POST['product_id'];
-    $estado = $consulta->desabilitar_producto($conexion, $productoId);
+    $P_estado = $_POST['product_estado'];
+    $estado = $consulta->cambia_estado_producto($conexion, $productoId, $P_estado);
 
     if ($estado == 'mal') {
     } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se deshabilito" />';
-    }
-}
-
-if (isset($_POST['active_pdt'])) {
-    $productoId = $_POST['product_id'];
-    $estado = $consulta->habilitar_producto($conexion, $productoId);
-
-    if ($estado == 'mal') {
-    } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se habilito" />';
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El estado del producto ha cambiado" />';
     }
 }
 
@@ -86,17 +77,11 @@ if (isset($_POST['active_pdt'])) {
 
                             </td>
                             <td>
-                                <?php if ($value['product_estado'] == 'Habilitado') : ?>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
-                                        <button class="btn btn-danger btn-xs" name="delete_pdt" title="Deshabilitar Producto" onclick="return confirm('¿Quieres Deshabilitar este producto?')"><i class="fa-solid fa-power-off"></i></button>
-                                    </form>
-                                <?php else : ?>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
-                                        <button class="btn btn-success btn-xs" name="active_pdt" title="Habilitar Producto" onclick="return confirm('¿Quieres Habilitar este producto?')"><i class="fa-solid fa-power-off"></i></button>
-                                    </form>
-                                <?php endif; ?>
+                                <form action="" method="post">
+                                    <input type="hidden" name="product_estado" value="<?= $value['product_estado']; ?>">
+                                    <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
+                                    <button class="btn <?php echo ($value['product_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_pdt" title="<?php echo ($value['product_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Producto" onclick="return confirm('¿Quieres <?php echo ($value['product_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este producto?')"><i class="fa-solid fa-power-off"></i></button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

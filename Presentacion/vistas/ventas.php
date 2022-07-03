@@ -81,7 +81,7 @@ $detalle = $consulta->detalleVenta($conexion);
                     </table>
                 </div>
                 <div class="tab-pane fade" id="detalleVentas" role="tabpanel" aria-labelledby="detalleVentas-tab">
-                <table class="table table-lg table-hover mx-auto" id="tablaDetalleVentas">
+                <table class="table table-lg table-hover wrap mx-auto w-100" id="tablaDetalleVentas">
                         <thead class="bg-danger text-white">
                             <tr>
                                 <td>Id Detalle </td>

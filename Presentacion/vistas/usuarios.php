@@ -1,9 +1,11 @@
 <?php
 require_once('BL/consultas_usuario.php');
+require_once('BL/consultas_rolesPermisos.php');
+$consultaRP = new Consulta_RolesPermisos();
 $consulta = new Consulta_usuario();
 $usuarios = $consulta->listarUsuarios($conexion);
 $usuarios2 = $consulta->listarUsuarios2($conexion);
-$roles = $consulta->listarRoles($conexion);
+$roles = $consultaRP->listarRoles($conexion);
 
 if (isset($_POST['btn_asignaRol'])) {
     $idUser = $_POST['selectUser'];
@@ -14,51 +16,33 @@ if (isset($_POST['btn_asignaRol'])) {
     if ($asignaRol == 'mal') {
             
     } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=Se agrego correctamente el rol al usuario" />';
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el rol al usuario" />';
     }
 }
 
-if (isset($_POST['delete_Urol'])) {
+if (isset($_POST['cambia_estado_usrRol'])) {    
+    $estado_UR = $_POST['usrrol_estado'];
     $idUser = $_POST['user_id'];
     $idRol = $_POST['rol_id'];
-    $estado = $consulta->desactivar_UserRol($conexion, $idUser, $idRol);
+    $estado = $consulta->cambia_estado_UsrRol($conexion, $idUser, $idRol, $estado_UR);
 
     if ($estado == 'mal') {
     } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El rol se desactivo para el usuario" />';
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=El estado del rol se cambio para el usuario" />';
     }
 }
 
-if (isset($_POST['active_Urol'])) {
-    $idUser = $_POST['user_id'];
-    $idRol = $_POST['rol_id'];
-    $estado = $consulta->activar_UserRol($conexion, $idUser, $idRol);
-
-    if ($estado == 'mal') {
-    } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El rol se activo para el usuario" />';
-    }
-}
-
-if (isset($_POST['delete_usr'])) {
+if (isset($_POST['cambia_estado_usr'])) {
     $idUser = $_POST['usr_id'];
-    $estado = $consulta->deshabilitar_User($conexion, $idUser);
+    $estado = $_POST['usr_estado'];
+    $estado = $consulta->cambia_estado_User($conexion, $idUser, $estado);
 
     if ($estado == 'mal') {
     } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El usuario fue desactivado" />';
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se cambio el estado del usuario" />';
     }
 }
 
-if (isset($_POST['active_usr'])) {
-    $idUser = $_POST['usr_id'];
-    $estado = $consulta->habilitar_User($conexion, $idUser);
-
-    if ($estado == 'mal') {
-    } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=clientes&mensaje=El usuario fue activado" />';
-    }
-}
 ?>
 <h2 class="text-center mt-3 h1">Usuarios</h2>
 <div class="row">
@@ -66,7 +50,7 @@ if (isset($_POST['active_usr'])) {
         <div class="my-3">
             <ul class="nav nav-tabs mb-2" id="adop-tables-tab" role="tablist">
 
-                <li class="nav-item" role="solicitud">
+                <li class="nav-item" role="usuarios">
                     <button class="nav-link active" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" type="button" role="tab" aria-controls="usuarios" aria-selected="true">Todos los usuarios</button>
                 </li>
                 <li class="nav-item" role="Asigna Roles">
@@ -75,7 +59,7 @@ if (isset($_POST['active_usr'])) {
             </ul>
             <div class="tab-content " id="myTabContent">
                 <div class="tab-pane fade show active" id="usuarios" role="tabpanel" aria-labelledby="usuarios-tab">
-                    <table class="table table-sm table-hover" id="tablaClientes">
+                    <table class="table table-sm table-hover" id="tablaUsuarios">
                         <thead class="bg-danger text-white">
                             <tr>
                                 <td>Usuario </td>
@@ -125,34 +109,24 @@ if (isset($_POST['active_usr'])) {
                                     <td><?php echo ($value['usr_fecha_creacion']); ?> </td>
                                     <td><?php echo ($value['usr_fecha_modificacion']); ?> </td>
                                     <td>
-                                <?php if ($value['usr_estado'] == 'Habilitado') : ?>
+           
                                     <form action="" method="post">
+                                        <input type="hidden" name="usr_estado" value="<?= $value['usr_estado']; ?>">
                                         <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
-                                        <button class="btn btn-danger btn-xs " name="delete_usr" title="Deshabilitar Usuario" onclick="return confirm('¿Quieres Deshabilitar este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
+                                        <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
                                     </form>
-                                <?php else : ?>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
-                                        <button class="btn btn-success btn-xs " name="active_usr" title="Habilitar usuario" onclick="return confirm('¿Quieres Habilitar este usuario?')"><i class="fa-solid fa-toggle-on"></i></button>
-                                    </form>
-                                <?php endif; ?>
                             </td>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>
                                     <td><?php echo ($value['usr_rol_estado']); ?> </td>                 
                                     <td>
-                                <?php if ($value['usr_rol_estado'] == 'Activado') : ?>
+
                                     <form action="" method="post">
+                                        <input type="hidden" name="usrrol_estado" value="<?= $value['usr_rol_estado']; ?>">
                                         <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
                                         <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                        <button class="btn btn-danger btn-xs" name="delete_Urol" title="Desactivar Rol" onclick="return confirm('¿Quieres Desactivar este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
+                                        <button class="btn <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrRol" title="<?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> rol para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
+                  
                                     </form>
-                                <?php else : ?>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
-                                        <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                        <button class="btn btn-success btn-xs" name="active_Urol" title="Activar Rol" onclick="return confirm('¿Quieres Activar este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
-                                    </form>
-                                <?php endif; ?>
                             </td>
 
                                 </tr>

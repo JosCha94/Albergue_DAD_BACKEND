@@ -1,4 +1,4 @@
- 
+
 // AÑO-----------------------------------
 var anio = (new Date).getFullYear();
 $(document).ready(function () {
@@ -6,24 +6,40 @@ $(document).ready(function () {
 });
 // ----------AÑO-------------
 
-$(document).ready(function() {
+$(document).ready(function () {
     $.extend($.fn.dataTable.defaults, {
         language: { url: "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json" }
-});
+    });
 
     $('#tablaPerritos').DataTable({
-        "scrollX": true});
+        "scrollX": true
+    });
     $('#tablaVentas').DataTable({
-        "scrollX": true});
+        "scrollX": true
+    });
     $('#tablaProductos').DataTable({
-        "scrollX": true});
-    $('#tablaClientes').DataTable({
-        "scrollX": true});
-    
+        "scrollX": true
+    });
+    $('#tablaUsuarios').DataTable({
+        "scrollX": true
+    });
+    $('#tablaRolesPermisos').DataTable({
+        "scrollX": true
+    });
+    $('#tablaRoles').DataTable({
+        // "scrollX": true
+    });
+    $('#tablaPermisos').DataTable({
+        // "scrollX": true
+    });
+    $('#tablaDetalleVentas').DataTable({
+        // "scrollX": true
+    });
+
 });
 
-$(document).ready(function() {
-    $('#tablaDetalleVentas').DataTable({});
+$(document).ready(function () {
+
     $('#solicitudesAdop').DataTable({});
     $('#tipoSusci').DataTable({});
     $('#agendaAdop').DataTable({});
@@ -34,12 +50,12 @@ $(document).ready(function() {
 
 });
 
-   
+
 
 //funcion para confirmar delete
 function checkDelete() {
-let status  = confirm( "¿Estás seguro que deseas realizar este cambio?" );
-return status;
+    let status = confirm("¿Estás seguro que deseas realizar este cambio?");
+    return status;
 
 }
 

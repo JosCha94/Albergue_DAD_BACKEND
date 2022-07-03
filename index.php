@@ -105,7 +105,10 @@ switch ($error = 'SinError') {
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item ">
-                                <a class="nav-link <?php echo ($modulo == "clientes") ? " active " : " " ?> mx-2" href="index.php?modulo=clientes">Clientes</a>
+                                <a class="nav-link <?php echo ($modulo == "usuarios") ? " active " : " " ?> mx-2" href="index.php?modulo=usuarios">Usuarios</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link <?php echo ($modulo == "rolPermiso") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link <?php echo ($modulo == "perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
@@ -205,8 +208,11 @@ switch ($error = 'SinError') {
             if ($modulo == "ventas") {
                 include_once "Presentacion/vistas/ventas.php";
             }
-            if ($modulo == "clientes") {
-                include_once "Presentacion/vistas/clientes.php";
+            if ($modulo == "usuarios") {
+                include_once "Presentacion/vistas/usuarios.php";
+            }
+            if ($modulo == "rolesPermisos") {
+                include_once "Presentacion/vistas/roles_permisos.php";
             }
             if ($modulo == "perfil-usuario") {
                 include_once "Presentacion/vistas/perfil-usuario.php";
