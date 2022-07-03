@@ -61,7 +61,7 @@ class Consulta_usuario
             <?php
             } else { ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el rol al usuario de
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el rol al usuario
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 <?php                

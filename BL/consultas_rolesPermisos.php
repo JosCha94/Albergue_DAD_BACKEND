@@ -128,6 +128,36 @@ class Consulta_RolesPermisos{
         }
         return $estado;
     }
+
+    public function asignarPermisoRol($conexion, $idRol, $idPermiso)
+    {
+        try {
+            $sql = "CALL SP_asignar_permiso_rol_admin($idRol, $idPermiso)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $resultado = 'bien';
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            $bad = $e->getMessage();
+            $msj = 'Duplicate entry';
+            $msj_error = strpos($bad, $msj);
+            if ($msj_error !== false) { ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>No se puede asignar el permiso al rol debia a que ya lo tiene
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+            } else { ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el permiso al rol
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+<?php                
+            }
+            $resultado = 'mal';
+        }
+        return $resultado;
+    }
 }
 
 ?>

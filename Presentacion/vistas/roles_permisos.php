@@ -38,6 +38,17 @@ if (isset($_POST['cambia_estado_permiso'])) {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se cambio el estado del permiso" />';
     }
 }
+
+if (isset($_POST['btn_asigna_permiso_rol'])) {
+    $Rol_Id = $_POST['selectRol'];
+    $Permiso_id = $_POST['selectPermiso'];
+    $Pestado = $consulta->asignarPermisoRol($conexion, $Rol_Id, $Permiso_id);
+
+    if ($Pestado == 'mal') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se agrego un nuevo permiso al rol" />';
+    }
+}
 ?>
 <h2 class="text-center mt-3 h1">Roles y Permisos</h2>
 <div class="row">
@@ -217,22 +228,22 @@ if (isset($_POST['cambia_estado_permiso'])) {
                         <h2 class="my-4 text-center">Asignar Permiso a rol</h2>
                         <form action="" method="post">
                             <label for="selectRol">Rol</label>
-                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol">
-                                <option selected>Open this select menu</option>
+                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol" required>
+                                <option selected></option>
                                 <?php foreach ($roles as $key => $value) : ?>
                                     <option value="<?php echo ($value['rol_id']); ?>"><?php echo ($value['rol_nombre']); ?></option>
                                 <?php endforeach; ?>
                             </select>
 
                             <label for="selectRol">Permisos</label>
-                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol">
-                                <option selected>Open this select menu</option>
+                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectPermiso" name="selectPermiso" required>
+                                <option selected></option>
                                 <?php foreach ($permisos as $key => $value) : ?>
                                     <option value="<?php echo ($value['permiso_id']); ?>"><?php echo ($value['permiso_nombre']); ?></option>
                                 <?php endforeach; ?>
                             </select>
 
-                            <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_roles">Asignar Permiso</button>
+                            <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asigna_permiso_rol">Asignar Permiso</button>
                             <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
 
                         </form>
