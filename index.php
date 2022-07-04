@@ -232,6 +232,9 @@ switch ($error = 'SinError') {
             if ($modulo == "admin_perritos") {
                 include_once "Presentacion/vistas/admin_perritos.php";
             }
+            if ($modulo == "admin_roles_permisos") {
+                include_once "Presentacion/vistas/admin_RolesPermisos.php";
+            }
 
             ?>
         </div>

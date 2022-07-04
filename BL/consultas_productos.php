@@ -302,7 +302,9 @@ class Consulta_producto
         return $estado;
     }
 }
-
+// ---------------------------------
+//          CLASE CATEGORIA
+// ---------------------------------
 class Consulta_categoria{
     public function listarCategorias($conexion)
     {
@@ -401,13 +403,13 @@ class Consulta_categoria{
             $pdtid = $consulta->fetch(PDO::FETCH_ASSOC);
             return $pdtid;
         } catch (PDOException $e) {
-            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
-            <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
               <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar los datos de la categoria
-            </div>   -->
+            </div>  
             <?php
-        }
+        }        
     }
 
     public function update_categoria($conexion, $cat, $id)
