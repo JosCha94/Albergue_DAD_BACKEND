@@ -88,7 +88,7 @@ class Consulta_producto
             $errores['pdt'] = "El nombre del producto es requerido";
         } elseif (strlen($producto) < 5 || strlen($producto) > 50) {
             $errores['pdt'] = "El nombre del producto debe tener no menos de 5 caracteres";
-        } elseif (!preg_match("/^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚÑ]+$/", $producto)) {
+        } elseif (!preg_match("/^[a-zA-Z\sñáéíóúÁÉÍÓÚÑ]+$/", $producto)) {
             $errores['pdt'] = "El nombre del producto solo debe de tener letras";
         }
 
@@ -140,6 +140,7 @@ class Consulta_producto
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
               <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar los datos del producto
+            </div>
             <?php
         }
     }
@@ -300,5 +301,137 @@ class Consulta_producto
         }
         return $estado;
     }
+}
+
+class Consulta_categoria{
+    public function listarCategorias($conexion)
+    {
+        try {
+            $sql = "CALL SP_select_categorias_admin()";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $pdtImgid = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $pdtImgid;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo listar las categorias
+            </div>
+            <?php
+        }
+    }
+
+    public function cambia_estado_categoria($conexion, $Cuid, $Cestado)
+    {
+        try {
+            $sql = "CALL SP_update_estado_Categoria_admin($Cuid, :estado)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':estado', $Cestado);
+            $consulta->execute();
+            $estado='bien';
+
+        } catch (PDOException $e) {
+            //  echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema , no se pudo cambiar el estado de la categoria
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
+
+    public function Validar_registroCat($cat)
+    {
+        $errores = [];
+        $categoria = trim($cat->getCat_nombre());
+        $descripcion= trim($cat->getCat_descripcion());
+
+
+        if (empty($categoria)) {
+            $errores['catego'] = "El nombre de la Categoria es requerido";
+        }elseif (strlen($categoria) < 4 || strlen($categoria) > 50) {
+            $errores['catego'] = "El nombre de la categoria no debe tener no menos de 5 caracteres";
+        }elseif (!preg_match("/^[a-zA-Z\sñáéíóúÁÉÍÓÚÑ]+$/", $categoria)) {
+            $errores['catego'] = "El nombre de la categoria solo debe de tener letras";
+        }
+        if (empty($descripcion)) {
+            $errores['descrip'] = "La descripcion de la categoria es requerida";
+        } elseif (strlen($descripcion) > 150) {
+            $errores['descrip'] = "La descripcion de la categoria no debe tener mas de 150 letras";
+        } elseif (!preg_match("/^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚÑ(,.;)]+$/", $descripcion)) {
+            $errores['descrip'] = "La descripcion no puede tener signos como @ $ & % # etc";
+        }
+
+        return $errores;
+    }
+
+    public function insetar_categoria($conexion, $cat)
+    {
+        try {
+            $sql = "CALL SP_insert_categoria_admin(:categoria, :descrip)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':categoria', $cat->getCat_nombre());
+            $consulta->bindParam(':descrip', $cat->getCat_descripcion()); 
+            $consulta->execute();
+            $estado = 'bien';
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido agregar el producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
+    }
+
+    public function detalleCategoria($conexion, $id)
+    {
+        try {
+            $sql = "CALL SP_select_categoria_id_admin($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $pdtid = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $pdtid;
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar los datos de la categoria
+            </div>   -->
+            <?php
+        }
+    }
+
+    public function update_categoria($conexion, $cat, $id)
+    {
+        try {
+            $sql = "CALL SP_update_categoria_admin($id, :categoria, :descrip)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':categoria', $cat->getCat_nombre());
+            $consulta->bindParam(':descrip', $cat->getCat_descripcion()); 
+            $consulta->execute();
+            $estado = 'bien';
+        } catch (PDOException $e) {
+            //  echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido actualizar la categoria, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
+    }
+
+
 }
 ?>

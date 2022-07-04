@@ -54,7 +54,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
 <div class="row">
     <div class="col-sm-12">
         <div class="my-3">
-            <ul class="nav nav-tabs mb-2" id="adop-tables-tab" role="tablist">
+            <ul class="nav nav-tabs mb-3" id="adop-tables-tab" role="tablist">
 
                 <li class="nav-item" role="RolesyPermisos">
                     <button class="nav-link active" id="rolesPermisos-tab" data-bs-toggle="tab" data-bs-target="#rolesPermisos" type="button" role="tab" aria-controls="rolesPermisos" aria-selected="true">Todos los Permisos segun rol</button>
@@ -225,7 +225,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         </tbody>
                     </table>
                     <div class="w-75 my-5 mx-auto">
-                        <h2 class="my-4 text-center">Asignar Permiso a rol</h2>
+                        <h2 class="my-4 text-center">Asignar Permiso al rol</h2>
                         <form action="" method="post">
                             <label for="selectRol">Rol</label>
                             <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol" required>

@@ -223,6 +223,9 @@ switch ($error = 'SinError') {
             if ($modulo == "agrega-producto") {
                 include_once "Presentacion/vistas/admin_producto.php";
             }
+            if ($modulo == "agrega-categoria") {
+                include_once "Presentacion/vistas/admin_categoria.php";
+            }
             if ($modulo == "perritos") {
                 include_once "Presentacion/vistas/perritos.php";
             }

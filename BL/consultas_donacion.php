@@ -14,6 +14,7 @@ class Consulta_donacion
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
                 <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se pueden mostrar las donaciones, intentelo mas tarde por favor.
+            </div>
             <?php
         }
     }   

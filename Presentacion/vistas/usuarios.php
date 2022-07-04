@@ -48,7 +48,7 @@ if (isset($_POST['cambia_estado_usr'])) {
 <div class="row">
     <div class="col-sm-12">
         <div class="my-3">
-            <ul class="nav nav-tabs mb-2" id="adop-tables-tab" role="tablist">
+            <ul class="nav nav-tabs mb-3" id="adop-tables-tab" role="tablist">
 
                 <li class="nav-item" role="usuarios">
                     <button class="nav-link active" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" type="button" role="tab" aria-controls="usuarios" aria-selected="true">Todos los usuarios</button>
@@ -139,8 +139,8 @@ if (isset($_POST['cambia_estado_usr'])) {
                     <div class="w-75 my-5 mx-auto">
                         <form action="" method="post">
                             <label for="selectUser">Usuario</label>
-                            <select class="form-select form-select-lg mb-3" aria-label="form-select-lg example" id="selectUser" name="selectUser">
-                                <option selected>Open this select menu</option>
+                            <select class="form-select form-select-lg mb-3" aria-label="form-select-lg example" id="selectUser" name="selectUser" required>
+                                <option selected></option>
                                 <?php foreach ($usuarios2 as $key => $value) : ?>
                                     <option value="<?php echo ($value['usr_id']); ?>"><?php echo ($value['usr_email']); ?></option>
                                 <?php endforeach; ?>
@@ -148,8 +148,8 @@ if (isset($_POST['cambia_estado_usr'])) {
                             </select>
 
                             <label for="selectRol">Rol</label>
-                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol">
-                                <option selected>Open this select menu</option>
+                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol" required>
+                                <option selected></option>
                                 <?php foreach ($roles as $key => $value) : ?>
                                     <option value="<?php echo ($value['rol_id']); ?>"><?php echo ($value['rol_nombre']); ?></option>
                                 <?php endforeach; ?>
