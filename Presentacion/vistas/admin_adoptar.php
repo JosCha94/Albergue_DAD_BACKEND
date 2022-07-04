@@ -14,8 +14,8 @@ require_once('BL/phpmailer/SMTP.php');
 
 $formTipo = $_GET['formTipo'] ?? '';
 
-
-$id = $_GET['id'];
+$en_id = $_GET['id'];  
+$id = (base64_decode(urldecode($en_id)))/94269456*8752;
 $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
 $data = $consulta->mostrar_datosAdo($conexion, $id);

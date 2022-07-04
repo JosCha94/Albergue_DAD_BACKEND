@@ -17,7 +17,7 @@ if (isset($_POST['cancel_sus'])) {
         echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser rechazada!.</div>';
     }else{
         echo "<meta http-equiv='refresh' content='2'>";
-        echo '<div class="alert alert-success">¡La solicitud fue rechazada exitosamente!.</div>';
+        echo '<div class="alert alert-success">¡La suscripcion fue cancelada exitosamente!.</div>';
     }
 }
 
@@ -30,7 +30,7 @@ if (isset($_POST['habi_sus'])) {
         echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser rechazada!.</div>';
     }else{
         echo "<meta http-equiv='refresh' content='2'>";
-        echo '<div class="alert alert-success">¡La solicitud fue rechazada exitosamente!.</div>';
+        echo '<div class="alert alert-success">¡La Suscripción ha sido reactivada exitosamente!.</div>';
     }
 }
 

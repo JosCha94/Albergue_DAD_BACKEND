@@ -72,7 +72,7 @@ if (isset($_POST['btn_rechazar'])) {
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
                                 <td><?= $value['perro_nombre']; ?></td>
                                 <td class="text-center">
-                                    <a href="index.php?modulo=admin_adoptar&formTipo=gestEntrevista&id=<?= $value['adop_id']; ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
+                                    <a href="index.php?modulo=admin_adoptar&formTipo=gestEntrevista&id=<?= urlencode(base64_encode(($value['adop_id']*94269456)/8752)); ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -103,7 +103,7 @@ if (isset($_POST['btn_rechazar'])) {
                                 <td><?= $value['adop_fecha_entrevista']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
                                 <td>
-                                    <a href="index.php?modulo=admin_adoptar&formTipo=acptAdop&id=<?= $value['adop_id']; ?>" class="btn btn-success mt-3 ms-3" name= "btn_aceptar"><i class="fa-solid fa-check"></i></a>
+                                    <a href="index.php?modulo=admin_adoptar&formTipo=acptAdop&id=<?= urlencode(base64_encode( ($value['adop_id']*94269456)/8752)); ?>" class="btn btn-success mt-3 ms-3" name= "btn_aceptar"><i class="fa-solid fa-check"></i></a>
                                 </td>
                                 <td>
                                 <form action="" method="post">
