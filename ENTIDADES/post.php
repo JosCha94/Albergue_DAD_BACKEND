@@ -4,6 +4,7 @@ class Post{
     private $post_autor;
     private $post_titulo;
     private $post_imagen;
+    private $post_nombre_img;
     private $post_tipo_img;
     private $post_descripcion;
     private $post_estado;
@@ -11,11 +12,12 @@ class Post{
     private $post_fecha_cambio;
 
 
-    public function __construct($post_id, $post_autor, $post_titulo, $post_imagen, $post_tipo_img, $post_descripcion, $post_estado, $post_fecha_creacion, $post_fecha_cambio){
+    public function __construct($post_id, $post_autor, $post_titulo, $post_imagen, $post_nombre_img, $post_tipo_img, $post_descripcion, $post_estado, $post_fecha_creacion, $post_fecha_cambio){
         $this->post_id = $post_id;
         $this->post_autor = $post_autor;
         $this->post_titulo = $post_titulo;
         $this->post_imagen = $post_imagen;
+        $this->post_nombre_img = $post_nombre_img;
         $this->post_tipo_img = $post_tipo_img;
         $this->post_descripcion = $post_descripcion;
         $this->post_estado = $post_estado;
@@ -34,6 +36,9 @@ class Post{
     }
     public function getPost_imagen(){
         return $this->post_imagen;
+    }
+    public function getPost_nombre_img(){
+        return $this->post_nombre_img;
     }
     public function getPost_tipo_img(){
         return $this->post_tipo_img;
@@ -62,6 +67,9 @@ class Post{
     }
     public function setPost_imagen($post_imagen){
         $this->post_imagen = $post_imagen;
+    }
+    public function setPost_nombre_img($post_nombre_img){
+        $this->post_nombre_img = $post_nombre_img;
     }
     public function setPost_tipo_img($post_tipo_img){
         $this->post_tipo_img = $post_tipo_img;
