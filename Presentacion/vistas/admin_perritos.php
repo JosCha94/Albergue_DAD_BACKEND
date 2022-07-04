@@ -9,7 +9,8 @@ $conexion = conexion::conectar();
 $consulta = new Consulta_perrito();
 
 if(isset($_GET['id'])){
-$id = $_GET['id'];
+$en_id = $_GET['id'];  
+$id = (base64_decode(urldecode($en_id)))*7854/489554;
 
 $perro = $consulta->listarPerritosPorId($conexion, $id);
 $imgs = $consulta -> listarImgs_perritos($conexion, $id);
@@ -77,7 +78,6 @@ if (isset($_POST['save_foto'])) {
 }
 
 if (isset($_POST['btnUpdate'])) {
-    $id = $_GET['id'];
     $p_name = $_POST['nombre'];
     $p_peso = $_POST['peso'];
     $p_tamano = $_POST['tamano'];
