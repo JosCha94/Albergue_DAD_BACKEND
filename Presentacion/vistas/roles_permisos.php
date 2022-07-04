@@ -153,7 +153,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                                     <td><?php echo ($value['rol_fecha_creacion']); ?> </td>
                                     <td><?php echo ($value['rol_fecha_cambio']); ?> </td>
                                     <td>
-                                        <form action="" method="post">
+                                        <form action="index.php?modulo=admin_roles_permisos&formTipo=editRol" method="post">
                                             <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
                                             <button class="btn btn-warning btn-xs" name="cambiarDatosRol" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></button>
                                         </form>
@@ -208,7 +208,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                                     <td><?php echo ($value['permiso_fecha_creacion']); ?> </td>
                                     <td><?php echo ($value['permiso_fecha_cambio']); ?> </td>
                                     <td>
-                                        <form action="" method="post">
+                                        <form action="index.php?modulo=admin_roles_permisos&formTipo=editPermiso" method="post">
                                             <input type="hidden" name="permiso_id" value="<?= $value['permiso_id']; ?>">
                                             <button class="btn btn-warning btn-xs" name="cambiarDatosPermiso" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></button>
                                         </form>

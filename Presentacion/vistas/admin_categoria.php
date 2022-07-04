@@ -57,7 +57,7 @@ if (isset($_POST['update_cat'])) {
     <section id="dormRegistro" class="container-fluid mt-5">
 
         <div class="section-heading text-center">
-            <h2>Nueva CAtegoria</h2>
+            <h2>Nueva Categoria</h2>
         </div>
         <div class="row">
             <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">

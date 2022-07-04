@@ -50,10 +50,10 @@ $perro = $consulta->listarPerritos($conexion);
                         <td><?= $value['perro_fecha_creacion'] ;?></td>
                         <td><?= $value['perro_fecha_modificacion'] ;?></td>
                         <td class="text-center">
-                            <a href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $value['perro_id'] ;?>" class="btn btn-warning" title="EDITAR FOTOS"><i class="fa-solid fa-file-image"></i></a>
+                            <a href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= urlencode(base64_encode(($value['perro_id']*489554)/7854)) ;?>" class="btn btn-warning" title="EDITAR FOTOS"><i class="fa-solid fa-file-image"></i></a>
                         </td>
                         <td>
-                            <a href="index.php?modulo=admin_perritos&formTipo=updatePerrito&id=<?= $value['perro_id'] ;?>" class="btn btn-warning" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="index.php?modulo=admin_perritos&formTipo=updatePerrito&id=<?= urlencode(base64_encode(($value['perro_id']*489554)/7854)) ;?>" class="btn btn-warning" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
