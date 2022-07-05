@@ -117,7 +117,7 @@ if (isset($_POST['delete_ImgPdt'])) {
 
 if (isset($_POST['update_estado_ImgPdt'])) {
     $idImg = $_POST['img_id'];
-    $ImgEstado =  $_POST['imgProductEstado' . $idImg];
+    $ImgEstado =  $_POST['imgProductEstado'. $idImg];
     if ($ImgEstado == 'Activado') {
         $estadoImg = $consulta->cambia_estado_Imgproducto_Acti($conexion, $idImg);
     } else {
@@ -397,8 +397,9 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                                     </label>
                                                 </div>
 
-                      
-
+                                                <input type="hidden" name="img_id" value="<?php echo ($value['img_product_id']); ?>">
+                                    
+                                    
                                             </div>
                                             <button type="submit" name="delete_ImgPdt" class="btn btn-danger" onclick="return confirm('¿Confirma si deseas eliminar la imagen del producto?')">Eliminar</button>
                                             <button type="submit" name="update_estado_ImgPdt" value="Submit" class="btn btn-orange ms-2">Actualizar</button>
