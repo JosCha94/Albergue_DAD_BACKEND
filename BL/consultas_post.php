@@ -14,6 +14,7 @@ class Consulta_post
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
                 <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se pueden mostrar los posts.
+            </div>
             <?php
         }
     }
@@ -31,6 +32,7 @@ class Consulta_post
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
                 <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se pueden mostrar los posts.
+            </div>
             <?php
         }
     }   
