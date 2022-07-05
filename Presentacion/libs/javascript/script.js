@@ -47,7 +47,6 @@ $(document).ready(function () {
     $('#suscip').DataTable({});
     $('#tablaDonaciones').DataTable({});
     $('#tablaBlog').DataTable({});
-    $('#tablaPerEsp').DataTable({});
 
 
 });
