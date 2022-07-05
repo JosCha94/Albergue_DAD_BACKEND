@@ -14,11 +14,7 @@ $modulo = $_GET['modulo'] ?? '';
 $Rol = $_SESSION['usuario'][2];
 $array = json_decode($Rol, true);
 foreach ($array as $key => $value) :
-    if ($value['id'] == 1) {
         $resRol = $value['id'];
-    } elseif ($value['id'] == 2) {
-        $resRol = $value['id'];
-    }
 endforeach;
 $rolUs = $resRol;
 
