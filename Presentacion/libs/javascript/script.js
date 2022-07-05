@@ -35,7 +35,6 @@ $(document).ready(function () {
     $('#tablaDetalleVentas').DataTable({
         // "scrollX": true
     });
-    
 
 });
 
@@ -49,8 +48,8 @@ $(document).ready(function () {
     $('#tablaDonaciones').DataTable({});
     $('#tablaBlog').DataTable({});
 
-});
 
+});
 
 
 //funcion para confirmar delete

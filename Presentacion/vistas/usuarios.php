@@ -5,7 +5,9 @@ $consultaRP = new Consulta_RolesPermisos();
 $consulta = new Consulta_usuario();
 $usuarios = $consulta->listarUsuarios($conexion);
 $usuarios2 = $consulta->listarUsuarios2($conexion);
+$perEsp = $consulta->listarPerEspUsr($conexion);
 $roles = $consultaRP->listarRoles($conexion);
+$permisos = $consultaRP->listarPermisos($conexion);
 
 if (isset($_POST['btn_asignaRol'])) {
     $idUser = $_POST['selectUser'];
@@ -14,19 +16,18 @@ if (isset($_POST['btn_asignaRol'])) {
     $asignaRol = $consulta->asignarRol($conexion, $idUser, $idRol);
 
     if ($asignaRol == 'mal') {
-            
     } else {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el rol al usuario" />';
     }
 }
 
-if (isset($_POST['cambia_estado_usrRol'])) {    
+if (isset($_POST['cambia_estado_usrRol'])) {
     $estado_UR = $_POST['usrrol_estado'];
     $idUser = $_POST['user_id'];
     $idRol = $_POST['rol_id'];
-    $estado = $consulta->cambia_estado_UsrRol($conexion, $idUser, $idRol, $estado_UR);
+    $estadoUR = $consulta->cambia_estado_UsrRol($conexion, $idUser, $idRol, $estado_UR);
 
-    if ($estado == 'mal') {
+    if ($estadoUR == 'mal') {
     } else {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=El estado del rol se cambio para el usuario" />';
     }
@@ -35,11 +36,35 @@ if (isset($_POST['cambia_estado_usrRol'])) {
 if (isset($_POST['cambia_estado_usr'])) {
     $idUser = $_POST['usr_id'];
     $estado = $_POST['usr_estado'];
-    $estado = $consulta->cambia_estado_User($conexion, $idUser, $estado);
+    $estadoU = $consulta->cambia_estado_User($conexion, $idUser, $estado);
 
-    if ($estado == 'mal') {
+    if ($estadoU == 'mal') {
     } else {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se cambio el estado del usuario" />';
+    }
+}
+
+if (isset($_POST['cambia_estado_usrPerEsp'])) {
+    $UP_estado = $_POST['usrper_estado'];
+    $idUser = $_POST['usr_id'];
+    $idPer = $_POST['permiso_id'];
+    $estadoUP = $consulta->cambia_estado_UsrPer($conexion, $idUser, $idPer, $UP_estado);
+
+    if ($estadoUP == 'mal') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se cambio el acceso del permiso para el usuario" />';
+    }
+}
+
+if (isset($_POST['btn_asignaPermiso'])) {
+    $idUser = $_POST['selectUser'];
+    $idPer = $_POST['selectPer'];
+
+    $asignaRol = $consulta->asignarPermiso($conexion, $idUser, $idPer);
+
+    if ($asignaRol == 'mal') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el permiso especial al usuario" />';
     }
 }
 
@@ -55,6 +80,9 @@ if (isset($_POST['cambia_estado_usr'])) {
                 </li>
                 <li class="nav-item" role="Asigna Roles">
                     <button class="nav-link" id="asignaRol-tab" data-bs-toggle="tab" data-bs-target="#asignaRol" type="button" role="tab" aria-controls="asignaRol" aria-selected="false">Asignar Rol</button>
+                </li>
+                <li class="nav-item" role="UsrPerEsp">
+                    <button class="nav-link" id="UsrPerEsp-tab" data-bs-toggle="tab" data-bs-target="#UsrPerEsp" type="button" role="tab" aria-controls="UsrPerEsp" aria-selected="false">Usuarios y permisos Especiales</button>
                 </li>
             </ul>
             <div class="tab-content " id="myTabContent">
@@ -109,25 +137,25 @@ if (isset($_POST['cambia_estado_usr'])) {
                                     <td><?php echo ($value['usr_fecha_creacion']); ?> </td>
                                     <td><?php echo ($value['usr_fecha_modificacion']); ?> </td>
                                     <td>
-           
-                                    <form action="" method="post">
-                                        <input type="hidden" name="usr_estado" value="<?= $value['usr_estado']; ?>">
-                                        <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
-                                        <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
-                                    </form>
-                            </td>
+
+                                        <form action="" method="post">
+                                            <input type="hidden" name="usr_estado" value="<?= $value['usr_estado']; ?>">
+                                            <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
+                                            <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
+                                        </form>
+                                    </td>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>
-                                    <td><?php echo ($value['usr_rol_estado']); ?> </td>                 
+                                    <td><?php echo ($value['usr_rol_estado']); ?> </td>
                                     <td>
 
-                                    <form action="" method="post">
-                                        <input type="hidden" name="usrrol_estado" value="<?= $value['usr_rol_estado']; ?>">
-                                        <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
-                                        <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                        <button class="btn <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrRol" title="<?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> rol para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
-                  
-                                    </form>
-                            </td>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="usrrol_estado" value="<?= $value['usr_rol_estado']; ?>">
+                                            <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
+                                            <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
+                                            <button class="btn <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrRol" title="<?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> rol para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
+
+                                        </form>
+                                    </td>
 
                                 </tr>
                             <?php endforeach; ?>
@@ -156,6 +184,78 @@ if (isset($_POST['cambia_estado_usr'])) {
                             </select>
 
                             <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaRol">Asignar Rol</button>
+                            <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="UsrPerEsp" role="tabpanel" aria-labelledby="UsrPerEsp-tab">
+                    <table class="table table-sm table-hover w-100" id="tablaDetalleVentas">
+                        <thead class="bg-danger text-white">
+                            <tr>
+                                <td>Usuario </td>
+                                <td>E-mail </td>
+                                <td>Permiso </td>
+                                <td>Estado </td>
+                                <td>Cambiar estado </td>
+
+
+                            </tr>
+                        </thead>
+                        <tfoot class="bg-secondary text-white">
+                            <tr>
+                                <td>Usuario </td>
+                                <td>E-mail </td>
+                                <td>Permiso </td>
+                                <td>Estado </td>
+                                <td>Cambiar estado </td>
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <?php foreach ($perEsp as $key => $value) : ?>
+                                <tr class="text-center">
+                                    <td><?php echo ($value['Usuario']); ?> </td>
+                                    <td><?php echo ($value['usr_email']); ?> </td>
+                                    <td><?php echo ($value['permiso_nombre']); ?></td>
+                                    <td><?php echo ($value['usr_per_estado']); ?> </td>
+                                    <td>
+
+                                        <form action="" method="post">
+                                            <input type="hidden" name="usrper_estado" value="<?= $value['usr_per_estado']; ?>">
+                                            <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
+                                            <input type="hidden" name="permiso_id" value="<?= $value['permiso_id']; ?>">
+                                            <button class="btn <?php echo ($value['usr_per_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrPerEsp" title="<?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> permiso para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este permiso para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
+
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
+                    <div class="w-75 my-5 mx-auto">
+                        <h2 class="my-4 text-center">Asignar Permiso al usuario</h2>
+                        <form action="" method="post">
+                            <label for="selectUser">Usuario</label>
+                            <select class="form-select form-select-lg mb-3" aria-label="form-select-lg example" id="selectUser" name="selectUser" required>
+                                <option selected></option>
+                                <?php foreach ($usuarios2 as $key => $value) : ?>
+                                    <option value="<?php echo ($value['usr_id']); ?>"><?php echo ($value['usr_email']); ?></option>
+                                <?php endforeach; ?>
+
+                            </select>
+
+                            <label for="selectRol">Permiso</label>
+                            <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectPer" required>
+                                <option selected></option>
+                                <?php foreach ($permisos as $key => $value) : ?>
+                                    <option value="<?php echo ($value['permiso_id']); ?>"><?php echo ($value['permiso_nombre']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaPermiso">Asignar Permiso</button>
                             <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
 
                         </form>
