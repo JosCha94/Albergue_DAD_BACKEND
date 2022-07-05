@@ -3,7 +3,6 @@
 require_once('BL/consultas_apadrinar.php');
 require_once('DAL/conexion.php');
 
-$conexion = conexion::conectar();
 $consulta = new Consulta_suscripcion();
 $sus = $consulta->listarSuscripAdmin($conexion);
 $tipoSus = $consulta -> listarTipoSuscripcion($conexion);
@@ -107,7 +106,6 @@ if (isset($_POST['habi_sus'])) {
                                 <th scope="col">Fecha de creación</th>
                                 <th scope="col">Fecha de cambio</th>
                                 <th scope="col">Editar</th>
-                                <th scope="col">Deshabilitar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,12 +118,13 @@ if (isset($_POST['habi_sus'])) {
                                 <td><?= $value['s_tipo_estado']; ?></td>
                                 <td><?= $value['s_tipo_fecha_creacion']; ?></td>
                                 <td><?= $value['s_tipo_fecha_cambio']; ?></td>
-                                <td>
-                                    <span class="btn btn-warning btn-xs" title="Editar"><i class="fa-solid fa-pen-to-square"></i></span>
-                                </td>
-                                <td>
-                                    <span class="btn btn-danger btn-xs" title="Desabilitar perrito"><i class="fa-solid fa-power-off"></i></span>
-                                </td>
+                                <form action="" method="POST">
+                                    <td>
+                                        <a href="index.php?modulo=admin_apadrinar&id=<?= urlencode(base64_encode(($value['s_tipo_id']*489554)/7854)) ;?> "class="btn btn-warning" name="edit_tipo" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <input type="hidden" name="edit_tipo" value="<?= $value['s_tipo_id']; ?>">
+                                    </td>
+                                   
+                                </form>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

@@ -3,7 +3,6 @@ require_once('BL/consultas_perritos.php');
 require_once('DAL/conexion.php');
 
 
-$conexion = conexion::conectar();
 $consulta = new Consulta_perrito();
 $perro = $consulta->listarPerritos($conexion);
 
