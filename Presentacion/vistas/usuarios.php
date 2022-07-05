@@ -190,7 +190,7 @@ if (isset($_POST['btn_asignaPermiso'])) {
                     </div>
                 </div>
                 <div class="tab-pane fade" id="UsrPerEsp" role="tabpanel" aria-labelledby="UsrPerEsp-tab">
-                    <table class="table table-sm table-hover w-100" id="tablaDetalleVentas">
+                    <table class="table table-sm table-hover w-100" id="tablaBlog">
                         <thead class="bg-danger text-white">
                             <tr>
                                 <td>Usuario </td>

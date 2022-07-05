@@ -173,7 +173,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                     </table>
                 </div>
                 <div class="tab-pane fade" id="permisos" role="tabpanel" aria-labelledby="roles-tab">
-                    <table class="table table-sm table-hover wrap mx-auto w-100" id="tablaPermisos">
+                    <table class="table table-sm table-hover w-100" id="tablaPermisos">
                         <thead class="bg-danger text-white">
                             <tr>
                                 <td>Permiso </td>

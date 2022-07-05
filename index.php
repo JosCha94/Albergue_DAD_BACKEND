@@ -13,12 +13,8 @@ $modulo = $_GET['modulo'] ?? '';
 
 $Rol = $_SESSION['usuario'][2];
 $array = json_decode($Rol, true);
-foreach ($array as $key => $value) :
-    if ($value['id'] == 1) {
+foreach ($array as $key => $value) :   
         $resRol = $value['id'];
-    } elseif ($value['id'] == 2) {
-        $resRol = $value['id'];
-    }
 endforeach;
 $rolUs = $resRol;
 
@@ -234,6 +230,9 @@ switch ($error = 'SinError') {
             }
             if ($modulo == "admin_roles_permisos") {
                 include_once "Presentacion/vistas/admin_RolesPermisos.php";
+            }
+            if ($modulo == "admin_post") {
+                include_once "Presentacion/vistas/admin_post.php";
             }
 
             ?>
