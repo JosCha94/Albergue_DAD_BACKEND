@@ -69,14 +69,14 @@ if (isset($_POST['eliminar_post'])){  //si se presiono el boton eliminar
                         <td><?php echo ($value['post_id']); ?> </td>
                             <td><?php echo ($value['post_autor']); ?> </td>
                             <td><?php echo ($value['post_titulo']); ?></td>
-                            <td><img src="data:image/<?php echo($value['post_tipo_img']);?>;base64,<?php echo base64_encode( $value['post_imagen']); ?>" style="width:150px;" alt="albergue"> </td>
+                            <td><img src="data:image/<?php echo ($value['post_img_tipo']); ?>;base64,<?php echo base64_encode($value['post_img']); ?>" alt="<?= $value['post_titulo']; ?>" class="img-fluid w-25"> </td>
                             <td><?php echo ($value['post_descripcion']); ?> </td>
                             <td>
                                     <form action="" method="post">
                                         <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
                                         <button class="btn <?php echo ($value['post_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_post" title="<?php echo ($value['post_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> post" onclick="return confirm('¿Quieres <?php echo ($value['post_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este post?')"><i class="fa-solid fa-power-off"></i></button>
                                     </form>
-                            </td>
+                            </td>                            
                             <td><?php echo ($value['post_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['post_fecha_cambio']); ?> </td>
                             <td>

@@ -33,24 +33,69 @@ if (isset($_POST['registro_post'])) {
 
     if ($IPost == 'fallo') {
     } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se agrego correctamente" />';
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=blog&mensaje=El post se agrego correctamente" />';
     }
 }
 
 if (isset($_POST['update_post'])) {
-    $idPost = $IPost;
+    $idPost = $idpost;
+    $id = $_SESSION['usuario'][0];
+    $rol = $rolUs;
     $autor = $_POST['post_autor'];
     $titulo = $_POST['post_titulo'];
     $descrip = $_POST['post_descripcion'];
     $estado = $_POST['post_estado'];
     $post = new Post($autor, $titulo, $descrip, $estado);
 
-    // $IPost = $consulta->insertarPost($conexion, $id, $rol, $post);
+    $UPost = $consulta->updatePost($conexion,$idPost, $id, $rol, $post);
 
-    // if ($IPost == 'fallo') {
-    // } else {
-    //     echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se agrego correctamente" />';
-    // }
+    if ($UPost == 'fallo') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=admin_post&formTipo=updatePost&mensaje=El post se actualizo correctamente" />';
+    }
+}
+
+if (isset($_POST['guardarImgPost'])) {
+
+    $data = $_FILES['foto'];
+    $foto = file_get_contents($_FILES['foto']['tmp_name']);
+    $fotoName = $_FILES['foto']['name'];
+    $fotoType = $_FILES['foto']['type'];
+    $fotoError = $_FILES['foto']['error'];
+    $fotoPeso = $_FILES['foto']['size'];
+    $ext = explode('.', $fotoName);
+    $extR = strtolower(end($ext));
+
+    $permitir = array('jpg', 'jpeg', 'png');
+    if (in_array($extR, $permitir)) {
+        if ($fotoError === 0) {
+            if ($fotoPeso < 5000000) {
+                $fotoNombreNew = uniqid('', true) . "." . $extR;
+            } else {
+                echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">¡El archivo es muy grande!. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>';
+            }
+        } else {
+            echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">¡Hubo un error al cargar la foto! <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></div>';
+        }
+    } else {
+        echo '<div class="alert alert-danger alert-dismissible fade show " role="alert">¡No tienes permitido añadir archivos de ese tipo!. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+    }
+
+    $estadoIP = $consulta->agregar_fotoPost($conexion, $idpost, $foto, $extR);
+    if ($estado == 'fallo') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=admin_post&formTipo=updatePost&mensaje=La imagen del post se agrego correctamente" />';
+    }
+}
+
+if (isset($_POST['EliminarImgPost'])) {
+    $foto = ' ';
+    $extR = '';
+    $estadoIP = $consulta->agregar_fotoPost($conexion, $idpost, $foto, $extR);
+    if ($estado == 'fallo') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=admin_post&formTipo=updatePost&mensaje=La imagen del post se elimino correctamente" />';
+    }
 }
 ?>
 
@@ -122,9 +167,9 @@ if (isset($_POST['update_post'])) {
             <h1 class="fw-bold">Actualizacion de Post: <br>
                 <?php echo $postID['post_titulo'] ?> </h1>
         </div>
-        <div class="row">
+        <div class="row bg-secondary bg-opacity-75">
 
-            <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
+            <div class="col-lg-6 p-4 p-md-5 h-50 mx-auto">
 
                 <h4 class="text-light">Datos del Post</h4>
 
@@ -173,28 +218,41 @@ if (isset($_POST['update_post'])) {
                         </div>
                     </form>
                     <!-- /form-group-->
-                    <div class="col-12  h-50  mt-3"> 
+                    
+
+                </div>
+                                      
+            </div> 
+            <div class="col-lg-6 p-4 p-md-5 h-50 mx-auto  mt-3 mt-md-0"> 
+                <h4 class="text-light">Imagen del Post</h4>
+                <div class="row my-3">
+                    <div class="col-12">
+                    <?php if($postID['post_img_tipo'] != null): ?>
+                        <img src="data:image/<?php echo ($postID['post_img_tipo']); ?>;base64,<?php echo base64_encode($postID['post_img']); ?>" alt="<?= $postID['post_titulo']; ?>" class="img-fluid w-75 mx-5">
+                    <?php else : ?>
+                        <marquee behavior="alternate" class="fs-3" scrollamount="10">SIN IMAGEN</marquee>
+                    <?php endif;?>
+                    
+                    </div>
+                </div>
+
                     <form method="post" enctype="multipart/form-data">
                         <div class="col-12">
                             <label for="foto" class="form-label text-light fs-4">Seleccione una imagen para agregar</label>
-                            <input type="file" class="form-control" id="foto" name="foto" required>
-                            <input type="hidden" id="IdProduct" name="IdProduct" value="">
+                            <input type="file" class="form-control" id="foto" name="foto" <?php echo($postID['post_img_tipo'] == null)? 'required':''; ?> >
                             <div class=" mt-3 d-flex justify-content-around">
-                            <button type="submit" class="btn btn-orange my-3" name="guardarImgPost" <?php echo($postID['post_img'] != null)? 'disabled':''; ?>>Agregar</button>
-                            <button type="submit" class="btn btn-danger my-3" name="EliminarImgPost" <?php echo($postID['post_img'] == null)? 'disabled':''; ?>>Eliminar</button>
-                       </div>
+                            <button type="submit" class="btn btn-orange my-3" name="guardarImgPost" <?php echo($postID['post_img_tipo'] != null)? 'disabled':''; ?>>Agregar</button>
+                            <button type="submit" class="btn btn-danger my-3" name="EliminarImgPost" <?php echo($postID['post_img_tipo'] == null)? 'disabled':''; ?>>Eliminar</button>
+                            </div>
 
                         </div>
                         
                    </form>
-                </div>
-        
-                </div> 
-                               
-            
-            <!-- /col-lg-->
-           
             </div>
+
+            </div>
+
+
 
         <!-- /row-->
     </section>
