@@ -19,63 +19,48 @@ class Consulta_post
         }
     }
 
-    public function mostrarPost($conexion, $id)
+    public function insertarPost($conexion,$id,$rol,$post)
     {
         try {
-            $sql = "CALL SP_mostrar_post($id)";
+            $sql = "CALL SP_insertar_post_admin($id, $rol, :autor, :titulo, :descripcion, :estado)";
             $consulta = $conexion->prepare($sql);
+            $consulta->bindValue(':autor', $post->getPost_autor());
+            $consulta->bindValue(':titulo', $post->getPost_titulo());
+            $consulta->bindValue(':descripcion', $post->getPost_descripcion());
+            $consulta->bindValue(':estado', $post->getPost_estado());
             $consulta->execute();
-            $postId = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            return $postId;
+            $estado='bien';
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se pueden mostrar los posts.
+                <strong>Error!</strong><br> Debido a un error no se ha podido actualizar el post, inténtelo mas tarde por favor.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <?php
+        <?php  
+            $estado='fallo';
         }
-    }   
-
-    public function insertarPost($conexion,$post)
-    {
-        try {
-            $sql = "CALL SP_insertar_post(:autor, :titulo, :imagen, :nombre_img, :tipo_img, :descripcion, :estado)";
-            $consulta = $conexion->prepare($sql);
-            $consulta->bindValue(':autor', $post->getPost_autor());
-            $consulta->bindValue(':titulo', $post->getPost_titulo());
-            $consulta->bindValue(':imagen', $post->getPost_imagen());
-            $consulta->bindValue(':nombre_img', $post->getPost_nombre_img());
-            $consulta->bindValue(':tipo_img', $post->getPost_tipo_img());
-            $consulta->bindValue(':descripcion', $post->getPost_descripcion());
-            $consulta->bindValue(':estado', $post->getPost_estado());
-            $consulta->execute();
-        } catch (PDOException $e) {
-            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
-        }
+        return $estado;
     }
 
-    public function updatePost($conexion, $id, $post)
+    public function updatePost($conexion,$idPost, $id, $rol, $post)
     {
         try {
-            $sql = "CALL SP_admin_update_post($id, :autor, :titulo, :imagen, :nombre_img, :tipo_img, :descripcion, :estado)";
+            $sql = "CALL SP_update_post_admin($idPost, $id, $rol, :autor, :titulo, :descripcion, :estado)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':autor', $post->getPost_autor());
             $consulta->bindValue(':titulo', $post->getPost_titulo());
-            $consulta->bindValue(':imagen', $post->getPost_imagen());
-            $consulta->bindValue(':nombre_img', $post->getPost_nombre_img());
-            $consulta->bindValue(':tipo_img', $post->getPost_tipo_img());
             $consulta->bindValue(':descripcion', $post->getPost_descripcion());
             $consulta->bindValue(':estado', $post->getPost_estado());
             $consulta->execute();
-            $estado = 'bien';
+            $estado='bien';
         } catch (PDOException $e) {
             echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
-                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
                     <strong>Error!</strong><br> Debido a un error no se ha podido actualizar el post, inténtelo mas tarde por favor.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                </div> -->
             <?php            
             $estado = 'fallo';
         }
@@ -99,5 +84,49 @@ class Consulta_post
             <?php
         }
     }
+
+    public function detallePost($conexion, $id)
+    {
+        try {
+            $sql = "CALL SP_select_Post_id_admin($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $pdtid = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $pdtid;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar los datos del post
+            </div>
+            <?php
+        }
+    }
+
+    public function agregar_fotoPost($conexion, $imgid, $img, $imgTipo)
+    {
+        try {
+            $sql = "CALL SP_update_foto_post_admin($imgid, :foto, :fTipo)";
+            $consulta = $conexion->prepare($sql);
+ 
+            $consulta->bindValue(':foto', $img);
+
+            $consulta->bindValue(':fTipo', $imgTipo);
+            $consulta->execute();
+            $estado = 'bien';
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un error no se ha podido agregar la foto del post, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
+    }
+
+
 }
 ?>

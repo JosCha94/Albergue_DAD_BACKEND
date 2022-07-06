@@ -48,7 +48,7 @@ $donacion = $consulta->listarDonaciones($conexion);
                             <td><?php echo ($value['dona_apellidos']); ?> </td>
                             <td><?php echo ($value['dona_correo']); ?> </td>
                             <td><?php echo ($value['dona_celular']); ?> </td>
-                            <td><button data-bs-toggle="modal" data-bs-target="#fotoModal"><img src="data:image/<?php echo($value['dona_tipo_img']);?>;base64,<?php echo base64_encode( $value['dona_vaucher']); ?>" style="width:100px;" alt="albergue"></button> </td>
+                            <td><button data-bs-toggle="modal" data-bs-target="#fotoModal"><img src="data:image/<?php echo($value['dona_tipo_img']);?>;base64,<?php echo base64_encode( $value['dona_vaucher']); ?>" style="width:80px;" alt="albergue"></button> </td>
                             <td><?php echo ($value['dona_monto']); ?> </td>
                         </tr>
                     <?php endforeach; ?>
@@ -65,11 +65,11 @@ $donacion = $consulta->listarDonaciones($conexion);
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel"> </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <img class="img-fluid" src="" alt="">              
+      <img class = "image-fluid" src="data:image/<?php echo($value['dona_tipo_img']);?>;base64,<?php echo base64_encode( $value['dona_vaucher']); ?>" style="width:290px;" alt="albergue">              
       </div>
     </div>
   </div>

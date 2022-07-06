@@ -1,4 +1,17 @@
+<?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [2,4]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [8]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [8]);
 
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
 <?php
 require_once('BL/consultas_adopcion.php');
 require_once('DAL/conexion.php');
@@ -71,9 +84,11 @@ if (isset($_POST['btn_rechazar'])) {
                                 <td><?= $value['adop_razon']; ?></td>
                                 <td><?= $value['adop_fecha_creacion']; ?></td>
                                 <td><?= $value['perro_nombre']; ?></td>
+                                <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                                 <td class="text-center">
                                     <a href="index.php?modulo=admin_adoptar&formTipo=gestEntrevista&id=<?= urlencode(base64_encode(($value['adop_id']*94269456)/8752)); ?>" class="btn btn-primary p-2" ><i class="mx-2 fa-solid fa-list-check"></i>Gestionar </a>
                                 </td>
+                                <?php endif; ?>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -159,3 +174,10 @@ if (isset($_POST['btn_rechazar'])) {
         </div>
     </div>
 </div>
+<?php else : ?>
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
+
+<?php endif; ?>

@@ -1,6 +1,26 @@
 *{
   font-family: 'Baloo Thambi 2', cursive;  
 }
+/*********PERFIL DE USUARIO *************/
+.img-circle {
+  border-radius: 50%;
+}
+
+.btn-orange {
+  color: #fff;
+  background-color: #E8630a;
+  border-color: #E8630a;
+}
+
+.bg-orange {
+  opacity: 0.95;
+  background-color: #E8630a;
+}
+
+.bg-orange2 {
+  opacity: 0.75;
+  background-color: #E8630a;
+}
 body{
   background-image: url(../images/huesoPatron.png);
   background-color: #fafbfd;
@@ -407,27 +427,7 @@ strong{
 
 
 
-/*********PERFIL DE USUARIO *************/
-.img-circle{
-  border-radius: 50%;
-}
 
-.btn-orange{
-  color: #fff;
-  background-color: #E8630a;
-  border-color: #E8630a;
-}
-
-.btn-orange:hover{
-  color: #fff;
-  background-color: #E8630a;
-  border-color: #E8630a;
-}
-
-@media (max-width: 740px) { 
-  .txt_form{font-size: 1.25rem;}
-
- }
 
 
 

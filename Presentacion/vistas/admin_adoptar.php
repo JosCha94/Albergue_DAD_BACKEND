@@ -1,11 +1,24 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [4]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [8]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [8]);
 
-
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_adopcion.php');
 require_once('DAL/conexion.php');
 require_once('ENTIDADES/adopciones.php');
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+
 require_once('BL/phpmailer/Exception.php');
 require_once('BL/phpmailer/PHPMailer.php');
 require_once('BL/phpmailer/SMTP.php');
@@ -14,7 +27,7 @@ require_once('BL/phpmailer/SMTP.php');
 
 $formTipo = $_GET['formTipo'] ?? '';
 
-$en_id = $_GET['id'];  
+$en_id = $_GET['id'];
 $id = (base64_decode(urldecode($en_id)))/94269456*8752;
 $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
@@ -119,7 +132,7 @@ if(isset($_POST['agendar'])){
     <div class="col-md-5 border-end border-5 ">
         <div class="my-3">
             <h2 class="text-center">Datos del solicitante</h2>
-        </div>   
+        </div>
         <table class="my-4 table table-bordered table-hover">
             <tr>
                 <td>Nombre del adoptante:</td>
@@ -155,11 +168,11 @@ if(isset($_POST['agendar'])){
         </form>
     </div>
     <div class="col-md-7">
-        <div class="my-3 "> 
+        <div class="my-3 ">
             <h2 class="text-center">  Datos del perrito</h2>
         </div>
         <div class="row">
-            <div class="col-md-7">    
+            <div class="col-md-7">
                 <table class="my-3 table table-bordered table-hover">
                     <tr>
                         <td>Nombre del Perro:</td>
@@ -191,7 +204,7 @@ if(isset($_POST['agendar'])){
                 <img class="img-fluid" src="data:image/<?php echo $data['img_perro_tipo']; ?>;base64,<?php echo base64_encode($data['img_perro_foto']); ?>" alt="Laski perro adopcion">
             </div>
         </div>
-        
+
     </div>
 </div>
 
@@ -199,7 +212,7 @@ if(isset($_POST['agendar'])){
 <div class="container w-50 my-5  border border-5 shadow-lg">
     <form action="" method="POST">
         <div class="row">
-            <div class="col-md-6">    
+            <div class="col-md-6">
                 <table class="my-3 table table-bordered table-hover">
                     <tr>
                         <td>Nombre del Perro:</td>
@@ -247,6 +260,13 @@ if(isset($_POST['agendar'])){
         </div>
     </form>
 </div>
-    
+
+
+<?php endif; ?>
+<?php else : ?>
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
 
 <?php endif; ?>

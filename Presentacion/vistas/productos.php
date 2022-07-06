@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [2, 5]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_productos.php');
 $consulta = new Consulta_producto();
 $consulta2 = new Consulta_categoria();
@@ -29,14 +43,16 @@ if (isset($_POST['cambia_estado_categoria'])) {
 
 ?>
 <h2 class="text-center mt-3 h1">Productos</h2>
+<?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
 <a href="index.php?modulo=agrega-producto&formTipo=insertProduct" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalProducto">
     <span>Agregar Producto <i class="fa-solid fa-circle-plus"></i></apan>
 </a>
+<?php endif;?>
 <hr>
 <div class="row">
     <div class="col-sm-12">
         <div class="my-3 ">
-            <table class="table table-sm table-hover" id="tablaProductos">
+            <table class="table table-sm table-hover w-100" id="tablaProductos">
                 <thead class="bg-danger text-white">
                     <tr>
                         <td>Producto </td>
@@ -48,8 +64,10 @@ if (isset($_POST['cambia_estado_categoria'])) {
                         <td>Tamaño</td>
                         <td>Fecha creación</td>
                         <td>Fecha modificación</td>
+                        <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                         <td>Editar</td>
                         <td>Habilitar/Deshabilitar</td>
+                        <?php endif;?>
 
                     </tr>
                 </thead>
@@ -64,8 +82,10 @@ if (isset($_POST['cambia_estado_categoria'])) {
                         <td>Tamaño</td>
                         <td>Fecha creación</td>
                         <td>Fecha modificación</td>
+                        <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                         <td>Editar</td>
                         <td>Habilitar/Deshabilitar</td>
+                        <?php endif;?>
 
                     </tr>
                 </tfoot>
@@ -81,6 +101,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
                             <td><?php echo ($value['product_size_perro']); ?> </td>
                             <td><?php echo ($value['product_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['product_fecha_modificacion']); ?> </td>
+                            <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                             <td>
                                 <form action="index.php?modulo=agrega-producto&formTipo=updateProduct" method="post">
                                     <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
@@ -95,6 +116,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
                                     <button class="btn <?php echo ($value['product_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_pdt" title="<?php echo ($value['product_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Producto" onclick="return confirm('¿Quieres <?php echo ($value['product_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este producto?')"><i class="fa-solid fa-power-off"></i></button>
                                 </form>
                             </td>
+                            <?php endif;?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -169,3 +191,10 @@ if (isset($_POST['cambia_estado_categoria'])) {
         </div>
     </div>
 </div>
+<?php else : ?>
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
+
+<?php endif; ?>

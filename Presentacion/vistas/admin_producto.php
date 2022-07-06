@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [5]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_productos.php');
 require_once 'ENTIDADES/producto.php';
 require_once 'ENTIDADES/img_productos.php';
@@ -239,6 +253,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                 <button type="submit" name="registro_pdt" value="Submit" class="btn btn-orange my-3">Agregar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
+                        </div>
 
                     </form>
                     <!-- /form-group-->
@@ -428,4 +443,11 @@ if (isset($_POST['update_estado_ImgPdt'])) {
 
         <!-- /row-->
     </div>   
+<?php endif; ?>
+<?php else : ?>
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
+
 <?php endif; ?>
