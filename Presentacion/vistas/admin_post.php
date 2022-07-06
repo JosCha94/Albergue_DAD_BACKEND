@@ -107,30 +107,30 @@ if (isset($_POST['EliminarImgPost'])) {
         </div>
         <div class="row">
 
-            <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
+            <div class="col-lg-6 p-4 p-md-5 res-margin shadow-lg bg-opacity-75 h-50 mx-auto">
 
-                <h4 class="text-light">Nuevo Post</h4>
+                <h4 class="text-dark">Nuevo Post</h4>
 
                 <!-- Form Starts -->
                 <div id="product_form">
                     <form action="" method="post">
                         <div class="row">
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Titulo post </label>
                                 <input type="text" name="post_titulo" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($titulo)) echo $titulo ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Autor</label>
                                 <input type="text" name="post_autor" class="form-control input-field" min="0" step="0.01" value="<?php if (isset($autor)) echo $autor ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Contenido </label>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="post_descripcion" name="post_descripcion" style="height: 100px" required> <?php if (isset($descrip)) echo $descrip ?></textarea>
                                 <label for="post_descripcion">Escribe el contenido del post aqui</label>
                             </div>
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Estado </label>
                                 <div class="d-flex justify-content-evenly">
                                     <div class="form-check">
@@ -148,8 +148,8 @@ if (isset($_POST['EliminarImgPost'])) {
                                 </div>
                             </div>  <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                 <button type="submit" name="registro_post" value="Submit" class="btn btn-orange my-3">Agregar</button>
-                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
+                                 <button type="submit" name="registro_post" value="Submit" class="btn btn-donation my-3">Agregar</button>
+                                 
                              </div>                          
                         </div>
                     </form>
@@ -167,32 +167,32 @@ if (isset($_POST['EliminarImgPost'])) {
             <h1 class="fw-bold">Actualizacion de Post: <br>
                 <?php echo $postID['post_titulo'] ?> </h1>
         </div>
-        <div class="row bg-secondary bg-opacity-75">
+        <div class="row shadow-lg bg-opacity-75">
 
             <div class="col-lg-6 p-4 p-md-5 h-50 mx-auto">
 
-                <h4 class="text-light">Datos del Post</h4>
+                <h4 class="text-dark">Datos del Post</h4>
 
                 <!-- Form Starts -->
                 <div id="product_form">
                     <form action="" method="post">
                         <div class="row">
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Titulo post </label>
                                 <input type="text" name="post_titulo" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($titulo)) {echo $titulo; } else { echo $postID['post_titulo']; } ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Autor</label>
                                 <input type="text" name="post_autor" class="form-control input-field" min="0" step="0.01" value="<?php if (isset($autor)) { echo $autor;} else {echo $postID['post_autor'];} ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Contenido </label>
                             </div>
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="post_descripcion" name="post_descripcion" style="height: 100px" required> <?php if (isset($descrip)) {echo $descrip;} else { echo $postID['post_descripcion'];} ?></textarea>
                                 <label for="post_descripcion">Escribe el contenido del post aqui</label>
                             </div>
-                            <div class="col-md-12 text-light mt-3">
+                            <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Estado </label>
                                 <div class="d-flex justify-content-evenly">
                                     <div class="form-check">
@@ -212,8 +212,8 @@ if (isset($_POST['EliminarImgPost'])) {
 
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="update_post" value="Submit" class="btn btn-orange my-3">Actualizar</button>
-                                <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
+                                <button type="submit" name="update_post" value="Submit" class="btn btn-donation my-3">Actualizar</button>
+                               
                             </div>
                         </div>
                     </form>
