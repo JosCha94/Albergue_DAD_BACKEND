@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+// error_reporting(0);
 session_regenerate_id(true);
 require_once 'SL/permisos.php';
 require_once('DAL/conexion.php');
@@ -255,6 +255,9 @@ switch ($error = 'SinError') {
             }
             if ($modulo == "admin_post") {
                 include_once "Presentacion/vistas/admin_post.php";
+            }
+            if ($modulo == "admin_apadrinar") {
+                include_once "Presentacion/vistas/admin_apadrinar.php";
             }
 
             ?>
