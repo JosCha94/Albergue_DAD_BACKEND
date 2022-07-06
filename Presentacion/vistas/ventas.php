@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [2,5]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_ventas.php');
 $consulta = new Consulta_ventas();
 $ventas = $consulta->listarVentas($conexion);
@@ -127,3 +141,10 @@ $detalle = $consulta->detalleVenta($conexion);
         </div>
     </div>
 </div>
+<?php else : ?>
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
+
+<?php endif; ?>

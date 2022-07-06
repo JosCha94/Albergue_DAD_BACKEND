@@ -37,22 +37,22 @@ class Consulta_post
         }
     }   
 
-    public function insertarPost($conexion,$post)
+    public function insertarPost($conexion,$id,$rol,$post)
     {
         try {
-            $sql = "CALL SP_insertar_post(:autor, :titulo, :imagen, :nombre_img, :tipo_img, :descripcion, :estado)";
+            $sql = "CALL SP_insertar_post($id, $rol, :autor, :titulo, :descripcion, :estado)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':autor', $post->getPost_autor());
             $consulta->bindValue(':titulo', $post->getPost_titulo());
-            $consulta->bindValue(':imagen', $post->getPost_imagen());
-            $consulta->bindValue(':nombre_img', $post->getPost_nombre_img());
-            $consulta->bindValue(':tipo_img', $post->getPost_tipo_img());
             $consulta->bindValue(':descripcion', $post->getPost_descripcion());
             $consulta->bindValue(':estado', $post->getPost_estado());
             $consulta->execute();
+            $estado='bien';
         } catch (PDOException $e) {
             echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            $estado='fallo';
         }
+        return $estado;
     }
 
     public function updatePost($conexion, $id, $post)
@@ -99,5 +99,25 @@ class Consulta_post
             <?php
         }
     }
+
+    public function detallePost($conexion, $id)
+    {
+        try {
+            $sql = "CALL SP_select_Post_id_admin($id)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $pdtid = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $pdtid;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong><br> Debido a un problema, no se pudo mostrar los datos del post
+            </div>
+            <?php
+        }
+    }
+
+
 }
 ?>

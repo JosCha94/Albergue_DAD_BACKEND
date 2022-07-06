@@ -72,37 +72,30 @@ if (isset($_POST['eliminar_post'])){  //si se presiono el boton eliminar
                             <td><img src="data:image/<?php echo($value['post_tipo_img']);?>;base64,<?php echo base64_encode( $value['post_imagen']); ?>" style="width:150px;" alt="albergue"> </td>
                             <td><?php echo ($value['post_descripcion']); ?> </td>
                             <td>
-                            <?php if ($value['post_estado'] == 'Habilitado') : ?>
                                     <form action="" method="post">
                                         <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
-                                        <button class="btn btn-danger btn-xs mt-4" name="post_habilitado" title=""><i class="fa-solid fa-power-off"></i></button>
+                                        <button class="btn <?php echo ($value['post_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_post" title="<?php echo ($value['post_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> post" onclick="return confirm('¿Quieres <?php echo ($value['post_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este post?')"><i class="fa-solid fa-power-off"></i></button>
                                     </form>
-                                <?php else : ?>
-                                    <form action="" method="post">
-                                        <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
-                                        <button class="btn btn-success btn-xs mt-4" name="post_deshabilitado" title=""><i class="fa-solid fa-power-off"></i></button>
-                                    </form>
-                                <?php endif; ?>
                             </td>
                             <td><?php echo ($value['post_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['post_fecha_cambio']); ?> </td>
                             <td>
-                                <form action="index.php?modulo=agrega-post&formTipo=updatePost" method="post">
+                                <form action="index.php?modulo=admin_post&formTipo=updatePost" method="post">
                                     <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
-                                    <button class="btn btn-warning btn-xs mt-4" name="editar_post" title="Editar post"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-warning btn-xs " name="editar_post" title="Editar post"><i class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
                             </td>    
                             <td>
                                 <form action="" method="post">
                                     <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
-                                    <button class="btn btn-danger btn-xs mt-4" name="eliminar_post" title="Eliminar post"><i class="fa fa-trash "></i></button>
+                                    <button class="btn btn-danger btn-xs " name="eliminar_post" title="Eliminar post"><i class="fa fa-trash "></i></button>
                                 </form>
                             </td>                         
                         </tr>                                      
               <?php endforeach; ?>
                 </tbody>
-
             </table>
+            
         </div>
     </div>
 </div>

@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [2,4]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [7]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [7]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_perritos.php');
 require_once('DAL/conexion.php');
 
@@ -10,9 +24,11 @@ $perro = $consulta->listarPerritos($conexion);
 ?>
 
 <h2 class="text-center mt-3 h1">Perritos</h2>
+<?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
 <a href="index.php?modulo=admin_perritos&formTipo=insertPerrito" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalProducto">
     <span>Agregar Perrito <i class="fa-solid fa-circle-plus"></i></apan>
 </a>
+<?php endif;?>
 <hr>
 <div class="row">
     <div class="col sm-12">
@@ -31,8 +47,10 @@ $perro = $consulta->listarPerritos($conexion);
                         <th scope="col">Estado</th>
                         <th scope="col">Fecha de ingreso</th>
                         <th scope="col">Fecha de modificación</th>
+                        <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                         <th scope="col">editar fotos</th>
                         <th scope="col">Editar</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,12 +67,14 @@ $perro = $consulta->listarPerritos($conexion);
                         <td><?= $value['perro_estado'] ;?></td>
                         <td><?= $value['perro_fecha_creacion'] ;?></td>
                         <td><?= $value['perro_fecha_modificacion'] ;?></td>
+                        <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                         <td class="text-center">
                             <a href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= urlencode(base64_encode(($value['perro_id']*489554)/7854)) ;?>" class="btn btn-warning" title="EDITAR FOTOS"><i class="fa-solid fa-file-image"></i></a>
                         </td>
                         <td>
                             <a href="index.php?modulo=admin_perritos&formTipo=updatePerrito&id=<?= urlencode(base64_encode(($value['perro_id']*489554)/7854)) ;?>" class="btn btn-warning" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
+                        <?php endif; ?>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -62,4 +82,11 @@ $perro = $consulta->listarPerritos($conexion);
         </div>
     </div>
 </div>
+<?php else : ?>
+
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
+
+<?php endif; ?>
 

@@ -7,14 +7,14 @@ require_once('DAL/conexion.php');
 $conexion = conexion::conectar();
 $log = new autorizacion();
 $logueado = $log->logueado($_SESSION['usuario']);
-$rolActi = $log->activeRol($_SESSION['usuario'][2], [1, 2]);
+$rolActi = $log->activeRol($_SESSION['usuario'][2], [2]);
 
 $modulo = $_GET['modulo'] ?? '';
 
 $Rol = $_SESSION['usuario'][2];
 $array = json_decode($Rol, true);
 foreach ($array as $key => $value) :
-        $resRol = $value['id'];
+    $resRol = $value['id'];
 endforeach;
 $rolUs = $resRol;
 
@@ -96,37 +96,56 @@ switch ($error = 'SinError') {
                     <marquee behavior="alternate">
                         <h2 style="color:#E8630a">Area administrativa del Albergue</h2>
                     </marquee>
-
                 <?php else : ?>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item ">
-                                <a class="nav-link <?php echo ($modulo == "usuarios") ? " active " : " " ?> mx-2" href="index.php?modulo=usuarios">Usuarios</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link <?php echo ($modulo == "rolPermiso") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link <?php echo ($modulo == "perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adoptar</a>
-                            </li>
+                            <?php $rolAdminGeneral = $log->activeRol($_SESSION['usuario'][2], [2]);
+                            if ($rolAdminGeneral == 'true') : ?>
+                                <li class="nav-item ">
+                                    <a class="nav-link <?php echo ($modulo == "usuarios") ? " active " : " " ?> mx-2" href="index.php?modulo=usuarios">Usuarios</a>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link <?php echo ($modulo == "rolPermiso") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
+                                </li>
+                            <?php endif; ?>
+
+                            <?php $rolAdminPerritos = $log->activeRol($_SESSION['usuario'][2], [2, 4]);
+                            if ($rolAdminPerritos == 'true') : ?>
+                                <li class="nav-item ">
+                                    <a class="nav-link <?php echo ($modulo == "perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adoptar</a>
+                                </li>
+                            <?php endif; ?>
+                            <?php $rolAdminGeneral = $log->activeRol($_SESSION['usuario'][2], [2]);
+                            if ($rolAdminGeneral == 'true') : ?>
                             <li class="nav-item ">
                                 <a class="nav-link <?php echo ($modulo == "apadrinar") ? " active " : " " ?> mx-2" href="index.php?modulo=apadrinar">Apadrinar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?php echo ($modulo == "productos" || $modulo == "agrega-producto") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?php echo ($modulo == "ventas") ? " active " : " " ?> mx-2" href="index.php?modulo=ventas">Ventas</a>
-                            </li>
+                            <?php endif; ?>
+                            <?php $rolAdminTienda = $log->activeRol($_SESSION['usuario'][2], [2, 5]);
+                            if ($rolAdminTienda == 'true') : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php echo ($modulo == "productos" || $modulo == "agrega-producto") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php echo ($modulo == "ventas") ? " active " : " " ?> mx-2" href="index.php?modulo=ventas">Ventas</a>
+                                </li>
+                            <?php endif; ?>
+                            <?php $rolAdminGeneral = $log->activeRol($_SESSION['usuario'][2], [2]);
+                            if ($rolAdminGeneral == 'true') : ?>
                             <li class="nav-item">
                                 <a class="nav-link <?php echo ($modulo == "donar") ? " active " : " " ?> mx-2" href="index.php?modulo=donar">Donaciones</a>
                             </li>
+                            <?php endif; ?>
+                            <?php $rolAdminBlog = $log->activeRol($_SESSION['usuario'][2], [2]);
+                            if ($rolAdminBlog == 'true') : ?>
                             <li class="nav-item">
                                 <a class="nav-link <?php echo ($modulo == "blog") ? " active " : " " ?> mx-2" href="index.php?modulo=blog">Blog</a>
                             </li>
+                            <?php endif; ?>
                         </ul>
                         <?php if ($logueado == null || $logueado == 'false') {
                         ?>
@@ -230,6 +249,12 @@ switch ($error = 'SinError') {
             }
             if ($modulo == "admin_roles_permisos") {
                 include_once "Presentacion/vistas/admin_RolesPermisos.php";
+            }
+            if ($modulo == "update-user") {
+                include_once "Presentacion/vistas/update-usuario.php";
+            }
+            if ($modulo == "admin_post") {
+                include_once "Presentacion/vistas/admin_post.php";
             }
 
             ?>
@@ -348,4 +373,5 @@ switch ($error = 'SinError') {
 <script src="Presentacion/libs/javascript/script.js"></script>
 <script src="Presentacion\libs\datatable\jquery.dataTables.min.js"></script>
 <script src="Presentacion\libs\datatable\dataTables.bootstrap5.min.js"></script>
+
 </html>

@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [4]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [7]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [7]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}?>
+<?php if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_perritos.php');
 require_once('ENTIDADES/img_perritos.php');
 require_once('ENTIDADES/perritos.php');
@@ -446,8 +460,11 @@ if (isset($_POST['elim_foto3'])){
         </div>
     </form>
 </section>
+<?php endif; ?>
+<?php else : ?>
 
-
-
+<div class="alert alert-danger" role="alert">
+    <?php echo $error; ?>
+</div>
 
 <?php endif; ?>
