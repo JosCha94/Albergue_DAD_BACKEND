@@ -155,9 +155,9 @@ if (isset($_POST['update_estado_ImgPdt'])) {
         </div>
         <div class="row">
 
-            <div class="col-lg-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto">
+            <div class="col-lg-6 p-4 p-md-5 res-margin shadow-lg bg-opacity-75 h-50 mx-auto">
 
-                <h4 class="text-light">Nuevo Producto</h4>
+                <h4 class="text-dark">Nuevo Producto</h4>
 
                 <!-- Form Starts -->
                 <div id="product_form">
@@ -173,19 +173,19 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                             <?php endif; ?>
                         <?php endif; ?>
                         <div class="row">
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Nombre Producto </label>
                                 <input type="text" name="productName" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($product)) echo $product ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Precio</label>
                                 <input type="number" name="productPrecio" class="form-control input-field" min="0" step="0.01" value="<?php if (isset($precio)) echo $precio ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Stock </label>
                                 <input type="number" name="productStock" class="form-control input-field" min="0" value="<?php if (isset($stock)) echo $stock ?>" required>
                             </div>
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Categoria </label>
                                 <select class="form-select" aria-label="Default select example" name="productCategory">
                                     <option selected>
@@ -199,7 +199,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Descripción del producto </label>
                             </div>
                             <div class="form-floating">
@@ -207,7 +207,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                 <label for="productDescripcion">Escribe una descripcion del producto aqui</label>
                             </div>
 
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Para perritos de tamaño </label>
                                 <div class="d-flex justify-content-evenly">
                                     <div class="form-check">
@@ -230,7 +230,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Estado </label>
                                 <div class="d-flex justify-content-evenly">
                                     <div class="form-check">
