@@ -209,7 +209,7 @@ if(isset($_POST['agendar'])){
 </div>
 
 <?php elseif ($formTipo == 'acptAdop') : ?>
-<div class="container w-50 my-5  border border-5 shadow-lg">
+<div class="container w-75 my-5 p-5  bg-secondary bg-opacity-25 shadow-lg">
     <form action="" method="POST">
         <div class="row">
             <div class="col-md-6">

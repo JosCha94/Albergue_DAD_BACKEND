@@ -55,7 +55,7 @@ switch ($error = 'SinError') {
     }
     ?>
     <?php if ($formTipo == 'dataUser') : ?>
-        <div class="col-12 col-md-6 border border-dark p-4 p-md-5 my-4 bg-light bg-opacity-75 mx-auto" id="formData">
+        <div class="col-12 col-md-6 p-4 p-md-5 my-4 bg-secondary shadow-lg bg-opacity-75 mx-auto" id="formData">
             <h3>INGRESA TUS DATOS PARA CAMBIAR</h3>
             <form action="" method="POST">
                 <?php if (isset($errores)) : ?>
@@ -101,7 +101,7 @@ switch ($error = 'SinError') {
         </div>
 
     <?php elseif ($formTipo == 'passUser') : ?>
-        <div class="col-12 col-md-8 border border-dark bg-light bg-opacity-75 p-4 p-md-5  my-4 mx-auto" id="formPass">
+        <div class="col-12 col-md-8 border bg-secondary shadow-lg bg-opacity-75 p-4 p-md-5  my-4 mx-auto" id="formPass">
             <h3>INGRESA TU NUEVA CONTRASEÑA</h3>
             <form action="" method="POST">
                 <?php if (isset($errores)) : ?>

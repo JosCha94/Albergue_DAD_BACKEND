@@ -265,7 +265,7 @@ if (isset($_POST['elim_foto3'])){
                         <div class="row">
                             <div>
                                 <img class="img-fluid  mb-4 shadow-lg bg-body ms-5 me-2" style="width: 180px" src="data:image/<?php echo $value['img_perro_tipo']; ?>;base64,<?php echo base64_encode($value['img_perro_foto']); ?>" alt="">
-                                <a  href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= $value['perro_id'] ;?>" class="btn btn-warning">Modificar</a>
+                                <a  href="index.php?modulo=admin_perritos&formTipo=insertFoto&id=<?= urlencode(base64_encode(( $value['perro_id']*489554)/7854))  ;?>" class="btn btn-warning">Modificar</a>
                             </div>
                         </div> 
                         <?php endforeach; ?>
