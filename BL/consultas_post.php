@@ -43,6 +43,39 @@ class Consulta_post
         return $estado;
     }
 
+    public function Validar_post($post)
+    {
+        $errores = [];
+        $autor = trim($post->getPost_autor());
+        $titulo = trim($post->getPost_titulo());
+        $descrip = trim($post->getPost_descripcion());
+        $estado = trim($post->getPost_estado());
+
+        if (empty($autor)) {
+            $errores['autor'] = "Campo Autor es requerido";
+        }
+        if (empty($titulo)) {
+            $errores['titu'] = "El titulo es requerido";
+        } elseif (strlen($titulo) > 50) {
+            $errores['titu'] = "El titulo, maximo puede tener 50 caracteres";
+        } elseif (!preg_match("/^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚÑ]+$/", $titulo)) {
+            $errores['titu'] = "El titulo solo puede contener letras y numeros";
+        }
+
+        if (empty($descrip)) {
+            $errores['descrip'] = "El contenido del post es requerid";
+        } elseif (strlen($descrip) > 16000) {
+            $errores['descrip'] = "El contenido del post puede ser maximo de 16000 caracteres";
+        } elseif (!preg_match("/^[a-zA-Z0-9\sñáéíóúÁÉÍÓÚÑ(,.;)]+$/", $descrip)) {
+            $errores['descrip'] = "El contenido no debe tener tener signos como @ $ & % # etc";
+        }
+
+        if (empty($estado)) {
+            $errores['estado'] = "El campo estado es requerido";
+        }
+        return $errores;
+    }
+
     public function updatePost($conexion,$idPost, $id, $rol, $post)
     {
         try {
@@ -126,7 +159,6 @@ class Consulta_post
         }
         return $estado;
     }
-
 
 }
 ?>

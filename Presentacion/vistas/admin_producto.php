@@ -71,7 +71,6 @@ if (isset($_POST['update_pdt'])) {
     $estado = $_POST['productEstado'];
     $pdto = new Producto($category, $product, $precio, $stock, $descrip, $sizeDog, $estado);
 
-    // $consulta = new Consulta_producto();
     $errores = $consulta->Validar_registroPdt($pdto);
     if (count($errores) == 0) {
         $estado = $consulta->update_producto($conexion, $pdto, $idProduct);

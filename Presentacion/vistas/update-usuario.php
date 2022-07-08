@@ -31,13 +31,27 @@ switch ($error = 'SinError') {
         $consulta = new Consulta_usuario();
         $errores = $consulta->Validar_registro($usu);
         if (count($errores) == 0) {
-            $estado = $consulta->actualizar_usuario($conexion, $id, $usu);
+            $estadoU = $consulta->actualizar_usuario($conexion, $id, $usu);
 
-            if ($estado == 'mal') {
-            } else {
-                echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=update-user&formTipo=dataUser&mensaje=El Usuario se actualizo correctamente" />';
-            }
+            if ($estadoU == 1) {
+                ?>
+                    <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                        <strong>Error!</strong> El numero de celular ya existe, ingrese otro numero de celular
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php
+                } elseif ($estadoU == 2) {
+                ?>
+                    <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                        <strong>Error!</strong> El correo electronico ya existe, ingrese otra dirreción de correo electronico
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php         
+                }elseif ($estadoU == 3){   
+                    echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=update-user&formTipo=dataUser&mensaje=El Usuario se actualizo correctamente" />';
+                }
         }
+                
     }
 
     if (isset($_POST['cambiar_pass'])) {
