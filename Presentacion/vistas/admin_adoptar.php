@@ -128,7 +128,7 @@ if(isset($_POST['agendar'])){
 <?php if ($formTipo == 'gestEntrevista') : ?>
 
 
-<div class="row m-5">
+<div class="row m-5 shadow-lg bg-secondary bg-opacity-25 p-2">
     <div class="col-md-5 border-end border-5 ">
         <div class="my-3">
             <h2 class="text-center">Datos del solicitante</h2>

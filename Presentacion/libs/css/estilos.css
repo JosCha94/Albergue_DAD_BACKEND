@@ -241,6 +241,7 @@ h2.text-center{
      z-index: 99;
 }
  .section-heading h2{
+      color: #001E6C;
      font-size: 62px;
      font-weight: 800;
 }
@@ -424,7 +425,9 @@ a .card-title:hover {
 strong{
   font-size: 1.05em;
 }
-
+h1.fw-bold{
+  color: #001E6C;
+}
 
 
 

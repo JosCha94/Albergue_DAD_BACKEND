@@ -163,10 +163,10 @@ if (isset($_POST['btn_asignaPermiso'])) {
 
                     </table>
                 </div>
-                <div class="tab-pane fade" id="asignaRol" role="tabpanel" aria-labelledby="asignaRol-tab">
-                    <div class="w-75 my-5 mx-auto">
-                        <form action="" method="post">
-                            <label for="selectUser">Usuario</label>
+                <div class="tab-pane fade py-3 shadow-lg bg-secondary bg-opacity-75" id="asignaRol" role="tabpanel" aria-labelledby="asignaRol-tab">
+                    <div class="w-75 mx-auto">
+                        <form class="" action="" method="post">
+                            <label for="selectUser ">Usuario</label>
                             <select class="form-select form-select-lg mb-3" aria-label="form-select-lg example" id="selectUser" name="selectUser" required>
                                 <option selected></option>
                                 <?php foreach ($usuarios2 as $key => $value) : ?>

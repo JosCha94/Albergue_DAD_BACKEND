@@ -155,7 +155,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
         </div>
         <div class="row">
 
-            <div class="col-lg-6 p-4 p-md-5 res-margin shadow-lg bg-opacity-75 h-50 mx-auto">
+            <div class="col-lg-6 p-4 p-md-5 res-margin shadow-lg bg-secondary bg-opacity-75 h-50 mx-auto">
 
                 <h4 class="text-dark">Nuevo Producto</h4>
 
@@ -273,7 +273,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
         </div>
         <div class="row">
 
-            <div class="col-12 col-md-6 p-4 p-md-5 res-margin bg-secondary bg-opacity-75 h-50 mx-auto mt-1">
+            <div class="col-12 col-md-6 p-4 p-md-5 res-margin shadow-lg bg-secondary bg-opacity-75 h-50 mx-auto mt-1">
 
                 <h4 class="text-light">Datos del Producto</h4>
 

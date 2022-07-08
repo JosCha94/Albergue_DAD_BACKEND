@@ -107,12 +107,17 @@ if (isset($_POST['btnUpdate'])) {
     if (count($errores) == 0) {
          $estado = $consulta->update_perritoAdmin($conexion, $id, $perro);
 
-        if ($estado == 'fallo') {
+        if (!$estado) {
+            
         } else {
-            echo "<meta http-equiv='refresh' content='2'>";
+            echo "<meta http-equiv='refresh' content='3'>";
             echo '<div class="alert alert-success">¡Los datos se actualizaron con éxito!.</div>';
         }
+    }else{
+        echo "<meta http-equiv='refresh' content='3'>";
+        echo '<div class="alert alert-danger">' .implode("",$errores). '</div>';
     }
+
 }
 
 if (isset($_POST['elim_foto1'])){
@@ -173,20 +178,20 @@ if (isset($_POST['elim_foto3'])){
     
 <section id="update_perrito">
     <div class="text-center"><h2 class="text-center mt-3 h1">Actualizar Perrito</h2></div>
-    <div class="container my-4">
+    <div class="container my-4 p-5 shadow-lg bg-secondary bg-opacity-75">
         <form action="" method="POST">
             <div class="row">
                 <div class="col-md-7">
                     <div class="row mb-4">
                         <div class="col">
                             <div class="form-outline">
-                                <input type="text" id="pnom" class="form-control" value="<?php if (isset($p_name)) {echo $p_name;} else { echo $perro['perro_nombre'];} ?>" maxlength="50" minlength="5" name="nombre" required/>
+                                <input type="text" id="pnom" class="form-control" value="<?php if (isset($p_name)) {echo $p_name;} else { echo $perro['perro_nombre'];} ?>" maxlength="50" minlength="5" name="nombre" />
                                 <label class="form-label" for="pnom">Nombre del perrito</label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-outline">
-                                <input type="number" id="ppeso" class="form-control" value="<?php if (isset($p_peso)) {echo $p_peso;} else { echo $perro['perro_peso'];} ?>" name="peso" min="0" step="0.01"  required/>
+                                <input type="text" id="ppeso" class="form-control" value="<?php if (isset($p_peso)) {echo $p_peso;} else { echo $perro['perro_peso'];} ?>" name="peso" step="0.01"  min="0" />
                                 <label class="form-label" for="ppeso">Peso</label>
                             </div>
                         </div>
@@ -194,7 +199,7 @@ if (isset($_POST['elim_foto3'])){
                     <div class="row mb-2">
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <select class="form-control" aria-label="Default select example" id="select_estado" name="tamano" required>
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="tamano" >
                                     <option selected><?php if (isset($p_tamano)) {echo $p_tamano;} else { echo $perro['perro_tamano'];} ?></option>
                                     <option value="M">Pequeño</option>
                                     <option value="H">Grande</option>
@@ -205,7 +210,7 @@ if (isset($_POST['elim_foto3'])){
                         </div>
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <input type="date" id="pnaci" class="form-control" value="<?php if (isset($p_nacimiento)) {echo $p_nacimiento;} else { echo $perro['perro_nacimiento'];} ?>" name = "nacimiento" required/>
+                                <input type="date" id="pnaci" class="form-control" value="<?php if (isset($p_nacimiento)) {echo $p_nacimiento;} else { echo $perro['perro_nacimiento'];} ?>" name = "nacimiento" />
                                 
                                 <label class="form-label" for="pnaci">Fecha de nacimiento</label>
                             </div>
@@ -214,7 +219,7 @@ if (isset($_POST['elim_foto3'])){
                     <div class="row mb-2">
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <select class="form-control" aria-label="Default select example" id="select_estado" name="sexo" required>
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="sexo" >
                                     <option selected><?php if (isset($p_sexo)) {echo $p_sexo;} else { echo $perro['perro_sexo'];} ?></option>
                                     <option value="M">Macho</option>
                                     <option value="H">Hembra</option>
@@ -223,7 +228,7 @@ if (isset($_POST['elim_foto3'])){
                         </div>
                         <div class="col">
                             <div class="form-outline mb-2">
-                                <select class="form-control" aria-label="Default select example" id="select_estado" name="actividad" required>
+                                <select class="form-control" aria-label="Default select example" id="select_estado" name="actividad" >
                                     <option selected><?php if (isset($p_actividad)) {echo $p_actividad;} else { echo $perro['perro_actividad'];} ?></option>
                                     <option value="Ligera">Ligera</option>
                                     <option value="Moderada">Moderada</option>
@@ -287,7 +292,7 @@ if (isset($_POST['elim_foto3'])){
                 </div>
             </div>    
             <div class="text-center">
-                <button type="submit" name="btnUpdate" class="btn btn-primary btn-block mb-4">Actualizar datos</button>
+                <button type="submit" name="btnUpdate" class="btn btn-adopt btn-block mb-4">Actualizar datos</button>
             </div>
 
         </form>
@@ -298,8 +303,8 @@ if (isset($_POST['elim_foto3'])){
 <?php elseif ($formTipo == 'insertPerrito') : ?>
 
 <section id="insert_perrito">
-    <div><h2 class="text-center my-3 h1">Agregar perrito</h2></div>
-    <div class="container-fluid w-50">
+    <div><h2 class="text-center my-5 h1">Agregar perrito</h2></div>
+    <div class="container-fluid w-50 shadow-lg bg-secondary bg-opacity-75 p-5">
     <form action="" method="POST">
         <?php if (isset($errores)) : ?>
             <?php if (count($errores) != 0) : ?>
@@ -378,7 +383,7 @@ if (isset($_POST['elim_foto3'])){
                 
         </div>    
         <div class="text-center">
-            <button type="submit" name="btnInsert" class="btn btn-primary btn-block mb-4">Agregar Perrito</button>
+            <button type="submit" name="btnInsert" class="btn btn-adopt btn-block mb-4">Agregar Perrito</button>
         </div>
         
     </form>    

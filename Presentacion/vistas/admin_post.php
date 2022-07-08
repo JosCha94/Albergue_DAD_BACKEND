@@ -107,7 +107,7 @@ if (isset($_POST['EliminarImgPost'])) {
         </div>
         <div class="row">
 
-            <div class="col-lg-6 p-4 p-md-5 res-margin shadow-lg bg-opacity-75 h-50 mx-auto">
+            <div class="col-lg-6 p-4 p-md-5 res-margin shadow-lg bg-secondary bg-opacity-75 h-50 mx-auto">
 
                 <h4 class="text-dark">Nuevo Post</h4>
 
@@ -167,7 +167,7 @@ if (isset($_POST['EliminarImgPost'])) {
             <h1 class="fw-bold">Actualizacion de Post: <br>
                 <?php echo $postID['post_titulo'] ?> </h1>
         </div>
-        <div class="row shadow-lg bg-opacity-75">
+        <div class="row shadow-lg bg-secondary bg-opacity-50">
 
             <div class="col-lg-6 p-4 p-md-5 h-50 mx-auto">
 
