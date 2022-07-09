@@ -26,16 +26,16 @@ if ($formTipo == 'updateProduct') :
 
     if ($_POST['product_id'] != '') {
         $idEditProducto = $_POST['product_id'];
-        $_SESSION['usuario'][6] = $idEditProducto;
+        $_SESSION['usuario'][5] = $idEditProducto;
         $pdtID = $consulta->detalleProducto($conexion, $idEditProducto);
         $pdtImgID = $consulta->listarImgProducto($conexion, $idEditProducto);
     } else {
-        $pdtImgID = $consulta->listarImgProducto($conexion, $_SESSION['usuario'][6]);
-        $pdtID = $consulta->detalleProducto($conexion, $_SESSION['usuario'][6]);
+        $pdtImgID = $consulta->listarImgProducto($conexion, $_SESSION['usuario'][5]);
+        $pdtID = $consulta->detalleProducto($conexion, $_SESSION['usuario'][5]);
     }
 endif;
 
-$idpdt =  $_SESSION['usuario'][6];
+$idpdt =  $_SESSION['usuario'][5];
 
 
 if (isset($_POST['registro_pdt'])) {

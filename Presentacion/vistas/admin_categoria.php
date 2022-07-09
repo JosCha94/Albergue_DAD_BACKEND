@@ -10,10 +10,10 @@ if ($formTipo == 'updateCategoria') :
 
     if ($_POST['cat_id'] != '') {
         $idEditCat = $_POST['cat_id'];
-        $_SESSION['usuario'][6] = $idEditCat;
+        $_SESSION['usuario'][5] = $idEditCat;
         $catID = $consulta->detalleCategoria($conexion, $idEditCat);
     } else {
-        $catID = $consulta->detalleCategoria($conexion, $_SESSION['usuario'][6]);
+        $catID = $consulta->detalleCategoria($conexion, $_SESSION['usuario'][5]);
     }
 endif;
 
@@ -35,7 +35,7 @@ if (isset($_POST['registro_cat'])) {
 
 if (isset($_POST['update_cat'])) {
     // $idCat = $_POST['IDcat'];
-    $idCat =  $_SESSION['usuario'][6];
+    $idCat =  $_SESSION['usuario'][5];
     $categoria = $_POST['catCategory'];
     $catDescrip = $_POST['catDescrip'];
     $catego = new Categoria($categoria, $catDescrip);

@@ -15,14 +15,12 @@ try {
     if ($usuarios) {
         $_SESSION['usuario'] = array();
         $_SESSION['usuario'][0] = $usuarios['usr_id'];
-        $_SESSION['usuario'][1] = $usuarios['usuario'];
+        $_SESSION['usuario'][1] = $usuarios['data_user'];
         $_SESSION['usuario'][2] = $usuarios['rol_estado'];
         $_SESSION['usuario'][3] = $usuarios['per_rol'];
         $_SESSION['usuario'][4] = $usuarios['per_esp'];
-        $_SESSION['usuario'][5] = $usuarios['car'];
-        if ($_SESSION['usuario'][5] == '') {
-            $_SESSION['usuario'][5] = json_encode(array());
-        }
+
+
         header("location: ../index.php");
     } else {
 

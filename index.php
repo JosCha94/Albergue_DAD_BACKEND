@@ -8,6 +8,7 @@ $conexion = conexion::conectar();
 $log = new autorizacion();
 $logueado = $log->logueado($_SESSION['usuario']);
 $rolActi = $log->activeRol($_SESSION['usuario'][2], [2]);
+$info = json_decode($_SESSION['usuario'][1]);
 
 $modulo = $_GET['modulo'] ?? '';
 
@@ -155,7 +156,7 @@ switch ($error = 'SinError') {
                         ?>
                             <div class="dropdown mx-4">
                                 <a class="dropdown-toggle text-uppercase" type="button" id="dropdownMenuUser" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php echo $_SESSION['usuario'][1] ?>
+                                <?php echo $info->nick; ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuUser">
                                     <li>

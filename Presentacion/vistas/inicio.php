@@ -36,7 +36,7 @@ switch ($error = 'SinError') {
 <?php
 } else {
 ?>
-<h1 class="text-center mt-4 mb-4">Bienvenido <?php echo $_SESSION['usuario'][1] ?></h1>
+<h1 class="text-center mt-4 mb-4">Bienvenido <?php echo $info->nick ?></h1>
 <?php
 }
 ?>

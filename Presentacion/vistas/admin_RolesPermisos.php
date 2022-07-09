@@ -8,10 +8,10 @@ if ($formTipo == 'editRol') :
 
     if ($_POST['rol_id'] != '') {
         $idEditRol = $_POST['rol_id'];
-        $_SESSION['usuario'][6] = $idEditRol;
+        $_SESSION['usuario'][5] = $idEditRol;
         $RolID = $consulta->detalleRol($conexion, $idEditRol);
     } else {
-        $RolID = $consulta->detalleRol($conexion, $_SESSION['usuario'][6]);
+        $RolID = $consulta->detalleRol($conexion, $_SESSION['usuario'][5]);
     }
 endif;
 
@@ -19,16 +19,16 @@ if ($formTipo == 'editPermiso') :
 
     if ($_POST['permiso_id'] != '') {
         $idEditPer = $_POST['permiso_id'];
-        $_SESSION['usuario'][6] = $idEditPer;
+        $_SESSION['usuario'][5] = $idEditPer;
         $PerID = $consulta->detallePermiso($conexion, $idEditPer);
     } else {
-        $PerID = $consulta->detallePermiso($conexion, $_SESSION['usuario'][6]);
+        $PerID = $consulta->detallePermiso($conexion, $_SESSION['usuario'][5]);
     }
 endif;
 
 if (isset($_POST['btn_update_rol'])) {
 
-    $idRol =  $_SESSION['usuario'][6];
+    $idRol =  $_SESSION['usuario'][5];
     $rol = $_POST['rolNombre'];
     $rolDescrip = $_POST['rolDescrip'];
 
@@ -45,7 +45,7 @@ if (isset($_POST['btn_update_rol'])) {
 
 if (isset($_POST['btn_update_per'])) {
 
-    $idPer =  $_SESSION['usuario'][6];
+    $idPer =  $_SESSION['usuario'][5];
     $permiso = $_POST['perNombre'];
     $perDescrip = $_POST['perDescrip'];
 

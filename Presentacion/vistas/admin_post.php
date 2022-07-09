@@ -9,20 +9,20 @@ if ($formTipo == 'updatePost') :
 
     if ($_POST['post_id'] != '') {
         $idEditPost = $_POST['post_id'];
-        $_SESSION['usuario'][6] =  $idEditPost;
+        $_SESSION['usuario'][5] =  $idEditPost;
         $postID = $consulta->detallePost($conexion,  $idEditPost);
     } else {
 
-        $postID = $consulta->detallePost($conexion, $_SESSION['usuario'][6]);
+        $postID = $consulta->detallePost($conexion, $_SESSION['usuario'][5]);
     }
 endif;
 
-$idpost =  $_SESSION['usuario'][6];
+$idpost =  $_SESSION['usuario'][5];
 
 if (isset($_POST['registro_post'])) {
     $id = $_SESSION['usuario'][0];
     $rol = $rolUs;
-    $autor = $_POST['post_autor'];
+    $autor =  $info->user_name;
     $titulo = $_POST['post_titulo'];
     $descrip = $_POST['post_descripcion'];
     $estado = $_POST['post_estado'];
@@ -43,7 +43,7 @@ if (isset($_POST['update_post'])) {
     $idPost = $idpost;
     $id = $_SESSION['usuario'][0];
     $rol = $rolUs;
-    $autor = $_POST['post_autor'];
+    $autor = $info->user_name;
     $titulo = $_POST['post_titulo'];
     $descrip = $_POST['post_descripcion'];
     $estado = $_POST['post_estado'];
@@ -136,7 +136,7 @@ if (isset($_POST['EliminarImgPost'])) {
                             </div>
                             <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Autor</label>
-                                <input type="text" name="post_autor" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($autor)) echo $autor ?>" required>
+                                <input type="text" name="post_autor" class="form-control input-field" maxlength="50" minlength="5" value="<?php echo $info->user_name ?>" disabled required>
                             </div>
                             <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Contenido </label>
@@ -208,7 +208,7 @@ if (isset($_POST['EliminarImgPost'])) {
                             </div>
                             <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Autor</label>
-                                <input type="text" name="post_autor" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($autor)) {echo $autor; } else {echo $postID['post_autor'];  } ?>" required>
+                                <input type="text" name="post_autor" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($autor)) {echo $autor; } else {echo $postID['post_autor'];  } ?>" disabled required>
                             </div>
                             <div class="col-md-12 text-dark mt-3">
                                 <label class="txt_form">Contenido </label>
