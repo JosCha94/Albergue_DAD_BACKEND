@@ -79,7 +79,7 @@ if (isset($_POST['btn_asignaPermiso'])) {
                     <button class="nav-link active" id="usuarios-tab" data-bs-toggle="tab" data-bs-target="#usuarios" type="button" role="tab" aria-controls="usuarios" aria-selected="true">Todos los usuarios</button>
                 </li>
                 <li class="nav-item" role="Asigna Roles">
-                    <button class="nav-link" id="asignaRol-tab" data-bs-toggle="tab" data-bs-target="#asignaRol" type="button" role="tab" aria-controls="asignaRol" aria-selected="false">Asignar Rol</button>
+                    <button class="nav-link" id="asignaRol-tab" data-bs-toggle="tab" data-bs-target="#asignaRol" type="button" role="tab" aria-controls="asignaRol" aria-selected="false">Usuarios y roles</button>
                 </li>
                 <li class="nav-item" role="UsrPerEsp">
                     <button class="nav-link" id="UsrPerEsp-tab" data-bs-toggle="tab" data-bs-target="#UsrPerEsp" type="button" role="tab" aria-controls="UsrPerEsp" aria-selected="false">Usuarios y permisos Especiales</button>
@@ -100,9 +100,6 @@ if (isset($_POST['btn_asignaPermiso'])) {
                                 <td>Fecha creación</td>
                                 <td>Fecha modificación</td>
                                 <td>Cambiar UsrEstado</td>
-                                <td>Rol</td>
-                                <td>Rol Estado</td>
-                                <td>Cambiar RolEstado</td>
 
                             </tr>
                         </thead>
@@ -118,14 +115,11 @@ if (isset($_POST['btn_asignaPermiso'])) {
                                 <td>Fecha creación</td>
                                 <td>Fecha modificación</td>
                                 <td>Cambiar UsrEstado</td>
-                                <td>Rol</td>
-                                <td>Rol Estado</td>
-                                <td>Cambiar RolEstado</td>
 
                             </tr>
                         </tfoot>
                         <tbody>
-                            <?php foreach ($usuarios as $key => $value) : ?>
+                            <?php foreach ($usuarios2 as $key => $value) : ?>
                                 <tr class="text-center">
                                     <td><?php echo ($value['usuario']); ?> </td>
                                     <td><?php echo ($value['usr_estado']); ?> </td>
@@ -144,6 +138,49 @@ if (isset($_POST['btn_asignaPermiso'])) {
                                             <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
                                         </form>
                                     </td>
+
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="tab-pane fade " id="asignaRol" role="tabpanel" aria-labelledby="asignaRol-tab">
+                    <table class="table table-sm table-hover w-100" id="tablaUserRol">
+                        <thead class="bg-danger text-white">
+                            <tr>
+                                <td>Usuario </td>
+                                <td>Estado del usuario </td>
+                                <td>Nombre completo </td>
+                                <td>Correo </td>
+                                <td>Telefono </td>
+                                <td>Rol</td>
+                                <td>Rol Estado</td>
+                                <td>Cambiar Estado del Rol</td>
+
+                            </tr>
+                        </thead>
+                        <tfoot class="bg-secondary text-white">
+                            <tr>
+                                <td>Usuario </td>
+                                <td>Estado del usuario </td>
+                                <td>Nombre completo </td>
+                                <td>Correo </td>
+                                <td>Telefono </td>
+                                <td>Rol</td>
+                                <td>Rol Estado</td>
+                                <td>Cambiar Estado del Rol</td>
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <?php foreach ($usuarios as $key => $value) : ?>
+                                <tr class="text-center">
+                                    <td><?php echo ($value['usuario']); ?> </td>
+                                    <td><?php echo ($value['usr_estado']); ?> </td>
+                                    <td><?php echo ($value['usr_nombre'].' '.$value['usr_apellido_paterno'].' '.$value['usr_apellido_materno']); ?> </td>
+                                    <td><?php echo ($value['usr_email']); ?> </td>
+                                    <td><?php echo ($value['usr_celular']); ?> </td>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>
                                     <td><?php echo ($value['usr_rol_estado']); ?> </td>
                                     <td>
@@ -162,8 +199,8 @@ if (isset($_POST['btn_asignaPermiso'])) {
                         </tbody>
 
                     </table>
-                </div>
-                <div class="tab-pane fade py-3 shadow-lg bg-secondary bg-opacity-75" id="asignaRol" role="tabpanel" aria-labelledby="asignaRol-tab">
+                    <div class="py-3 my-3 shadow-lg bg-secondary bg-opacity-75">
+                                <h3 class="my-2 text-center">Asignar Rol al usuario</h3>
                     <div class="w-75 mx-auto">
                         <form class="" action="" method="post">
                             <label for="selectUser ">Usuario</label>
@@ -189,8 +226,9 @@ if (isset($_POST['btn_asignaPermiso'])) {
                         </form>
                     </div>
                 </div>
+                </div>
                 <div class="tab-pane fade" id="UsrPerEsp" role="tabpanel" aria-labelledby="UsrPerEsp-tab">
-                    <table class="table table-sm table-hover w-100" id="tablaDetalleVentas">
+                    <table class="table table-sm table-hover w-100" id="tablaUserEsp">
                         <thead class="bg-danger text-white">
                             <tr>
                                 <td>Usuario </td>

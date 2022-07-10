@@ -36,10 +36,6 @@ $(document).ready(function () {
         // "scrollX": true
     });
 
-});
-
-$(document).ready(function () {
-
     $('#solicitudesAdop').DataTable({});
     $('#tipoSusci').DataTable({});
     $('#agendaAdop').DataTable({});
@@ -47,6 +43,8 @@ $(document).ready(function () {
     $('#suscip').DataTable({});
     $('#tablaDonaciones').DataTable({});
     $('#tablaBlog').DataTable({});
+    $('#tablaUserRol').DataTable({});
+    $('#tablaUserEsp').DataTable({});
 
 
 });
