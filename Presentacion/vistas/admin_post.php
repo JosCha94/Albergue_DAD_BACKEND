@@ -266,7 +266,7 @@ if (isset($_POST['EliminarImgPost'])) {
                         <label for="foto" class="form-label text-light fs-4">Seleccione una imagen para agregar</label>
                         <input type="file" class="form-control" id="foto" name="foto" <?php echo ($postID['post_img_tipo'] == null) ? 'required' : ''; ?>>
                         <div class=" mt-3 d-flex justify-content-around">
-                            <button type="submit" class="btn btn-orange my-3" name="guardarImgPost" <?php echo ($postID['post_img_tipo'] != null) ? 'disabled' : ''; ?>>Agregar</button>
+                            <button type="submit" class="btn btn-adopt my-3" name="guardarImgPost" <?php echo ($postID['post_img_tipo'] != null) ? 'disabled' : ''; ?>>Agregar</button>
                             <button type="submit" class="btn btn-danger my-3" name="EliminarImgPost" <?php echo ($postID['post_img_tipo'] == null) ? 'disabled' : ''; ?>>Eliminar</button>
                         </div>
 
