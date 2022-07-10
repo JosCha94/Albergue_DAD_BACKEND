@@ -91,7 +91,7 @@ if (isset($_POST['update_cat'])) {
                             </div>
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="registro_cat" value="Submit" class="btn btn-orange my-3">Agregar</button>
+                                <button type="submit" name="registro_cat" value="Submit" class="btn btn-adopt my-3">Agregar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
 
@@ -145,7 +145,7 @@ if (isset($_POST['update_cat'])) {
 
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="update_cat" value="Submit" class="btn btn-orange my-3">Actualizar</button>
+                                <button type="submit" name="update_cat" value="Submit" class="btn btn-adopt my-3">Actualizar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
 

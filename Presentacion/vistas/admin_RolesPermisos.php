@@ -99,7 +99,7 @@ if (isset($_POST['btn_update_per'])) {
                             </div>
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="btn_update_rol" value="Submit" class="btn btn-orange my-3">Actualizar</button>
+                                <button type="submit" name="btn_update_rol" value="Submit" class="btn btn-adopt my-3">Actualizar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
                     </form>
@@ -152,7 +152,7 @@ if (isset($_POST['btn_update_per'])) {
 
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="btn_update_per" value="Submit" class="btn btn-orange my-3">Actualizar</button>
+                                <button type="submit" name="btn_update_per" value="Submit" class="btn btn-adopt my-3">Actualizar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
 

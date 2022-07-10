@@ -249,7 +249,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
 
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="registro_pdt" value="Submit" class="btn btn-orange my-3">Agregar</button>
+                                <button type="submit" name="registro_pdt" value="Submit" class="btn btn-adopt my-3">Agregar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
                         </div>
@@ -369,7 +369,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
 
                             <!-- button -->
                             <div class="mt-3 d-flex justify-content-around">
-                                <button type="submit" name="update_pdt" value="Submit" class="btn btn-orange my-3">Actualizar</button>
+                                <button type="submit" name="update_pdt" value="Submit" class="btn btn-adopt my-3">Actualizar</button>
                                 <button type="reset" id="submit_btn" value="Submit" class="btn btn-danger my-3 mx-3">Limpiar</button>
                             </div>
                         </div>
@@ -416,7 +416,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                     
                                             </div>
                                             <button type="submit" name="delete_ImgPdt" class="btn btn-danger" onclick="return confirm('¿Confirma si deseas eliminar la imagen del producto?')">Eliminar</button>
-                                            <button type="submit" name="update_estado_ImgPdt" value="Submit" class="btn btn-orange ms-2">Actualizar</button>
+                                            <button type="submit" name="update_estado_ImgPdt" value="Submit" class="btn btn-adopt ms-2">Actualizar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -434,7 +434,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                         <input type="hidden" id="IdProduct" name="IdProduct" value="">
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-orange my-3" name="guardarImgPdt">Agregar</button>
+                        <button type="submit" class="btn btn-adopt my-3" name="guardarImgPdt">Agregar</button>
                     </div>
                 </form>
             </div>

@@ -108,7 +108,7 @@ switch ($error = 'SinError') {
                 </div>
 
                                 <?php if($usuario != ''): ?>
-                <button class="btn btn-orange my-3" name="actualizar_data">Actualizar</button>
+                <button class="btn btn-adopt my-3" name="actualizar_data">Actualizar</button>
                 <button type="reset" class="btn btn-danger my-3 mx-3" id="btn-cleanFormData">Limpiar</button>
                 <?php endif; ?>
             </form>
@@ -136,7 +136,7 @@ switch ($error = 'SinError') {
                     <label for="usr2">Repite tu contraseña:</label>
                     <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Repite tu contraseña">
                 </div>
-                <button type="submit" class="btn btn-orange my-3" name="cambiar_pass">Cambiar contraseña</button>
+                <button type="submit" class="btn btn-adopt my-3" name="cambiar_pass">Cambiar contraseña</button>
                 <button type="reset" class="btn btn-danger my-3 mx-3" id="btn-cleanFormPass">Limpiar</button>
             </form>
         </div>
