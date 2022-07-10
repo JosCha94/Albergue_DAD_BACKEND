@@ -4,7 +4,7 @@ class Consulta_post
     public function listarPosts($conexion)
     {
         try {
-            $sql = "CALL SP_listar_posts()";
+            $sql = "CALL SP_listar_posts_admin()";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $posts = $consulta->fetchAll(PDO::FETCH_ASSOC);
