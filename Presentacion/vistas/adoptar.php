@@ -141,11 +141,12 @@ if (isset($_POST['btn_rechazar'])) {
                                 <th scope="col">Nombre del perro</th>
                                 <th scope="col">Observaciones</th>
                                 <th scope="col">Fecha de solicitud</th>
-                                <th scope="col">Fecha de última visita</th>
-                                <th scope="col">Observaciones de visitas</th>
+                                <!-- <th scope="col">Fecha de última visita</th>
+                                <th scope="col">Observaciones de visitas</th> -->
                                 <th scope="col">Estado de adopción</th>
                                 <th scope="col">Fecha de adopción</th>
                                 <th scope="col">Fecha de actualización</th>
+                                <th scope="col">Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -157,14 +158,23 @@ if (isset($_POST['btn_rechazar'])) {
                                     <td><?= $value['perro_nombre'] ?></td>
                                     <td><?= $value['adop_observaciones'] ?></td>
                                     <td><?= $value['adop_fecha_creacion'] ?></td>
-                                    <td><?= $value['adop_ultima_visita'] ?></td>
-                                    <td><?= $value['adop_resumen_visitas'] ?></td>
+                                    <!-- <td><?= $value['adop_ultima_visita'] ?></td>
+                                    <td><?= $value['adop_resumen_visitas'] ?></td> -->
                                     <?php if($value['adop_estado'] == 'Rechazada'){ 
                                                 echo "<td class='bg-danger text-white'>$value[adop_estado]</td>";
                                                 
                                                 }else{echo"<td class='bg-success text-white'>$value[adop_estado]</td>";}?>
                                     <td><?= $value['adop_fecha'] ?></td>
                                     <td><?= $value['adop_fecha_cambio'] ?></td>
+                                    <?php if($value['adop_estado'] == 'Rechazada'){ ?>
+                                    <td class="text-center">
+                                        <a href="index.php?modulo=admin_perritos&formTipo=updatePerrito&id=<?= urlencode(base64_encode(($value['perro_id']*489554)/7854)) ;?>" class="btn btn-warning" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                                    <?php }else{ ?>
+                                    <td class="text-center">
+                                        --
+                                    </td>  
+                                    <?php } ?>
                                 </tr>
                             <?php endforeach; ?>  
                         </tbody>

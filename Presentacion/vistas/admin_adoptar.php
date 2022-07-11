@@ -46,7 +46,7 @@ if (isset($_POST['agendar'])) {
     $fechEntrevista = $consulta->updateEstadoAdop($conexion, $id, $entrevista);
     if(!$fechEntrevista)
     {
-        echo '<div class="alert alert-danger">¡Hubo un erro el momento de eliminar la foto!.</div>';
+        echo '<div class="alert alert-danger">¡Hubo un error el momento de agendar la entrevista!.</div>';
     }else{
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adopciones&mensaje=La entrevista ha sido agendada exitosamente" />';
     }
@@ -82,47 +82,55 @@ if (isset($_POST['btn_aceptar'])) {
 
 //EMAIL
 if(isset($_POST['agendar'])){
-    $usrId = $_POST['user_id'];
-    $name = $_POST['user_nombre'];
-    $asunto = "Solicitud de adopción";
-    $msg = $_POST['mensaje'];
-    $correo = $_POST['user_mail'];
-    $fecha = $_POST['fecha'];
-    $hora = $_POST['hora'];
-    $fechaHora = $fecha .' '. $hora;
-    $body = "Hola <strong>".$name."</strong>, hemos revisado tu solicitud y hemos procedido a agendar una fecha para tu entrevista por videollamada <br> fecha de entrevista: <strong>" .$fechaHora. "</strong><br>
-    Con las siguientes observaciones: <br>" .$msg. "<br> Si tienes alguna duda sobre la entrevista, o deseas reagendar la entrevista, escribenos a este correo electronico con el asunto REAGENDAR ENTREVISTA. <br> Saludos Cordiales.";
+    if (isset($_POST['agendar'])) {
+        $fecha = $_POST['fecha'];
+        $hora = $_POST['hora'];
+        $fechaHora = $fecha .' '. $hora;
+        $usrId = $_POST['user_id'];
+        $name = $_POST['user_nombre'];
+        $asunto = "Solicitud de adopción";
+        $msg = $_POST['mensaje'];
+        $correo = $_POST['user_mail'];
+        $body = "Hola <strong>".$name."</strong>, hemos revisado tu solicitud y hemos procedido a agendar una fecha para tu entrevista por videollamada <br> fecha de entrevista: <strong>" .$fechaHora. "</strong><br>
+        Con las siguientes observaciones: <br>" .$msg. "<br> Si tienes alguna duda sobre la entrevista, o deseas reagendar la entrevista, escribenos a este correo electronico con el asunto REAGENDAR ENTREVISTA. <br> Saludos Cordiales.";
+        $entrevista = new updt_estadoAdo($fechaHora);
+        $consulta = new Consulta_adopcion();
+        $fechEntrevista = $consulta->updateEstadoAdop($conexion, $id, $entrevista);
+        if(!$fechEntrevista)
+        {
+            echo '<div class="alert alert-danger">¡Hubo un error el momento de agendar la entrevista!.</div>';
+        }else{
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adoptar&mensaje=La entrevista ha sido agendada exitosamente" />';
+            $mail = new PHPMailer(true);
+            try {
+                //Server settings
+                $mail->SMTPDebug = "0";                      //Enable verbose debug output
+                $mail->isSMTP();                                            //Send using SMTP
+                $mail->Host       = 'smtp.gmail.com';'smtp.live.com';'smtp-mail.outlook.com';               //Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                $mail->Username   = 'albergue.adoptar.perritos@gmail.com';                     //SMTP username
+                $mail->Password   = 'iolsqknvqrlvoijr';                               //SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    $mail = new PHPMailer(true);
+                //Recipients
+                $mail->setFrom('albergue.adoptar.perritos@gmail.com', "ALBERGUE DE PERRITOS");
+                $mail->addAddress($correo, $name);     //Add a recipient
 
-    try {
-        //Server settings
-        $mail->SMTPDebug = "0";                      //Enable verbose debug output
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host       = 'smtp.gmail.com';'smtp.live.com';'smtp-mail.outlook.com';               //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'albergue.adoptar.perritos@gmail.com';                     //SMTP username
-        $mail->Password   = 'iolsqknvqrlvoijr';                               //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                //Content
+                $mail->isHTML(true);                                  //Set email format to HTML
+                $mail->Subject = $asunto;
+                $mail->Body    = $body;
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
-        //Recipients
-        $mail->setFrom('albergue.adoptar.perritos@gmail.com', "ALBERGUE DE PERRITOS");
-        $mail->addAddress($correo, $name);     //Add a recipient
-
-        //Content
-        $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = $asunto;
-        $mail->Body    = $body;
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-        $mail->send();
-        echo 'El correo se mando correctamente';
-    } catch (Exception $e) {
-        echo "Hubo un error al momento de enviar el correo: {$mail->ErrorInfo}";
+                $mail->send();
+                echo 'El correo se mando correctamente';
+            } catch (Exception $e) {
+                echo "Hubo un error al momento de enviar el correo: {$mail->ErrorInfo}";
+            }
+        }
     }
 }
-
 
 ?>
 <?php if ($formTipo == 'gestEntrevista') : ?>
