@@ -8,7 +8,23 @@ $conexion = conexion::conectar();
 $log = new autorizacion();
 $logueado = $log->logueado($_SESSION['usuario']);
 $rolActi = $log->activeRol($_SESSION['usuario'][2], [2]);
+
 $info = json_decode($_SESSION['usuario'][1]);
+if ($_SESSION['usuario'][6] == '') {
+    $rolPermiBtn = $log->roles_permitidos_btn($conexion);
+    $_SESSION['usuario'][6] = $rolPermiBtn;
+}
+$PermisosRolBtn = $_SESSION['usuario'][6];
+
+$usuarios = $log->permisosBtnXrol($PermisosRolBtn['btn_usuarios']);
+$RolPermisos = $log->permisosBtnXrol($PermisosRolBtn['btn_RolPermisos']);
+$perritos = $log->permisosBtnXrol($PermisosRolBtn['btn_perritos']);
+$adopciones = $log->permisosBtnXrol($PermisosRolBtn['btn_adopciones']);
+$suscripciones = $log->permisosBtnXrol($PermisosRolBtn['btn_suscripciones']);
+$productos = $log->permisosBtnXrol($PermisosRolBtn['btn_productos']);
+$ventas = $log->permisosBtnXrol($PermisosRolBtn['btn_ventas']);
+$donaciones = $log->permisosBtnXrol($PermisosRolBtn['btn_donaciones']);
+$blog = $log->permisosBtnXrol($PermisosRolBtn['btn_blog']);
 
 $modulo = $_GET['modulo'] ?? '';
 
@@ -100,52 +116,60 @@ switch ($error = 'SinError') {
                 <?php else : ?>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <?php $rolAdminGeneral = $log->activeRol($_SESSION['usuario'][2], [2]);
-                            if ($rolAdminGeneral == 'true') : ?>
+                            <?php $rolPermitUsu = $log->activeRol($_SESSION['usuario'][2], $usuarios);
+                            if ($rolPermitUsu == 'true') : ?>
                                 <li class="nav-item ">
                                     <a class="nav-link <?php echo ($modulo == "usuarios") ? " active " : " " ?> mx-2" href="index.php?modulo=usuarios">Usuarios</a>
                                 </li>
-
+                            <?php endif; ?>
+                            <?php $rolPermitRP = $log->activeRol($_SESSION['usuario'][2], $RolPermisos);
+                            if ($rolPermitRP == 'true') : ?>
                                 <li class="nav-item ">
                                     <a class="nav-link <?php echo ($modulo == "rolPermiso") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
                                 </li>
                             <?php endif; ?>
 
-                            <?php $rolAdminPerritos = $log->activeRol($_SESSION['usuario'][2], [2, 4]);
-                            if ($rolAdminPerritos == 'true') : ?>
+                            <?php $rolPermitDogs = $log->activeRol($_SESSION['usuario'][2], $perritos);
+                            if ($rolPermitDogs == 'true') : ?>
                                 <li class="nav-item ">
                                     <a class="nav-link <?php echo ($modulo == "perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
                                 </li>
+                            <?php endif; ?>
+                            <?php $rolPermitAdop = $log->activeRol($_SESSION['usuario'][2], $adopciones);
+                            if ($rolPermitAdop == 'true') : ?>
                                 <li class="nav-item ">
-                                    <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adoptar</a>
+                                    <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adopciones</a>
                                 </li>
                             <?php endif; ?>
-                            <?php $rolAdminGeneral = $log->activeRol($_SESSION['usuario'][2], [2]);
-                            if ($rolAdminGeneral == 'true') : ?>
-                            <li class="nav-item ">
-                                <a class="nav-link <?php echo ($modulo == "apadrinar") ? " active " : " " ?> mx-2" href="index.php?modulo=apadrinar">Apadrinar</a>
-                            </li>
+                            <?php $rolPermitSuscrip = $log->activeRol($_SESSION['usuario'][2], $suscripciones);
+                            if ($rolPermitSuscrip == 'true') : ?>
+                                <li class="nav-item ">
+                                    <a class="nav-link <?php echo ($modulo == "apadrinar") ? " active " : " " ?> mx-2" href="index.php?modulo=apadrinar">Suscripciones</a>
+                                </li>
                             <?php endif; ?>
-                            <?php $rolAdminTienda = $log->activeRol($_SESSION['usuario'][2], [2, 5]);
-                            if ($rolAdminTienda == 'true') : ?>
+                            <?php $rolPermitPdt = $log->activeRol($_SESSION['usuario'][2], $productos);
+                            if ($rolPermitPdt == 'true') : ?>
                                 <li class="nav-item">
                                     <a class="nav-link <?php echo ($modulo == "productos" || $modulo == "agrega-producto") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
                                 </li>
+                            <?php endif; ?>
+                            <?php $rolPermitSales = $log->activeRol($_SESSION['usuario'][2], $ventas);
+                            if ($rolPermitSales == 'true') : ?>
                                 <li class="nav-item">
                                     <a class="nav-link <?php echo ($modulo == "ventas") ? " active " : " " ?> mx-2" href="index.php?modulo=ventas">Ventas</a>
                                 </li>
                             <?php endif; ?>
-                            <?php $rolAdminGeneral = $log->activeRol($_SESSION['usuario'][2], [2]);
-                            if ($rolAdminGeneral == 'true') : ?>
-                            <li class="nav-item">
-                                <a class="nav-link <?php echo ($modulo == "donar") ? " active " : " " ?> mx-2" href="index.php?modulo=donar">Donaciones</a>
-                            </li>
+                            <?php $rolPermitDona = $log->activeRol($_SESSION['usuario'][2], $donaciones);
+                            if ($rolPermitDona == 'true') : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php echo ($modulo == "donar") ? " active " : " " ?> mx-2" href="index.php?modulo=donar">Donaciones</a>
+                                </li>
                             <?php endif; ?>
-                            <?php $rolAdminBlog = $log->activeRol($_SESSION['usuario'][2], [2]);
-                            if ($rolAdminBlog == 'true') : ?>
-                            <li class="nav-item">
-                                <a class="nav-link <?php echo ($modulo == "blog") ? " active " : " " ?> mx-2" href="index.php?modulo=blog">Blog</a>
-                            </li>
+                            <?php $rolPermitBlog = $log->activeRol($_SESSION['usuario'][2], $blog);
+                            if ($rolPermitBlog == 'true') : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link <?php echo ($modulo == "blog") ? " active " : " " ?> mx-2" href="index.php?modulo=blog">Blog</a>
+                                </li>
                             <?php endif; ?>
                         </ul>
                         <?php if ($logueado == null || $logueado == 'false') {
@@ -156,7 +180,7 @@ switch ($error = 'SinError') {
                         ?>
                             <div class="dropdown mx-4">
                                 <a class="dropdown-toggle text-uppercase" type="button" id="dropdownMenuUser" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php echo $info->nick; ?>
+                                    <?php echo $info->nick; ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuUser">
                                     <li>
