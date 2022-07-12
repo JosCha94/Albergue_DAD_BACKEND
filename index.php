@@ -16,6 +16,7 @@ if ($_SESSION['usuario'][6] == '') {
 }
 $PermisosRolBtn = $_SESSION['usuario'][6];
 
+
 $usuarios = $log->permisosBtnXrol($PermisosRolBtn['btn_usuarios']);
 $RolPermisos = $log->permisosBtnXrol($PermisosRolBtn['btn_RolPermisos']);
 $perritos = $log->permisosBtnXrol($PermisosRolBtn['btn_perritos']);
