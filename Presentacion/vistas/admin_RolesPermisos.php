@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], $RolPermisos);
+// $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
+// $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}
+if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_rolesPermisos.php');
 $consulta = new Consulta_RolesPermisos();
 
@@ -166,4 +180,9 @@ if (isset($_POST['btn_update_per'])) {
         <!-- /row-->
     </div>
 
+<?php endif; ?>
+<?php else : ?>
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
 <?php endif; ?>

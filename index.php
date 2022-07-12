@@ -7,9 +7,10 @@ require_once('DAL/conexion.php');
 $conexion = conexion::conectar();
 $log = new autorizacion();
 $logueado = $log->logueado($_SESSION['usuario']);
-$rolActi = $log->activeRol($_SESSION['usuario'][2], [2]);
+$rolActual = $log->RolActual($_SESSION['usuario'][2]);
 
 $info = json_decode($_SESSION['usuario'][1]);
+
 if ($_SESSION['usuario'][6] == '') {
     $rolPermiBtn = $log->roles_permitidos_btn($conexion);
     $_SESSION['usuario'][6] = $rolPermiBtn;
@@ -17,15 +18,15 @@ if ($_SESSION['usuario'][6] == '') {
 $PermisosRolBtn = $_SESSION['usuario'][6];
 
 
-$usuarios = $log->permisosBtnXrol($PermisosRolBtn['btn_usuarios']);
-$RolPermisos = $log->permisosBtnXrol($PermisosRolBtn['btn_RolPermisos']);
-$perritos = $log->permisosBtnXrol($PermisosRolBtn['btn_perritos']);
-$adopciones = $log->permisosBtnXrol($PermisosRolBtn['btn_adopciones']);
-$suscripciones = $log->permisosBtnXrol($PermisosRolBtn['btn_suscripciones']);
-$productos = $log->permisosBtnXrol($PermisosRolBtn['btn_productos']);
-$ventas = $log->permisosBtnXrol($PermisosRolBtn['btn_ventas']);
-$donaciones = $log->permisosBtnXrol($PermisosRolBtn['btn_donaciones']);
-$blog = $log->permisosBtnXrol($PermisosRolBtn['btn_blog']);
+$usuarios = $log->RolPermitido($PermisosRolBtn['btn_usuarios']);
+$RolPermisos = $log->RolPermitido($PermisosRolBtn['btn_RolPermisos']);
+$perritos = $log->RolPermitido($PermisosRolBtn['btn_perritos']);
+$adopciones = $log->RolPermitido($PermisosRolBtn['btn_adopciones']);
+$suscripciones = $log->RolPermitido($PermisosRolBtn['btn_suscripciones']);
+$productos = $log->RolPermitido($PermisosRolBtn['btn_productos']);
+$ventas = $log->RolPermitido($PermisosRolBtn['btn_ventas']);
+$donaciones = $log->RolPermitido($PermisosRolBtn['btn_donaciones']);
+$blog = $log->RolPermitido($PermisosRolBtn['btn_blog']);
 
 $modulo = $_GET['modulo'] ?? '';
 

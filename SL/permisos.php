@@ -67,7 +67,7 @@ class autorizacion
         return $PerRolBtn;
     }
 
-    public function permisosBtnXrol($permisos)
+    public function RolPermitido($permisos)
     {
         $array = json_decode($permisos, true);
         $perRol = array();
@@ -76,6 +76,20 @@ class autorizacion
 
         endforeach;
         return $perRol;
+    }
+
+    public function RolActual($roles)
+    {      
+        $array = json_decode($roles, true);
+        foreach ($array as $key => $value) :
+            if ($value['id'] == 1) {
+                $rolActual = $value['id'];
+                break;
+            } else {
+                $rolActual = $value['id'];
+            }
+        endforeach;
+        return $rolActual;
     }
 }
 ?>

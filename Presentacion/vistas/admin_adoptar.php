@@ -1,7 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [4]);
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], $adopciones);
 $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [8]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [8]);
 
@@ -12,8 +12,8 @@ switch ($error = 'SinError') {
     case ($rolPermitido != 'true'):
         $error = 'Su rol actual no le otorga permisos para acceder a esta página';
         break;
-}?>
-<?php if ($error == 'SinError') : ?>
+}
+if ($error == 'SinError') : ?>
 <?php
 require_once('BL/consultas_adopcion.php');
 require_once('DAL/conexion.php');
@@ -158,7 +158,7 @@ if(isset($_POST['agendar'])){
         <form action="" method="post" class="d-inline me-5">
             <h1 class="h3 my-3 fw-normal text-center">  Agendar entrevista</h1>
             <div class="form ">
-                <textarea class="form-control my-4" id="floatingInput" rows="4" placeholder="Escribe un mensaje para el solicitante" style="min-heigth: 100%" required name="mensaje" ></textarea>
+                <textarea class="form-control my-4" id="floatingInput" rows="4" placeholder="Escribe un mensaje para el solicitante" style="min-height: 100%" required name="mensaje" ></textarea>
             </div>
             <div class="form text-center">
                 <label class="mx-2" for="">Agenda una fecha</label>
@@ -272,9 +272,7 @@ if(isset($_POST['agendar'])){
 
 <?php endif; ?>
 <?php else : ?>
-
-<div class="alert alert-danger" role="alert">
-    <?php echo $error; ?>
-</div>
-
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
 <?php endif; ?>

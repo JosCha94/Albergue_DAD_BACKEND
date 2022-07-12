@@ -1,5 +1,5 @@
 <?php
-$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [5]);
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], $productos);
 $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
 
@@ -10,8 +10,8 @@ switch ($error = 'SinError') {
     case ($rolPermitido != 'true'):
         $error = 'Su rol actual no le otorga permisos para acceder a esta página';
         break;
-}?>
-<?php if ($error == 'SinError') : ?>
+}
+if ($error == 'SinError') : ?>
 <?php
 require_once('BL/consultas_productos.php');
 require_once 'ENTIDADES/producto.php';
@@ -444,9 +444,7 @@ if (isset($_POST['update_estado_ImgPdt'])) {
     </div>   
 <?php endif; ?>
 <?php else : ?>
-
-<div class="alert alert-danger" role="alert">
-    <?php echo $error; ?>
-</div>
-
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
 <?php endif; ?>

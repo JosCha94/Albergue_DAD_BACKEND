@@ -1,4 +1,18 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], $suscripciones);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [8]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [8]);
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}
+if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_apadrinar.php');
 require_once('DAL/conexion.php');
 require_once('ENTIDADES/suscripciones_tipo.php');
@@ -65,3 +79,8 @@ if(isset($_POST['btnUpdate'])){
             </div>
         </form>
 </section>
+<?php else : ?>
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
+<?php endif; ?>

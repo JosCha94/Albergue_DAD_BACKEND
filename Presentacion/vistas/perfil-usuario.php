@@ -3,8 +3,8 @@ switch ($error = 'SinError') {
     case ($logueado == 'false'):
         $error = 'Debe iniciar sesión para poder visualizar este pagina';
         break;
-    case ($rolActi != 'true'):
-        $error = 'No tiene activado el rol de Cliente';
+    case ($rolActual == ' '):
+        $error = 'No tiene ningun rol activado';
         break;
 }
 ?>
@@ -53,9 +53,7 @@ switch ($error = 'SinError') {
 
     </div>
 <?php else : ?>
-
-    <div class="alert alert-danger" role="alert">
-        <?php echo $error; ?>
-    </div>
-
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
 <?php endif; ?>

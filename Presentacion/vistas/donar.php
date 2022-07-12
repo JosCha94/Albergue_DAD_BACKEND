@@ -1,4 +1,17 @@
 <?php
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], $donaciones);
+
+
+switch ($error = 'SinError') {
+    case ($logueado == 'false'):
+        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        break;
+    case ($rolPermitido != 'true'):
+        $error = 'Su rol actual no le otorga permisos para acceder a esta página';
+        break;
+}
+if ($error == 'SinError') : ?>
+<?php
 require_once('BL/consultas_donacion.php');
 require_once('DAL/conexion.php');
 
@@ -74,3 +87,8 @@ $donacion = $consulta->listarDonaciones($conexion);
     </div>
   </div>
 </div>
+<?php else : ?>
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
+<?php endif; ?>

@@ -6,8 +6,7 @@ switch ($error = 'SinError') {
 }
 ?>
 <?php if ($error == 'SinError') : ?>
-<?php if ($logueado == null || $logueado == 'false') {
-?>
+<?php if ($logueado == null || $logueado == 'false'):?>
     <div class="container mt-4 mb-4">
         <div class="col-12 col-md-6 mx-auto">
         <main class="form-signin">
@@ -35,13 +34,12 @@ switch ($error = 'SinError') {
         </main>
     </div>
 </div>
-<?php
-} else {
-?>
+<?php else: ?>
+
 <h1 class="text-center mt-4 mb-4">Bienvenido <?php echo $info->nick ?></h1>
-<?php
-}
-?>
+
+<?php endif; ?>
+
 <?php else : ?>
 
 <div class="alert alert-danger mt-5 mb-5" role="alert">

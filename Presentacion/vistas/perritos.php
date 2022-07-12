@@ -1,5 +1,5 @@
 <?php
-$rolPermitido= $log->activeRol($_SESSION['usuario'][2], [2,4]);
+$rolPermitido= $log->activeRol($_SESSION['usuario'][2], $perritos);
 $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [7]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [7]);
 
@@ -10,8 +10,8 @@ switch ($error = 'SinError') {
     case ($rolPermitido != 'true'):
         $error = 'Su rol actual no le otorga permisos para acceder a esta página';
         break;
-}?>
-<?php if ($error == 'SinError') : ?>
+}
+if ($error == 'SinError') : ?>
 <?php
 require_once('BL/consultas_perritos.php');
 require_once('DAL/conexion.php');
@@ -82,10 +82,7 @@ $perro = $consulta->listarPerritos($conexion);
     </div>
 </div>
 <?php else : ?>
-
-<div class="alert alert-danger" role="alert">
-    <?php echo $error; ?>
-</div>
-
+        <div class="alert alert-danger p-5 my-5" role="alert">
+            <?php echo $error; ?>
+        </div>
 <?php endif; ?>
-
