@@ -3,7 +3,6 @@
 }
 /*********PERFIL DE USUARIO *************/
 
-
 body{
   background-image: url(../images/huesoPatron.png);
   background-color: #fafbfd;
@@ -41,10 +40,9 @@ h3.mb-0.mt-2{
   -ms-transition: 0.5s;
   -o-transition: 0.5s;
 }
-/* .active{
+.nav-link.active {
   font-weight: bold;
-} */
-
+}
 
 #nav_principal{
   background-color: #001E6C;

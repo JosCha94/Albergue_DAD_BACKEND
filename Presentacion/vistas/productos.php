@@ -40,7 +40,8 @@ if (isset($_POST['cambia_estado_categoria'])) {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El estado de la categoria ha cambiado" />';
     }
 }
-
+$pdt = 1;
+$cat = 1;
 ?>
 <h2 class="text-center mt-3 h1">Productos</h2>
 <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
@@ -55,6 +56,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
             <table class="table table-sm table-hover w-100" id="tablaProductos">
                 <thead class="bg-danger text-white">
                     <tr>
+                    <th scope="col">#</th>
                         <td>Producto </td>
                         <td>Estado </td>
                         <td>Categoria </td>
@@ -73,6 +75,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
                 </thead>
                 <tfoot class="bg-secondary text-white">
                     <tr>
+                    <th scope="col">#</th>
                         <td>Producto </td>
                         <td>Estado </td>
                         <td>Categoria </td>
@@ -92,6 +95,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
                 <tbody>
                     <?php foreach ($productos as $key => $value) : ?>
                         <tr class="text-center">
+                            <th scope="row"><?= $pdt++ ?></th>
                             <td><?php echo ($value['product_nombre']); ?> </td>
                             <td><?php echo ($value['product_estado']); ?> </td>
                             <td><?php echo ($value['cat_nombre']); ?></td>
@@ -139,6 +143,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
             <table class="table table-sm table-hover" id="tablaRoles">
                 <thead class="bg-danger text-white">
                     <tr>
+                    <th scope="col">#</th>
                         <td>Categoria </td>
                         <td>descripcón </td>
                         <td>Estado </td>
@@ -151,6 +156,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
                 </thead>
                 <tfoot class="bg-secondary text-white">
                     <tr>
+                    <th scope="col">#</th>
                         <td>Categoria </td>
                         <td>descripcón </td>
                         <td>Estado </td>
@@ -164,6 +170,7 @@ if (isset($_POST['cambia_estado_categoria'])) {
                 <tbody>
                     <?php foreach ($categorias as $key => $value) : ?>
                         <tr class="text-center">
+                        <th scope="row"><?= $cat++ ?></th>
                             <td><?php echo ($value['cat_nombre']); ?> </td>
                             <td><?php echo ($value['cat_descripcion']); ?> </td>
                             <td><?php echo ($value['cat_estado']); ?></td>

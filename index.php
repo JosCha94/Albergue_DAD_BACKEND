@@ -68,30 +68,25 @@ switch ($error = 'SinError') {
 
     <title>Administracion de Albergue de perritos<?php
                                                     switch ($modulo) {
-                                                        case ("clientes"):
-                                                            echo " - Clientes ";
-                                                            break;
-                                                        case ("adoptar"):
-                                                            echo " - Adopciones ";
-                                                            break;
-                                                        case ("apadrinar"):
-                                                            echo " - Apadrinar ";
-                                                            break;
-                                                        case ("productos" || "agrega-producto"):
-                                                            echo " - Productos ";
-                                                            break;
-                                                        case ("ventas"):
-                                                            echo " - Ventas ";
-                                                            break;
-                                                        case ("donar"):
-                                                            echo " - Donación ";
-                                                            break;
-                                                        case ("blog"):
-                                                            echo " - Blog ";
-                                                            break;
-                                                        case ("perfil-usuario"):
-                                                            echo " - Perfil de Administrador ";
-                                                            break;
+                                                        case ("usuarios"): echo " - Usuarios "; break;
+                                                        case ("rolesPermisos"): echo " - Roles y permisos "; break;
+                                                        case ("adoptar"): echo " - Adopciones "; break;
+                                                        case ("perritos"): echo " - Perritos "; break;
+                                                        case ("apadrinar"): echo " - Apadrinar ";break;
+                                                        case ("admin_apadrinar"): echo " - Apadrinar ";  break;
+                                                        case ("productos"): echo " - Productos "; break;
+                                                        case ("ventas"): echo " - Ventas "; break;
+                                                        case ("donar"): echo " - Donación "; break;
+                                                        case ("blog"): echo " - Blog "; break;
+                                                        case ("admin_post"): echo " - Blog "; break;
+                                                        case ("perfil-usuario"): echo " - Perfil de Administrador "; break;
+                                                        case ("admin_adoptar"): echo " - Admin Adopciones "; break;
+                                                        case ("agrega-categoria"): echo " - Categorias"; break;
+                                                        case ("admin_perritos"): echo " - Perritos Admin"; break;
+                                                        case ("admin_roles_permisos"): echo " - Roles y Permisos Admin";  break;
+                                                        case ("update-user"):  echo " - Perfil usuario"; break;
+                                                        case ("admin_post"): echo " - admin Post"; break;
+                                                        case ("admin_apadrinar"): echo " - admin Suscripciones"; break;
                                                     }
                                                     ?>
 
@@ -127,32 +122,32 @@ switch ($error = 'SinError') {
                             <?php $rolPermitRP = $log->activeRol($_SESSION['usuario'][2], $RolPermisos);
                             if ($rolPermitRP == 'true') : ?>
                                 <li class="nav-item ">
-                                    <a class="nav-link <?php echo ($modulo == "rolPermiso") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
+                                    <a class="nav-link <?php echo ($modulo == "rolesPermisos" || $modulo == "admin_roles_permisos") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
                                 </li>
                             <?php endif; ?>
 
                             <?php $rolPermitDogs = $log->activeRol($_SESSION['usuario'][2], $perritos);
                             if ($rolPermitDogs == 'true') : ?>
                                 <li class="nav-item ">
-                                    <a class="nav-link <?php echo ($modulo == "perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
+                                    <a class="nav-link <?php echo ($modulo == "perritos" || $modulo == "admin_perritos") ? " active " : " " ?> mx-2" href="index.php?modulo=perritos">Perritos</a>
                                 </li>
                             <?php endif; ?>
                             <?php $rolPermitAdop = $log->activeRol($_SESSION['usuario'][2], $adopciones);
                             if ($rolPermitAdop == 'true') : ?>
                                 <li class="nav-item ">
-                                    <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adopciones</a>
+                                    <a class="nav-link <?php echo ($modulo == "adoptar" || $modulo == "adoptar-single" || $modulo == "admin_adoptar") ? " active " : " " ?> mx-2" href="index.php?modulo=adoptar">Adopciones</a>
                                 </li>
                             <?php endif; ?>
                             <?php $rolPermitSuscrip = $log->activeRol($_SESSION['usuario'][2], $suscripciones);
                             if ($rolPermitSuscrip == 'true') : ?>
                                 <li class="nav-item ">
-                                    <a class="nav-link <?php echo ($modulo == "apadrinar") ? " active " : " " ?> mx-2" href="index.php?modulo=apadrinar">Suscripciones</a>
+                                    <a class="nav-link <?php echo ($modulo == "apadrinar" || $modulo == "admin_apadrinar") ? " active " : " " ?> mx-2" href="index.php?modulo=apadrinar">Suscripciones</a>
                                 </li>
                             <?php endif; ?>
                             <?php $rolPermitPdt = $log->activeRol($_SESSION['usuario'][2], $productos);
                             if ($rolPermitPdt == 'true') : ?>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo ($modulo == "productos" || $modulo == "agrega-producto") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
+                                    <a class="nav-link <?php echo ($modulo == "productos" || $modulo == "agrega-producto" || $modulo == "agrega-categoria") ? " active " : " " ?> mx-2" href="index.php?modulo=productos">Productos</a>
                                 </li>
                             <?php endif; ?>
                             <?php $rolPermitSales = $log->activeRol($_SESSION['usuario'][2], $ventas);
@@ -170,7 +165,7 @@ switch ($error = 'SinError') {
                             <?php $rolPermitBlog = $log->activeRol($_SESSION['usuario'][2], $blog);
                             if ($rolPermitBlog == 'true') : ?>
                                 <li class="nav-item">
-                                    <a class="nav-link <?php echo ($modulo == "blog") ? " active " : " " ?> mx-2" href="index.php?modulo=blog">Blog</a>
+                                    <a class="nav-link <?php echo ($modulo == "blog" || $modulo == "admin_post") ? " active " : " " ?> mx-2" href="index.php?modulo=blog">Blog</a>
                                 </li>
                             <?php endif; ?>
                         </ul>

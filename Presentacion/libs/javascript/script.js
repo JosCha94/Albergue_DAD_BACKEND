@@ -45,6 +45,7 @@ $(document).ready(function () {
     $('#tablaBlog').DataTable({});
     $('#tablaUserRol').DataTable({});
     $('#tablaUserEsp').DataTable({});
+    $('#tablaBtnRol').DataTable({});
 
 
 });

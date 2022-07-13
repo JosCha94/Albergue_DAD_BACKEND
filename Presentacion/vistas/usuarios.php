@@ -81,6 +81,9 @@ if ($error == 'SinError') : ?>
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el permiso especial al usuario" />';
         }
     }
+    $us = 1;
+    $ur = 1;
+    $up = 1;
 
     ?>
     <h2 class="text-center mt-3 h1">Usuarios</h2>
@@ -104,6 +107,7 @@ if ($error == 'SinError') : ?>
                         <table class="table table-sm table-hover" id="tablaUsuarios">
                             <thead class="bg-danger text-white">
                                 <tr>
+                                    <th scope="col">#</th>
                                     <td>Usuario </td>
                                     <td>Estado </td>
                                     <td>Nombre </td>
@@ -119,6 +123,7 @@ if ($error == 'SinError') : ?>
                             </thead>
                             <tfoot class="bg-secondary text-white">
                                 <tr>
+                                    <th scope="col">#</th>                                    
                                     <td>Usuario </td>
                                     <td>Estado </td>
                                     <td>Nombre </td>
@@ -135,6 +140,7 @@ if ($error == 'SinError') : ?>
                             <tbody>
                                 <?php foreach ($usuarios2 as $key => $value) : ?>
                                     <tr class="text-center">
+                                        <th scope="row"><?= $us++ ?></th>
                                         <td><?php echo ($value['usuario']); ?> </td>
                                         <td><?php echo ($value['usr_estado']); ?> </td>
                                         <td><?php echo ($value['usr_nombre']); ?></td>
@@ -163,6 +169,7 @@ if ($error == 'SinError') : ?>
                         <table class="table table-sm table-hover w-100" id="tablaUserRol">
                             <thead class="bg-danger text-white">
                                 <tr>
+                                    <th scope="col">#</th>
                                     <td>Usuario </td>
                                     <td>Estado del usuario </td>
                                     <td>Nombre completo </td>
@@ -176,6 +183,7 @@ if ($error == 'SinError') : ?>
                             </thead>
                             <tfoot class="bg-secondary text-white">
                                 <tr>
+                                    <th scope="col">#</th>
                                     <td>Usuario </td>
                                     <td>Estado del usuario </td>
                                     <td>Nombre completo </td>
@@ -190,6 +198,7 @@ if ($error == 'SinError') : ?>
                             <tbody>
                                 <?php foreach ($usuarios as $key => $value) : ?>
                                     <tr class="text-center">
+                                        <th scope="row"><?= $ur++ ?></th>
                                         <td><?php echo ($value['usuario']); ?> </td>
                                         <td><?php echo ($value['usr_estado']); ?> </td>
                                         <td><?php echo ($value['usr_nombre'] . ' ' . $value['usr_apellido_paterno'] . ' ' . $value['usr_apellido_materno']); ?> </td>
@@ -245,6 +254,7 @@ if ($error == 'SinError') : ?>
                         <table class="table table-sm table-hover w-100" id="tablaUserEsp">
                             <thead class="bg-danger text-white">
                                 <tr>
+                                    <th scope="col">#</th>
                                     <td>Usuario </td>
                                     <td>E-mail </td>
                                     <td>Permiso </td>
@@ -256,6 +266,7 @@ if ($error == 'SinError') : ?>
                             </thead>
                             <tfoot class="bg-secondary text-white">
                                 <tr>
+                                    <th scope="col">#</th>
                                     <td>Usuario </td>
                                     <td>E-mail </td>
                                     <td>Permiso </td>
@@ -267,6 +278,7 @@ if ($error == 'SinError') : ?>
                             <tbody>
                                 <?php foreach ($perEsp as $key => $value) : ?>
                                     <tr class="text-center">
+                                        <th scope="row"><?= $up++ ?></th>
                                         <td><?php echo ($value['Usuario']); ?> </td>
                                         <td><?php echo ($value['usr_email']); ?> </td>
                                         <td><?php echo ($value['permiso_nombre']); ?></td>

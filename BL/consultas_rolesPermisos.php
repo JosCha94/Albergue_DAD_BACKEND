@@ -263,7 +263,7 @@ class Consulta_RolesPermisos{
             $consulta->execute();
             $estado = 'bien';
         } catch (PDOException $e) {
-              echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            //   echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
                     <strong>Error!</strong><br> Debido a un problema no se ha podido actualizar los datos del rol, intentelo mas tarde
@@ -271,6 +271,52 @@ class Consulta_RolesPermisos{
                 </div>
             <?php            
             $estado = 'fallo';
+        }
+        return $estado;
+    }
+
+    // ------------------------------------------------
+    //                  Roles PERMISOS btn
+    // ------------------------------------------------
+
+    public function listarRolesXBtn($conexion)
+    {
+        try {
+            $sql = "CALL SP_select_permisos_rolBtn_admin()";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $user = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $user;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede listar los permisos
+
+            </div>
+
+        <?php
+        }
+    }
+
+    public function cambiar_estado_permiso_rol($conexion, $BtnIdId, $RolId, $estado)
+    {
+        try {
+            $sql = "CALL SP_update_estado_Per_RolBtn_admin($BtnIdId, $RolId, $estado)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $estado='bienRB';
+
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema, no se pudo cambiar el estado del rol para el boton, intentelo mas tarde
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div> -->
+
+            <?php
+            $estado='mal';
         }
         return $estado;
     }

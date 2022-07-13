@@ -17,6 +17,8 @@ require_once('BL/consultas_ventas.php');
 $consulta = new Consulta_ventas();
 $ventas = $consulta->listarVentas($conexion);
 $detalle = $consulta->detalleVenta($conexion);
+$vt = 1;
+$dp = 1;
 ?>
 
 <h2 class="text-center mt-3 h1">Ventas</h2>
@@ -39,6 +41,7 @@ $detalle = $consulta->detalleVenta($conexion);
                     <table class="table table-sm table-hover" id="tablaVentas">
                         <thead class="bg-danger text-white">
                             <tr>
+                                <th scope="col">#</th>
                                 <td>Numero de comprobante </td>
                                 <td>Usuario_id </td>
                                 <td>Rol_id </td>
@@ -56,6 +59,7 @@ $detalle = $consulta->detalleVenta($conexion);
                         </thead>
                         <tfoot class="bg-secondary text-white">
                             <tr>
+                                <th scope="col">#</th>
                                 <td>Numero de comprobante </td>
                                 <td>Usuario_id </td>
                                 <td>Rol_id </td>
@@ -75,6 +79,7 @@ $detalle = $consulta->detalleVenta($conexion);
                             <?php foreach ($ventas as $key => $value) : ?>
                                 <?php $info = json_decode($value['datos_cliente']) ?>
                                 <tr class="text-center">
+                                    <th scope="row"><?= $vt++ ?></th>
                                     <td><?php echo ($value['pedi_id']); ?></td>
                                     <td><?php echo ($value['usr_id']); ?></td>
                                     <td><?php echo ($value['rol_id']); ?></td>
@@ -98,6 +103,7 @@ $detalle = $consulta->detalleVenta($conexion);
                 <table class="table table-lg table-hover wrap mx-auto w-100" id="tablaDetalleVentas">
                         <thead class="bg-danger text-white">
                             <tr>
+                                <th scope="col">#</th>
                                 <td>Id Detalle </td>
                                 <td>Pedido_id </td>
                                 <td>Producto_id </td>
@@ -110,6 +116,7 @@ $detalle = $consulta->detalleVenta($conexion);
                         </thead>
                         <tfoot class="bg-secondary text-white">
                             <tr>
+                            <th scope="col">#</th>
                             <td>Id Detalle </td>
                                 <td>Pedido_id </td>
                                 <td>Producto_id </td>
@@ -123,6 +130,7 @@ $detalle = $consulta->detalleVenta($conexion);
                             <?php foreach ($detalle as $key => $value) : ?>
                                 <?php $infoDeta = json_decode($value['precioCantidad']) ?>
                                 <tr class="text-center">
+                                    <th scope="row"><?= $dp++ ?></th>
                                     <td><?php echo ($value['iddetalle_pedido']); ?></td>
                                     <td><?php echo ($value['pedi_id']); ?></td>
                                     <td><?php echo ($value['product_nombre']); ?></td>

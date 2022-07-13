@@ -18,13 +18,14 @@ $consulta = new Consulta_RolesPermisos();
 $rolPer = $consulta->listarRolesPermisos($conexion);
 $roles = $consulta->listarRoles($conexion);
 $permisos = $consulta->listarPermisos($conexion);
+$perRolBtn = $consulta->listarRolesXBtn($conexion);
 
 if (isset($_POST['cambia_estado_rol'])) {
     $Rol_Id = $_POST['rol_id'];
     $Rol_estado = $_POST['rol_estado'];
-    $Restado = $consulta->cambiar_estado_rol($conexion, $Rol_Id, $Rol_estado);
+    $Rresult = $consulta->cambiar_estado_rol($conexion, $Rol_Id, $Rol_estado);
 
-    if ($Restado == 'mal') {
+    if ($Rresult == 'mal') {
     } else {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se cambio el estado del rol" />';
     }
@@ -45,9 +46,9 @@ if (isset($_POST['cambia_estado_PerRol'])) {
 if (isset($_POST['cambia_estado_permiso'])) {
     $Permiso_Id = $_POST['permiso_id'];
     $Permiso_estado = $_POST['permiso_estado'];
-    $Pestado = $consulta->cambiar_estado_permiso($conexion, $Permiso_Id, $Permiso_estado);
+    $Presult = $consulta->cambiar_estado_permiso($conexion, $Permiso_Id, $Permiso_estado);
 
-    if ($Pestado == 'mal') {
+    if ($Presult == 'mal') {
     } else {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se cambio el estado del permiso" />';
     }
@@ -56,13 +57,29 @@ if (isset($_POST['cambia_estado_permiso'])) {
 if (isset($_POST['btn_asigna_permiso_rol'])) {
     $Rol_Id = $_POST['selectRol'];
     $Permiso_id = $_POST['selectPermiso'];
-    $Pestado = $consulta->asignarPermisoRol($conexion, $Rol_Id, $Permiso_id);
+    $APRresult = $consulta->asignarPermisoRol($conexion, $Rol_Id, $Permiso_id);
 
-    if ($Pestado == 'mal') {
+    if ($APRresult== 'mal') {
     } else {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se agrego un nuevo permiso al rol" />';
     }
 }
+
+if (isset($_POST['cambia_estado_permisoRol'])) {
+    $Btn_Id = $_POST['btn_id'];
+    $Rol_Id = $_POST['rol_id'];
+    $estado_RBt = $_POST['estadoRBt'];
+    $RBresult = $consulta->cambiar_estado_permiso_rol($conexion, $Btn_Id, $Rol_Id, $estado_RBt);
+
+    if ($RBresult == 'mal') {
+    } else {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se cambio el estado del permiso" />';
+    }
+}
+$tpr = 1;
+$ro = 1;
+$pe = 1;
+$brp = 1;
 ?>
 <h2 class="text-center mt-3 h1">Roles y Permisos</h2>
 <div class="row">
@@ -79,12 +96,16 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                 <li class="nav-item" role="Permisos">
                     <button class="nav-link" id="permisos-tab" data-bs-toggle="tab" data-bs-target="#permisos" type="button" role="tab" aria-controls="permisos" aria-selected="false">Permisos</button>
                 </li>
+                <li class="nav-item" role="Permisos">
+                    <button class="nav-link" id="btnRolPermit-tab" data-bs-toggle="tab" data-bs-target="#btnRolPermit" type="button" role="tab" aria-controls="btnRolPermit" aria-selected="false">Botones y Roles permitidos</button>
+                </li>
             </ul>
             <div class="tab-content " id="myTabContent">
                 <div class="tab-pane fade show active wrap" id="rolesPermisos" role="tabpanel" aria-labelledby="rolesPermisos-tab">
                     <table class="table table-sm table-hover" id="tablaRolesPermisos">
                         <thead class="bg-danger text-white">
                             <tr>
+                            <th scope="col">#</th>
                                 <td>Rol </td>
                                 <td>Descripcion del Rol </td>
                                 <td>Permiso </td>
@@ -97,6 +118,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         </thead>
                         <tfoot class="bg-secondary text-white">
                             <tr>
+                            <th scope="col">#</th>
                                 <td>Rol </td>
                                 <td>Descripcion del Rol </td>
                                 <td>Permiso </td>
@@ -109,6 +131,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         <tbody>
                             <?php foreach ($rolPer as $key => $value) : ?>
                                 <tr class="text-center">
+                                <th scope="row"><?= $tpr++ ?></th>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>
                                     <td><?php echo ($value['rol_descripcion']); ?> </td>
                                     <td><?php echo ($value['permiso_nombre']); ?></td>
@@ -135,6 +158,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                     <table class="table table-sm table-hover wrap mx-auto w-100" id="tablaRoles">
                         <thead class="bg-danger text-white">
                             <tr>
+                            <th scope="col">#</th>
                                 <td>Rol </td>
                                 <td>Descripcion del Rol </td>
                                 <td>Estado del rol </td>
@@ -148,6 +172,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         </thead>
                         <tfoot class="bg-secondary text-white">
                             <tr>
+                            <th scope="col">#</th>
                                 <td>Rol </td>
                                 <td>Descripcion del Rol </td>
                                 <td>Estado del rol </td>
@@ -161,6 +186,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         <tbody>
                             <?php foreach ($roles as $key => $value) : ?>
                                 <tr class="text-center">
+                                <th scope="row"><?= $ro++ ?></th>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>
                                     <td><?php echo ($value['rol_descripcion']); ?> </td>
                                     <td><?php echo ($value['rol_estado']); ?></td>
@@ -186,10 +212,11 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
 
                     </table>
                 </div>
-                <div class="tab-pane fade" id="permisos" role="tabpanel" aria-labelledby="roles-tab">
+                <div class="tab-pane fade" id="permisos" role="tabpanel" aria-labelledby="permisos-tab">
                     <table class="table table-sm table-hover wrap mx-auto w-100" id="tablaPermisos">
                         <thead class="bg-danger text-white">
                             <tr>
+                            <th scope="col">#</th>
                                 <td>Permiso </td>
                                 <td>Descripcion del Permiso </td>
                                 <td>Estado del permiso </td>
@@ -203,6 +230,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         </thead>
                         <tfoot class="bg-secondary text-white">
                             <tr>
+                            <th scope="col">#</th>
                                 <td>Permiso </td>
                                 <td>Descripcion del Permiso </td>
                                 <td>Estado del permiso </td>
@@ -216,6 +244,7 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
                         <tbody>
                             <?php foreach ($permisos as $key => $value) : ?>
                                 <tr class="text-center">
+                                <th scope="row"><?= $pe++ ?></th>
                                     <td><?php echo ($value['permiso_nombre']); ?> </td>
                                     <td><?php echo ($value['permiso_descripcion']); ?> </td>
                                     <td><?php echo ($value['permiso_estado']); ?></td>
@@ -262,6 +291,49 @@ if (isset($_POST['btn_asigna_permiso_rol'])) {
 
                         </form>
                     </div>
+                </div>
+                <div class="tab-pane fade" id="btnRolPermit" role="tabpanel" aria-labelledby="btnRolPermit-tab">
+                    <table class="table table-sm table-hover wrap mx-auto w-100" id="tablaBtnRol">
+                        <thead class="bg-danger text-white">
+                            <tr>
+                                <td># </td>
+                                <td>Boton/Enlace </td>
+                                <td>Rol </td>
+                                <td>Estado</td>
+                                <td>Cambiar estado </td>
+
+                            </tr>
+                        </thead>
+                        <tfoot class="bg-secondary text-white">
+                            <tr>
+                                <td># </td>
+                                <td>Boton/Enlace </td>
+                                <td>Rol </td>
+                                <td>Estado</td>
+                                <td>Cambiar estado </td>
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <?php foreach ($perRolBtn as $key => $value) : ?>
+                                <tr class="text-center">
+                                    <td><?php echo ($brp++); ?> </td>
+                                    <td><?php echo ($value['nombre_btn_link']); ?> </td>
+                                    <td><?php echo ($value['rol_nombre']); ?> </td>                                    
+                                    <td><?php echo ($value['estado'] == 1)?'Activado':'Desactivado'; ?></td>
+                                    <td>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="btn_id" value="<?= $value['id']; ?>">
+                                            <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
+                                            <input type="hidden" name="estadoRBt" value="<?= $value['estado']; ?>">
+                                            <button class="btn <?php echo ($value['estado'] == 1) ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_permisoRol" title="<?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> rol para el boton" onclick="return confirm('¿Quieres <?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> este rol para el boton?')"><i class="fa-solid fa-power-off"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
         </div>
