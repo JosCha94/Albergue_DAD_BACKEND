@@ -282,7 +282,7 @@ class Consulta_RolesPermisos{
     public function listarRolesXBtn($conexion)
     {
         try {
-            $sql = "CALL SP_select_permisos_rolBtn_admin()";
+            $sql = "CALL SP_select_permisos_RolesArea_admin()";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $user = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -302,18 +302,18 @@ class Consulta_RolesPermisos{
     public function cambiar_estado_permiso_rol($conexion, $BtnIdId, $RolId, $estado)
     {
         try {
-            $sql = "CALL SP_update_estado_Per_RolBtn_admin($BtnIdId, $RolId, $estado)";
+            $sql = "CALL SP_update_estado_RolesArea_admin($BtnIdId, $RolId, $estado)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
             $estado='bienRB';
 
         } catch (PDOException $e) {
-            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
-              <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
               <strong>Error!</strong> Debido a un problema, no se pudo cambiar el estado del rol para el boton, intentelo mas tarde
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> -->
+            </div>
 
             <?php
             $estado='mal';

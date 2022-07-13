@@ -318,15 +318,15 @@ $brp = 1;
                             <?php foreach ($perRolBtn as $key => $value) : ?>
                                 <tr class="text-center">
                                     <td><?php echo ($brp++); ?> </td>
-                                    <td><?php echo ($value['nombre_btn_link']); ?> </td>
+                                    <td><?php echo ($value['area_nombre']); ?> </td>
                                     <td><?php echo ($value['rol_nombre']); ?> </td>                                    
                                     <td><?php echo ($value['estado'] == 1)?'Activado':'Desactivado'; ?></td>
                                     <td>
                                         <form action="" method="post">
-                                            <input type="hidden" name="btn_id" value="<?= $value['id']; ?>">
+                                            <input type="hidden" name="btn_id" value="<?= $value['area_id']; ?>">
                                             <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
                                             <input type="hidden" name="estadoRBt" value="<?= $value['estado']; ?>">
-                                            <button class="btn <?php echo ($value['estado'] == 1) ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_permisoRol" title="<?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> rol para el boton" onclick="return confirm('¿Quieres <?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> este rol para el boton?')"><i class="fa-solid fa-power-off"></i></button>
+                                            <button class="btn <?php echo ($value['estado'] == 1) ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_permisoRol" title="<?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> rol para esta area" onclick="return confirm('¿Quieres <?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> este rol para esta area?')"><i class="fa-solid fa-power-off"></i></button>
                                         </form>
                                     </td>
                                 </tr>

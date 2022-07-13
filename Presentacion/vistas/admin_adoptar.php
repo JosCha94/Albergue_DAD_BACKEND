@@ -88,7 +88,7 @@ if(isset($_POST['agendar'])){
         $fechaHora = $fecha .' '. $hora;
         $usrId = $_POST['user_id'];
         $name = $_POST['user_nombre'];
-        $asunto = "Solicitud de adopción";
+        $asunto = utf8_decode("Solicitud de adopción");
         $msg = $_POST['mensaje'];
         $correo = $_POST['user_mail'];
         $body = "Hola <strong>".$name."</strong>, hemos revisado tu solicitud y hemos procedido a agendar una fecha para tu entrevista por videollamada <br> fecha de entrevista: <strong>" .$fechaHora. "</strong><br>

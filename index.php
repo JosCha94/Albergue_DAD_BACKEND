@@ -8,25 +8,22 @@ $conexion = conexion::conectar();
 $log = new autorizacion();
 $logueado = $log->logueado($_SESSION['usuario']);
 $rolActual = $log->RolActual($_SESSION['usuario'][2]);
-
+$_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
 $info = json_decode($_SESSION['usuario'][1]);
 
-if ($_SESSION['usuario'][6] == '') {
-    $rolPermiBtn = $log->roles_permitidos_btn($conexion);
-    $_SESSION['usuario'][6] = $rolPermiBtn;
-}
-$PermisosRolBtn = $_SESSION['usuario'][6];
+
+$PermisosRolBtn = $_SESSION['permisos'];
 
 
-$usuarios = $log->RolPermitido($PermisosRolBtn['btn_usuarios']);
-$RolPermisos = $log->RolPermitido($PermisosRolBtn['btn_RolPermisos']);
-$perritos = $log->RolPermitido($PermisosRolBtn['btn_perritos']);
-$adopciones = $log->RolPermitido($PermisosRolBtn['btn_adopciones']);
-$suscripciones = $log->RolPermitido($PermisosRolBtn['btn_suscripciones']);
-$productos = $log->RolPermitido($PermisosRolBtn['btn_productos']);
-$ventas = $log->RolPermitido($PermisosRolBtn['btn_ventas']);
-$donaciones = $log->RolPermitido($PermisosRolBtn['btn_donaciones']);
-$blog = $log->RolPermitido($PermisosRolBtn['btn_blog']);
+$usuarios = $log->RolPermitido($PermisosRolBtn['area_usuarios_admin']);
+$RolPermisos = $log->RolPermitido($PermisosRolBtn['area_RolPermisos_admin']);
+$perritos = $log->RolPermitido($PermisosRolBtn['area_perritos_admin']);
+$adopciones = $log->RolPermitido($PermisosRolBtn['area_adopciones_admin']);
+$suscripciones = $log->RolPermitido($PermisosRolBtn['area_suscripciones_admin']);
+$productos = $log->RolPermitido($PermisosRolBtn['area_productos_admin']);
+$ventas = $log->RolPermitido($PermisosRolBtn['area_ventas_admin']);
+$donaciones = $log->RolPermitido($PermisosRolBtn['area_donaciones_admin']);
+$blog = $log->RolPermitido($PermisosRolBtn['area_blog_admin']);
 
 $modulo = $_GET['modulo'] ?? '';
 
