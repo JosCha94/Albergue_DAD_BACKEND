@@ -100,11 +100,15 @@ class Consulta_adopcion{
     public function aceptar_adopcion($conexion, $ado_id, $obs)
     {
         try {
-            $sql = "CALL SP_admin_adop_aceptar($ado_id, :observaciones)";
+            $sql = "CALL SP_admin_adop_aceptar($ado_id, :observaciones, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':observaciones', $obs->getObservaciones());
             $consulta->execute();
-            $estado='bien';
+            $consulta ->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
 
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
@@ -114,9 +118,9 @@ class Consulta_adopcion{
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
-            $estado='mal';
+            $resultado='mal';
         }
-        return $estado;
+        return $resultado;
     }
 
     

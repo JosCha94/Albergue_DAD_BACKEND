@@ -71,13 +71,17 @@ if (isset($_POST['btn_aceptar'])) {
     $consulta = new Consulta_adopcion();
     $observaciones = new acpt_adopcion($obs);
     $aceptar = $consulta->aceptar_adopcion($conexion, $id, $observaciones);
-    if(!$aceptar)
+    if($aceptar== 1)
     {
+        echo '<div class="alert alert-danger">¡Ocurrio un error, al parecer la solicitud ya fue aceptada anteriormente!.</div>';
+    }elseif($aceptar == 2){
         echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser aceptada!.</div>';
-    }else{
+        
+    }elseif($aceptar == 3){
         echo "<meta http-equiv='refresh' content='3'; url=index.php?modulo=adoptar>";
         echo '<div class="alert alert-success">¡La adopcion ha sido aceptada!.</div>';
     }
+
 }
 
 //EMAIL

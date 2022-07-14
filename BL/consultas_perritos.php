@@ -63,7 +63,7 @@ Class Consulta_perrito
     public function insertar_perrito($conexion, $perro)
     {
         try {
-            $sql = "CALL SP_admin_insertar_perrito(:nombre, :peso, :tamano, :fNacimiento, :sexo, :actividad, :descripcion)";
+            $sql = "CALL SP_admin_insertar_perrito(:nombre, :peso, :tamano, :fNacimiento, :sexo, :actividad, :descripcion, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':nombre', $perro->getPerro_nombre());
             $consulta->bindValue(':peso', $perro->getPerro_peso());
@@ -73,7 +73,12 @@ Class Consulta_perrito
             $consulta->bindValue(':actividad', $perro->getPerro_actividad());
             $consulta->bindValue(':descripcion', $perro->getPerro_descripcion()); 
             $consulta->execute();
-            $estado = 'bien';
+
+            $consulta ->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -82,9 +87,9 @@ Class Consulta_perrito
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
-            $estado = 'fallo';
+            $resultado = 'fallo';
         }
-        return $estado;
+        return $resultado;
         
     }
 
@@ -161,7 +166,7 @@ Class Consulta_perrito
     public function update_perritoAdmin($conexion, $id, $perro)
     {
         try {
-            $sql = "CALL SP_admin_update_perrito($id, :nombre, :peso, :tamano, :nacimiento, :sexo, :actividad, :descripcion, :estado)";
+            $sql = "CALL SP_admin_update_perrito($id, :nombre, :peso, :tamano, :nacimiento, :sexo, :actividad, :descripcion, :estado, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':nombre', $perro->getPerro_nombre());
             $consulta->bindValue(':peso', $perro->getPerro_peso());
@@ -172,7 +177,12 @@ Class Consulta_perrito
             $consulta->bindValue(':descripcion', $perro->getPerro_descripcion()); 
             $consulta->bindValue(':estado', $perro->getPerro_estado()); 
             $consulta->execute();
-            $estado = 'bien';
+            
+            $consulta ->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -181,9 +191,9 @@ Class Consulta_perrito
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
-            $estado = 'fallo';
+            $resultado = 'fallo';
         }
-        return $estado;
+        return $resultado;
     }
 
     public function delete_foto($conexion, $f_id){
