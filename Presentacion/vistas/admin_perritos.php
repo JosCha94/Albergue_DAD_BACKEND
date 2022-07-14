@@ -45,13 +45,15 @@ if (isset($_POST['btnInsert'])) {
     if (count($errores) == 0) {
         $estado = $consulta->insertar_perrito($conexion, $add_perro);
 
-        if ($estado == 'fallo') {
-        } else {
+        if ($estado == 2) {
+            echo '<div class="alert alert-danger">¡Ocurrio un error! el registro no pudo ser añadido.</div>';
+
+        } elseif($estado == 3) {
+            echo "<meta http-equiv='refresh' content='3';>";
             echo '<div class="alert alert-success">¡El nuevo perrito ha sido agregado con exito!.</div>';
         }
     }
 }
-
 if (isset($_POST['save_foto'])) {
 
     $data = $_FILES['new_foto'];
@@ -107,9 +109,10 @@ if (isset($_POST['btnUpdate'])) {
     if (count($errores) == 0) {
          $estado = $consulta->update_perritoAdmin($conexion, $id, $perro);
 
-        if (!$estado) {
-            
-        } else {
+        if ($estado == 2) {
+            echo "<meta http-equiv='refresh' content='3'>";
+            echo '<div class="alert alert-success">¡No se pudieron actualizar los datos del perrito!.</div>';
+        } elseif($estado == 3) {
             echo "<meta http-equiv='refresh' content='3'>";
             echo '<div class="alert alert-success">¡Los datos se actualizaron con éxito!.</div>';
         }
