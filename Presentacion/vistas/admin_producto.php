@@ -53,8 +53,21 @@ if (isset($_POST['registro_pdt'])) {
     if (count($errores) == 0) {
         $estado = $consulta->insetar_producto($conexion, $pdto);
 
-        if ($estado == 'fallo') {
-        } else {
+        if ($estado == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Ya existe un producto con ese nombre ingrese otro o actualice el producto ya existente
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($estado == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema no se ha podido agregar el producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        } elseif($estado == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se agrego correctamente" />';
         }
     }
@@ -75,8 +88,21 @@ if (isset($_POST['update_pdt'])) {
     if (count($errores) == 0) {
         $estado = $consulta->update_producto($conexion, $pdto, $idProduct);
 
-        if ($estado == 'fallo') {
-        } else {
+        if ($estado == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Ya existe un producto con ese nombre ingrese otro o actualice el producto ya existente
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($estado == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema no se ha podido actualizar el producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        } elseif($estado == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
         }
     }
@@ -111,9 +137,14 @@ if (isset($_POST['guardarImgPdt'])) {
     $img = new img_producto($idpdt, $fotoNombreNew, $foto, $extR);
     $consulta = new Consulta_producto();
     $estado = $consulta->insertar_fotoProducto($conexion, $img);
-    if ($estado == 'fallo') {
-        // echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&error=La imagen del producto no se agrego correctamente" />';
-    } else {
+    if ($estado == '2') {
+        ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un error no se ha podido agregar la foto del producto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php   
+    } elseif ($estado == '3') {
         echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-producto&formTipo=updateProduct&mensaje=La imagen del producto se agrego correctamente" />';
     }
 }

@@ -46,7 +46,7 @@ class Consulta_producto
     public function insetar_producto($conexion, $pdto)
     {
         try {
-            $sql = "CALL SP_insertar_producto_admin(:categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
+            $sql = "CALL SP_insertar_producto_admin(:categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':categoria', $pdto->getProduct_categoria());
             $consulta->bindParam(':nombre', $pdto->getProduct_nombre());
@@ -56,9 +56,13 @@ class Consulta_producto
             $consulta->bindParam(':tamano', $pdto->getProduct_size_perro());
             $consulta->bindParam(':estado', $pdto->getProduct_estado()); 
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
-            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
                     <strong>Error!</strong><br> Debido a un problema no se ha podido agregar el producto, intentelo mas tarde
@@ -148,7 +152,7 @@ class Consulta_producto
     public function update_producto($conexion, $pdto, $id)
     {
         try {
-            $sql = "CALL SP_update_producto_admin($id, :categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado)";
+            $sql = "CALL SP_update_producto_admin($id, :categoria, :nombre, :precio, :stock, :descrip, :tamano, :estado, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':categoria', $pdto->getProduct_categoria());
             $consulta->bindParam(':nombre', $pdto->getProduct_nombre());
@@ -158,7 +162,11 @@ class Consulta_producto
             $consulta->bindParam(':tamano', $pdto->getProduct_size_perro());
             $consulta->bindParam(':estado', $pdto->getProduct_estado()); 
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -281,14 +289,18 @@ class Consulta_producto
     public function insertar_fotoProducto($conexion, $img)
     {
         try {
-            $sql = "CALL SP_agrega_img_producto_id_admin(:p_id, :fNombre, :foto, :fTipo)";
+            $sql = "CALL SP_agrega_img_producto_id_admin(:p_id, :fNombre, :foto, :fTipo, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':p_id', $img->getId_producto());
             $consulta->bindValue(':fNombre', $img->getImg_producto_nombre());
             $consulta->bindValue(':foto', $img->getImg_producto_foto());
             $consulta->bindValue(':fTipo', $img->getImg_producto_tipo());
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -375,17 +387,21 @@ class Consulta_categoria{
     public function insetar_categoria($conexion, $cat)
     {
         try {
-            $sql = "CALL SP_insert_categoria_admin(:categoria, :descrip)";
+            $sql = "CALL SP_insert_categoria_admin(:categoria, :descrip, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':categoria', $cat->getCat_nombre());
             $consulta->bindParam(':descrip', $cat->getCat_descripcion()); 
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong>Error!</strong><br> Debido a un problema no se ha podido agregar el producto, intentelo mas tarde
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido agregar la categoria, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
@@ -415,12 +431,16 @@ class Consulta_categoria{
     public function update_categoria($conexion, $cat, $id)
     {
         try {
-            $sql = "CALL SP_update_categoria_admin($id, :categoria, :descrip)";
+            $sql = "CALL SP_update_categoria_admin($id, :categoria, :descrip, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':categoria', $cat->getCat_nombre());
             $consulta->bindParam(':descrip', $cat->getCat_descripcion()); 
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
             //  echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
