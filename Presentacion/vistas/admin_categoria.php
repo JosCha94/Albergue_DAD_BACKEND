@@ -40,8 +40,21 @@ if (isset($_POST['registro_cat'])) {
     if (count($errores) == 0) {
         $estado = $consulta->insetar_categoria($conexion, $catego);
 
-        if ($estado == 'fallo') {
-        } else {
+        if ($estado == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Ya existe esa categoria, ingrese otro nombre de categoria o actualice la categoria ya existente
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($estado == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema no se ha podido agregar la categoria, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        } elseif($estado == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=La Categoria se agrego correctamente" />';
         }
     }
@@ -57,9 +70,27 @@ if (isset($_POST['update_cat'])) {
     if (count($errores) == 0) {
         $estado = $consulta->update_categoria($conexion, $catego,  $idCat);
 
+        if ($estado == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Ya existe esa categoria, ingrese otro nombre de categoria
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($estado == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema no se ha podido actualizar la categoria, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        } elseif($estado == 3) {
+            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-categoria&formTipo=updateCategoria&mensaje=La categoria se actualizo correctamente" />';
+        }
+
         if ($estado == 'fallo') {
         } else {
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
+            
         }
     }
 }
@@ -94,7 +125,7 @@ if (isset($_POST['update_cat'])) {
                         <div class="row">
                             <div class="col-md-12 text-light mt-2">
                                 <label class="txt_form">Nombre Categoria </label>
-                                <input type="text" name="catCategory" class="form-control input-field" maxlength="50" minlength="5" value="<?php if (isset($categoria)) echo $categoria ?>" required>
+                                <input type="text" name="catCategory" class="form-control input-field" maxlength="50" minlength="4" value="<?php if (isset($categoria)) echo $categoria ?>" required>
                             </div>
                             <div class="col-md-12 text-light mt-2">
                                 <label class="txt_form">Descripción de la Categoria </label>
