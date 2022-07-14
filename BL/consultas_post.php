@@ -22,14 +22,18 @@ class Consulta_post
     public function insertarPost($conexion,$id,$rol,$post)
     {
         try {
-            $sql = "CALL SP_insertar_post_admin($id, $rol, :autor, :titulo, :descripcion, :estado)";
+            $sql = "CALL SP_insertar_post_admin($id, $rol, :autor, :titulo, :descripcion, :estado, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':autor', $post->getPost_autor());
             $consulta->bindValue(':titulo', $post->getPost_titulo());
             $consulta->bindValue(':descripcion', $post->getPost_descripcion());
             $consulta->bindValue(':estado', $post->getPost_estado());
             $consulta->execute();
-            $estado='bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -37,7 +41,7 @@ class Consulta_post
                 <strong>Error!</strong><br> Debido a un error no se ha podido actualizar el post, inténtelo mas tarde por favor.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        <?php  
+        <?php
             $estado='fallo';
         }
         return $estado;
@@ -79,22 +83,26 @@ class Consulta_post
     public function updatePost($conexion,$idPost, $id, $rol, $post)
     {
         try {
-            $sql = "CALL SP_update_post_admin($idPost, $id, $rol, :autor, :titulo, :descripcion, :estado)";
+            $sql = "CALL SP_update_post_admin($idPost, $id, $rol, :autor, :titulo, :descripcion, :estado, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':autor', $post->getPost_autor());
             $consulta->bindValue(':titulo', $post->getPost_titulo());
             $consulta->bindValue(':descripcion', $post->getPost_descripcion());
             $consulta->bindValue(':estado', $post->getPost_estado());
             $consulta->execute();
-            $estado='bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
-            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
-                <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
                     <strong>Error!</strong><br> Debido a un error no se ha podido actualizar el post, inténtelo mas tarde por favor.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div> -->
-            <?php            
+                </div>
+            <?php
             $estado = 'fallo';
         }
         return $estado;
@@ -139,14 +147,18 @@ class Consulta_post
     public function agregar_fotoPost($conexion, $imgid, $img, $imgTipo)
     {
         try {
-            $sql = "CALL SP_update_foto_post_admin($imgid, :foto, :fTipo)";
+            $sql = "CALL SP_update_foto_post_admin($imgid, :foto, :fTipo, @DATA)";
             $consulta = $conexion->prepare($sql);
- 
+
             $consulta->bindValue(':foto', $img);
 
             $consulta->bindValue(':fTipo', $imgTipo);
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -154,7 +166,7 @@ class Consulta_post
                     <strong>Error!</strong><br> Debido a un error no se ha podido agregar la foto del post, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            <?php            
+            <?php
             $estado = 'fallo';
         }
         return $estado;

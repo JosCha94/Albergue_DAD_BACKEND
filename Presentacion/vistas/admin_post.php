@@ -46,8 +46,14 @@ if (isset($_POST['registro_post'])) {
     if (count($errores) == 0) {
         $IPost = $consulta->insertarPost($conexion, $id, $rol, $post);
 
-        if ($IPost == 'fallo') {
-        } else {
+        if ($IPost == 2) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un error no se ha podido agregar el post, inténtelo mas tarde por favor.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        } elseif($IPost == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=blog&mensaje=El post se agrego correctamente" />';
         }
     }
@@ -67,8 +73,14 @@ if (isset($_POST['update_post'])) {
     if (count($errores) == 0) {
         $UPost = $consulta->updatePost($conexion, $idPost, $id, $rol, $post);
 
-        if ($UPost == 'fallo') {
-        } else {
+        if ($UPost == 2) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un error no se ha podido agregar el post, inténtelo mas tarde por favor.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        } elseif($UPost == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=admin_post&formTipo=updatePost&mensaje=El post se actualizo correctamente" />';
         }
     }
@@ -101,9 +113,16 @@ if (isset($_POST['guardarImgPost'])) {
     }
 
     $estadoIP = $consulta->agregar_fotoPost($conexion, $idpost, $foto, $extR);
-    if ($estado == 'fallo') {
-    } else {
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=admin_post&formTipo=updatePost&mensaje=La imagen del post se agrego correctamente" />';
+
+    if ($estadoIP == 2) {
+        ?>
+        <div class="alert alert-danger alert-dismissible fade show " role="alert">
+        <strong class="fs-3">Error!</strong><br>Debido a un error no se ha podido agregar la foto al post, inténtelo mas tarde por favor.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    <?php
+    } elseif($estadoIP == 3) {
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=admin_post&formTipo=updatePost&mensaje=La imagen del post se agrego correctamente" />';;
     }
 }
 
