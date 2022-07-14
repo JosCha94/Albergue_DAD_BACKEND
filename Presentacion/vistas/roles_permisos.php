@@ -59,8 +59,21 @@ if ($error == 'SinError') : ?>
         $Permiso_id = $_POST['selectPermiso'];
         $APRresult = $consulta->asignarPermisoRol($conexion, $Rol_Id, $Permiso_id);
 
-        if ($APRresult == 'mal') {
-        } else {
+        if ($APRresult == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>No se puede asignar el permiso al rol debia a que ya lo tiene
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($APRresult == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el permiso al rol
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        } elseif($APRresult == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se agrego un nuevo permiso al rol" />';
         }
     }

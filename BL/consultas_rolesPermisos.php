@@ -49,10 +49,14 @@ class Consulta_RolesPermisos{
     public function asignarPermisoRol($conexion, $idRol, $idPermiso)
     {
         try {
-            $sql = "CALL SP_asignar_permiso_rol_admin($idRol, $idPermiso)";
+            $sql = "CALL SP_asignar_permiso_rol_admin($idRol, $idPermiso, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
-            $resultado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             $bad = $e->getMessage();
@@ -144,14 +148,18 @@ class Consulta_RolesPermisos{
     public function update_rol($conexion, $nombreRol, $descripRol, $id)
     {
         try {
-            $sql = "CALL SP_update_Rol_admin($id, :nombre, :descrip)";
+            $sql = "CALL SP_update_Rol_admin($id, :nombre, :descrip, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':nombre', $nombreRol);
             $consulta->bindParam(':descrip', $descripRol); 
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
-              echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            //   echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
                     <strong>Error!</strong><br> Debido a un problema no se ha podido actualizar los datos del rol, intentelo mas tarde
@@ -256,17 +264,21 @@ class Consulta_RolesPermisos{
     public function update_permiso($conexion, $nombrePer, $descripPer, $id)
     {
         try {
-            $sql = "CALL SP_update_Permiso_admin($id, :nombre, :descrip)";
+            $sql = "CALL SP_update_Permiso_admin($id, :nombre, :descrip, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindParam(':nombre', $nombrePer);
             $consulta->bindParam(':descrip', $descripPer); 
             $consulta->execute();
-            $estado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
         } catch (PDOException $e) {
-            //   echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+              echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong>Error!</strong><br> Debido a un problema no se ha podido actualizar los datos del rol, intentelo mas tarde
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido actualizar los datos del permiso, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            

@@ -64,10 +64,14 @@ class Consulta_usuario
     public function asignarRol($conexion, $idUser, $idRol)
     {
         try {
-            $sql = "CALL SP_asignar_rol_admin($idUser, $idRol)";
+            $sql = "CALL SP_asignar_rol_admin($idUser, $idRol, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
-            $resultado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             $bad = $e->getMessage();
@@ -164,10 +168,14 @@ class Consulta_usuario
     public function asignarPermiso($conexion, $idUser, $idPer)
     {
         try {
-            $sql = "CALL SP_asignar_user_permiso_admin($idUser, $idPer)";
+            $sql = "CALL SP_asignar_user_permiso_admin($idUser, $idPer, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
-            $resultado = 'bien';
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             $bad = $e->getMessage();

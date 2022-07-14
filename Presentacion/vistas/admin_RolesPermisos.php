@@ -50,8 +50,21 @@ if (isset($_POST['btn_update_rol'])) {
     if (count($errores) == 0) {
          $estado = $consulta->update_rol($conexion, $rol, $rolDescrip, $idRol);
 
-        if ($estado == 'fallo') {
-        } else {
+         if ($estado == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br> Ya existe un rol con ese nombre, ingrese otro
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($estado == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema no se ha podido actualizar los datos del rol, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        } elseif($estado == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se actualizo los datos del rol" />';
         }
     }
@@ -67,8 +80,21 @@ if (isset($_POST['btn_update_per'])) {
     if (count($errores) == 0) {
          $estado = $consulta->update_permiso($conexion, $permiso, $perDescrip, $idPer);
 
-        if ($estado == 'fallo') {
-        } else {
+         if ($estado == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br> Ya existe un permiso con ese nombre, ingrese otro
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($estado == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema no se ha podido actualizar los datos del permiso, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        } elseif($estado == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se actualizo los datos del permiso" />';
         }
     }

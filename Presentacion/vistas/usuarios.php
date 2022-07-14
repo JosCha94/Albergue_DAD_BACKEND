@@ -29,8 +29,21 @@ if ($error == 'SinError') : ?>
 
         $asignaRol = $consulta->asignarRol($conexion, $idUser, $idRol);
 
-        if ($asignaRol == 'mal') {
-        } else {
+        if ($asignaRol == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>No se puede asignar el rol al uasuario debia a que ya lo tiene
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($asignaRol == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el rol al usuario
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        } elseif($asignaRol == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el rol al usuario" />';
         }
     }
@@ -76,10 +89,24 @@ if ($error == 'SinError') : ?>
 
         $asignaRol = $consulta->asignarPermiso($conexion, $idUser, $idPer);
 
-        if ($asignaRol == 'mal') {
-        } else {
+        if ($asignaRol == 1) {
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>No se puede asignar el permiso al uasuario debia a que ya lo tiene
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        <?php
+        }elseif($asignaRol == 2){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el permiso al usuario
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        } elseif($asignaRol == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el permiso especial al usuario" />';
         }
+
     }
     $us = 1;
     $ur = 1;
