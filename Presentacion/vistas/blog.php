@@ -46,7 +46,8 @@ if (isset($_POST['eliminar_post'])){  //si se presiono el boton eliminar
 <div class="row">
     <div class="col-sm-12">
         <div class="my-3 ">
-            <table class="table table-sm table-hover" id="tablaBlog">
+        <div class="table-responsive">
+            <table class="table table-hover" id="tablaBlog">
                 <thead class="bg-danger text-white">
                     <tr>
                         <td>Id </td>
@@ -102,7 +103,7 @@ if (isset($_POST['eliminar_post'])){  //si se presiono el boton eliminar
               <?php endforeach; ?>
                 </tbody>
             </table>
-            
+        </div>
         </div>
     </div>
 </div>
