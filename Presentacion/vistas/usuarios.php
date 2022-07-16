@@ -1,7 +1,8 @@
 <?php
 $rolPermitido = $log->activeRol($_SESSION['usuario'][2], $usuarios);
-// $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
-// $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [13]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [13]);
+$gestionUsr = $log->permisosEspeciales($_SESSION['usuario'][4], [12]);
 
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
@@ -178,12 +179,13 @@ if ($error == 'SinError') : ?>
                                         <td><?php echo ($value['usr_fecha_creacion']); ?> </td>
                                         <td><?php echo ($value['usr_fecha_modificacion']); ?> </td>
                                         <td>
-
+                                        <?php if($gestionUsr == 'true'): ?>
                                             <form action="" method="post">
                                                 <input type="hidden" name="usr_estado" value="<?= $value['usr_estado']; ?>">
                                                 <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
                                                 <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
                                             </form>
+                                        <?php endif; ?>
                                         </td>
 
                                     </tr>
@@ -234,7 +236,7 @@ if ($error == 'SinError') : ?>
                                         <td><?php echo ($value['rol_nombre']); ?> </td>
                                         <td><?php echo ($value['usr_rol_estado']); ?> </td>
                                         <td>
-
+                                        <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
                                             <form action="" method="post">
                                                 <input type="hidden" name="usrrol_estado" value="<?= $value['usr_rol_estado']; ?>">
                                                 <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
@@ -242,6 +244,7 @@ if ($error == 'SinError') : ?>
                                                 <button class="btn <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrRol" title="<?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> rol para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
 
                                             </form>
+                                        <?php endif; ?>
                                         </td>
 
                                     </tr>
@@ -269,9 +272,10 @@ if ($error == 'SinError') : ?>
                                             <option value="<?php echo ($value['rol_id']); ?>"><?php echo ($value['rol_nombre']); ?></option>
                                         <?php endforeach; ?>
                                     </select>
-
+                                    <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
                                     <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaRol">Asignar Rol</button>
                                     <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
+                                    <?php endif; ?>
 
                                 </form>
                             </div>
@@ -311,7 +315,7 @@ if ($error == 'SinError') : ?>
                                         <td><?php echo ($value['permiso_nombre']); ?></td>
                                         <td><?php echo ($value['usr_per_estado']); ?> </td>
                                         <td>
-
+                                        <?php if($gestionUsr == 'true'): ?>
                                             <form action="" method="post">
                                                 <input type="hidden" name="usrper_estado" value="<?= $value['usr_per_estado']; ?>">
                                                 <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
@@ -319,6 +323,7 @@ if ($error == 'SinError') : ?>
                                                 <button class="btn <?php echo ($value['usr_per_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrPerEsp" title="<?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> permiso para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este permiso para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
 
                                             </form>
+                                        <?php endif; ?>
                                         </td>
 
                                     </tr>
@@ -345,10 +350,10 @@ if ($error == 'SinError') : ?>
                                         <option value="<?php echo ($value['permiso_id']); ?>"><?php echo ($value['permiso_nombre']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-
+                                <?php if($gestionUsr == 'true'): ?>
                                 <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaPermiso">Asignar Permiso</button>
                                 <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
-
+                                <?php endif; ?>
                             </form>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ $rolPermitido= $log->activeRol($_SESSION['usuario'][2], $productos);
 $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [9]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [9]);
 
+
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
         $error = 'Debe iniciar sesión para poder visualizar este pagina';
@@ -65,11 +66,10 @@ $cat = 1;
                         <td style="width:500px">Detalle </td>
                         <td>Tamaño</td>
                         <td>Fecha creación</td>
-                        <td>Fecha modificación</td>
-                        <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
+                        <td>Fecha modificación</td>                        
                         <td>Editar</td>
                         <td>Habilitar/Deshabilitar</td>
-                        <?php endif;?>
+                       
 
                     </tr>
                 </thead>
@@ -85,10 +85,10 @@ $cat = 1;
                         <td>Tamaño</td>
                         <td>Fecha creación</td>
                         <td>Fecha modificación</td>
-                        <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
+                        
                         <td>Editar</td>
                         <td>Habilitar/Deshabilitar</td>
-                        <?php endif;?>
+                        
 
                     </tr>
                 </tfoot>
@@ -105,22 +105,25 @@ $cat = 1;
                             <td><?php echo ($value['product_size_perro']); ?> </td>
                             <td><?php echo ($value['product_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['product_fecha_modificacion']); ?> </td>
-                            <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
+                            
                             <td>
+                                <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                                 <form action="index.php?modulo=agrega-producto&formTipo=updateProduct" method="post">
                                     <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
                                     <button class="btn btn-warning btn-xs" name="cambiarDatosProducto" title="Cambiar datos"><i class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
-
+                                <?php endif;?>
                             </td>
                             <td>
+                            <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>    
                                 <form action="" method="post">
                                     <input type="hidden" name="product_estado" value="<?= $value['product_estado']; ?>">
                                     <input type="hidden" name="product_id" value="<?= $value['product_id']; ?>">
                                     <button class="btn <?php echo ($value['product_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_pdt" title="<?php echo ($value['product_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Producto" onclick="return confirm('¿Quieres <?php echo ($value['product_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este producto?')"><i class="fa-solid fa-power-off"></i></button>
                                 </form>
-                            </td>
                             <?php endif;?>
+                            </td>
+                            
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

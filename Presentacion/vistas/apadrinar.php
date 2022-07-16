@@ -1,7 +1,7 @@
 <?php
 $rolPermitido= $log->activeRol($_SESSION['usuario'][2], $suscripciones);
-$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [8]);
-$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [8]);
+$permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [5]);
+$permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [5]);
 
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
@@ -92,6 +92,7 @@ if (isset($_POST['habi_sus'])) {
                                 <td><?= $value['suscrip_fecha_renov'] ;?></td>
                                 <td><?= $value['suscrip_fecha_termino'] ;?></td>
                                 <td>
+                                    <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
                                     <form action="" method="POST">
                                     <?php if($value['suscrip_estado'] == "Vigente"){ ?>
                                         <button class="btn btn-danger" title="Cancelar Suscripcion" name="cancel_sus" onclick="return checkDelete()"><i class="fa-solid fa-power-off"></i></button>
@@ -101,7 +102,9 @@ if (isset($_POST['habi_sus'])) {
                                         <input type="hidden" name="inpt_habil" value="<?= $value['suscrip_id'] ;?>">
                                         
                                     </form>
+                                    <?php endif; ?>
                                 </td>
+                                
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -131,6 +134,7 @@ if (isset($_POST['habi_sus'])) {
                                 <td><?= $value['s_tipo_estado']; ?></td>
                                 <td><?= $value['s_tipo_fecha_creacion']; ?></td>
                                 <td><?= $value['s_tipo_fecha_cambio']; ?></td>
+                                <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
                                 <form action="" method="POST">
                                     <td>
                                         <a href="index.php?modulo=admin_apadrinar&id=<?= urlencode(base64_encode(($value['s_tipo_id']*489554)/7854)) ;?> "class="btn btn-warning" name="edit_tipo" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -138,6 +142,7 @@ if (isset($_POST['habi_sus'])) {
                                     </td>
                                    
                                 </form>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

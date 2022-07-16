@@ -2,6 +2,7 @@
 $rolPermitido= $log->activeRol($_SESSION['usuario'][2], $blog);
 $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [10]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [10]);
+$rolAdminGen= $log->activeRol($_SESSION['usuario'][2], [2]);
 
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
@@ -38,10 +39,11 @@ if (isset($_POST['eliminar_post'])){  //si se presiono el boton eliminar
 ?>
 
 <h2 class="text-center mt-3 h1">Posts</h2>
-
+<?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
 <a href="index.php?modulo=admin_post&formTipo=insertPost" type="button" class="btn btn-primary btm-lg" data-toggle="modal" data-target="#modalBlog">
     <span>Agregar Post <i class="fa-solid fa-circle-plus"></i></apan>
 </a>
+<?php endif;?>
 <hr>
 <div class="row">
     <div class="col-sm-12">
@@ -88,16 +90,24 @@ if (isset($_POST['eliminar_post'])){  //si se presiono el boton eliminar
                             <td><?php echo ($value['post_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['post_fecha_cambio']); ?> </td>
                             <td>
+                            <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>     
                                 <form action="index.php?modulo=admin_post&formTipo=updatePost" method="post">
                                     <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
-                                    <button class="btn btn-warning btn-xs " name="editar_post" title="Editar post"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button class="btn btn-warning btn-xs " name="editar_post" title="Editar post" <?php echo($value['usr_id'] != $_SESSION['usuario'][0])?'disabled':''; ?>><i class="fa-solid fa-pen-to-square"></i></button>
                                 </form>
+                            <?php endif;?>
                             </td>    
                             <td>
+                            <?php if ($permisosRol == 'true' || $permisoEsp == 'true'):?>
                                 <form action="" method="post">
                                     <input type="hidden" name="post_id" value="<?= $value['post_id']; ?>">
-                                    <button class="btn btn-danger btn-xs " name="eliminar_post" title="Eliminar post" onclick="return confirm('¿Quieres eliminar este Post?')"><i class="fa fa-trash "></i></button>
+                                    <button class="btn btn-danger btn-xs " name="eliminar_post" title="Eliminar post" onclick="return confirm('¿Quieres eliminar este Post?')" 
+                                    <?php 
+                                    echo($value['usr_id'] != $_SESSION['usuario'][0] && $rolAdminGen != 'true')?
+                                         'disabled':''; ?>><i class="fa fa-trash "></i></button>
                                 </form>
+                                <?php endif;?>
+                            
                             </td>                         
                         </tr>                                      
               <?php endforeach; ?>

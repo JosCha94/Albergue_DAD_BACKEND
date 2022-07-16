@@ -8,10 +8,13 @@ $conexion = conexion::conectar();
 $log = new autorizacion();
 $logueado = $log->logueado($_SESSION['usuario']);
 $rolActual = $log->RolActual($_SESSION['usuario'][2]);
-$_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
+
 $info = json_decode($_SESSION['usuario'][1]);
 
-
+if($_SESSION['permisos'] == null || $_SESSION['permisos'] == ''):
+    $_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
+endif;
+// $_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
 $PermisosRolBtn = $_SESSION['permisos'];
 
 
@@ -84,7 +87,7 @@ switch ($error = 'SinError') {
                                                         case ("update-user"):  echo " - Perfil usuario"; break;
                                                         case ("admin_post"): echo " - admin Post"; break;
                                                         case ("admin_apadrinar"): echo " - admin Suscripciones"; break;
-                                                        case ("ariasBloqueos"): echo " - permisos de Areas y bloqueos"; break;
+                     
                                                     }
                                                     ?>
 
@@ -123,13 +126,6 @@ switch ($error = 'SinError') {
                                     <a class="nav-link <?php echo ($modulo == "rolesPermisos" || $modulo == "admin_roles_permisos") ? " active " : " " ?> mx-2" href="index.php?modulo=rolesPermisos">Roles y Permisos</a>
                                 </li>
                             <?php endif; ?>
-                            <?php $rolPermitRP = $log->activeRol($_SESSION['usuario'][2], $RolPermisos);
-                            if ($rolPermitRP == 'true') : ?>
-                                <li class="nav-item ">
-                                    <a class="nav-link <?php echo ($modulo == "ariasBloqueos") ? " active " : " " ?> mx-2" href="index.php?modulo=ariasBloqueos">Areas y Bloqueos</a>
-                                </li>
-                            <?php endif; ?>
-
                             <?php $rolPermitDogs = $log->activeRol($_SESSION['usuario'][2], $perritos);
                             if ($rolPermitDogs == 'true') : ?>
                                 <li class="nav-item ">
@@ -285,9 +281,6 @@ switch ($error = 'SinError') {
             if ($modulo == "admin_apadrinar") {
                 include_once "Presentacion/vistas/admin_apadrinar.php";
             }            
-            if ($modulo == "ariasBloqueos") {
-                include_once "Presentacion/vistas/arias_bloqueos.php";
-            }
 
             ?>
         </div>

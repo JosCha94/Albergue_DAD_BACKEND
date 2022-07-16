@@ -363,5 +363,31 @@ class Consulta_usuario
         }
         return $estado;
     }
+
+    public function eliminar_cuenta($conexion, $id)
+    {
+        try {
+            $sql = "CALL SP_eliminar_cuenta($id,  @DATA)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
+
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div> -->
+
+            <?php
+            $estado='mal';
+        }
+        return $estado;
+    }
 }
 ?>

@@ -3,6 +3,7 @@ $rolPermitido= $log->activeRol($_SESSION['usuario'][2], $perritos);
 $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [7]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [7]);
 
+// print_r($_SESSION['usuario'][3]);
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
         $error = 'Debe iniciar sesión para poder visualizar este pagina';
