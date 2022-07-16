@@ -40,6 +40,7 @@ $(document).ready(function () {
     $('#tipoSusci').DataTable({});
     $('#agendaAdop').DataTable({});
     $('#adopFinal').DataTable({});
+    $('#Visitas').DataTable({});
     $('#suscip').DataTable({});
     $('#tablaDonaciones').DataTable({});
     $('#tablaBlog').DataTable({});

@@ -154,7 +154,7 @@ Class Consulta_perrito
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong>Error!</strong><br> Debido a un error no se ha podido agregar el perrito, intentelo mas tarde
+                    <strong>Error!</strong><br> Debido a un error no se ha podido subir la foto, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
@@ -187,7 +187,7 @@ Class Consulta_perrito
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
                 <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong>Error!</strong><br> Debido a un error no se ha podido actualizar los datos del producto, intentelo mas tarde
+                    <strong>Error!</strong><br> Debido a un error no se ha podido actualizar los datos del perrito, intentelo mas tarde
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php            
@@ -207,7 +207,7 @@ Class Consulta_perrito
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede mostrar las imagenes
+                <strong class="fs-3">Error!</strong><br>Debido a un problema, la foto no se ha podido eliminar
             </div>
 
             <?php
@@ -217,7 +217,7 @@ Class Consulta_perrito
 
 
 
-
+    
 
 }
 

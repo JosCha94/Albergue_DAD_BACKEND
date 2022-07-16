@@ -40,7 +40,7 @@ class Consulta_adopcion{
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
               <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+                <strong>Error!</strong> debido a un error en la base de datos, no se pudo deshabilitar el producto
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -87,7 +87,7 @@ class Consulta_adopcion{
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
               <div class="alert alert-danger alert-dismissible fade show " role="alert">
-              <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+              <strong>Error!</strong> debido a un error en la base de datos, no se pudo deshabilitar el producto
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
@@ -97,10 +97,10 @@ class Consulta_adopcion{
         return $estado;
     }
 
-    public function aceptar_adopcion($conexion, $ado_id, $obs)
+    public function aceptar_adopcion($conexion, $ado_id, $perro_id, $obs)
     {
         try {
-            $sql = "CALL SP_admin_adop_aceptar($ado_id, :observaciones, @DATA)";
+            $sql = "CALL SP_admin_adop_aceptar($ado_id, $perro_id, :observaciones, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':observaciones', $obs->getObservaciones());
             $consulta->execute();
@@ -114,7 +114,7 @@ class Consulta_adopcion{
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+                <strong>Error!</strong> debido a un error en la base de datos, no se pudo aceptar la adopción
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
@@ -132,19 +132,73 @@ class Consulta_adopcion{
             $mail = $consulta->fetch(PDO::FETCH_ASSOC);
             return $mail;
         } catch (PDOException $e) {
-            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
-            <!-- <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                <strong>Error!</strong> Devido a un error en la base de datos, no se pudo deshabilitar el producto
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong>Error!</strong> debido a un error en la base de datos, no se pudo deshabilitar el producto
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div> -->
+            </div>
             <?php
 
         }
     }
 
-
+    public function listar_visitas($conexion) {
+        try{
+            $sql = "CALL SP_admin_visitasAdo()";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $final = $consulta->fetchall(PDO::FETCH_ASSOC);
+            return $final;
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+        }
+    
+    }
  
+
+    public function editVisita($conexion, $id, $visita)
+    {
+        try {
+            $sql = "CALL SP_admin_insert_visita($id, :fecha, :observaciones)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindValue(':fecha', $visita->getFecha());
+            $consulta->bindValue(':observaciones', $visita->getObservaciones());
+            $consulta->execute();
+            $resultado = 'bien';
+
+        } catch (PDOException $e) {
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un error no se ha podido subir la foto, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php     
+            $resultado='mal';
+        }
+        return $resultado;
+    }
+    
+
+    public function mostrar_datosVisita($conexion, $adId) {
+        try{
+            $sql = "CALL SP_admin_visitasAdo_id($adId)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $mail = $consulta->fetch(PDO::FETCH_ASSOC);
+            return $mail;
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                <strong>Error!</strong> debido a un error en la base de datos, no se pudo deshabilitar el producto
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+
+        }
+    }
 }
 
 

@@ -21,6 +21,7 @@ $consulta = new Consulta_adopcion();
 $adop = $consulta->ad_listar_adopciones($conexion);
 $entrevista = $consulta->ad_listar_entrevista($conexion);
 $final = $consulta->ad_listar_finalizadas($conexion);
+$visita = $consulta ->listar_visitas($conexion);
 
 if(isset($_POST['acp_modal'])){
     $id= $_POST['value_modal'];
@@ -61,6 +62,9 @@ if (isset($_POST['btn_rechazar'])) {
                 </li>
                 <li class="nav-item" role="Adopciones finalizadas">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tabAdopFinal" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Adopciones finalizadas</button>
+                </li>
+                <li class="nav-item" role="Adopciones finalizadas">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tabVisitas" type="button" role="tab" aria-controls="adopciones" aria-selected="false">Visitas a adoptantes</button>
                 </li>
             </ul>
             <div class="tab-content " id="myTabContent">
@@ -146,7 +150,7 @@ if (isset($_POST['btn_rechazar'])) {
                                 <th scope="col">Estado de adopción</th>
                                 <th scope="col">Fecha de adopción</th>
                                 <th scope="col">Fecha de actualización</th>
-                                <th scope="col">Editar</th>
+                                <th scope="col">Visitas</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -166,15 +170,50 @@ if (isset($_POST['btn_rechazar'])) {
                                                 }else{echo"<td class='bg-success text-white'>$value[adop_estado]</td>";}?>
                                     <td><?= $value['adop_fecha'] ?></td>
                                     <td><?= $value['adop_fecha_cambio'] ?></td>
-                                    <?php if($value['adop_estado'] == 'Rechazada'){ ?>
+                                    <?php if($value['adop_estado'] == 'Vigente'){ ?>
                                     <td class="text-center">
-                                        <a href="index.php?modulo=admin_perritos&formTipo=updatePerrito&id=<?= urlencode(base64_encode(($value['perro_id']*489554)/7854)) ;?>" class="btn btn-warning" title="EDITAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="index.php?modulo=admin_adoptar&formTipo=editVisita&id=<?= urlencode(base64_encode(($value['adop_id']*94269456)/8752)); ?>" class="btn btn-warning" title="EDITAR VISITAS"><i class="fa-solid fa-dog"></i></a>
                                     </td>
                                     <?php }else{ ?>
                                     <td class="text-center">
                                         --
                                     </td>  
                                     <?php } ?>
+                                </tr>
+                            <?php endforeach; ?>  
+                        </tbody>
+                    </table>        
+                </div>
+                <div class="tab-pane fade" id="tabVisitas" role="tabpanel" aria-labelledby="">
+                    <a href="index.php?modulo=admin_perritos&formTipo=insertPerrito" type="button" class="btn btn-primary btn-lg mt-2" data-toggle="modal" data-target="#modalProducto">
+                        <span>Agendar visita <i class="fa-solid fa-circle-plus"></i></apan>
+                    </a>
+                    <hr>
+                    <table id="Visitas" class="table table-sm table-hover">
+                        <thead class="table-heading text-white bg-danger">
+                            <tr class="text-center">
+                                <th scope="col">ID visita</th>
+                                <th scope="col">Adoptante</th>
+                                <th scope="col">fecha de adopción</th>
+                                <th scope="col">Estado de adopción</th>
+                                <th scope="col">Nombre del perrito</th>
+                                <th scope="col">Perro estado</th>
+                                <th scope="col">Observaciones de Visita</th>
+                                <th scope="col">Fecha de visita</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($visita as $adopcion => $value) : ?>
+                                <tr class="text-center">
+                                    <td><?= $value['id'] ?></td>
+                                    <td><?= $value['adop_dueño'] ?></td>
+                                    <td><?= $value['adop_fecha'] ?></td>
+                                    <td><?= $value['adop_estado'] ?></td>
+                                    <td><?= $value['perro_nombre'] ?></td>
+                                    <td><?= $value['perro_estado'] ?></td>
+                                    <td><?= $value['comentarios_visita'] ?></td>
+                                    <td><?= $value['fecha_visita'] ?></td>
+                                   
                                 </tr>
                             <?php endforeach; ?>  
                         </tbody>

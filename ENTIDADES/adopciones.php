@@ -88,5 +88,33 @@ class acpt_adopcion{
     }
 }
 
+class editVisita{
+    private $fecha;
+    private $observaciones;
+
+    public function __construct($fecha, $observaciones){
+        
+        $this->fecha = $fecha;
+        $this->observaciones = $observaciones;
+    }
+
+    public function getFecha(){
+        return $this->fecha;
+    }
+    public function getObservaciones(){
+        return $this->observaciones;
+    }
+
+
+
+    public function setFecha($fecha){
+        $this->fecha = $fecha;
+    }
+    
+    public function setObservaciones($observaciones){
+        $this->observaciones = $observaciones;
+    }
+}
+
 
 ?>

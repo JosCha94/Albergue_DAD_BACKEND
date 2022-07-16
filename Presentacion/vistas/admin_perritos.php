@@ -100,15 +100,15 @@ if (isset($_POST['btnUpdate'])) {
     $p_nacimiento = $_POST['nacimiento'];
     $p_sexo = $_POST['sexo'];
     $p_actividad = $_POST['actividad'];
-    $p_estado = $_POST['estado'];
     $p_descripcion = $_POST['descripcion'];
+    $p_estado = $_POST['estado'];
     $perro = new updt_perrito($p_name, $p_peso, $p_tamano, $p_nacimiento, $p_sexo, $p_actividad,  $p_descripcion, $p_estado);
 
     $consulta = new Consulta_perrito();
     $errores = $consulta->Validar_registroPerrito($perro);
     if (count($errores) == 0) {
          $estado = $consulta->update_perritoAdmin($conexion, $id, $perro);
-
+         var_dump($estado);
         if ($estado == 2) {
             echo "<meta http-equiv='refresh' content='3'>";
             echo '<div class="alert alert-success">¡No se pudieron actualizar los datos del perrito!.</div>';

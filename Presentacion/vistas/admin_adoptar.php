@@ -33,6 +33,9 @@ $conexion = conexion::conectar();
 $consulta = new Consulta_adopcion();
 $data = $consulta->mostrar_datosAdo($conexion, $id);
 $user = $consulta->user_mail($conexion, $id);
+$datos_visita = $consulta ->mostrar_datosVisita($conexion, $id);
+
+
 
 
 
@@ -67,10 +70,11 @@ if (isset($_POST['rechazar'])) {
 
 //ACEPTA LA ADOPCION
 if (isset($_POST['btn_aceptar'])) {
+    $perro_id = $data['perro_id'];
     $obs = $_POST['observaciones'];
     $consulta = new Consulta_adopcion();
     $observaciones = new acpt_adopcion($obs);
-    $aceptar = $consulta->aceptar_adopcion($conexion, $id, $observaciones);
+    $aceptar = $consulta->aceptar_adopcion($conexion, $id, $perro_id, $observaciones);
     if($aceptar== 1)
     {
         echo '<div class="alert alert-danger">¡Ocurrio un error, al parecer la solicitud ya fue aceptada anteriormente!.</div>';
@@ -118,7 +122,7 @@ if(isset($_POST['agendar'])){
                 $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                 //Recipients
-                $mail->setFrom('albergue.adoptar.perritos@gmail.com', "ALBERGUE DE PERRITOS");
+                $mail->setFrom('albergue.adoptar.perritos@gmail.com', "Albergue de perritos");
                 $mail->addAddress($correo, $name);     //Add a recipient
 
                 //Content
@@ -134,6 +138,29 @@ if(isset($_POST['agendar'])){
             }
         }
     }
+
+}
+
+if(isset($_POST['editVisita'])){
+    $id = intval(round((base64_decode(urldecode($en_id)))/94269456*8752));
+    $fechaVisita = $_POST['fecha_visi'];
+    $obsVisita = $_POST['obsVisita'];
+    $consulta = new Consulta_adopcion();
+    $visita = new editVisita($fechaVisita, $obsVisita);
+    $insert_visita = $consulta->editVisita($conexion, $id, $visita);
+    if(!$insert_visita){
+        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser aceptada!.</div>';
+
+    }else{
+        echo "<meta http-equiv='refresh' content='3'>";
+        echo '<div class="alert alert-success">¡Los datos han sido agregados!.</div>';
+
+    }
+
+    // echo $id;
+    // echo $fechaVisita;
+    // echo $obsVisita;
+    // var_dump($id);
 }
 
 ?>
@@ -272,8 +299,56 @@ if(isset($_POST['agendar'])){
         </div>
     </form>
 </div>
-
-
+<?php elseif ($formTipo == 'editVisita') : ?>
+<div class="container w-75 my-5 p-5  bg-secondary bg-opacity-25 shadow-lg">
+    <form action="" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="my-3 table table-bordered table-hover">
+                    <tr>
+                        <td>Nombre del Perro:</td>
+                        <td><?php echo $datos_visita['perro_nombre']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Nombre de adoptante</td>
+                        <td><?php echo $datos_visita['adop_dueño']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de adopcion</td>
+                        <td><?php echo $datos_visita['adop_fecha']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>estado de adopción</td>
+                        <td><?php echo $datos_visita['adop_estado']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Estado del perrito</td>
+                        <td><?php echo $datos_visita['perro_estado']; ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6 text-center my-3">
+                <img class="img-fluid" src="data:image/<?php echo $data['img_perro_tipo']; ?>;base64,<?php echo base64_encode($data['img_perro_foto']); ?>" alt="Laski perro adopcion">
+            </div>
+        </div>
+        <div class="p-3">
+            <input type="date" name="fecha_visi">
+            <label for="">Fecha de Visita</label>
+        </div>
+        <div class="row">
+            <div class="form-outline p-3">
+                <label class="form-label" for="observaciones">Deja tus observaciones</label>
+                <textarea class="form-control" name="obsVisita" id="observaciones"  rows="6" minlength="10" maxlength="255" required></textarea>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-6 text-center">
+                <button type="submit" class="btn btn-adopt px-5" name="editVisita"  onclick="return checkDelete()">Aceptar</button>
+            </div>
+            
+        </div>
+    </form>
+</div>
 <?php endif; ?>
 <?php else : ?>
         <div class="alert alert-danger p-5 my-5" role="alert">
