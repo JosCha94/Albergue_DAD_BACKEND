@@ -53,7 +53,7 @@ $cat = 1;
 <div class="row">
     <div class="col-sm-12">
         <div class="my-3 ">
-            <table class="table table-sm table-hover w-100" id="tablaProductos">
+            <table class="table table-hover" id="tablaProductos">
                 <thead class="bg-danger text-white">
                     <tr>
                     <th scope="col">#</th>
@@ -62,7 +62,7 @@ $cat = 1;
                         <td>Categoria </td>
                         <td>Precio </td>
                         <td>Stock</td>
-                        <td WIDTH="150">Detalle </td>
+                        <td style="width:500px">Detalle </td>
                         <td>Tamaño</td>
                         <td>Fecha creación</td>
                         <td>Fecha modificación</td>
@@ -81,7 +81,7 @@ $cat = 1;
                         <td>Categoria </td>
                         <td>Precio </td>
                         <td>Stock</td>
-                        <td WIDTH="150">Detalle </td>
+                        <td style="width:500px">Detalle </td>
                         <td>Tamaño</td>
                         <td>Fecha creación</td>
                         <td>Fecha modificación</td>
@@ -101,7 +101,7 @@ $cat = 1;
                             <td><?php echo ($value['cat_nombre']); ?></td>
                             <td><?php echo ($value['product_precio']); ?> </td>
                             <td><?php echo ($value['product_stock']); ?> </td>
-                            <td WIDTH="150"><?php echo ($value['product_descripcion']); ?> </td>
+                            <td style="width:500px"><?php echo ($value['product_descripcion']); ?> </td>
                             <td><?php echo ($value['product_size_perro']); ?> </td>
                             <td><?php echo ($value['product_fecha_creacion']); ?> </td>
                             <td><?php echo ($value['product_fecha_modificacion']); ?> </td>
