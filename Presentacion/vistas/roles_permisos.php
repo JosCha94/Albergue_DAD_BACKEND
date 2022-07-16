@@ -18,8 +18,7 @@ if ($error == 'SinError') : ?>
     $rolPer = $consulta->listarRolesPermisos($conexion);
     $roles = $consulta->listarRoles($conexion);
     $permisos = $consulta->listarPermisos($conexion);
-    $perRolBtn = $consulta->listarRolesXArea($conexion);
-    $areas = $consulta->listarAreas($conexion);
+
 
     if (isset($_POST['cambia_estado_rol'])) {
         $Rol_Id = $_POST['rol_id'];
@@ -73,11 +72,10 @@ if ($error == 'SinError') : ?>
                 <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el permiso al rol
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-    <?php
+        <?php
         } elseif ($APRresult == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se agrego un nuevo permiso al rol" />';
         }
-        
     }
 
     if (isset($_POST['btn_insert_rol'])) {
@@ -87,7 +85,7 @@ if ($error == 'SinError') : ?>
 
 
         if ($Rolresult == 1) {
-    ?>
+        ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
                 <strong class="fs-3">Error!</strong><br>No se puede agregar este rol porque ya hay un rol con ese nombre
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -99,22 +97,20 @@ if ($error == 'SinError') : ?>
                 <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede agregar el rol
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-    <?php
+        <?php
         } elseif ($Rolresult == 3) {
             echo "<meta http-equiv='refresh' content='3';>";
             echo '<div class="alert alert-success">¡Se agrego un nuevo rol!.</div>';
-
         }
-        
     }
 
     if (isset($_POST['btn_asigna_rol_area'])) {
         $Rol_Id = $_POST['selectRol'];
         $PArea_id = $_POST['selectArea'];
-        $RAresult = $consulta->asignarRolArea($conexion, $Rol_Id, $PArea_id);    
+        $RAresult = $consulta->asignarRolArea($conexion, $Rol_Id, $PArea_id);
 
         if ($RAresult == 1) {
-    ?>
+        ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
                 <strong class="fs-3">Error!</strong><br>No se puede asignar el rol al area debido a que ya lo tiene
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -131,7 +127,6 @@ if ($error == 'SinError') : ?>
             echo "<meta http-equiv='refresh' content='3';>";
             echo '<div class="alert alert-success">¡Se agrego un nuevo rol al area!.</div>';
         }
-        
     }
 
     if (isset($_POST['cambia_estado_permisoRol'])) {
@@ -164,9 +159,6 @@ if ($error == 'SinError') : ?>
                     </li>
                     <li class="nav-item" role="Permisos">
                         <button class="nav-link" id="permisos-tab" data-bs-toggle="tab" data-bs-target="#permisos" type="button" role="tab" aria-controls="permisos" aria-selected="false">Permisos</button>
-                    </li>
-                    <li class="nav-item" role="Permisos">
-                        <button class="nav-link" id="btnRolPermit-tab" data-bs-toggle="tab" data-bs-target="#btnRolPermit" type="button" role="tab" aria-controls="btnRolPermit" aria-selected="false">Botones y Roles permitidos</button>
                     </li>
                 </ul>
                 <div class="tab-content " id="myTabContent">
@@ -360,7 +352,7 @@ if ($error == 'SinError') : ?>
                             <div class="w-75 my-5 mx-auto">
                                 <form action="" method="post">
                                     <div class="form-outline mb-3">
-                                        <label for="selectRol" >Rol</label>
+                                        <label for="selectRol">Rol</label>
                                         <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol" required>
                                             <option selected></option>
                                             <?php foreach ($roles as $key => $value) : ?>
@@ -376,94 +368,23 @@ if ($error == 'SinError') : ?>
                                             <option value="<?php echo ($value['permiso_id']); ?>"><?php echo ($value['permiso_nombre']); ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                        
+
                                     <div class="d-flex justify-content-evenly">
-                                    <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asigna_permiso_rol">Asignar Permiso</button>
-                                    <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
-                                </div>
+                                        <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asigna_permiso_rol">Asignar Permiso</button>
+                                        <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
+                                    </div>
 
                                 </form>
 
-                            </div>
-                        </div>
-                    </div>
-                        <div class="tab-pane fade" id="btnRolPermit" role="tabpanel" aria-labelledby="btnRolPermit-tab">
-                            <table class="table table-sm table-hover wrap mx-auto w-100" id="tablaBtnRol">
-                                <thead class="bg-danger text-white">
-                                    <tr>
-                                        <td># </td>
-                                        <td>Area </td>
-                                        <td>Rol </td>
-                                        <td>Estado</td>
-                                        <td>Cambiar estado </td>
-
-                                    </tr>
-                                </thead>
-                                <tfoot class="bg-secondary text-white">
-                                    <tr>
-                                        <td># </td>
-                                        <td>Area </td>
-                                        <td>Rol </td>
-                                        <td>Estado</td>
-                                        <td>Cambiar estado </td>
-
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <?php foreach ($perRolBtn  as $key => $value) : ?>
-                                        <tr class="text-center">
-                                            <td><?php echo ($brp++); ?> </td>
-                                            <td><?php echo ($value['area_nombre']); ?> </td>
-                                            <td><?php echo ($value['rol_nombre']); ?> </td>
-                                            <td><?php echo ($value['estado'] == 1) ? 'Activado' : 'Desactivado'; ?></td>
-                                            <td>
-                                                <form action="" method="post">
-                                                    <input type="hidden" name="btn_id" value="<?= $value['area_id']; ?>">
-                                                    <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                                    <input type="hidden" name="estadoRBt" value="<?= $value['estado']; ?>">
-                                                    <button class="btn <?php echo ($value['estado'] == 1) ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_permisoRol" title="<?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> rol para esta area" onclick="return confirm('¿Quieres <?php echo ($value['estado'] == 1) ? 'Desactivar' : 'Activar' ?> este rol para esta area?')"><i class="fa-solid fa-power-off"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                            <div class="py-3 my-3 shadow-lg bg-secondary bg-opacity-75">
-                                <h2 class="my-4 text-center">Asignar Rol al Area</h2>
-                                <div class="w-75 my-5 mx-auto">
-                                <form action="" method="post">
-                                <div class="form-outline mb-3">
-                                    <label for="selectRol">Rol</label>
-                                    <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectRol" name="selectRol" required>
-                                        <option selected></option>
-                                        <?php foreach ($roles as $key => $value) : ?>
-                                            <option value="<?php echo ($value['rol_id']); ?>"><?php echo ($value['rol_nombre']); ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-outline mb-3">
-                                    <label for="selectBtn">Area</label>
-                                    <select class="form-select form-select-lg" aria-label="form-select-lg example" id="selectBtn" name="selectArea" required>
-                                        <option selected></option>
-                                        <?php foreach ($areas as $key => $value) : ?>
-                                            <option value="<?php echo ($value['area_id']); ?>"><?php echo ($value['area_nombre']); ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                    <div class="d-flex justify-content-evenly">
-                                    <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asigna_rol_area">Asignar Rol</button>
-                                    <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
-                                </div>
-                                </form>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    <?php else : ?>
-        <div class="alert alert-danger p-5 my-5" role="alert">
-            <?php echo $error; ?>
-        </div>
-    <?php endif; ?>
+    </div>
+<?php else : ?>
+    <div class="alert alert-danger p-5 my-5" role="alert">
+        <?php echo $error; ?>
+    </div>
+<?php endif; ?>

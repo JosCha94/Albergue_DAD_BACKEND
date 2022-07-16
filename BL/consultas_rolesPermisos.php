@@ -369,12 +369,12 @@ class Consulta_RolesPermisos{
             
 
         } catch (PDOException $e) {
-            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
-            ?>
-              <div class="alert alert-danger alert-dismissible fade show " role="alert">
-              <strong>Error!</strong> Debido a un problema, no se pudo listar las areas disponibles
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            // ?>
+            //   <div class="alert alert-danger alert-dismissible fade show " role="alert">
+            //   <strong>Error!</strong> Debido a un problema, no se pudo listar las areas disponibles
+            //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            // </div>
 
             <?php
            
