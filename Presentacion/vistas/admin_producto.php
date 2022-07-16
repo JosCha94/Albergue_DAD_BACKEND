@@ -103,7 +103,9 @@ if (isset($_POST['update_pdt'])) {
                 </div>           
              <?php
         } elseif($estado == 3) {
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
+            echo "<meta http-equiv='refresh' content='3'>";
+            echo '<div class="alert alert-success">¡El producto se actualizo correctamente!</div>';
+            // echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
         }
     }
 }

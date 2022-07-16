@@ -171,6 +171,32 @@ class Consulta_RolesPermisos{
         return $estado;
     }
 
+    public function insert_rol($conexion, $nombreRol, $descripRol)
+    {
+        try {
+            $sql = "CALL SP_insert_rol_admin(:nombre, :descrip, @DATA)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':nombre', $nombreRol);
+            $consulta->bindParam(':descrip', $descripRol); 
+            $consulta->execute();
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $estado = $resnum['rnum'];
+        } catch (PDOException $e) {
+            //    echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong>Error!</strong><br> Debido a un problema no se ha podido agregar el nuevo rol, intentelo mas tarde
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php            
+            $estado = 'fallo';
+        }
+        return $estado;
+    }
+
     // ------------------------------------------------
     //                  PERMISOS
     // ------------------------------------------------
@@ -288,10 +314,10 @@ class Consulta_RolesPermisos{
     }
 
     // ------------------------------------------------
-    //                  Roles PERMISOS btn
+    //                  Roles por Area
     // ------------------------------------------------
 
-    public function listarRolesXBtn($conexion)
+    public function listarRolesXArea($conexion)
     {
         try {
             $sql = "CALL SP_select_permisos_RolesArea_admin()";
@@ -332,6 +358,53 @@ class Consulta_RolesPermisos{
         }
         return $estado;
     }
+
+    public function listarAreas($conexion)
+    {
+        try {
+            $sql = "CALL SP_select_areas_admin()";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $area = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            
+
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+            ?>
+              <div class="alert alert-danger alert-dismissible fade show " role="alert">
+              <strong>Error!</strong> Debido a un problema, no se pudo listar las areas disponibles
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <?php
+           
+        }
+        return $area;
+    }
+
+    public function asignarRolArea($conexion, $idRol, $idArea)
+    {
+        try {
+            $sql = "CALL SP_asignar_rol_area_admin($idRol, $idArea, @DATA)";
+            $consulta = $conexion->prepare($sql);
+            $consulta->execute();
+            $consulta->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
+        } catch (PDOException $e) {
+            // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
+         ?>
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Devido a un problema no se pudo asignar el rol al Area
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        }
+        return $resultado;
+    }
+
 
 }
 

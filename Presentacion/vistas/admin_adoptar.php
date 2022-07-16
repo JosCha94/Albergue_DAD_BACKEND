@@ -60,7 +60,7 @@ if (isset($_POST['rechazar'])) {
     {
         echo '<div class="alert alert-danger">¡Ocurrio un errr, la solicitud no pudo ser rechazada!.</div>';
     }else{
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adopciones&mensaje=La solicitud se ha rechazado" />';
+        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adoptar&mensaje=La solicitud se ha rechazado" />';
     }
 }
 
