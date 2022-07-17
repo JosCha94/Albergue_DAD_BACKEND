@@ -17,6 +17,6 @@ class Consulta_donacion
             </div>
             <?php
         }
-    }   
+    }      
 }
 ?>

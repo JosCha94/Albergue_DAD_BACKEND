@@ -349,7 +349,7 @@ if (isset($_POST['elim_foto3'])){
                     </div>
                     <div class="col col-md-6">
                         <div class="form-outline mb-2">
-                            <input type="date" id="pnaci" class="form-control" name="f_nacimiento" required/>
+                            <input type="date" id="pnaci" class="form-control" name="f_nacimiento" max = "<?= date('Y-m-d');?>" required/>
                             <label class="form-label" for="f_nacimiento">Fecha de nacimiento</label>
                         </div>
                     </div>    

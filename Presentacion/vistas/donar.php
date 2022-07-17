@@ -18,6 +18,8 @@ require_once('DAL/conexion.php');
 $consulta = new Consulta_donacion();
 $donacion = $consulta->listarDonaciones($conexion);
 
+
+
 ?>
 
 <h2 class="text-center mt-3 h1">Donaciones</h2>
@@ -61,7 +63,9 @@ $donacion = $consulta->listarDonaciones($conexion);
                             <td><?php echo ($value['dona_apellidos']); ?> </td>
                             <td><?php echo ($value['dona_correo']); ?> </td>
                             <td><?php echo ($value['dona_celular']); ?> </td>
-                            <td><button data-bs-toggle="modal" data-bs-target="#fotoModal"><img src="data:image/<?php echo($value['dona_tipo_img']);?>;base64,<?php echo base64_encode( $value['dona_vaucher']); ?>" style="width:80px;" alt="albergue"></button> </td>
+                            <form action="" method="POST">
+                                <td><div class="foto-zoom"><img src="data:image/<?php echo($value['dona_tipo_img']);?>;base64,<?php echo base64_encode( $value['dona_vaucher']); ?>" style="width:80px;" alt="albergue"></div> </td>
+                            </form>
                             <td><?php echo ($value['dona_monto']); ?> </td>
                         </tr>
                     <?php endforeach; ?>
@@ -72,21 +76,7 @@ $donacion = $consulta->listarDonaciones($conexion);
     </div>
 </div>
 
-<!-- MODAL DE IMAGENS -->
 
-<div class="modal fade" id="fotoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <img class = "image-fluid" src="data:image/<?php echo($value['dona_tipo_img']);?>;base64,<?php echo base64_encode( $value['dona_vaucher']); ?>" style="width:290px;" alt="albergue">              
-      </div>
-    </div>
-  </div>
-</div>
 <?php else : ?>
         <div class="alert alert-danger p-5 my-5" role="alert">
             <?php echo $error; ?>

@@ -58,4 +58,3 @@ function checkDelete() {
     return status;
 
 }
-

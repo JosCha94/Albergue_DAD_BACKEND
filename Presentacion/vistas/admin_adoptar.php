@@ -149,7 +149,7 @@ if(isset($_POST['editVisita'])){
     $visita = new editVisita($fechaVisita, $obsVisita);
     $insert_visita = $consulta->editVisita($conexion, $id, $visita);
     if(!$insert_visita){
-        echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser aceptada!.</div>';
+        echo '<div class="alert alert-danger">¡Ocurrio un error, los datos no sepudieron agregar!.</div>';
 
     }else{
         echo "<meta http-equiv='refresh' content='3'>";
@@ -157,10 +157,6 @@ if(isset($_POST['editVisita'])){
 
     }
 
-    // echo $id;
-    // echo $fechaVisita;
-    // echo $obsVisita;
-    // var_dump($id);
 }
 
 ?>
@@ -193,8 +189,8 @@ if(isset($_POST['editVisita'])){
             </div>
             <div class="form text-center">
                 <label class="mx-2" for="">Agenda una fecha</label>
-                <input class="mx-2" type="date" name="fecha" required>
-                <input class="mx-2" type="time" name="hora"required>
+                <input class="mx-2" type="date" name="fecha" id="startDate" min="<?= date('Y-m-d');?>" required>
+                <input class="mx-2" type="time" name="hora"  required>
                 <input type="hidden" name="user_nombre" value="<?php echo $user['adop_dueño']?>">
                 <input type="hidden" name="user_mail" value="<?php echo $user['usr_email']?>">
                 <input type="hidden" name="user_id" value="<?php echo $user['usr_id']?>">
