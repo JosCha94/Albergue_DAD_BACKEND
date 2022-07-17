@@ -157,10 +157,10 @@ class Consulta_adopcion{
     }
  
 
-    public function editVisita($conexion, $id, $visita)
+    public function editVisita($conexion, $id, $visita, $idUsr)
     {
         try {
-            $sql = "CALL SP_admin_insert_visita($id, :fecha, :observaciones)";
+            $sql = "CALL SP_admin_insert_visita($id, :fecha, :observaciones, $idUsr)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':fecha', $visita->getFecha());
             $consulta->bindValue(':observaciones', $visita->getObservaciones());

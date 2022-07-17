@@ -145,8 +145,6 @@ if (isset($_POST['btn_rechazar'])) {
                                 <th scope="col">Nombre del perro</th>
                                 <th scope="col">Observaciones</th>
                                 <th scope="col">Fecha de solicitud</th>
-                                <!-- <th scope="col">Fecha de última visita</th>
-                                <th scope="col">Observaciones de visitas</th> -->
                                 <th scope="col">Estado de adopción</th>
                                 <th scope="col">Fecha de adopción</th>
                                 <th scope="col">Fecha de actualización</th>
@@ -162,8 +160,6 @@ if (isset($_POST['btn_rechazar'])) {
                                     <td><?= $value['perro_nombre'] ?></td>
                                     <td><?= $value['adop_observaciones'] ?></td>
                                     <td><?= $value['adop_fecha_creacion'] ?></td>
-                                    <!-- <td><?= $value['adop_ultima_visita'] ?></td>
-                                    <td><?= $value['adop_resumen_visitas'] ?></td> -->
                                     <?php if($value['adop_estado'] == 'Rechazada'){ 
                                                 echo "<td class='bg-danger text-white'>$value[adop_estado]</td>";
                                                 
@@ -185,10 +181,6 @@ if (isset($_POST['btn_rechazar'])) {
                     </table>        
                 </div>
                 <div class="tab-pane fade" id="tabVisitas" role="tabpanel" aria-labelledby="">
-                    <a href="index.php?modulo=admin_perritos&formTipo=insertPerrito" type="button" class="btn btn-primary btn-lg mt-2" data-toggle="modal" data-target="#modalProducto">
-                        <span>Agendar visita <i class="fa-solid fa-circle-plus"></i></apan>
-                    </a>
-                    <hr>
                     <table id="Visitas" class="table table-sm table-hover">
                         <thead class="table-heading text-white bg-danger">
                             <tr class="text-center">
@@ -200,6 +192,8 @@ if (isset($_POST['btn_rechazar'])) {
                                 <th scope="col">Perro estado</th>
                                 <th scope="col">Observaciones de Visita</th>
                                 <th scope="col">Fecha de visita</th>
+                                <th scope="col">encargado de visita</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -213,6 +207,7 @@ if (isset($_POST['btn_rechazar'])) {
                                     <td><?= $value['perro_estado'] ?></td>
                                     <td><?= $value['comentarios_visita'] ?></td>
                                     <td><?= $value['fecha_visita'] ?></td>
+                                    <td><?= $value['usuario'] ?></td>
                                    
                                 </tr>
                             <?php endforeach; ?>  

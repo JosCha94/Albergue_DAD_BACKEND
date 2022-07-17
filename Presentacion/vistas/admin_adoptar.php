@@ -143,11 +143,12 @@ if(isset($_POST['agendar'])){
 
 if(isset($_POST['editVisita'])){
     $id = intval(round((base64_decode(urldecode($en_id)))/94269456*8752));
+    $id_usr = $_SESSION['usuario'][0];
     $fechaVisita = $_POST['fecha_visi'];
     $obsVisita = $_POST['obsVisita'];
     $consulta = new Consulta_adopcion();
     $visita = new editVisita($fechaVisita, $obsVisita);
-    $insert_visita = $consulta->editVisita($conexion, $id, $visita);
+    $insert_visita = $consulta->editVisita($conexion, $id, $visita, $id_usr);
     if(!$insert_visita){
         echo '<div class="alert alert-danger">¡Ocurrio un error, los datos no sepudieron agregar!.</div>';
 
