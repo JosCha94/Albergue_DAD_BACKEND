@@ -240,12 +240,12 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                 </select>
                             </div>
                             <div class="col-md-12 text-dark mt-2">
+                                                          
+                                <div class="form-outline mb-2">
                                 <label class="txt_form">Descripción del producto </label>
+                                <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="productDescripcion" name="productDescripcion" rows="3" maxlength="1200" required> <?php if (isset($descrip)) echo $descrip ?></textarea>                            
                             </div>
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="productDescripcion" name="productDescripcion" style="height: 100px" required> <?php if (isset($descrip)) echo $descrip ?></textarea>
-                                <label for="productDescripcion">Escribe una descripcion del producto aqui</label>
-                            </div>
+                        </div>
 
                             <div class="col-md-12 text-dark mt-2">
                                 <label class="txt_form">Para perritos de tamaño </label>
