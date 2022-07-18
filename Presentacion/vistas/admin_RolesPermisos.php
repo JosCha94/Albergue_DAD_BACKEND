@@ -65,6 +65,14 @@ if (isset($_POST['btn_update_rol'])) {
                 </div>
             <?php
         } elseif($estado == 3) {
+            echo "<meta http-equiv='refresh' content='5';>";
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Este rol se ha actualizado hace poco, refresque la pagina y vuelva a intentarlo o espere 30 segundos
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        }elseif($estado == 4) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se actualizo los datos del rol" />';
         }
     }
@@ -95,6 +103,14 @@ if (isset($_POST['btn_update_per'])) {
                 </div>
             <?php
         } elseif($estado == 3) {
+            echo "<meta http-equiv='refresh' content='5';>";
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>Este permiso se ha actualizado hace poco, refresque la pantalla y vielva a intentarlo o espere 30 segundos
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+        }elseif($estado == 4) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=rolesPermisos&mensaje=Se actualizo los datos del permiso" />';
         }
     }

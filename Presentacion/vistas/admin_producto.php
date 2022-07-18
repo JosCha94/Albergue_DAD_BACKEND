@@ -103,6 +103,14 @@ if (isset($_POST['update_pdt'])) {
                 </div>           
              <?php
         } elseif($estado == 3) {
+            echo "<meta http-equiv='refresh' content='8';>";
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>El producto se actializo hace poco, refresque la pantalla y vielva a intentarlo o espere un minuto y vuelva a intentarlo
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        }elseif($estado == 4) {
             echo "<meta http-equiv='refresh' content='3'>";
             echo '<div class="alert alert-success">¡El producto se actualizo correctamente!</div>';
             // echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=productos&mensaje=El producto se actualizo correctamente" />';
@@ -345,19 +353,18 @@ if (isset($_POST['update_estado_ImgPdt'])) {
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="col-md-12 text-light mt-2">
+                            <div class="col-md-12 text-light mt-2">                                                          
+                            <div class="form-outline mb-2">
                                 <label class="txt_form">Descripción del producto </label>
-                            </div>
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="productDescripcion" name="productDescripcion" style="height: 100px" required>
+                                <textarea class="form-control" placeholder="Escribe una descripcion del producto aqui" id="productDescripcion" name="productDescripcion" rows="3" maxlength="1200" required>
                                     <?php if (isset($descrip)) {
                                         echo $descrip;
                                     } else {
                                         echo $pdtID['product_descripcion'];
                                     } ?>
                                 </textarea>
-                                <label for="productDescripcion">Escribe una descripcion del producto aqui</label>
                             </div>
+                        </div>
 
                             <div class="col-md-12 text-light mt-2 ">
                                 <label class="txt_form">Para perritos de tamaño </label>
