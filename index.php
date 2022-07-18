@@ -14,7 +14,7 @@ $info = json_decode($_SESSION['usuario'][1]);
 if($_SESSION['permisos'] == null || $_SESSION['permisos'] == ''):
     $_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
 endif;
-$_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
+// $_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
 $PermisosRolBtn = $_SESSION['permisos'];
 
 
