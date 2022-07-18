@@ -30,12 +30,16 @@ class Consulta_adopcion{
     public function updateEstadoAdop($conexion, $idAdop, $entrevista)
     {
         try {
-            $sql = "CALL SP_admin_updateEstado_adopcion($idAdop, :fechaHora)";
+            $sql = "CALL SP_admin_updateEstado_adopcion($idAdop, :fechaHora, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->bindValue(':fechaHora', $entrevista->getEntrevista());
             $consulta->execute();
-            $estado='bien';
-
+            
+            $consulta ->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
@@ -45,10 +49,15 @@ class Consulta_adopcion{
             </div>
 
             <?php
-            $estado='mal';
+            $resultado='mal';
         }
-        return $estado;
+        return $resultado;
     }
+
+////////////////////
+
+
+////////////////////////////
 
     public function ad_listar_entrevista($conexion) {
         try{
@@ -78,25 +87,28 @@ class Consulta_adopcion{
     public function rechazar_adopcion($conexion, $ado_id)
     {
         try {
-            $sql = "CALL SP_admin_adop_rechazar($ado_id)";
+            $sql = "CALL SP_admin_adop_rechazar($ado_id, @DATA)";
             $consulta = $conexion->prepare($sql);
             $consulta->execute();
-            $estado='bien';
-
+            
+            $consulta ->closeCursor();
+            $consulta = $conexion->prepare("SELECT @DATA AS rnum");
+            $consulta->execute();
+            $resnum = $consulta->fetch(PDO::FETCH_ASSOC);
+            $resultado = $resnum['rnum'];
         } catch (PDOException $e) {
             // echo "Ocurrió un ERROR con la base de datos: " .    $e->getMessage();
             ?>
               <div class="alert alert-danger alert-dismissible fade show " role="alert">
-              <strong>Error!</strong> debido a un error en la base de datos, no se pudo deshabilitar el producto
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>Error!</strong> debido a un error en la base de datos, no se pudo deshabilitar el producto
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
 
             <?php
-            $estado='mal';
+            $resultado='mal';
         }
-        return $estado;
+        return $resultado;
     }
-
     public function aceptar_adopcion($conexion, $ado_id, $perro_id, $obs)
     {
         try {

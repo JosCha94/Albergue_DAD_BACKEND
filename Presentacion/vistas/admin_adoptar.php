@@ -36,35 +36,19 @@ $user = $consulta->user_mail($conexion, $id);
 $datos_visita = $consulta ->mostrar_datosVisita($conexion, $id);
 
 
-
-
-
-//ACEPTA LA ENTREVISTA Y PONE UNA FECHA PARA ELLA
-if (isset($_POST['agendar'])) {
-    $fecha = $_POST['fecha'];
-    $hora = $_POST['hora'];
-    $fechaHora = $fecha .' '. $hora;
-    $entrevista = new updt_estadoAdo($fechaHora);
-    $consulta = new Consulta_adopcion();
-    $fechEntrevista = $consulta->updateEstadoAdop($conexion, $id, $entrevista);
-    if(!$fechEntrevista)
-    {
-        echo '<div class="alert alert-danger">¡Hubo un error el momento de agendar la entrevista!.</div>';
-    }else{
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adopciones&mensaje=La entrevista ha sido agendada exitosamente" />';
-    }
-}
-
 //RECHAZA LA ENTREVISTA
 if (isset($_POST['rechazar'])) {
     $consulta = new Consulta_adopcion();
     $rechazar = $consulta->rechazar_adopcion($conexion, $id);
-    if(!$rechazar)
+    if($rechazar == 2)
     {
-        echo '<div class="alert alert-danger">¡Ocurrio un errr, la solicitud no pudo ser rechazada!.</div>';
-    }else{
-        echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adoptar&mensaje=La solicitud se ha rechazado" />';
-    }
+        echo '<div class="alert alert-danger">¡Ocurrio un error, la entrevista no pudo ser rechazada!.</div>';
+        }elseif($rechazar == 3){
+            echo '<div class="alert alert-warning">¡La entrevista no pudo ser rechazada, pues otro administrador estaba realizando cambios en este registro!.</div>';
+        }elseif($rechazar == 4){
+            echo "<meta http-equiv='refresh' content='3'; url=index.php?modulo=adoptar>";
+            echo '<div class="alert alert-success">¡La entrevista se rechazó exitosamente!.</div>';
+        }
 }
 
 
@@ -82,6 +66,8 @@ if (isset($_POST['btn_aceptar'])) {
         echo '<div class="alert alert-danger">¡Ocurrio un error, la solicitud no pudo ser aceptada!.</div>';
         
     }elseif($aceptar == 3){
+        echo '<div class="alert alert-warning">¡La adopción no pudo ser aceptada, pues otro administrador estaba realizando cambios en este registro!.</div>';
+    }elseif($aceptar == 4){
         echo "<meta http-equiv='refresh' content='3'; url=index.php?modulo=adoptar>";
         echo '<div class="alert alert-success">¡La adopcion ha sido aceptada!.</div>';
     }
@@ -104,11 +90,17 @@ if(isset($_POST['agendar'])){
         $entrevista = new updt_estadoAdo($fechaHora);
         $consulta = new Consulta_adopcion();
         $fechEntrevista = $consulta->updateEstadoAdop($conexion, $id, $entrevista);
-        if(!$fechEntrevista)
+        if($fechEntrevista == 1)
         {
-            echo '<div class="alert alert-danger">¡Hubo un error el momento de agendar la entrevista!.</div>';
-        }else{
-            echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=adoptar&mensaje=La entrevista ha sido agendada exitosamente" />';
+            echo '<div class="alert alert-danger">¡Ocurrio un error, al parecer la solicitud ya fue aceptada anteriormente!.</div>';
+        }elseif($fechEntrevista == 2){
+            echo '<div class="alert alert-danger">¡Ocurrio un error, la entrevista no pudo ser agendada!.</div>';
+            
+        }elseif($fechEntrevista == 3){
+            echo '<div class="alert alert-warning">¡La entrevista no pudo ser agendada, pues otro administrador estaba realizando cambios en este registro!.</div>';
+        }elseif($fechEntrevista == 4){
+            echo "<meta http-equiv='refresh' content='3'; url=index.php?modulo=adoptar>";
+            echo '<div class="alert alert-success">¡La entrevista se agendó exitosamente!.</div>';
             $mail = new PHPMailer(true);
             try {
                 //Server settings

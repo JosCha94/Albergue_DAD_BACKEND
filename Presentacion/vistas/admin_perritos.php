@@ -113,9 +113,10 @@ if (isset($_POST['btnUpdate'])) {
             echo "<meta http-equiv='refresh' content='3'>";
             echo '<div class="alert alert-success">¡No se pudieron actualizar los datos del perrito!.</div>';
         } elseif($estado == 3) {
+            echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">¡Los datos no se pudieron actualizar debido a que otro administrador también actualizó los datos de este perrito!.</div>';
+        } elseif($estado == 4) {
             echo "<meta http-equiv='refresh' content='3'>";
-            echo '<div class="alert alert-success">¡Los datos se actualizaron con éxito!.</div>';
-        }
+            echo '<div class="alert alert-success">¡Los datos se actualizaron con éxito!.</div>';}
     }else{
         echo "<meta http-equiv='refresh' content='3'>";
         echo '<div class="alert alert-danger">' .implode("",$errores). '</div>';
