@@ -109,7 +109,7 @@ switch ($error = 'SinError') {
                 </button>
                 <?php if ($logueado == null || $logueado == 'false') : ?>
                     <marquee behavior="alternate">
-                        <h2 style="color:#E8630a">Area administrativa del Albergue</h2>
+                        <h2 style="color:#E8630a">Área Administrativa del Albergue</h2>
                     </marquee>
                 <?php else : ?>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -296,24 +296,24 @@ switch ($error = 'SinError') {
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-item widget-about">
-                                    <h4 class="widget-title">About Us</h4>
-                                    <p class="desc">Lorem ipsum dolor sit amet, consectel adipisicing elit, sed do eiusmod temp incidid ut labore et dolo</p>
+                                    <h4 class="widget-title">Planet Dog</h4>
+                                    <p class="desc">Albergue</p>
                                     <div class="social-icons">
-                                        <a href="" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
-                                        <a href="" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                                        <a href="" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                                        <a href=""></i></a>
+                                        <a href=""></i></a>
+                                        <a href=""></i></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-item nav-menu-item1">
-                                    <h4 class="widget-title">Information</h4>
+                                    <h4 class="widget-title">Información</h4>
                                     <div class="widget-menu-wrap">
                                         <ul class="nav-menu">
-                                            <li><a href="about-us.html">Acerca de nosotros</a></li>
-                                            <li><a href="account-login.html">Politicas de privacidad</a></li>
-                                            <li><a href="account-login.html">Terminos y condiciones</a></li>
-                                            <li><a href="contact.html">Contactanos</a></li>
+                                            <li><a href="#">Acerca de nosotros</a></li>
+                                            <li><a href="">Políticas de privacidad</a></li>
+                                            <li><a href="">Términos y condiciones</a></li>
+                                            <li><a href="">Contáctanos</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -334,7 +334,7 @@ switch ($error = 'SinError') {
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="widget-item">
-                                    <h4 class="widget-title">Informacion de contacto</h4>
+                                    <h4 class="widget-title">Información de contacto</h4>
                                     <div class="widget-contact-info">
                                         <p class="contact-info-desc">Si tienes alguna duda o pregunta, por favor escribenos a: <a href="mailto://demo@example.com">demo@example.com</a></p>
                                         <div class="contact-item">
@@ -342,7 +342,7 @@ switch ($error = 'SinError') {
                                                 <i class="pe-7s-map-marker"></i>
                                             </div>
                                             <div class="info">
-                                                <p>direccion calle <br>200, distrito.</p>
+                                                <p>Direccion:<br>Calle 200</p>
                                             </div>
                                         </div>
                                         <div class="contact-item phone-info">
@@ -350,7 +350,7 @@ switch ($error = 'SinError') {
                                                 <i class="pe-7s-phone"></i>
                                             </div>
                                             <div class="info">
-                                                <p><i class="fa-brands fa-whatsapp"></i> <span>Escribenos al WhatsApp</span> <br><a href="">+51 999 888 333</a></p>
+                                                <p><i class="fa-brands fa-whatsapp"></i> <span>Escríbenos al WhatsApp</span> <br><a href="">+51 999 888 333</a></p>
                                             </div>
                                         </div>
                                     </div>
