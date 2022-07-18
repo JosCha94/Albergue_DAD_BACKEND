@@ -1,7 +1,7 @@
 <?php
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
-        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        $error = '<meta http-equiv="refresh" content="0; url=index.php" />';
         break;
     case ($rolActual == ' '):
         $error = 'No tiene ningun rol activado';

@@ -5,7 +5,7 @@ $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [7]);
 
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
-        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        $error = '<meta http-equiv="refresh" content="0; url=index.php" />';
         break;
     case ($rolPermitido != 'true'):
         $error = 'Su rol actual no le otorga permisos para acceder a esta página';

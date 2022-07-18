@@ -4,7 +4,7 @@ $rolPermitido= $log->activeRol($_SESSION['usuario'][2], $donaciones);
 
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
-        $error = 'Debe iniciar sesión para poder visualizar este pagina';
+        $error = '<meta http-equiv="refresh" content="0; url=index.php" />';
         break;
     case ($rolPermitido != 'true'):
         $error = 'Su rol actual no le otorga permisos para acceder a esta página';
