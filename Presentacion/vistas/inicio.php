@@ -15,8 +15,8 @@ switch ($error = 'SinError') {
                 <h1 class="h3 mb-3 fw-normal text-center">Bienvenido</h1>
 
                 <div class="form-floating">
-                    <input type="text" class="form-control mb-3" id="user" name="user" placeholder="Correo electronico o numero de celular">
-                    <label for="floatingInput">Correo electronico o numero de celular</label>
+                    <input type="text" class="form-control mb-3" id="user" name="user" placeholder="Correo electrónico o número de celular">
+                    <label for="floatingInput">Correo electrónico o número de celular</label>
                 </div>
                 <div class="form-floating">
                     <input type="password" class="form-control" id="pass" name="pass" placeholder="Contraseña">

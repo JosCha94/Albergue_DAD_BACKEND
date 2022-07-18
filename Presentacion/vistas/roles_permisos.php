@@ -154,7 +154,7 @@ if ($error == 'SinError') : ?>
                 <ul class="nav nav-tabs mb-3" id="adop-tables-tab" role="tablist">
 
                     <li class="nav-item" role="RolesyPermisos">
-                        <button class="nav-link active" id="rolesPermisos-tab" data-bs-toggle="tab" data-bs-target="#rolesPermisos" type="button" role="tab" aria-controls="rolesPermisos" aria-selected="true">Todos los Permisos segun rol</button>
+                        <button class="nav-link active" id="rolesPermisos-tab" data-bs-toggle="tab" data-bs-target="#rolesPermisos" type="button" role="tab" aria-controls="rolesPermisos" aria-selected="true">Todos los permisos segun rol</button>
                     </li>
                     <li class="nav-item" role="Roles">
                         <button class="nav-link" id="roles-tab" data-bs-toggle="tab" data-bs-target="#roles" type="button" role="tab" aria-controls="roles" aria-selected="false">Roles</button>
@@ -163,7 +163,7 @@ if ($error == 'SinError') : ?>
                         <button class="nav-link" id="permisos-tab" data-bs-toggle="tab" data-bs-target="#permisos" type="button" role="tab" aria-controls="permisos" aria-selected="false">Permisos</button>
                     </li>
                     <li class="nav-item" role="Permisos">
-                        <button class="nav-link" id="btnRolArea-tab" data-bs-toggle="tab" data-bs-target="#btnRolArea" type="button" role="tab" aria-controls="btnRolPermit" aria-selected="false">Areas y roles</button>
+                        <button class="nav-link" id="btnRolArea-tab" data-bs-toggle="tab" data-bs-target="#btnRolArea" type="button" role="tab" aria-controls="btnRolPermit" aria-selected="false">Áreas y roles</button>
                     </li>
                 </ul>
                 <div class="tab-content " id="myTabContent">
@@ -173,9 +173,9 @@ if ($error == 'SinError') : ?>
                                 <tr>
                                     <th scope="col">#</th>
                                     <td>Rol </td>
-                                    <td>Descripcion del Rol </td>
+                                    <td>Descripción del Rol </td>
                                     <td>Permiso </td>
-                                    <td>Descripcion del Permiso </td>
+                                    <td>Descripción del Permiso </td>
                                     <td>Estado del acceso del rol al permiso </td>
                                     <td>Acceso del rol al permiso </td>
 
@@ -186,9 +186,9 @@ if ($error == 'SinError') : ?>
                                 <tr>
                                     <th scope="col">#</th>
                                     <td>Rol </td>
-                                    <td>Descripcion del Rol </td>
+                                    <td>Descripción del Rol </td>
                                     <td>Permiso </td>
-                                    <td>Descripcion del Permiso </td>
+                                    <td>Descripción del Permiso </td>
                                     <td>Estado del acceso del rol al permiso </td>
                                     <td>Acceso del rol al permiso </td>
 
@@ -226,10 +226,10 @@ if ($error == 'SinError') : ?>
                                 <tr>
                                     <th scope="col">#</th>
                                     <td>Rol </td>
-                                    <td>Descripcion del Rol </td>
+                                    <td>Descripción del Rol </td>
                                     <td>Estado del rol </td>
                                     <td>Fecha de creación </td>
-                                    <td>Ultima modidicacion </td>
+                                    <td>Última modificación </td>
                                     <td>Editar Rol </td>
                                     <td>Cambiar estado del rol </td>
 
@@ -240,10 +240,10 @@ if ($error == 'SinError') : ?>
                                 <tr>
                                     <th scope="col">#</th>
                                     <td>Rol </td>
-                                    <td>Descripcion del Rol </td>
+                                    <td>Descripción del Rol </td>
                                     <td>Estado del rol </td>
                                     <td>Fecha de creación </td>
-                                    <td>Ultima modidicacion </td>
+                                    <td>Última modificacion </td>
                                     <td>Editar Rol </td>
                                     <td>Cambiar estado del rol </td>
 
@@ -290,7 +290,7 @@ if ($error == 'SinError') : ?>
                                     </div>
 
                                     <div class="form-outline mb-3">
-                                        <label for="Roldesipt" class="form-label">Descripcion del rol</label>
+                                        <label for="Roldesipt" class="form-label">Descripción del rol</label>
                                         <textarea class="form-control" id="Roldesipt" rows="3" name="rol_descrip" required maxlength="120" minlength="15" placeholder="Describe brebemente la funciones del rol"> </textarea>
                                     </div>
                                     <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
@@ -309,10 +309,10 @@ if ($error == 'SinError') : ?>
                                 <tr>
                                     <th scope="col">#</th>
                                     <td>Permiso </td>
-                                    <td>Descripcion del Permiso </td>
+                                    <td>Descripción del Permiso </td>
                                     <td>Estado del permiso </td>
                                     <td>Fecha de creación </td>
-                                    <td>Ultima modidicacion </td>
+                                    <td>Última modificación </td>
                                     <td>Editar Permiso </td>
                                     <td>Cambiar estado del permiso </td>
 
@@ -323,10 +323,10 @@ if ($error == 'SinError') : ?>
                                 <tr>
                                     <th scope="col">#</th>
                                     <td>Permiso </td>
-                                    <td>Descripcion del Permiso </td>
+                                    <td>Descripción del Permiso </td>
                                     <td>Estado del permiso </td>
                                     <td>Fecha de creación </td>
-                                    <td>Ultima modidicacion </td>
+                                    <td>Última modificación </td>
                                     <td>Editar Permiso </td>
                                     <td>Cambiar estado del permiso </td>
 
@@ -400,7 +400,7 @@ if ($error == 'SinError') : ?>
                             <thead class="bg-danger text-white">
                                 <tr>
                                     <td># </td>
-                                    <td>Area </td>
+                                    <td>Área </td>
                                     <td>Rol </td>
                                     <td>Estado</td>
                                     <td>Cambiar estado </td>
@@ -410,7 +410,7 @@ if ($error == 'SinError') : ?>
                             <tfoot class="bg-secondary text-white">
                                 <tr>
                                     <td># </td>
-                                    <td>Area </td>
+                                    <td>Área </td>
                                     <td>Rol </td>
                                     <td>Estado</td>
                                     <td>Cambiar estado </td>

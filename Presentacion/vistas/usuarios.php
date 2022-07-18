@@ -142,9 +142,9 @@ if ($error == 'SinError') : ?>
                                     <td>Apellido Paterno </td>
                                     <td>Apellido Materno </td>
                                     <td>Correo </td>
-                                    <td>Telefono </td>
-                                    <td>Fecha creación</td>
-                                    <td>Fecha modificación</td>
+                                    <td>Teléfono </td>
+                                    <td>Fecha de creación</td>
+                                    <td>Fecha de modificación</td>
                                     <td>Cambiar UsrEstado</td>
 
                                 </tr>
@@ -158,9 +158,9 @@ if ($error == 'SinError') : ?>
                                     <td>Apellido Paterno </td>
                                     <td>Apellido Materno </td>
                                     <td>Correo </td>
-                                    <td>Telefono </td>
-                                    <td>Fecha creación</td>
-                                    <td>Fecha modificación</td>
+                                    <td>Teléfono </td>
+                                    <td>Fecha de creación</td>
+                                    <td>Fecha de modificación</td>
                                     <td>Cambiar UsrEstado</td>
 
                                 </tr>
@@ -203,7 +203,7 @@ if ($error == 'SinError') : ?>
                                     <td>Estado del usuario </td>
                                     <td>Nombre completo </td>
                                     <td>Correo </td>
-                                    <td>Telefono </td>
+                                    <td>Teléfono </td>
                                     <td>Rol</td>
                                     <td>Rol Estado</td>
                                     <td>Cambiar Estado del Rol</td>
@@ -217,7 +217,7 @@ if ($error == 'SinError') : ?>
                                     <td>Estado del usuario </td>
                                     <td>Nombre completo </td>
                                     <td>Correo </td>
-                                    <td>Telefono </td>
+                                    <td>Teléfono </td>
                                     <td>Rol</td>
                                     <td>Rol Estado</td>
                                     <td>Cambiar Estado del Rol</td>
