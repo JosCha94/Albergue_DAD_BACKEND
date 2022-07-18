@@ -176,10 +176,10 @@ switch ($error = 'SinError') {
                         } else {
                         ?>
                             <div class="dropdown mx-4">
-                                <a class="dropdown-toggle text-uppercase" type="button" id="dropdownMenuUser" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="dropdown-toggle text-uppercase text-white" type="button" id="dropdownMenuUser" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo $info->nick; ?>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuUser">
+                                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="dropdownMenuUser">
                                     <li>
                                         <a href="index.php?modulo=perfil-usuario">Mi perfil</a>
                                     </li>

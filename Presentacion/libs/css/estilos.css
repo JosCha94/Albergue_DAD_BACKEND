@@ -50,7 +50,9 @@ h3.mb-0.mt-2{
 }
 
 #nav_principal .navbar .collapse .nav-link{
-  color:white
+  color:white;
+  font-size: 20px;
+  padding: 20px;
 }
 #nav_principal .navbar .collapse .nav-link:hover{
   color:#E8630a
@@ -434,6 +436,20 @@ strong{
   font-size: 1.05em;
 }
 h1.fw-bold{
+  color: #001E6C;
+}
+
+/* dropdown perfil usuario */
+
+ul.dropdown-menu{
+  background-color: #E8630A;
+  font-size: 20px;
+}
+
+ul.dropdown-menu a{
+  color: white;
+}
+ul.dropdown-menu a:hover{
   color: #001E6C;
 }
 

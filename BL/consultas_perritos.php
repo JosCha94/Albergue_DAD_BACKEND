@@ -214,11 +214,6 @@ Class Consulta_perrito
         }
     }
 
-
-
-
-    
-
 }
 
 
