@@ -85,12 +85,15 @@ if (isset($_POST['update_cat'])) {
                 </div>           
              <?php
         } elseif($estado == 3) {
+            echo "<meta http-equiv='refresh' content='5';>";
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <strong class="fs-3">Error!</strong><br>La categoria se actualizo hace poco, refresque la pagina y vuelva a intentarlo o espere 30 segundos
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>           
+             <?php
+        }elseif($estado == 4) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=agrega-categoria&formTipo=updateCategoria&mensaje=La categoria se actualizo correctamente" />';
-        }
-
-        if ($estado == 'fallo') {
-        } else {
-            
         }
     }
 }
@@ -154,7 +157,7 @@ if (isset($_POST['update_cat'])) {
 
         <div class="text-center mb-4">
             <h1 class="fw-bold">Actualizacion de Categoria: <br>
-                <?php echo $pdtID['cat_nombre'] ?> </h1>
+                <?php echo $catID['cat_nombre'] ?> </h1>
         </div>
         <div class="row">
 
