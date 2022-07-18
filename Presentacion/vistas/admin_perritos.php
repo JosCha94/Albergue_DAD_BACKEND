@@ -108,7 +108,6 @@ if (isset($_POST['btnUpdate'])) {
     $errores = $consulta->Validar_registroPerrito($perro);
     if (count($errores) == 0) {
          $estado = $consulta->update_perritoAdmin($conexion, $id, $perro);
-         var_dump($estado);
         if ($estado == 2) {
             echo "<meta http-equiv='refresh' content='3'>";
             echo '<div class="alert alert-success">¡No se pudieron actualizar los datos del perrito!.</div>';
