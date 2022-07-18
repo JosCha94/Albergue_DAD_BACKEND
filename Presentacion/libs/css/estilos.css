@@ -51,12 +51,26 @@ h3.mb-0.mt-2{
 
 #nav_principal .navbar .collapse .nav-link{
   color:white;
-  font-size: 20px;
-  padding: 20px;
+  /* font-size: 20px; */
+  /* padding: 20px; */
 }
 #nav_principal .navbar .collapse .nav-link:hover{
   color:#E8630a
 }
+
+/* @media screen and (max-width: 1080px) {
+  #nav_principal .navbar .collapse .nav-link{
+    font-size: 20px;
+    padding: 20px;
+  }
+} */
+/* @media only screen and (max-width: 980px) and (min-width: 821px) {  
+  #nav_principal .navbar .collapse .nav-link{
+    font-size: 20px;
+    padding: 20px;
+  }
+  
+}  */
 
 .btn-login{
   color: #fff;
