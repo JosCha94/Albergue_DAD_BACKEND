@@ -4,7 +4,7 @@ $permisosRol = $log->activeRolPermi($_SESSION['usuario'][3], [7]);
 $permisoEsp = $log->permisosEspeciales($_SESSION['usuario'][4], [7]);
 
 
-// print_r($_SESSION['usuario'][2]);
+//  print_r($_SESSION['usuario'][3]);
 switch ($error = 'SinError') {
     case ($logueado == 'false'):
         $error = '<meta http-equiv="refresh" content="0; url=index.php" />';

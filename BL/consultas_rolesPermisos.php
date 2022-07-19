@@ -145,11 +145,13 @@ class Consulta_RolesPermisos{
         }
     }
 
-    public function update_rol($conexion, $nombreRol, $descripRol, $id)
+    public function update_rol($conexion, $nombreRolOld, $descripRolOld, $nombreRol, $descripRol, $id)
     {
         try {
-            $sql = "CALL SP_update_Rol_admin($id, :nombre, :descrip, @DATA)";
+            $sql = "CALL SP_update_Rol_admin(:Oldnombre, :Olddescrip, $id, :nombre, :descrip, @DATA)";
             $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':Oldnombre', $nombreRolOld);
+            $consulta->bindParam(':Olddescrip', $descripRolOld); 
             $consulta->bindParam(':nombre', $nombreRol);
             $consulta->bindParam(':descrip', $descripRol); 
             $consulta->execute();
@@ -287,11 +289,13 @@ class Consulta_RolesPermisos{
         }
     }
 
-    public function update_permiso($conexion, $nombrePer, $descripPer, $id)
+    public function update_permiso($conexion, $nombrePerOld, $descripPerOld, $nombrePer, $descripPer, $id)
     {
         try {
-            $sql = "CALL SP_update_Permiso_admin($id, :nombre, :descrip, @DATA)";
+            $sql = "CALL SP_update_Permiso_admin(:Oldnombre, :Olddescrip, $id, :nombre, :descrip, @DATA)";
             $consulta = $conexion->prepare($sql);
+            $consulta->bindParam(':Oldnombre', $nombrePerOld);
+            $consulta->bindParam(':Olddescrip', $descripPerOld); 
             $consulta->bindParam(':nombre', $nombrePer);
             $consulta->bindParam(':descrip', $descripPer); 
             $consulta->execute();

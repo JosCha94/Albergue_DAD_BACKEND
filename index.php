@@ -16,7 +16,7 @@ if($_SESSION['usuario'] == null || $_SESSION['usuario'] == ''):
         $_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
 
 endif;
-// $_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
+$_SESSION['permisos'] = $log->roles_permitidos_btn($conexion);
 $PermisosRolBtn = $_SESSION['permisos'];
 
 

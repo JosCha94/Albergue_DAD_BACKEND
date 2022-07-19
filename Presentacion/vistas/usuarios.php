@@ -31,20 +31,20 @@ if ($error == 'SinError') : ?>
         $asignaRol = $consulta->asignarRol($conexion, $idUser, $idRol);
 
         if ($asignaRol == 1) {
-            ?>
+    ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong class="fs-3">Error!</strong><br>No se puede asignar el rol al uasuario debia a que ya lo tiene
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                <strong class="fs-3">Error!</strong><br>No se puede asignar el rol al uasuario debia a que ya lo tiene
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         <?php
-        }elseif($asignaRol == 2){
-            ?>
+        } elseif ($asignaRol == 2) {
+        ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el rol al usuario
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>           
-             <?php
-        } elseif($asignaRol == 3) {
+                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el rol al usuario
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        } elseif ($asignaRol == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el rol al usuario" />';
         }
     }
@@ -91,23 +91,22 @@ if ($error == 'SinError') : ?>
         $asignaRol = $consulta->asignarPermiso($conexion, $idUser, $idPer);
 
         if ($asignaRol == 1) {
-            ?>
+        ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong class="fs-3">Error!</strong><br>No se puede asignar el permiso al uasuario debia a que ya lo tiene
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                <strong class="fs-3">Error!</strong><br>No se puede asignar el permiso al uasuario debia a que ya lo tiene
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         <?php
-        }elseif($asignaRol == 2){
-            ?>
+        } elseif ($asignaRol == 2) {
+        ?>
             <div class="alert alert-danger alert-dismissible fade show " role="alert">
-                    <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el permiso al usuario
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php
-        } elseif($asignaRol == 3) {
+                <strong class="fs-3">Error!</strong><br>Debido a un problema, por el momento no se puede asignar el permiso al usuario
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    <?php
+        } elseif ($asignaRol == 3) {
             echo '<meta http-equiv="refresh" content="0; url=index.php?modulo=usuarios&mensaje=Se agrego correctamente el permiso especial al usuario" />';
         }
-
     }
     $us = 1;
     $ur = 1;
@@ -151,7 +150,7 @@ if ($error == 'SinError') : ?>
                             </thead>
                             <tfoot class="bg-secondary text-white">
                                 <tr>
-                                    <th scope="col">#</th>                                    
+                                    <th scope="col">#</th>
                                     <td>Usuario </td>
                                     <td>Estado </td>
                                     <td>Nombre </td>
@@ -179,13 +178,13 @@ if ($error == 'SinError') : ?>
                                         <td><?php echo ($value['usr_fecha_creacion']); ?> </td>
                                         <td><?php echo ($value['usr_fecha_modificacion']); ?> </td>
                                         <td>
-                                        <?php if($gestionUsr == 'true'): ?>
-                                            <form action="" method="post">
-                                                <input type="hidden" name="usr_estado" value="<?= $value['usr_estado']; ?>">
-                                                <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
-                                                <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
-                                            </form>
-                                        <?php endif; ?>
+                                            <?php if ($gestionUsr == 'true') : ?>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="usr_estado" value="<?= $value['usr_estado']; ?>">
+                                                    <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
+                                                    <button class="btn <?php echo ($value['usr_estado'] == 'Habilitado') ? 'btn-danger' : 'btn-success' ?> btn-xs " name="cambia_estado_usr" title="<?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> Usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_estado'] == 'Habilitado') ? 'Deshabilitar' : 'Habilitar' ?> este usuario?')"><i class="fa-solid fa-toggle-off"></i></button>
+                                                </form>
+                                            <?php endif; ?>
                                         </td>
 
                                     </tr>
@@ -194,8 +193,9 @@ if ($error == 'SinError') : ?>
 
                         </table>
                     </div>
-                    <div class="tab-pane fade " id="asignaRol" role="tabpanel" aria-labelledby="asignaRol-tab">
-                        <table class="table table-sm table-hover w-100" id="tablaUserRol">
+                    <div class="tab-pane fade" id="asignaRol" role="tabpanel" aria-labelledby="asignaRol-tab">
+
+                        <table class="table table table-hover w-100" id="tablaUserRol">
                             <thead class="bg-danger text-white">
                                 <tr>
                                     <th scope="col">#</th>
@@ -236,19 +236,20 @@ if ($error == 'SinError') : ?>
                                         <td><?php echo ($value['rol_nombre']); ?> </td>
                                         <td><?php echo ($value['usr_rol_estado']); ?> </td>
                                         <td>
-                                        <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
-                                            <form action="" method="post">
-                                                <input type="hidden" name="usrrol_estado" value="<?= $value['usr_rol_estado']; ?>">
-                                                <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
-                                                <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
-                                                <button class="btn <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrRol" title="<?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> rol para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
+                                            <?php if ($permisosRol == 'true' || $permisoEsp == 'true') : ?>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="usrrol_estado" value="<?= $value['usr_rol_estado']; ?>">
+                                                    <input type="hidden" name="user_id" value="<?= $value['usr_id']; ?>">
+                                                    <input type="hidden" name="rol_id" value="<?= $value['rol_id']; ?>">
+                                                    <button class="btn <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrRol" title="<?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> rol para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_rol_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este rol para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
 
-                                            </form>
-                                        <?php endif; ?>
+                                                </form>
+                                            <?php endif; ?>
                                         </td>
 
                                     </tr>
                                 <?php endforeach; ?>
+                            
                             </tbody>
 
                         </table>
@@ -272,17 +273,18 @@ if ($error == 'SinError') : ?>
                                             <option value="<?php echo ($value['rol_id']); ?>"><?php echo ($value['rol_nombre']); ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <?php if($permisosRol == 'true' || $permisoEsp == 'true'): ?>
-                                    <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaRol">Asignar Rol</button>
-                                    <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
+                                    <?php if ($permisosRol == 'true' || $permisoEsp == 'true') : ?>
+                                        <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaRol">Asignar Rol</button>
+                                        <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
                                     <?php endif; ?>
 
                                 </form>
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="UsrPerEsp" role="tabpanel" aria-labelledby="UsrPerEsp-tab">
-                        <table class="table table-sm table-hover w-100" id="tablaUserEsp">
+                        <table class="table table table-hover w-100" id="tablaUserEsp">
                             <thead class="bg-danger text-white">
                                 <tr>
                                     <th scope="col">#</th>
@@ -315,15 +317,15 @@ if ($error == 'SinError') : ?>
                                         <td><?php echo ($value['permiso_nombre']); ?></td>
                                         <td><?php echo ($value['usr_per_estado']); ?> </td>
                                         <td>
-                                        <?php if($gestionUsr == 'true'): ?>
-                                            <form action="" method="post">
-                                                <input type="hidden" name="usrper_estado" value="<?= $value['usr_per_estado']; ?>">
-                                                <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
-                                                <input type="hidden" name="permiso_id" value="<?= $value['permiso_id']; ?>">
-                                                <button class="btn <?php echo ($value['usr_per_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrPerEsp" title="<?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> permiso para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este permiso para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
+                                            <?php if ($gestionUsr == 'true') : ?>
+                                                <form action="" method="post">
+                                                    <input type="hidden" name="usrper_estado" value="<?= $value['usr_per_estado']; ?>">
+                                                    <input type="hidden" name="usr_id" value="<?= $value['usr_id']; ?>">
+                                                    <input type="hidden" name="permiso_id" value="<?= $value['permiso_id']; ?>">
+                                                    <button class="btn <?php echo ($value['usr_per_estado'] == 'Activado') ? 'btn-danger' : 'btn-success' ?> btn-xs" name="cambia_estado_usrPerEsp" title="<?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> permiso para el usuario" onclick="return confirm('¿Quieres <?php echo ($value['usr_per_estado'] == 'Activado') ? 'Desactivar' : 'Activar' ?> este permiso para el usuario?')"><i class="fa-solid fa-power-off"></i></button>
 
-                                            </form>
-                                        <?php endif; ?>
+                                                </form>
+                                            <?php endif; ?>
                                         </td>
 
                                     </tr>
@@ -350,9 +352,9 @@ if ($error == 'SinError') : ?>
                                         <option value="<?php echo ($value['permiso_id']); ?>"><?php echo ($value['permiso_nombre']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <?php if($gestionUsr == 'true'): ?>
-                                <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaPermiso">Asignar Permiso</button>
-                                <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
+                                <?php if ($gestionUsr == 'true') : ?>
+                                    <button type="submit" class="btn btn-primary btn-lg mt-4" name="btn_asignaPermiso">Asignar Permiso</button>
+                                    <button type="reset" class="btn btn-danger btn-lg mt-4">Cancelar</button>
                                 <?php endif; ?>
                             </form>
                         </div>
@@ -362,7 +364,7 @@ if ($error == 'SinError') : ?>
         </div>
     </div>
 <?php else : ?>
-        <div class="alert alert-danger p-5 my-5" role="alert">
-            <?php echo $error; ?>
-        </div>
+    <div class="alert alert-danger p-5 my-5" role="alert">
+        <?php echo $error; ?>
+    </div>
 <?php endif; ?>
